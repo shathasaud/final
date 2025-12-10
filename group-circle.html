@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>عجلة اتجاهات الأسئلة الستة — أدوار التفاعل</title>
+<style>
+  :root{
+    --bg:linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    --card:linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    --ink:#1a202c;
+    --muted:#4a5568;
+    --accent:#ff6b6b;
+    --secondary:#4ecdc4;
+    --tertiary:#45b7d1;
+    --quaternary:#96ceb4;
+    --ring:#3d5a80;
+    --glow:#ff6b6b;
+  }
+  *{box-sizing:border-box}
+  @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800;900&display=swap');
+  body{margin:0;font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Noto Sans Arabic",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh}
+  .wrap{max-width:1100px;margin:24px auto;padding:16px}
+  h1{margin:0 0 6px;font-size:clamp(20px,2.6vw,28px);font-weight:800;color:var(--accent)}
+  .starter-question{
+    font-size:clamp(18px,2.2vw,24px);
+    font-weight:700;
+    color:var(--accent);
+    margin:8px 0 16px;
+    text-align:center;
+    background:linear-gradient(135deg, var(--accent), var(--secondary));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+    text-shadow:0 0 20px rgba(255,107,107,0.3);
+  }
+  .sub{color:var(--muted);margin-bottom:16px}
+  .grid{display:grid;grid-template-columns:1fr;gap:16px}
+  @media(min-width:980px){.grid{grid-template-columns:1.2fr .8fr}}
+  .panel{
+    background:var(--card);
+    border:1px solid var(--ring);
+    border-radius:20px;
+    padding:20px;
+    box-shadow:0 8px 32px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
+    backdrop-filter:blur(10px);
+  }
+  .wheelArea{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+  .canvasBox{
+    position:relative;
+    aspect-ratio:1;
+    border-radius:20px;
+    background:linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    box-shadow:inset 0 0 50px rgba(0,0,0,0.2), 0 0 30px rgba(102,126,234,0.3);
+    border:2px solid rgba(255,255,255,0.3);
+  }
+  svg{width:100%;height:100%}
+  .pointer{position:absolute;top:-8px;left:50%;transform:translateX(-50%)}
+  .pointer svg{width:44px;height:44px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+  .controls{display:flex;flex-wrap:wrap;gap:8px}
+  button{
+    appearance:none;
+    border:none;
+    border-radius:15px;
+    padding:14px 20px;
+    font-weight:700;
+    cursor:pointer;
+    background:linear-gradient(145deg, #e2e8f0, #cbd5e0);
+    color:#2d3748;
+    border:1px solid rgba(0,0,0,0.1);
+    transition:all 0.3s ease;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+    font-family:"Tajawal",sans-serif;
+  }
+  button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 25px rgba(0,0,0,0.3);
+    border-color:rgba(255,107,107,0.3);
+  }
+  .primary{
+    background:linear-gradient(135deg, var(--accent), var(--secondary));
+    border:none;
+    color:#ffffff;
+    box-shadow:0 6px 20px rgba(255,107,107,0.3);
+  }
+  .primary:hover{
+    box-shadow:0 10px 30px rgba(255,107,107,0.4);
+    transform:translateY(-3px);
+  }
+  .muted{opacity:.85}
+  .pill{
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    border-radius:999px;
+    border:1px solid rgba(255,107,107,0.2);
+    background:linear-gradient(145deg, #f7fafc, #edf2f7);
+    padding:8px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.1);
+  }
+  .pill button{
+    border:none;
+    background:transparent;
+    padding:10px 16px;
+    border-radius:999px;
+    color:var(--muted);
+    transition:all 0.3s ease;
+    font-family:"Tajawal",sans-serif;
+  }
+  .pill button.active{
+    background:linear-gradient(135deg, var(--tertiary), var(--quaternary));
+    color:#ffffff;
+    box-shadow:0 4px 15px rgba(69,183,209,0.3);
+  }
+  .pill button:hover{
+    color:#ffffff;
+    transform:none;
+    box-shadow:none;
+  }
+  .list{
+    max-height:360px;
+    overflow:auto;
+    border:1px solid rgba(255,107,107,0.2);
+    border-radius:16px;
+    background:linear-gradient(145deg, #ffffff, #f7fafc);
+    box-shadow:inset 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .list h3{
+    margin:12px 16px;
+    color:var(--accent);
+    font-size:18px;
+    font-weight:700;
+    font-family:"Tajawal",sans-serif;
+  }
+  .q{
+    padding:12px 16px;
+    border-top:1px solid rgba(255,255,255,0.05);
+    transition:all 0.3s ease;
+  }
+  .q:first-of-type{border-top:none}
+  .q:hover{
+    background:rgba(255,107,107,0.05);
+    transform:translateX(-2px);
+  }
+  .hint{font-size:12px;color:#9fb2cf}
+  .big{font-size:22px;font-weight:800;margin:0}
+  .copy{float:left;font-size:12px;opacity:.85}
+  .chip{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:999px;
+    background:linear-gradient(135deg, var(--tertiary), var(--quaternary));
+    border:none;
+    color:#ffffff;
+    font-size:14px;
+    font-weight:600;
+    box-shadow:0 2px 10px rgba(69,183,209,0.3);
+    font-family:"Tajawal",sans-serif;
+  }
+  .centerBox{
+    background:linear-gradient(145deg, #ffffff, #f7fafc);
+    border:2px dashed rgba(255,107,107,0.3);
+    border-radius:18px;
+    padding:16px;
+    margin-top:12px;
+    box-shadow:inset 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .spinning{animation:spin 3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards}
+  @keyframes spin{
+    0%{transform:rotate(0deg)}
+    100%{transform:rotate(var(--spin-degrees))}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>🎯 عجلة اتجاهات الأسئلة الستة — أدوار التفاعل</h1>
+  <h2 class="starter-question">من يبدأ أولاً؟</h2>
+
+  <div class="grid">
+    <div class="panel">
+      <div class="wheelArea">
+        <div class="canvasBox">
+          <div class="pointer" aria-hidden="true">
+            <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><path d="M32 2 L46 24 L18 24 Z" fill="#fbbf24" stroke="#92400e" stroke-width="2"/><circle cx="32" cy="24" r="4" fill="#fde68a" stroke="#92400e"/></svg>
+          </div>
+          <svg id="wheel" viewBox="-250 -250 500 500" aria-label="عجلة الأدوار">
+            <g id="wheelGroup"></g>
+            <circle r="248" fill="none" stroke="#1f3354" stroke-width="4"/>
+            <circle r="44" fill="#0a1324" stroke="#1e3458" stroke-width="3"/>
+            <text id="centerLabel" text-anchor="middle" dominant-baseline="middle" font-size="14" fill="#bed7ff">اضغطي للدوران</text>
+          </svg>
+        </div>
+        <div>
+          <div class="centerBox">
+            <div class="muted">القناة الحالية:</div>
+            <p class="big" id="currentDir">—</p>
+            <div class="chip" id="subInfo">—</div>
+          </div>
+          <div class="controls" style="margin-top:16px">
+            <button id="spinBtn" class="primary">🎯 ابدئي الدوران</button>
+            <button id="resetBtn" class="primary">🔄 إعادة تعيين</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="pill">
+        <button id="formativeBtn" class="active">التقويم البنائي</button>
+        <button id="summativeBtn">التقويم الختامي</button>
+      </div>
+      
+      <div class="list" id="questionsList">
+        <h3>اختاري قناة تفاعل أولاً</h3>
+        <div class="q">
+          <div class="hint">قومي بتدوير العجلة لعرض الأسئلة المقترحة</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const roles = [
+  {
+    name: "طالب → طالب",
+    color: "#ff6b6b",
+    formative: [
+      "ما رأيك في إجابة زميلك؟",
+      "هل يمكنك مساعدة زميلك في فهم هذه النقطة؟",
+      "ما الذي تعلمته من مناقشة زميلك؟"
+    ],
+    summative: [
+      "قيّم أداء زميلك في هذا النشاط",
+      "ما نقاط القوة في عمل زميلك؟",
+      "اقترح تحسينات لعمل زميلك"
+    ]
+  },
+  {
+    name: "طالب → مجموعة",
+    color: "#4ecdc4",
+    formative: [
+      "شارك فكرتك مع المجموعة",
+      "ما رأيك في اقتراح المجموعة؟",
+      "كيف يمكن تطوير فكرة المجموعة؟"
+    ],
+    summative: [
+      "اعرض نتائج عملك على المجموعة",
+      "قدم تقييمك لأداء المجموعة",
+      "ما الدروس المستفادة من العمل الجماعي؟"
+    ]
+  },
+  {
+    name: "معلم → طالب",
+    color: "#45b7d1",
+    formative: [
+      "ما فهمك لهذا المفهوم؟",
+      "أين تجد صعوبة في هذا الموضوع؟",
+      "كيف يمكنني مساعدتك أكثر؟"
+    ],
+    summative: [
+      "اشرح ما تعلمته اليوم",
+      "ما أهم إنجازاتك في هذا الدرس؟",
+      "كيف ستطبق ما تعلمته؟"
+    ]
+  },
+  {
+    name: "معلم → مجموعة",
+    color: "#96ceb4",
+    formative: [
+      "ما التحديات التي تواجهها المجموعة؟",
+      "كيف تتعاونون لحل المشكلة؟",
+      "ما الاستراتيجيات التي تستخدمونها؟"
+    ],
+    summative: [
+      "اعرضوا نتائج عملكم الجماعي",
+      "ما أبرز إنجازات المجموعة؟",
+      "كيف قيّمتم تعاونكم؟"
+    ]
+  },
+  {
+    name: "مجموعة → مجموعة",
+    color: "#feca57",
+    formative: [
+      "ما رأيكم في نهج المجموعة الأخرى؟",
+      "كيف يمكن دمج أفكار المجموعتين؟",
+      "ما أوجه الشبه والاختلاف بين المجموعتين؟"
+    ],
+    summative: [
+      "قارنوا نتائجكم مع المجموعة الأخرى",
+      "ما الذي تعلمتموه من المجموعة الأخرى؟",
+      "اقترحوا تحسينات متبادلة"
+    ]
+  },
+  {
+    name: "مجموعة → طالب",
+    color: "#a29bfe",
+    formative: [
+      "ما مساهمتك في عمل المجموعة؟",
+      "كيف تشعر تجاه العمل الجماعي؟",
+      "ما الدعم الذي تحتاجه من المجموعة؟"
+    ],
+    summative: [
+      "قيّم مشاركتك في المجموعة",
+      "ما الذي أضفته للعمل الجماعي؟",
+      "كيف طوّرت مهاراتك من خلال المجموعة؟"
+    ]
+  }
+];
+
+let currentRole = null;
+let isSpinning = false;
+let currentAssessmentType = 'formative';
+let availableRoles = [...roles];
+
+function createWheel() {
+  const wheelGroup = document.getElementById('wheelGroup');
+  wheelGroup.innerHTML = ''; // Clear existing wheel
+  
+  if (availableRoles.length === 0) {
+    // Show completion message when all roles are used
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', '0');
+    text.setAttribute('y', '0');
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('dominant-baseline', 'middle');
+    text.setAttribute('fill', '#22c55e');
+    text.setAttribute('font-size', '18');
+    text.setAttribute('font-weight', 'bold');
+    text.textContent = 'تم استخدام جميع القنوات!';
+    wheelGroup.appendChild(text);
+    return;
+  }
+  
+  const anglePerSection = 360 / availableRoles.length;
+  
+  availableRoles.forEach((role, index) => {
+    const startAngle = index * anglePerSection;
+    const endAngle = (index + 1) * anglePerSection;
+    
+    const startAngleRad = (startAngle * Math.PI) / 180;
+    const endAngleRad = (endAngle * Math.PI) / 180;
+    
+    const x1 = Math.cos(startAngleRad) * 240;
+    const y1 = Math.sin(startAngleRad) * 240;
+    const x2 = Math.cos(endAngleRad) * 240;
+    const y2 = Math.sin(endAngleRad) * 240;
+    
+    const largeArcFlag = anglePerSection > 180 ? 1 : 0;
+    
+    const pathData = [
+      `M 0 0`,
+      `L ${x1} ${y1}`,
+      `A 240 240 0 ${largeArcFlag} 1 ${x2} ${y2}`,
+      `Z`
+    ].join(' ');
+    
+    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    path.setAttribute('d', pathData);
+    path.setAttribute('fill', role.color);
+    path.setAttribute('stroke', '#1a2332');
+    path.setAttribute('stroke-width', '2');
+    path.setAttribute('opacity', '0.9');
+    
+    const textAngle = startAngle + anglePerSection / 2;
+    const textAngleRad = (textAngle * Math.PI) / 180;
+    const textRadius = 160;
+    const textX = Math.cos(textAngleRad) * textRadius;
+    const textY = Math.sin(textAngleRad) * textRadius;
+    
+    const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+    text.setAttribute('x', textX);
+    text.setAttribute('y', textY);
+    text.setAttribute('text-anchor', 'middle');
+    text.setAttribute('dominant-baseline', 'middle');
+    text.setAttribute('fill', '#ffffff');
+    text.setAttribute('font-size', '16');
+    text.setAttribute('font-weight', 'bold');
+    text.setAttribute('transform', `rotate(${textAngle}, ${textX}, ${textY})`);
+    text.textContent = role.name;
+    
+    wheelGroup.appendChild(path);
+    wheelGroup.appendChild(text);
+  });
+}
+
+function spinWheel() {
+  if (isSpinning) return;
+  
+  isSpinning = true;
+  const spinBtn = document.getElementById('spinBtn');
+  const wheel = document.getElementById('wheelGroup');
+  const centerLabel = document.getElementById('centerLabel');
+  
+  spinBtn.disabled = true;
+  spinBtn.textContent = '🔄 جاري الدوران...';
+  centerLabel.textContent = 'جاري الدوران...';
+  
+  const spins = 5 + Math.random() * 5;
+  const finalAngle = Math.random() * 360;
+  const totalRotation = spins * 360 + finalAngle;
+  
+  wheel.style.setProperty('--spin-degrees', `${totalRotation}deg`);
+  wheel.classList.add('spinning');
+  
+  setTimeout(() => {
+    if (availableRoles.length === 0) {
+      wheel.classList.remove('spinning');
+      isSpinning = false;
+      spinBtn.disabled = true;
+      spinBtn.textContent = '✅ انتهت جميع القنوات';
+      centerLabel.textContent = 'مكتمل!';
+      return;
+    }
+    
+    const normalizedAngle = (360 - (finalAngle % 360)) % 360;
+    const sectionAngle = 360 / availableRoles.length;
+    const selectedIndex = Math.floor(normalizedAngle / sectionAngle);
+    
+    currentRole = availableRoles[selectedIndex];
+    
+    // Remove the selected role from available roles
+    availableRoles.splice(selectedIndex, 1);
+    
+    updateDisplay();
+    
+    // Recreate wheel without the selected role
+    createWheel();
+    
+    wheel.classList.remove('spinning');
+    isSpinning = false;
+    
+    if (availableRoles.length === 0) {
+      spinBtn.disabled = true;
+      spinBtn.textContent = '✅ انتهت جميع القنوات';
+      centerLabel.textContent = 'مكتمل!';
+    } else {
+      spinBtn.disabled = false;
+      spinBtn.textContent = '🎯 ابدئي الدوران';
+      centerLabel.textContent = 'اضغطي للدوران';
+    }
+  }, 3000);
+}
+
+function updateDisplay() {
+  if (!currentRole) return;
+  
+  document.getElementById('currentDir').textContent = currentRole.name;
+  document.getElementById('subInfo').textContent = `${currentAssessmentType === 'formative' ? 'التقويم البنائي' : 'التقويم الختامي'}`;
+  
+  updateQuestionsList();
+}
+
+function updateQuestionsList() {
+  const questionsList = document.getElementById('questionsList');
+  
+  if (!currentRole) {
+    questionsList.innerHTML = `
+      <h3>اختاري قناة تفاعل أولاً</h3>
+      <div class="q">
+        <div class="hint">قومي بتدوير العجلة لعرض الأسئلة المقترحة</div>
+      </div>
+    `;
+    return;
+  }
+  
+  const questions = currentAssessmentType === 'formative' ? currentRole.formative : currentRole.summative;
+  const title = currentAssessmentType === 'formative' ? 'أسئلة التقويم البنائي' : 'أسئلة التقويم الختامي';
+  
+  questionsList.innerHTML = `
+    <h3>${title}</h3>
+    ${questions.map(question => `
+      <div class="q">
+        <div>${question}</div>
+      </div>
+    `).join('')}
+  `;
+}
+
+function switchAssessmentType(type) {
+  currentAssessmentType = type;
+  
+  document.getElementById('formativeBtn').classList.toggle('active', type === 'formative');
+  document.getElementById('summativeBtn').classList.toggle('active', type === 'summative');
+  
+  updateDisplay();
+}
+
+function resetWheel() {
+  availableRoles = [...roles];
+  currentRole = null;
+  isSpinning = false;
+  
+  const spinBtn = document.getElementById('spinBtn');
+  const centerLabel = document.getElementById('centerLabel');
+  
+  spinBtn.disabled = false;
+  spinBtn.textContent = '🎯 ابدئي الدوران';
+  centerLabel.textContent = 'اضغطي للدوران';
+  
+  document.getElementById('currentDir').textContent = '—';
+  document.getElementById('subInfo').textContent = '—';
+  
+  createWheel();
+  updateQuestionsList();
+}
+
+// Event listeners
+document.getElementById('spinBtn').addEventListener('click', spinWheel);
+document.getElementById('wheel').addEventListener('click', spinWheel);
+document.getElementById('resetBtn').addEventListener('click', resetWheel);
+document.getElementById('formativeBtn').addEventListener('click', () => switchAssessmentType('formative'));
+document.getElementById('summativeBtn').addEventListener('click', () => switchAssessmentType('summative'));
+
+// Initialize
+createWheel();
+updateQuestionsList();
+</script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abae871061ecdf8',t:'MTc2NTM1MDQ3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
