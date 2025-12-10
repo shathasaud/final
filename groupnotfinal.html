@@ -1,0 +1,819 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>نظام تحفيز المجموعات</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+  :root{
+    --brand1:#ffb74d;
+    --brand2:#90caf9;
+    --brand3:#a5d6a7;
+    --brand4:#ce93d8;
+    --brand5:#ffe082;
+    --brand6:#80cbc4;
+    --bg:#f7f7fb; 
+    --card:#ffffff; 
+    --ink:#1f2937; 
+    --muted:#6b7280; 
+    --chip:#eef2ff;
+    --ok:#16a34a; 
+    --warn:#f59e0b; 
+    --bad:#ef4444; 
+    --bar:#e5e7eb;
+    --radius:14px; 
+    --shadow:0 6px 20px rgba(0,0,0,.06);
+  }
+  
+  html, body {
+    height: 100%;
+    box-sizing: border-box;
+  }
+  
+  *{box-sizing:border-box} 
+  
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:"Noto Naskh Arabic","Tajawal",system-ui,sans-serif;
+  }
+  
+  header{padding:18px 18px 0}
+  h1{margin:0 0 6px;font-size:clamp(20px,2.6vw,30px)}
+  .sub{color:var(--muted);font-size:14px;margin-bottom:14px}
+  .wrap{padding:18px;display:grid;gap:18px;grid-template-columns:1fr}
+  .row{display:grid;gap:18px}
+  @media(min-width:860px){.row{grid-template-columns:1fr 1fr}}
+  @media(min-width:1280px){.row{grid-template-columns:1fr 1fr 1fr}}
+  .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);padding:16px}
+  .groupHeader{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+  .dot{width:12px;height:12px;border-radius:50%}
+  .gtitle{font-weight:700;font-size:18px;flex:1}
+  .gtitle[contenteditable]{outline:0;border-bottom:1px dashed transparent}
+  .gtitle[contenteditable]:focus{border-color:#c7d2fe}
+  .criteria{display:grid;gap:10px}
+  .crit{background:var(--chip);border-radius:12px;padding:10px}
+  .critHead{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .critName{font-weight:700}
+  .stars{display:flex;gap:6px;flex-wrap:wrap}
+  .starBtn{
+    border:0;
+    background:#fff;
+    border-radius:8px;
+    padding:6px 8px;
+    box-shadow:0 2px 8px rgba(0,0,0,.06);
+    cursor:pointer;
+    transition: all 0.2s ease;
+  }
+  .starBtn:hover{transform:scale(1.05)}
+  .starBtn[aria-checked="true"]{outline:2px solid #6366f1;background:#eef2ff}
+  .starBtn:focus-visible{outline:3px solid #4f46e5}
+  .starBtn:disabled{opacity:0.5;cursor:not-allowed}
+  .barWrap{margin-top:8px;background:var(--bar);height:10px;border-radius:999px;overflow:hidden}
+  .bar{height:100%;width:0%;transition:width 0.3s ease}
+  .scoreLine{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--muted);margin-top:6px}
+  .avg{font-weight:700;color:var(--ink)}
+  .footerLine{display:flex;align-items:center;gap:10px;margin-top:12px}
+  .reset{
+    margin-inline-start:auto;
+    background:#fee2e2;
+    color:#991b1b;
+    border:0;
+    border-radius:10px;
+    padding:8px 10px;
+    cursor:pointer;
+    transition: all 0.2s ease;
+  }
+  .reset:hover{background:#fecaca}
+  .reset:disabled{opacity:0.5;cursor:not-allowed}
+  .pill{background:#ecfeff;color:#155e75;border-radius:999px;padding:6px 10px;font-size:13px}
+  .leader{position:sticky;top:12px}
+  table{width:100%;border-collapse:separate;border-spacing:0 8px}
+  th,td{padding:10px 12px;text-align:center}
+  th{text-align:right;color:var(--muted);font-weight:700;font-size:13px}
+  tr{background:var(--card)}
+  tr td:first-child{border-radius:10px 0 0 10px}
+  tr td:last-child{border-radius:0 10px 10px 0}
+  .medal{font-size:18px}
+  .tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+  .btn{
+    background:#eef2ff;
+    border:0;
+    border-radius:10px;
+    padding:8px 10px;
+    cursor:pointer;
+    transition: all 0.2s ease;
+  }
+  .btn:hover{background:#e0e7ff}
+  .btn:disabled{opacity:0.5;cursor:not-allowed}
+  textarea{
+    width:100%;
+    min-height:120px;
+    border:1px dashed #c7d2fe;
+    border-radius:10px;
+    padding:8px;
+    background:#fff;
+    font-family:monospace;
+  }
+  .bar.g1{background:linear-gradient(90deg,var(--brand1),#ffa726)}
+  .bar.g2{background:linear-gradient(90deg,var(--brand2),#64b5f6)}
+  .bar.g3{background:linear-gradient(90deg,var(--brand3),#81c784)}
+  .bar.g4{background:linear-gradient(90deg,var(--brand4),#ba68c8)}
+  .bar.g5{background:linear-gradient(90deg,var(--brand5),#ffd54f)}
+  .bar.g6{background:linear-gradient(90deg,var(--brand6),#4db6ac)}
+  .sr-only{position:absolute;left:-10000px}
+  .loading{opacity:0.6;pointer-events:none}
+  .toast{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    background:#1f2937;
+    color:#fff;
+    padding:12px 20px;
+    border-radius:10px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.2);
+    z-index:1000;
+    animation:slideIn 0.3s ease;
+  }
+  @keyframes slideIn{
+    from{transform:translateX(100%);opacity:0}
+    to{transform:translateX(0);opacity:1}
+  }
+</style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <header>
+   <h1 id="mainTitle">🌟 نظام تحفيز المجموعات</h1>
+   <div class="sub" id="subtitle">
+    قيّمي 6 مجموعات عبر معايير بنجوم 1–10، مع متوسط، تقدّم، وترتيب فوري. يُحفَظ كل شيء تلقائياً في جدول Canva.
+   </div>
+  </header>
+  <div class="wrap">
+   <div class="row" id="groups"></div>
+   <aside class="card leader">
+    <h2 style="margin-top:0" id="leaderboardTitle">🏆 لوحة المتصدرين</h2>
+    <div class="tools"><button class="btn" id="resetAll">إعادة تعيين الكل</button> <button class="btn" id="exportBtn">تصدير JSON</button> <button class="btn" id="importBtn">استيراد JSON</button>
+    </div>
+    <div id="leaderboard"></div>
+    <div style="margin-top:10px"><label for="io" style="font-size:13px;color:var(--muted)">منطقة التصدير/الاستيراد</label> <textarea id="io" placeholder="يظهر هنا ملف JSON عند التصدير… يمكنك لصقه ثم الضغط &quot;استيراد JSON&quot;"></textarea>
+    </div>
+   </aside>
+  </div>
+  <script>
+const CRITERIA = [
+  "مشاركة", "تطبيق المهارة", "سرعة الإنجاز", "الدقة", "الجهد", "التميز والإبداع"
+];
+
+const GROUPS = [
+  {id:"g1", name:"مجموعة النحل الأمثل", color:"var(--brand1)", colorClass:"g1"},
+  {id:"g2", name:"مجموعة الطاقة المطلقة", color:"var(--brand2)", colorClass:"g2"},
+  {id:"g3", name:"مجموعة الإنجاز السريع", color:"var(--brand3)", colorClass:"g3"},
+  {id:"g4", name:"مجموعة الفكرة العملية", color:"var(--brand4)", colorClass:"g4"},
+  {id:"g5", name:"مجموعة الانطلاقة السريعة", color:"var(--brand5)", colorClass:"g5"},
+  {id:"g6", name:"مجموعة الأفق الإبداعي", color:"var(--brand6)", colorClass:"g6"},
+];
+
+const MAX = 10;
+let allScores = [];
+let isUpdating = false;
+
+// Element SDK Configuration
+const defaultConfig = {
+  main_title: "🌟 نظام تحفيز المجموعات",
+  subtitle: "قيّمي 6 مجموعات عبر معايير بنجوم 1–10، مع متوسط، تقدّم، وترتيب فوري. يُحفَظ كل شيء تلقائياً في جدول Canva.",
+  leaderboard_title: "🏆 لوحة المتصدرين",
+  background_color: "#f7f7fb",
+  card_color: "#ffffff",
+  text_color: "#1f2937",
+  primary_action_color: "#6366f1",
+  secondary_surface_color: "#eef2ff",
+  font_family: "Noto Naskh Arabic",
+  font_size: 16
+};
+
+async function onConfigChange(config) {
+  const mainTitle = config.main_title || defaultConfig.main_title;
+  const subtitle = config.subtitle || defaultConfig.subtitle;
+  const leaderboardTitle = config.leaderboard_title || defaultConfig.leaderboard_title;
+  const backgroundColor = config.background_color || defaultConfig.background_color;
+  const cardColor = config.card_color || defaultConfig.card_color;
+  const textColor = config.text_color || defaultConfig.text_color;
+  const primaryActionColor = config.primary_action_color || defaultConfig.primary_action_color;
+  const secondarySurfaceColor = config.secondary_surface_color || defaultConfig.secondary_surface_color;
+  const fontFamily = config.font_family || defaultConfig.font_family;
+  const fontSize = config.font_size || defaultConfig.font_size;
+
+  document.getElementById('mainTitle').textContent = mainTitle;
+  document.getElementById('subtitle').textContent = subtitle;
+  document.getElementById('leaderboardTitle').textContent = leaderboardTitle;
+
+  document.body.style.backgroundColor = backgroundColor;
+  document.body.style.color = textColor;
+  document.body.style.fontFamily = `${fontFamily}, Tajawal, system-ui, sans-serif`;
+  document.body.style.fontSize = `${fontSize}px`;
+
+  document.documentElement.style.setProperty('--bg', backgroundColor);
+  document.documentElement.style.setProperty('--card', cardColor);
+  document.documentElement.style.setProperty('--ink', textColor);
+  document.documentElement.style.setProperty('--chip', secondarySurfaceColor);
+
+  const buttons = document.querySelectorAll('.starBtn[aria-checked="true"]');
+  buttons.forEach(btn => {
+    btn.style.outlineColor = primaryActionColor;
+    btn.style.backgroundColor = secondarySurfaceColor;
+  });
+
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.style.backgroundColor = secondarySurfaceColor;
+  });
+
+  document.querySelectorAll('.crit').forEach(crit => {
+    crit.style.backgroundColor = secondarySurfaceColor;
+  });
+
+  document.getElementById('mainTitle').style.fontSize = `${fontSize * 1.875}px`;
+  document.querySelector('.sub').style.fontSize = `${fontSize * 0.875}px`;
+  document.querySelectorAll('.gtitle').forEach(el => {
+    el.style.fontSize = `${fontSize * 1.125}px`;
+  });
+}
+
+// Data SDK Handler
+const dataHandler = {
+  onDataChanged(data) {
+    allScores = data;
+    if (!isUpdating) {
+      render();
+    }
+  }
+};
+
+function getScore(groupIndex, criterionIndex) {
+  const record = allScores.find(s => s.group_index === groupIndex && s.criterion_index === criterionIndex && s.field_type === 'score');
+  return record ? record.score : 0;
+}
+
+function getGroupName(groupIndex) {
+  const record = allScores.find(s => s.group_index === groupIndex && s.field_type === 'name');
+  return record ? record.name : GROUPS[groupIndex].name;
+}
+
+async function setScore(groupIndex, criterionIndex, score) {
+  if (isUpdating) return;
+  
+  isUpdating = true;
+  const existing = allScores.find(s => s.group_index === groupIndex && s.criterion_index === criterionIndex && s.field_type === 'score');
+  
+  if (existing) {
+    existing.score = score;
+    const result = await window.dataSdk.update(existing);
+    if (!result.isOk) {
+      showToast('خطأ في حفظ التقييم');
+    }
+  } else {
+    const result = await window.dataSdk.create({
+      group_index: groupIndex,
+      criterion_index: criterionIndex,
+      score: score,
+      field_type: 'score',
+      name: ''
+    });
+    if (!result.isOk) {
+      showToast('خطأ في حفظ التقييم');
+    }
+  }
+  
+  isUpdating = false;
+}
+
+async function setGroupName(groupIndex, name) {
+  if (isUpdating) return;
+  
+  isUpdating = true;
+  const existing = allScores.find(s => s.group_index === groupIndex && s.field_type === 'name');
+  
+  if (existing) {
+    existing.name = name;
+    const result = await window.dataSdk.update(existing);
+    if (!result.isOk) {
+      showToast('خطأ في حفظ الاسم');
+    }
+  } else {
+    const result = await window.dataSdk.create({
+      group_index: groupIndex,
+      field_type: 'name',
+      name: name,
+      criterion_index: -1,
+      score: 0
+    });
+    if (!result.isOk) {
+      showToast('خطأ في حفظ الاسم');
+    }
+  }
+  
+  isUpdating = false;
+}
+
+const groupsEl = document.getElementById('groups');
+
+function render(){
+  groupsEl.innerHTML = "";
+  for(let i = 0; i < 6; i++) {
+    groupsEl.appendChild(groupCard(i));
+  }
+  renderLeaderboard();
+}
+
+function average(arr){
+  if(arr.length === 0) return 0;
+  return arr.reduce((a,b)=>a+b,0) / arr.length;
+}
+
+function health(v){
+  if(!v) return "بانتظار التقييم";
+  if(v>=9) return "ممتاز";
+  if(v>=7) return "جيد جداً";
+  if(v>=5) return "جيد";
+  return "بحاجة دعم";
+}
+
+function hintColor(v){
+  if(!v) return "var(--muted)";
+  if(v>=9) return "var(--ok)";
+  if(v>=7) return "#2563eb";
+  if(v>=5) return "var(--warn)";
+  return "var(--bad)";
+}
+
+function trendLabel(avg){
+  if(avg>=9) return "🔝 أداء نخبة";
+  if(avg>=7) return "📈 تقدّم قوي";
+  if(avg>=5) return "🛠 تحسين ممكن";
+  return "🎯 ركّزي على الدعم";
+}
+
+function groupCard(i){
+  const card = document.createElement('section');
+  card.className = "card";
+  const color = GROUPS[i]?.color || 'var(--chip)';
+
+  const head = document.createElement('div');
+  head.className = "groupHeader";
+  const dot = document.createElement('span');
+  dot.className = "dot"; 
+  dot.style.background = color;
+  
+  const avatar = "👧🏻";
+  const title = document.createElement('div');
+  title.className = "gtitle"; 
+  title.contentEditable = "true";
+  title.textContent = getGroupName(i);
+  
+  let nameTimeout;
+  title.addEventListener('input',()=>{ 
+    clearTimeout(nameTimeout);
+    nameTimeout = setTimeout(async () => {
+      await setGroupName(i, title.textContent.trim());
+      renderLeaderboard();
+    }, 500);
+  });
+
+  const scores = [];
+  for(let ci = 0; ci < CRITERIA.length; ci++) {
+    scores.push(getScore(i, ci));
+  }
+  
+  const pill = document.createElement('span');
+  pill.className = "pill";
+  const avg = average(scores);
+  pill.textContent = `المتوسط: ${avg.toFixed(1)} / ${MAX}`;
+
+  const reset = document.createElement('button');
+  reset.className = "reset"; 
+  reset.textContent = "إعادة تعيين المجموعة";
+  reset.addEventListener('click', async ()=>{
+    const confirmDiv = document.createElement('div');
+    confirmDiv.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:1000;text-align:center';
+    confirmDiv.innerHTML = `
+      <p style="margin:0 0 15px">تأكيد إعادة تعيين جميع معايير هذه المجموعة؟</p>
+      <button id="confirmYes" style="background:#ef4444;color:white;border:0;padding:8px 16px;border-radius:8px;cursor:pointer;margin:0 5px">نعم</button>
+      <button id="confirmNo" style="background:#6b7280;color:white;border:0;padding:8px 16px;border-radius:8px;cursor:pointer;margin:0 5px">لا</button>
+    `;
+    
+    const backdrop = document.createElement('div');
+    backdrop.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:999';
+    
+    document.body.appendChild(backdrop);
+    document.body.appendChild(confirmDiv);
+    
+    document.getElementById('confirmYes').onclick = async () => {
+      backdrop.remove();
+      confirmDiv.remove();
+      
+      reset.disabled = true;
+      reset.textContent = 'جاري الحذف...';
+      
+      const toDelete = allScores.filter(s => s.group_index === i && s.field_type === 'score');
+      for (const record of toDelete) {
+        await window.dataSdk.delete(record);
+      }
+      
+      reset.disabled = false;
+      reset.textContent = 'إعادة تعيين المجموعة';
+      showToast('تم إعادة تعيين المجموعة');
+    };
+    
+    document.getElementById('confirmNo').onclick = () => {
+      backdrop.remove();
+      confirmDiv.remove();
+    };
+  });
+
+  head.append(dot, document.createTextNode(avatar), title, pill, reset);
+
+  const list = document.createElement('div');
+  list.className = "criteria";
+  for(let ci = 0; ci < CRITERIA.length; ci++) {
+    const val = getScore(i, ci);
+    list.appendChild(criterionRow(i, ci, val));
+  }
+
+  const footer = document.createElement('div');
+  footer.className = "footerLine";
+  const progressWrap = document.createElement('div');
+  progressWrap.className = "barWrap"; 
+  progressWrap.style.flex = "1";
+  const progress = document.createElement('div');
+  progress.className = `bar g${i+1}`;
+  progress.style.width = (avg/MAX*100) + "%";
+  progressWrap.appendChild(progress);
+
+  const advice = document.createElement('span');
+  advice.className = "pill";
+  advice.textContent = trendLabel(avg);
+
+  footer.append(progressWrap, advice);
+
+  card.append(head, list, footer);
+  return card;
+}
+
+function criterionRow(gi, ci, val){
+  const wrap = document.createElement('div'); 
+  wrap.className = "crit";
+  
+  const head = document.createElement('div'); 
+  head.className = "critHead";
+  
+  const name = document.createElement('div'); 
+  name.className = "critName"; 
+  name.textContent = CRITERIA[ci];
+  
+  const line = document.createElement('div'); 
+  line.className = "scoreLine";
+  
+  const now = document.createElement('span'); 
+  now.innerHTML = `الدرجة: <b class="avg">${val}</b> / ${MAX}`;
+  
+  const status = document.createElement('span'); 
+  status.textContent = health(val); 
+  status.style.marginInlineStart="auto";
+  status.style.color = hintColor(val);
+  
+  head.append(name);
+
+  const stars = document.createElement('div'); 
+  stars.className = "stars"; 
+  stars.setAttribute('role','radiogroup'); 
+  stars.setAttribute('aria-label',CRITERIA[ci]);
+  
+  for(let s=1; s<=MAX; s++){
+    const b = document.createElement('button');
+    b.className = "starBtn"; 
+    b.type = "button"; 
+    b.setAttribute('role','radio');
+    b.setAttribute('aria-checked', String(s===val));
+    b.setAttribute('aria-label', `${CRITERIA[ci]}: ${s}`);
+    b.textContent = "★ " + s;
+    
+    b.addEventListener('click', async ()=>{
+      const allButtons = stars.querySelectorAll('.starBtn');
+      allButtons.forEach(btn => btn.disabled = true);
+      stars.classList.add('loading');
+      
+      await setScore(gi, ci, s);
+      
+      allButtons.forEach((btn, idx) => {
+        btn.setAttribute('aria-checked', String((idx + 1) === s));
+        btn.disabled = false;
+      });
+      
+      now.innerHTML = `الدرجة: <b class="avg">${s}</b> / ${MAX}`;
+      status.textContent = health(s);
+      status.style.color = hintColor(s);
+      
+      const barWrap = wrap.querySelector('.barWrap .bar');
+      if(barWrap) {
+        barWrap.style.width = (s/MAX*100) + "%";
+      }
+      
+      const groupCard = b.closest('.card');
+      const groupPill = groupCard.querySelector('.groupHeader .pill');
+      const scores = [];
+      for(let i = 0; i < CRITERIA.length; i++) {
+        scores.push(getScore(gi, i));
+      }
+      const avg = average(scores);
+      groupPill.textContent = `المتوسط: ${avg.toFixed(1)} / ${MAX}`;
+      
+      const groupProgress = groupCard.querySelector('.footerLine .bar');
+      if(groupProgress) {
+        groupProgress.style.width = (avg/MAX*100) + "%";
+      }
+      
+      const groupAdvice = groupCard.querySelector('.footerLine .pill');
+      if(groupAdvice) {
+        groupAdvice.textContent = trendLabel(avg);
+      }
+      
+      renderLeaderboard();
+      stars.classList.remove('loading');
+    });
+    
+    stars.appendChild(b);
+  }
+
+  const barWrap = document.createElement('div');
+  barWrap.className = "barWrap";
+  const bar = document.createElement('div');
+  bar.className = `bar g${gi+1}`;
+  bar.style.width = (val/MAX*100) + "%";
+  barWrap.appendChild(bar);
+
+  line.append(now, status);
+  wrap.append(head, stars, barWrap, line);
+  return wrap;
+}
+
+function sum(arr){
+  return arr.reduce((a,b)=>a+(+b||0),0);
+}
+
+function average(arr){
+  const filled = arr.filter(x=>x>0); 
+  return filled.length ? sum(filled)/filled.length : 0;
+}
+
+function renderLeaderboard(){
+  const rankings = [];
+  
+  for(let i = 0; i < 6; i++) {
+    const scores = [];
+    for(let ci = 0; ci < CRITERIA.length; ci++) {
+      scores.push(getScore(i, ci));
+    }
+    
+    const total = sum(scores);
+    const avg = average(scores);
+    const filled = scores.filter(x=>x>0).length;
+    
+    rankings.push({
+      name: getGroupName(i),
+      total: total,
+      avg: avg,
+      filled: filled
+    });
+  }
+  
+  rankings.sort((a, b) => b.total - a.total);
+  
+  const medals = ['🥇', '🥈', '🥉'];
+  const html = `
+    <table aria-describedby="board">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th style="text-align:right">المجموعة</th>
+          <th>المتوسط</th>
+          <th>المجموع</th>
+          <th>المكتمل</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rankings.map((r, idx) => `
+          <tr>
+            <td><span class="medal">${medals[idx] || (idx + 1)}</span></td>
+            <td style="text-align:right">${r.name}</td>
+            <td>${r.avg.toFixed(1)}</td>
+            <td><strong>${r.total}</strong></td>
+            <td>${r.filled}/${CRITERIA.length}</td>
+          </tr>
+        `).join('')}
+      </tbody>
+    </table>
+  `;
+  
+  document.getElementById('leaderboard').innerHTML = html;
+}
+
+async function resetAll() {
+  if (allScores.length === 0) {
+    showToast('لا توجد بيانات لحذفها');
+    return;
+  }
+  
+  const confirmDiv = document.createElement('div');
+  confirmDiv.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:white;padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:1000;text-align:center';
+  confirmDiv.innerHTML = `
+    <p style="margin:0 0 15px">هل أنت متأكد من إعادة تعيين جميع المجموعات؟</p>
+    <button id="confirmYesAll" style="background:#ef4444;color:white;border:0;padding:8px 16px;border-radius:8px;cursor:pointer;margin:0 5px">نعم</button>
+    <button id="confirmNoAll" style="background:#6b7280;color:white;border:0;padding:8px 16px;border-radius:8px;cursor:pointer;margin:0 5px">لا</button>
+  `;
+  
+  const backdrop = document.createElement('div');
+  backdrop.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:999';
+  
+  document.body.appendChild(backdrop);
+  document.body.appendChild(confirmDiv);
+  
+  document.getElementById('confirmYesAll').onclick = async () => {
+    backdrop.remove();
+    confirmDiv.remove();
+    
+    const btn = document.getElementById('resetAll');
+    btn.disabled = true;
+    btn.textContent = 'جاري الحذف...';
+    
+    for (const record of allScores) {
+      await window.dataSdk.delete(record);
+    }
+    
+    btn.disabled = false;
+    btn.textContent = 'إعادة تعيين الكل';
+    showToast('تم إعادة تعيين جميع المجموعات');
+  };
+  
+  document.getElementById('confirmNoAll').onclick = () => {
+    backdrop.remove();
+    confirmDiv.remove();
+  };
+}
+
+function exportData() {
+  const exportData = {};
+  
+  for(let i = 0; i < 6; i++) {
+    exportData[GROUPS[i].id] = {
+      name: getGroupName(i),
+      scores: {}
+    };
+    
+    for(let ci = 0; ci < CRITERIA.length; ci++) {
+      exportData[GROUPS[i].id].scores[CRITERIA[ci]] = getScore(i, ci);
+    }
+  }
+  
+  const json = JSON.stringify(exportData, null, 2);
+  document.getElementById('io').value = json;
+  showToast('تم التصدير إلى منطقة النص');
+}
+
+async function importData() {
+  const textarea = document.getElementById('io');
+  const json = textarea.value.trim();
+  
+  if (!json) {
+    showToast('الرجاء لصق بيانات JSON أولاً');
+    return;
+  }
+  
+  try {
+    const data = JSON.parse(json);
+    const btn = document.getElementById('importBtn');
+    btn.disabled = true;
+    btn.textContent = 'جاري الاستيراد...';
+    
+    for(let i = 0; i < 6; i++) {
+      const groupId = GROUPS[i].id;
+      if(data[groupId]) {
+        if(data[groupId].name) {
+          await setGroupName(i, data[groupId].name);
+        }
+        
+        if(data[groupId].scores) {
+          for(let ci = 0; ci < CRITERIA.length; ci++) {
+            const criterion = CRITERIA[ci];
+            if(data[groupId].scores[criterion] !== undefined) {
+              await setScore(i, ci, data[groupId].scores[criterion]);
+            }
+          }
+        }
+      }
+    }
+    
+    btn.disabled = false;
+    btn.textContent = 'استيراد JSON';
+    textarea.value = '';
+    showToast('تم الاستيراد بنجاح');
+  } catch (err) {
+    showToast('خطأ في تنسيق JSON');
+  }
+}
+
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.textContent = message;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.remove();
+  }, 3000);
+}
+
+document.getElementById('resetAll').addEventListener('click', resetAll);
+document.getElementById('exportBtn').addEventListener('click', exportData);
+document.getElementById('importBtn').addEventListener('click', importData);
+
+// Initialize SDKs
+(async () => {
+  const initResult = await window.dataSdk.init(dataHandler);
+  if (!initResult.isOk) {
+    console.error('Failed to initialize Data SDK');
+    showToast('خطأ في تحميل النظام');
+  }
+  
+  if (window.elementSdk) {
+    await window.elementSdk.init({
+      defaultConfig,
+      onConfigChange,
+      mapToCapabilities: (config) => ({
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.secondary_surface_color || defaultConfig.secondary_surface_color,
+            set: (value) => {
+              config.secondary_surface_color = value;
+              window.elementSdk.setConfig({ secondary_surface_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          },
+          {
+            get: () => config.primary_action_color || defaultConfig.primary_action_color,
+            set: (value) => {
+              config.primary_action_color = value;
+              window.elementSdk.setConfig({ primary_action_color: value });
+            }
+          },
+          {
+            get: () => config.card_color || defaultConfig.card_color,
+            set: (value) => {
+              config.card_color = value;
+              window.elementSdk.setConfig({ card_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            config.font_family = value;
+            window.elementSdk.setConfig({ font_family: value });
+          }
+        },
+        fontSizeable: {
+          get: () => config.font_size || defaultConfig.font_size,
+          set: (value) => {
+            config.font_size = value;
+            window.elementSdk.setConfig({ font_size: value });
+          }
+        }
+      }),
+      mapToEditPanelValues: (config) => new Map([
+        ["main_title", config.main_title || defaultConfig.main_title],
+        ["subtitle", config.subtitle || defaultConfig.subtitle],
+        ["leaderboard_title", config.leaderboard_title || defaultConfig.leaderboard_title]
+      ])
+    });
+  }
+})();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abb32e170999350',t:'MTc2NTM1MzUyMy4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
