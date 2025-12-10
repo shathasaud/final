@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>شواهد المعايير المهنية للمعلمة</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <style>
+        body {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Tajawal', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100%;
+            width: 100%;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 100%;
+            min-height: 100%;
+            padding: 3rem 2rem;
+        }
+
+        .trophy-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+            animation: bounce 2s infinite;
+        }
+
+        .hero-title {
+            font-size: 2.5rem;
+            color: #2d3748;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: #ffffff;
+            margin: 3rem 0 2.5rem 0;
+            font-weight: bold;
+        }
+
+        .info-card {
+            max-width: 1000px;
+            margin: 0 auto 3rem auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-right: 6px solid #764ba2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        .info-text {
+            color: #2d3748;
+            font-size: 1.1rem;
+            line-height: 2;
+            margin: 1.5rem 0 0 0;
+            text-align: justify;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-description {
+                font-size: 1rem;
+                padding: 1.5rem;
+            }
+            
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .info-card {
+                padding: 1.5rem;
+            }
+
+            .info-text {
+                font-size: 1rem;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="info-card" style="margin-top: 2rem;">
+    <div style="text-align: center; font-size: 3.5rem; margin-bottom: 1.5rem;">
+     🏆
+    </div><!-- البطاقة الداخلية الأولى -->
+    <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-right: 5px solid #f59e0b;">
+     <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+      <div style="font-size: 2rem; margin-left: 1rem;">
+       ✨
+      </div>
+      <h2 style="font-size: 1.8rem; color: #92400e; margin: 0; font-weight: bold;">في رحلة التميز المهني</h2>
+     </div>
+     <p class="info-text" style="margin: 0; text-align: center; color: #78350f;">يصبح التوثيق ليس مجرد عرض لشواهد، بل <span style="color: #dc2626; font-weight: bold;">نافذة تكشف أثر المعلم على تعلم طالباته</span>، و كيفية توظيف <span style="color: #059669; font-weight: bold;">التقنية والابتكار والتحليل</span> في تطوير البيئة التعليمية. <br><br>
+       تجمع هذه الصفحة <span style="color: #d97706; font-weight: bold;">الأدلة والممارسات المتقدمة المرتبطة بالمعايير الـ 11 للأداء المهني</span>، بصياغة جذابة توضح <span style="color: #7c2d12; font-weight: bold;">جودة العمل ودقته وعمقه</span>، وتبرز <span style="color: #dc2626; font-weight: bold;">أثره الحقيقي على الطالبة والأسرة والمدرسة</span>.</p>
+    </div><!-- البطاقة الداخلية الثانية -->
+    <div style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-right: 5px solid #3b82f6;">
+     <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+      <div style="font-size: 2rem; margin-left: 1rem;">
+       🎯
+      </div>
+      <h2 style="font-size: 1.8rem; color: #1e3a8a; margin: 0; font-weight: bold;">شواهد المعايير المهنية</h2>
+     </div>
+     <p class="info-text" style="margin: 0; color: #1e40af;">في رحلة التطوير المهني للمعلمة، لا يكفي الممارسة اليومية وحدها، بل يبرز <span style="color: #dc2626; font-weight: bold;">التميّز الحقيقي</span> عندما تتحول التجربة إلى <span style="color: #059669; font-weight: bold;">شواهد رقمية موثقة</span> تعكس أثرها في تعلم الطالبات وجودة البيئة التعليمية. <br><br>
+       وفي هذه الصفحة، أقدّم <span style="color: #ea580c; font-weight: bold;">باقة من الشواهد النوعية</span> المبنية على <span style="color: #7c3aed; font-weight: bold;">الذكاء الاصطناعي وتحليل البيانات والتفاعل الرقمي</span>، مرتّبة وفق <span style="color: #dc2626; font-weight: bold;">المعايير العشرة للتميز المهني</span>، وبأسلوب يجمع بين <span style="color: #059669; font-weight: bold;">الجاذبية، الاحترافية، والوضوح</span>.</p>
+    </div>
+   </div>
+   <div class="info-card" style="margin-top: 2rem;">
+    <div style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">
+     ⭐
+    </div>
+    <h2 style="font-size: 2rem; color: #2d3748; margin-bottom: 1.5rem; font-weight: bold; text-align: center;">نظام الإدارة الصفية المرتكز على البيانات والشراكة الرقمية</h2>
+    <p style="text-align: center; font-size: 1rem; color: #805ad5; font-weight: 600; margin-bottom: 2rem;">(The Data-Driven Adaptive Digital Partnership Classroom Management Model)</p>
+    <div style="background: #f7fafc; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">📋 نظرة عامة:</h3>
+     <p class="info-text" style="margin: 0;">تم تصميم <span style="color: #e53e3e; font-weight: bold;">لوحة رقمية مبتكرة</span> تُعد <span style="color: #d69e2e; font-weight: bold;">نموذجًا متقدمًا للإدارة الصفية المرتكزة على البيانات</span> والشراكة الرقمية المتكيفة؛ حيث تجمع بين <span style="color: #38a169; font-weight: bold;">التقويم، التخطيط، تحليل النتائج، الإدارة الصفية، والتفاعل مع أولياء الأمور</span> في نظام واحد متكامل. <br><br>
+       تجمع اللوحة بيانات أداء الطالبة بشكل شامل <span style="color: #805ad5; font-weight: bold;">(الاختبارات, التقييم العملي، الواجب، المشاركة، التعاون، الغياب)</span>، وتحوّلها إلى <span style="color: #dd6b20; font-weight: bold;">صورة تحليلية واضحة</span> تُظهر نقاط القوة والضعف ومستوى التقدم.</p>
+    </div>
+    <div style="background: #edf2f7; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">🧠 الذكاء التحليلي والتخصيص:</h3>
+     <p class="info-text" style="margin: 0;">تنتج اللوحة تلقائيًا <span style="color: #e53e3e; font-weight: bold;">خطة رفع مستوى مخصّصة</span> تُبنى على تحليل المجموع والتعاون والغياب، إضافةً إلى إظهار <span style="color: #d69e2e; font-weight: bold;">"حالة الطالبة"</span> و<span style="color: #38a169; font-weight: bold;">نصيحة تطويرية ذكية</span> تعتمد على بياناتها الفعلية. <br><br>
+       وتتميز المنظومة بإتاحة <span style="color: #805ad5; font-weight: bold;">لوحة خاصة للطالبة وولي الأمر</span> تتضمن: الرسم البياني لتقدمها، نقاط القوة والضعف، الخطة العلاجية، ونصيحة تطويرية؛ مع إمكانية إدخال بيانات نوعية التعليمي (كيف تتعلم، مهاراتها، الطريقة المقترحة لتحسين مستواها)، إضافةً إلى <span style="color: #dd6b20; font-weight: bold;">قناة اتصال مباشرة عبر الواتساب</span>، مما يجعل العلاقة <span style="color: #e53e3e; font-weight: bold;">شراكة تعليمية رقمية متكيفة (Adaptive Digital Partnership)</span>.</p>
+    </div>
+    <div style="background: linear-gradient(135deg, #667eea15, #764ba215); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #667eea;">
+     <h3 style="color: #667eea; font-size: 1.4rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">🎯 النموذج الرسمي</h3>
+     <p style="text-align: center; font-size: 1.2rem; color: #e53e3e; font-weight: 700; line-height: 1.8; margin: 0;">"نموذج الإدارة الصفية المرتكز على البيانات والشراكة الرقمية " <br><span style="font-size: 1rem; color: #805ad5; font-weight: 600;"> (The Data-Driven Adaptive Digital Partnership Classroom Management Model) </span></p>
+    </div>
+    <h3 style="color: #2d3748; font-size: 1.5rem; margin: 2.5rem 0 1.5rem 0; font-weight: bold; text-align: center;">📊 تحقيق متطلبات الدرجة 5 في المحاور المهنية</h3>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 أولاً: تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4>
+     <p class="info-text" style="margin: 1rem 0;">النظام يمثل <span style="color: #e53e3e; font-weight: bold;">أداة تحليل وتشخيص متقدمة</span> لأنه لا يكتفي برصد الدرجات، بل يقوم بتحليل شامل لبيانات الطالبة عبر عناصر متعددة: <span style="color: #38a169; font-weight: bold;">الاختبارات، التقييم العملي، المشاركة، الواجب، التعاون داخل المجموعة، الغياب، ونقاط القوة والضعف</span>.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر أدوات تحليل وتشخيص متقدمة (أنظمة ذكية)</span>" + "<span style="color: #805ad5; font-weight: bold;">يولد خططاً فردية أو جماعية مستندة إلى التعلم المتقدم</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثانياً: إعداد وتنفيذ خطة التعلم</h4>
+     <p class="info-text" style="margin: 1rem 0;">النظام لا يحلل البيانات فقط، بل يقوم بوظيفة تعليمية متقدمة: <span style="color: #e53e3e; font-weight: bold;">توليد خطة علاجية ذكية ومتكيفة</span>، <span style="color: #38a169; font-weight: bold;">تقديم نصيحة تطويرية فردية</span>، والسماح للطالبة وولي الأمر بتقديم مدخلات حول صفاتها التعليمية وطريقة تعلمها واقتراح أسلوب لتحسين مستواها.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر خطط تعلم مرنة وذكية تراعي التغيرات</span>" + "<span style="color: #805ad5; font-weight: bold;">يبتكر نماذج تخطيط تعليمية متقدمة (دمج التقنية – التعلم المخصص)</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثالثاً: التفاعل مع أولياء الأمور والمجتمع المهني</h4>
+     <p class="info-text" style="margin: 1rem 0;">يقدم النظام <span style="color: #e53e3e; font-weight: bold;">مفهومًا جديدًا للشراكة التعليمية</span>، إذ يوفّر <span style="color: #805ad5; font-weight: bold;">لوحة خاصة لولي الأمر والطالبة</span> تعرض الخطة العلاجية، التقدم، الرسم البياني، ونقاط القوة والضعف، وتُمكّن الأسرة من إدخال بيانات تعليمية نوعية واقتراح طريقة للتحسين، مع <span style="color: #dd6b20; font-weight: bold;">التواصل المباشر عبر الواتس آب</span>.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يقود مبادرات ابتكارية للتواصل عبر منصات تفاعلية</span>" + "<span style="color: #805ad5; font-weight: bold;">يبتكر أساليب تسهم في رفع وعي أولياء الأمور وتحقيق شراكة استراتيجية مستدامة</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 رابعاً: تنوّع أساليب وأدوات التقويم</h4>
+     <p class="info-text" style="margin: 1rem 0;">النظام نفسه <span style="color: #e53e3e; font-weight: bold;">أداة تقويم رقمية متقدمة</span> لأنه يجمع عدة مصادر تقويمية <span style="color: #38a169; font-weight: bold;">(اختبار – عملي – واجب – مشاركة – تعاون)</span>، ويحولها إلى <span style="color: #805ad5; font-weight: bold;">تقويم تشخيصي</span>، ويوظفها مباشرة في التخطيط العلاجي.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر أدوات تقويم رقمية (لوحات متابعة ذكية) توظّف نتائج التقويم لتحسين جودة التعليم</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 خامساً: تحسين نتائج المتعلمين</h4>
+     <p class="info-text" style="margin: 1rem 0;">الأثر النهائي للنظام يظهر في: <span style="color: #e53e3e; font-weight: bold;">منع التعثر مبكرًا</span>، <span style="color: #38a169; font-weight: bold;">التدخل السريع الذكي</span>، <span style="color: #d69e2e; font-weight: bold;">تقديم خطط علاجية فردية</span>، <span style="color: #805ad5; font-weight: bold;">رفع الوعي الذاتي للطالبة</span>، تعزيز دافعية التعلم، و<span style="color: #dd6b20; font-weight: bold;">تحسين التحصيل بشكل مستدام</span>.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر حلولاً تعليمية تُحدث قفزات نوعية في التحصيل، ويحقق أثراً مستداماً في رفع نتائج المتعلمين</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 سادساً: توظيف التقنية ووسائل التعلم المناسبة</h4>
+     <p class="info-text" style="margin: 1rem 0;">النظام هو <span style="color: #e53e3e; font-weight: bold;">ابتكار تقني متكامل</span> لأنه <span style="color: #38a169; font-weight: bold;">أداة رقمية تفاعلية</span> تعتمد على <span style="color: #805ad5; font-weight: bold;">التحليل اللحظي وتوليد الخطط بشكل آلي</span>، وتدمج <span style="color: #d69e2e; font-weight: bold;">وظائف إدارية، تعليمية، وتقويمية</span> في وقت واحد.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر أدوات تعليمية رقمية جديدة ويبتكر طرقاً متقدمة لدمج التقنية بالتعليم</span>"</p>
+     </div>
+    </div>
+    <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #10b981;">
+     <h3 style="color: #059669; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">💠 الأثر النهائي للنظام</h3>
+     <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+      <li>📊 رفع دقة التشخيص الفردي لكل طالبة</li>
+      <li>📈 تحسين متابعة التقدم وتحديد الاحتياجات</li>
+      <li>🎯 توليد خطط علاجية ذكية لحظيًا</li>
+      <li>🤝 بناء شراكة رقمية مستدامة بين المدرسة والأسرة</li>
+      <li>⭐ تحسين نتائج الطالبات بصورة مستمرة</li>
+      <li>🎯 رفع مستوى الانضباط والتعاون داخل الصف</li>
+      <li>📊 دعم المعلمة ببيانات دقيقة لاتخاذ القرار</li>
+     </ul>
+    </div>
+    <div style="background: #f7fafc; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+     <h4 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: bold;">🧰 الأدوات المستخدمة:</h4>
+     <p style="margin: 0 0 1.5rem 0; color: #2d3748; line-height: 1.8;">لوحة بيانات – تحليل رقمي – ذكاء اصطناعي – تقنيات اتصال – أدوات إدارة صفية</p><button onclick="window.open('https://yourlink.com', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';"> 🚀 الانتقال إلى لوحة المتابعة </button>
+    </div>
+   </div>
+   <div class="info-card" style="margin-top: 2rem;">
+    <div style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">
+     🎯
+    </div>
+    <h2 style="font-size: 2rem; color: #2d3748; margin-bottom: 1.5rem; font-weight: bold; text-align: center;">"نظام التقويم للمهارات العملية المعتمد على تنفيذ المهارات والتنبؤ الذكي"</h2>
+    <p style="text-align: center; font-size: 1rem; color: #805ad5; font-weight: 600; margin-bottom: 2rem;">Performance-Based Practical Skills Assessment System with Intelligent Prediction</p>
+    <div style="background: #f7fafc; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">📋 الوصف:</h3>
+     <p class="info-text" style="margin: 0;">تمثل هذه <span style="color: #e53e3e; font-weight: bold;">اللوحة الرقمية ابتكارًا تربوياً متقدمًا</span> يمكن تصنيفها تحت مسميين رئيسيين يعكسان مستوى التطور التقني والمنهجي. <br><br>
+       وهو <span style="color: #d69e2e; font-weight: bold;">نظام متقدم يجمع بين التقييم القائم على Rubrics</span>، <span style="color: #38a169; font-weight: bold;">التحليل الذكي، التنبؤ بمستوى المتعلمة</span>، وتوليد <span style="color: #805ad5; font-weight: bold;">خطط تعليمية مرنة وفق البيانات اللحظية</span>.</p>
+    </div>
+    <div style="background: #edf2f7; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">🎯 آلية التقييم المعيارية:</h3>
+     <p class="info-text" style="margin: 0 0 1.5rem 0;">تعتمد اللوحة على تقييم مهارات الطالبات بطريقة معيارية وفق <span style="color: #e53e3e; font-weight: bold;">أربعة مستويات</span>:</p>
+     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1.5rem;">
+      <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #10b981;">
+       <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+        🌟
+       </div>
+       <div style="color: #059669; font-weight: bold; font-size: 1.1rem;">
+        ابتكار
+       </div>
+      </div>
+      <div style="background: linear-gradient(135deg, #3b82f620, #2563eb20); padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #3b82f6;">
+       <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+        ⭐
+       </div>
+       <div style="color: #2563eb; font-weight: bold; font-size: 1.1rem;">
+        إتقان
+       </div>
+      </div>
+      <div style="background: linear-gradient(135deg, #f59e0b20, #d9770620); padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #f59e0b;">
+       <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+        ✨
+       </div>
+       <div style="color: #d97706; font-weight: bold; font-size: 1.1rem;">
+        تطبيق
+       </div>
+      </div>
+      <div style="background: linear-gradient(135deg, #ef444420, #dc262620); padding: 1rem; border-radius: 8px; text-align: center; border: 2px solid #ef4444;">
+       <div style="font-size: 2rem; margin-bottom: 0.5rem;">
+        📌
+       </div>
+       <div style="color: #dc2626; font-weight: bold; font-size: 1.1rem;">
+        يحتاج دعم
+       </div>
+      </div>
+     </div>
+     <p class="info-text" style="margin: 0;"><span style="color: #805ad5; font-weight: bold;">تشمل عناصر التقييم:</span> الحضور، تنفيذ المهارة، جودة العمل، مستوى الفهم.</p>
+    </div>
+    <div style="background: linear-gradient(135deg, #667eea15, #764ba215); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #667eea;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">🤖 الذكاء التلقائي للنظام:</h3>
+     <p class="info-text" style="margin: 0 0 1rem 0;">بمجرد تسجيل تقييم الطالبة، تقوم اللوحة تلقائياً بـ:</p>
+     <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+      <li><span style="color: #e53e3e; font-weight: bold;">💬 توليد تغذية فورية</span></li>
+      <li><span style="color: #d69e2e; font-weight: bold;">📋 اقتراح خطة تعليمية أو علاجية</span></li>
+      <li><span style="color: #38a169; font-weight: bold;">🔮 التنبؤ بالمستوى النهائي للطالبة</span></li>
+      <li><span style="color: #805ad5; font-weight: bold;">📊 تحليل نقاط القوة والضعف</span></li>
+      <li><span style="color: #dd6b20; font-weight: bold;">🎯 إنشاء خطط تعلم مرنة تعتمد على أسلوب الطالبة</span></li>
+     </ul>
+    </div>
+    <h3 style="color: #2d3748; font-size: 1.5rem; margin: 2.5rem 0 1.5rem 0; font-weight: bold; text-align: center;">📊 تحقيق متطلبات الدرجة 5 في المحاور المهنية</h3>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 أولاً: تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4>
+     <p class="info-text" style="margin: 1rem 0;">اللوحة تعمل <span style="color: #e53e3e; font-weight: bold;">كنظام ذكي متكامل</span> يتحقق بأعلى درجات الدقة والابتكار؛ فهي <span style="color: #38a169; font-weight: bold;">ترصد الحضور/الغياب، وتحلل الأداء العملي بدقة</span> باستخدام مستويات تقييم معيارية. ثم تقوم بإخراج <span style="color: #805ad5; font-weight: bold;">تشخيص فوري مبني على بيانات متعددة</span>. <br><br>
+       النظام يولد آلياً <span style="color: #d69e2e; font-weight: bold;">تغذية فورية، تغذية علاجية، وخطط تعلم مرنة وذكية</span>، تعتمد على نتائج التشخيص، مما يحقق التعلم المخصص الحقيقي. كما <span style="color: #e53e3e; font-weight: bold;">يتنبأ بمستوى الطالبة تلقائياً وفق الأداء</span>، وهو معيار متقدم جداً يعكس استخدام خوارزميات الذكاء الاصطناعي في التقييم. <br><br><span style="color: #059669; font-weight: bold;">✅ النتيجة:</span> تحولت اللوحة من أداة رصد إلى <span style="color: #dd6b20; font-weight: bold;">نظام تشخيص وتنبؤ متقدم يقدم رؤى استراتيجية</span> وليس مجرد تقارير.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر أدوات تحليل وتشخيص متقدمة (أنظمة ذكية)</span>" + "<span style="color: #805ad5; font-weight: bold;">يولد خططاً فردية أو جماعية مستندة إلى التعلم المتقدم</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثانياً: إعداد وتنفيذ خطة التعلم</h4>
+     <p class="info-text" style="margin: 1rem 0;">يظهر <span style="color: #e53e3e; font-weight: bold;">الابتكار القيادي للنظام</span> في قدرته على توليد <span style="color: #38a169; font-weight: bold;">خطط تعليمية ذكية ومرنة</span> لكل طالبة، تُبنى على التقييم اللحظي والتنبؤ بمستواها المستقبلي، و<span style="color: #805ad5; font-weight: bold;">قابلة للتعديل حسب تطور الأداء</span>. اللوحة تمثل <span style="color: #d69e2e; font-weight: bold;">نموذجاً متكاملاً للتخطيط المخصص المدعوم بالتقنية</span>.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر خطط تعلم مرنة وذكية تراعي التغيرات</span>" + "<span style="color: #805ad5; font-weight: bold;">يبتكر نماذج تخطيط تعليمية متقدمة</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثالثاً: تنوّع أساليب وأدوات التقويم</h4>
+     <p class="info-text" style="margin: 1rem 0;">اللوحة نفسها <span style="color: #e53e3e; font-weight: bold;">أدة تقويم مبتكرة</span> لقياس الأداء العملي باستخدام <span style="color: #38a169; font-weight: bold;">معايير متعددة المستويات (Rubrics)</span>، وتمثل <span style="color: #805ad5; font-weight: bold;">مثالاً مباشراً للوحة متابعة ذكية</span> تعتمد على تحليل البيانات والتنبؤ الذكي، حيث <span style="color: #d69e2e; font-weight: bold;">تحول التقييم فورياً إلى خطة علاجية</span> قابلة للتطبيق مباشرة.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر أدوات تقويم رقمية جديدة مثل لوحات ذكية</span>" + "<span style="color: #805ad5; font-weight: bold;">يحول نتائج التقويم إلى رؤى قابلة للتنفيذ</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 رابعاً: تحسين نتائج المتعلمين</h4>
+     <p class="info-text" style="margin: 1rem 0;"><span style="color: #e53e3e; font-weight: bold;">التنبؤ الذكي والتدخل الفوري</span> يمثلان مبادرة تحسين نوعية تمنع التعثر قبل حدوثه. <span style="color: #38a169; font-weight: bold;">الخطة العلاجية المتولدة آلياً</span> تقدم برنامج علاجي متقدم ودقيق قائم على بيانات فعلية. الدمج بين <span style="color: #805ad5; font-weight: bold;">التشخيص الفوري، التنبؤ، والخطط الذكية</span> يرفع التحصيل بشكل مستدام ومدعوم بالبيانات.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يقود مبادرات نوعية ترفع نتائج التعلم</span>" + "<span style="color: #805ad5; font-weight: bold;">يطور برامج علاجية مبتكرة ويحقق أثراً مستداماً</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 خامساً: توظيف التقنية ووسائل التعلم المناسبة</h4>
+     <p class="info-text" style="margin: 1rem 0;">النظام هو <span style="color: #e53e3e; font-weight: bold;">ابتكار تقني متكامل</span> لأنه <span style="color: #38a169; font-weight: bold;">أداة رقمية تفاعلية</span> تعتمد على <span style="color: #805ad5; font-weight: bold;">التحليل اللحظي وتوليد الخطط بشكل آلي</span>, وتقدم <span style="color: #d69e2e; font-weight: bold;">وظائف تقويمية، تشخيصية، وتخطيطية</span> في وقت واحد.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">يبتكر أدوات تعليمية رقمية جديدة ويبتكر طرقاً متقدمة لدمج التقنية بالتعليم</span>"</p>
+     </div>
+    </div>
+    <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #10b981;">
+     <h3 style="color: #059669; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">💠 الأثر</h3>
+     <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+      <li>📊 تحسين أداء الطالبات في المهارات العملية</li>
+      <li>🎯 تعزيز التعلم القائم على المهارة والتطبيق</li>
+      <li>⚡ تسريع الاستجابة التعليمية من خلال خطط علاجية فورية</li>
+      <li>📊 دعم المعلمة في إعداد تقارير الأداء في وقت قصير</li>
+      <li>🌟 زيادة استقلالية الطالبات وإحساسهن بالتقدم</li>
+     </ul>
+    </div>
+    <div style="background: #f7fafc; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+     <h4 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: bold;">🧰 الأدوات المستخدمة:</h4>
+     <p style="margin: 0 0 1.5rem 0; color: #2d3748; line-height: 1.8;">Canva – رموز برمجية – HTML / CSS / JavaScript – آلية تحليل بيانات داخلية – نظام روبريك للمهارات العملية</p><button onclick="window.open('https://shathaedu.com/skillsboard', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';"> 🚀 الانتقال إلى نظام التقويم </button>
+    </div>
+   </div>
+   <div class="info-card" style="margin-top: 2rem;">
+    <div style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">
+     🤖
+    </div>
+    <h2 style="font-size: 2rem; color: #2d3748; margin-bottom: 1rem; font-weight: bold; text-align: center;">"نموذج تقييم الأداء البصري المعزز بالذكاء الاصطناعي"</h2>
+    <p style="text-align: center; font-size: 1.2rem; color: #805ad5; font-weight: 600; margin-bottom: 2rem;">تقويم ذكي يُحوّل أعمال الطالبات إلى بيانات تقييم دقيقة</p>
+    <div style="background: #f7fafc; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">📋 وصف النموذج:</h3>
+     <p class="info-text" style="margin: 0;">يمثل هذا النموذج <span style="color: #e53e3e; font-weight: bold;">مثالًا حيًا ومباشرًا على تطوير أدوات تقويم مبتكرة ورقمية</span>، ويستغل قوة الذكاء الاصطناعي في <span style="color: #38a169; font-weight: bold;">التقويم القائم على الأداء (Performance-Based Assessment)</span>. <br><br>
+       فالنموذج لا يُعد مجرد وسيلة تقويم، بل <span style="color: #d69e2e; font-weight: bold;">منهجية متقدمة تجمع بين التحليل البصري، والمعايير الدقيقة، والذكاء الاصطناعي</span> لإنتاج تقييم فوري وموضوعي وشامل.</p>
+    </div>
+    <div style="background: #edf2f7; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">🔍 آلية العمل:</h3>
+     <p class="info-text" style="margin: 0 0 1.5rem 0;">يمثل هذا النموذج <span style="color: #e53e3e; font-weight: bold;">ابتكارًا متقدمًا في التقويم التربوي</span>، حيث يعتمد على الذكاء الاصطناعي لتحليل أعمال الطالبات من خلال <span style="color: #38a169; font-weight: bold;">صور أنشطتهن</span>، مقارنة بمعايير تقييم محكمة وواضحة.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 2;">يقوم النموذج بـ <span style="color: #805ad5; font-weight: bold;">قراءة الشواهد البصرية</span>، <span style="color: #d69e2e; font-weight: bold;">فهم السياق</span>، ثم <span style="color: #38a169; font-weight: bold;">مطابقة الأداء بمعايير Rubrics</span> مبنية على مستويات الإتقان، ليصدر <span style="color: #e53e3e; font-weight: bold;">حكمًا تقويميًا موضوعيًا، سريعًا، ودقيقًا</span>.</p>
+     </div>
+     <p class="info-text" style="margin: 1.5rem 0 0 0;">يعد هذا الأسلوب <span style="color: #dd6b20; font-weight: bold;">نقلة نوعية في تقويم الأداء العملي</span> لأنه يحوّل الأدلة البصرية إلى بيانات قابلة للقياس، ويوفر <span style="color: #38a169; font-weight: bold;">تغذية راجعة فورية</span> تُستخدم لتحسين جودة التعلم وتطوير أداء الطالبة.</p>
+    </div>
+    <div style="background: linear-gradient(135deg, #667eea15, #764ba215); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #667eea;">
+     <h3 style="color: #667eea; font-size: 1.4rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">🏷️ تصنيف النموذج تربويًا وتقنيًا</h3>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h4 style="color: #e53e3e; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: bold;">1️⃣ تقييم الأداء المدعوم بالذكاء الاصطناعي</h4>
+      <p style="margin: 0 0 0.5rem 0; color: #805ad5; font-size: 0.95rem; font-weight: 600;">AI-Powered Performance Assessment</p>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">وهو التصنيف الأشمل لأنه يجمع بين: <span style="color: #38a169; font-weight: bold;">استخدام الذكاء الاصطناعي (ChatGPT)</span>، <span style="color: #d69e2e; font-weight: bold;">تحليل مدخلات بصرية</span> (صور أعمال الطالبات)، و<span style="color: #805ad5; font-weight: bold;">تطبيق منهجية معيارية دقيقة (Rubrics)</span>. هذا التحول يمثل قفزة نوعية نحو <span style="color: #e53e3e; font-weight: bold;">التقويم الرقمي العميق (AI-Enhanced Assessment)</span>.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h4 style="color: #e53e3e; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: bold;">2️⃣ تحليل الأنشطة البصرية القائم على المعايير</h4>
+      <p style="margin: 0 0 0.5rem 0; color: #805ad5; font-size: 0.95rem; font-weight: 600;">Criteria-Based Visual Activity Analysis</p>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">وصف دقيق لما يفعله النموذج: <span style="color: #38a169; font-weight: bold;">تحليل بصري للصور واستنتاج عناصر الأداء الظاهرة</span>، <span style="color: #d69e2e; font-weight: bold;">تقييم نوعي/كمي للمهام وفق المعايير</span>، و<span style="color: #805ad5; font-weight: bold;">ربط الدليل البصري بنتيجة قابلة للقياس</span>.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h4 style="color: #e53e3e; font-size: 1.1rem; margin-bottom: 0.8rem; font-weight: bold;">3️⃣ أداة قياس للإتقان من الشواهد</h4>
+      <p style="margin: 0 0 0.5rem 0; color: #805ad5; font-size: 0.95rem; font-weight: 600;">Evidence-Based Mastery Measurement Tool</p>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">يركز هذا التصنيف على جوهر الابتكار: <span style="color: #38a169; font-weight: bold;">تحويل الشواهد غير النصية (الصور) إلى مقاييس إتقان دقيقة</span>، <span style="color: #d69e2e; font-weight: bold;">رفع صدق وموثوقية عملية التقويم</span>، و<span style="color: #805ad5; font-weight: bold;">تقليل التقدير الشخصي وزيادة الموضوعية</span>.</p>
+     </div>
+    </div>
+    <h3 style="color: #2d3748; font-size: 1.5rem; margin: 2.5rem 0 1.5rem 0; font-weight: bold; text-align: center;">🎯 تحقيق متطلبات الدرجة 5 في المحاور المهنية</h3>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 أولاً: محور — تنوع أساليب وأدوات التقويم</h4>
+     <p class="info-text" style="margin: 1rem 0;">هذا النموذج يحقق المعيار بدرجة ممتازة، حيث يمثل <span style="color: #e53e3e; font-weight: bold;">أداة تقويم رقمية مبتكرة</span> تجمع بين <span style="color: #38a169; font-weight: bold;">الذكاء الاصطناعي والمعايير والتحليل البصري</span>. تقدّم <span style="color: #805ad5; font-weight: bold;">تغذية راجعة فورية</span> تساعد في تعديل التعليم بشكل لحظي، بينما <span style="color: #d69e2e; font-weight: bold;">التحليل الآلي يعتمد على معايير ثابتة</span> ويقلل التدخل الشخصي ويختصر الوقت بشكل كبير.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">ابتكار أداة تقويم رقمية جديدة</span>" + "<span style="color: #805ad5; font-weight: bold;">توظيف نتائج التقويم للتحسين الاستراتيجي</span>" + "<span style="color: #e53e3e; font-weight: bold;">زيادة كفاءة وموضوعية التقويم</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثانياً: محور — تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4>
+     <p class="info-text" style="margin: 1rem 0;">يساهم النموذج في تحقيق هذا المحور بقوة، حيث يعمل <span style="color: #e53e3e; font-weight: bold;">كنظام ذكي متقدم</span> يحلل <span style="color: #38a169; font-weight: bold;">الدليل البصري ويولد نتائج معيارية دقيقة</span>. يحدد <span style="color: #d69e2e; font-weight: bold;">معايير الإتقان والقصور بدقة</span> ويكشف نقاط القوة والضعف، ويتيح للمعلمة معرفة <span style="color: #805ad5; font-weight: bold;">مواضع الضعف التفصيلية</span> (مثل ضعف التخطيط مقابل التنفيذ).</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">ابتكار أدوات تحليل وتشخيص متقدمة</span>" + "<span style="color: #805ad5; font-weight: bold;">تحويل البيانات إلى رؤى استراتيجية</span>" + "<span style="color: #e53e3e; font-weight: bold;">تشخيص عميق يقود للتدخل العلاجي</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثالثاً: محور — توظيف التقنية ووسائل التعلم المناسبة</h4>
+     <p class="info-text" style="margin: 1rem 0;">استخدام <span style="color: #e53e3e; font-weight: bold;">الذكاء الاصطناعي لتحليل أداء الطالبات</span> هو ابتكار حقيقي في التقويم. <span style="color: #38a169; font-weight: bold;">التغذية الراجعة السريعة وتحليل الإتقان</span> يرفعان جودة التعلم بشكل ملحوظ. الأداة <span style="color: #805ad5; font-weight: bold;">قابلة للتطبيق في أي مهارات عملية</span>، مما يجعلها <span style="color: #d69e2e; font-weight: bold;">نموذجًا قابلًا للتعميم والتبني</span> على مستوى المدرسة.</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">ابتكار طرق جديدة لدمج التقنية بالتعليم</span>" + "<span style="color: #805ad5; font-weight: bold;">تصميم أدوات رقمية ترفع مستوى التحصيل</span>" + "<span style="color: #e53e3e; font-weight: bold;">قابلية التبني كنموذج مدرسي رائد</span>"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 رابعاً: محور — التنويع في استراتيجيات التدريس</h4>
+     <p class="info-text" style="margin: 1rem 0;">يمثل النموذج <span style="color: #e53e3e; font-weight: bold;">نقلة نوعية في تنويع استراتيجيات التدريس</span>، إذ يتحول دور التقويم من كونه <span style="color: #38a169; font-weight: bold;">عملية لاحقة للدرس إلى أداة قيادية توجه اختيار الاستراتيجيات وتنويعها بشكل ديناميكي</span>. فعبر <span style="color: #805ad5; font-weight: bold;">التحليل الفوري لمستوى الإتقان في كل نشاط</span>، يحصل المعلم على قراءة دقيقة لمواطن القوة والاحتياج، مما يمكّنه من <span style="color: #d69e2e; font-weight: bold;">تكييف الاستراتيجية المناسبة لكل طالبة</span>—سواء كانت تعلمًا تعاونيًا، مهامًا عملية، تعلماً قائماً على المشكلات، أو نماذج الشرح المصغر. <br><br>
+       بهذا يصبح <span style="color: #e53e3e; font-weight: bold;">الذكاء الاصطناعي محفزًا فعالاً لتطبيق استراتيجيات تدريس متقدمة</span> تتجاوز الطرق التقليدية، وتضمن <span style="color: #38a169; font-weight: bold;">مشاركة أعلى وتعلماً أعمق</span>.</p>
+     <div style="background: #edf2f7; padding: 1.5rem; border-radius: 8px; margin: 1.5rem 0;">
+      <h5 style="color: #667eea; font-size: 1rem; margin-bottom: 1rem; font-weight: bold;">✨ كيف يُحدث النموذج نقلة نوعية في الاستراتيجيات؟</h5>
+      <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+       <li>يوفر <span style="color: #38a169; font-weight: bold;">بيانات فورية</span> تسمح بتعديل الاستراتيجية داخل الحصة نفسها</li>
+       <li>يكشف <span style="color: #805ad5; font-weight: bold;">فجوات المهارة</span>، مما يجعل المعلم ينتقل من "استراتيجية واحدة للجميع" إلى "استراتيجية مناسبة لكل مستوى"</li>
+       <li>يدعم <span style="color: #d69e2e; font-weight: bold;">الابتكار في اختيار الأنشطة</span>، ويتيح تصميم مهام تتناسب مع الأداء الحقيقي للطالبات</li>
+       <li>يخلق <span style="color: #e53e3e; font-weight: bold;">بيئة تعلم نشطة</span> تعتمد على التفاعل والأداء العملي بدل التلقين</li>
+      </ul>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin-top: 1rem;">
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;"><strong style="color: #38a169;">✅ تحقيق المتطلب:</strong> "<span style="color: #d69e2e; font-weight: bold;">ابتكار استراتيجيات تدريس جديدة مبنية على الأدلة والبحوث التربوية، يتم اعتمادها كنموذج متميز</span>" + "<span style="color: #805ad5; font-weight: bold;">توظيف استراتيجيات إبداعية تحدث نقلة نوعية في خبرة تعلم الطلاب</span>" + "<span style="color: #e53e3e; font-weight: bold;">قيادة مبادرات نوعية في مجال التنويع التدريسي</span>"</p>
+     </div>
+    </div>
+    <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #10b981;">
+     <h3 style="color: #059669; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">💠 الأثر التربوي والتقني</h3>
+     <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+      <li>🎯 <span style="font-weight: bold;">تقويم موضوعي ودقيق</span> خالٍ من التحيز البشري</li>
+      <li>⚡ <span style="font-weight: bold;">تغذية راجعة فورية</span> تسرّع عملية التحسين</li>
+      <li>📊 <span style="font-weight: bold;">تحويل الأدلة البصرية</span> إلى بيانات قابلة للقياس</li>
+      <li>⏰ <span style="font-weight: bold;">توفير وقت المعلمة</span> وزيادة كفاءة التقويم</li>
+      <li>📈 <span style="font-weight: bold;">توحيد معايير التقييم</span> على جميع الطالبات</li>
+      <li>💡 <span style="font-weight: bold;">دعم اتخاذ القرارات التعليمية</span> بناءً على بيانات دقيقة</li>
+      <li>🔄 <span style="font-weight: bold;">تحسين مستمر</span> لجودة التعليم والتعلم</li>
+     </ul>
+    </div>
+    <div style="background: #f7fafc; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+     <h4 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: bold;">🧰 الأدوات المستخدمة:</h4>
+     <p style="margin: 0 0 1.5rem 0; color: #2d3748; line-height: 1.8;">ChatGPT – Vision API – معايير التقييم (Rubrics) – التحليل البصري للصور – نظام تحليل الأداء – صور أنشطة الطالبات – محرك تحليل بصري – منهجية معيارية دقيقة</p><button onclick="window.open('https://chatgpt.com/share/691ed179-11e9-8009-9ca5-f49ed75b7f72', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';"> 🚀 الانتقال إلى نموذج التقييم البصري - مثال 1 </button> <button onclick="window.open('https://chatgpt.com/share/691ed1a9-64a8-8009-b598-b49ed75b7f72', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(16, 185, 129, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(16, 185, 129, 0.4)';"> 🚀 الانتقال إلى نموذج التقييم البصري - مثال 2 </button>
+    </div>
+   </div>
+   <div class="info-card" style="margin-top: 2rem;">
+    <div style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">
+     🎯
+    </div>
+    <h2 style="font-size: 2rem; color: #2d3748; margin-bottom: 1rem; font-weight: bold; text-align: center;">"أداة توليد الأسئلة التشخيصية المنهجية المعززة بالذكاء الاصطناعي"</h2>
+    <p style="text-align: center; font-size: 1rem; color: #805ad5; font-weight: 600; margin-bottom: 2rem;">(AI-Powered Methodological Diagnostic Question Generator)</p>
+    <div style="background: #f7fafc; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">📋 وصف النموذج:</h3>
+     <p class="info-text" style="margin: 0;">يُعد هذا النموذج <span style="color: #e53e3e; font-weight: bold;">ابتكاراً قيادياً متقدماً</span> يخدم مجال <span style="color: #38a169; font-weight: bold;">التقويم وتصميم المحتوى التعليمي</span>، ويحقق متطلبات الدرجة 5 بشكل ممتاز في ثلاثة محاور رئيسية من المعايير المهنية. <br><br>
+       ويمثل هذا النموذج <span style="color: #d69e2e; font-weight: bold;">أداة توليد الأسئلة التشخيصية المنهجية المعززة بالذكاء الاصطناعي</span>، وهو <span style="color: #805ad5; font-weight: bold;">أداة رقمية جديدة تجمع بين قوة الذكاء الاصطناعي والمنهجية التعليمية الدقيقة</span> لتولّد أسئلة موجهة ومخصصة لكل وحدة ودرس. <br><br>
+       هذه الأداة <span style="color: #e53e3e; font-weight: bold;">تتفوق على بنوك الأسئلة التقليدية</span>، لأنها لا تقدم أسئلة عامة، بل تولّد <span style="color: #38a169; font-weight: bold;">أسئلة تشخيصية منهجية مبنية على مصادر تعلم محددة</span>، ومرتبطة مباشرة بأهداف التعلم والمهارات المستهدفة، مما يجعلها <span style="color: #dd6b20; font-weight: bold;">ابتكاراً نوعياً في التقويم التكويني</span>.</p>
+    </div>
+    <h3 style="color: #2d3748; font-size: 1.5rem; margin: 2.5rem 0 1.5rem 0; font-weight: bold; text-align: center;">📊 تحقيق متطلبات الدرجة 5 في المحاور المهنية</h3>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 أولاً: محور — تنوّع أساليب وأدوات التقويم</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">يتحقق هذا المحور بقوة من خلال النموذج، إذ:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 ابتكار أو تطوير أدوات تقويم رقمية جديدة</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">النموذج يمثل <span style="color: #38a169; font-weight: bold;">أداة تقويم مبتكرة تستخدم الذكاء الاصطناعي</span> لتوليد أسئلة تشخيصية دقيقة وموجّهة بناءً على الوحدة والدرس، وهو ما <span style="color: #d69e2e; font-weight: bold;">يتجاوز نماذج التقييم التقليدية</span>.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 توظيف نتائج التقويم كأداة استراتيجية للتحسين</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">يوفر النموذج <span style="color: #38a169; font-weight: bold;">تقويماً تكوينياً فورياً</span>، ما يمكّن المعلم من <span style="color: #805ad5; font-weight: bold;">التدخل السريع وتصحيح مسار التعلم</span> قبل تراكم الفجوات.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 إحداث نقلة نوعية في جودة التقييم</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">الأسئلة الدقيقة المولدة آلياً تجعل التقويم <span style="color: #38a169; font-weight: bold;">أكثر عمقاً</span>، وتسمح بقياس <span style="color: #d69e2e; font-weight: bold;">الفهم الحقيقي للمهارة</span> وليس الإجابة السطحية.</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثانياً: محور — توظيف تقنيات ووسائل التعلم المناسبة</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">يحقق النموذج هذا المعيار بامتياز من خلال:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 ابتكار أدوات تعليمية رقمية جديدة</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">تصميم نموذج مخصص <span style="color: #38a169; font-weight: bold;">(Custom GPT)</span> وتغذيته بمصادر المقرر هو <span style="color: #d69e2e; font-weight: bold;">تطوير فعلي لأداة رقمية جديدة</span> تخدم التعليم.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 ابتكار طرق جديدة لدمج التقنية بالتعليم</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">التقنية هنا <span style="color: #805ad5; font-weight: bold;">لا تُستخدم للعرض فقط</span>، بل <span style="color: #38a169; font-weight: bold;">لإنشاء محتوى تقويمي وتشخيصي فوري</span> يتفاعل مباشرة مع احتياجات الدرس.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 قيادة مبادرات توظيف التقنية</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">النموذج يمثل <span style="color: #d69e2e; font-weight: bold;">مبادرة رائدة يمكن تعميمها</span> على مقررات عديدة، مما يجعله <span style="color: #38a169; font-weight: bold;">أداة قيادية قابلة للتبنّي المدرسي</span>.</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثالثاً: محور — تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">يسهم النموذج بشكل عميق في هذا المحور من خلال:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 ابتكار أدوات تحليل وتشخيص متقدمة</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">الأسئلة التشخيصية الموجّهة هي <span style="color: #38a169; font-weight: bold;">أداة قوية لتحديد الفجوات بدقة</span> في كل مفهوم أو مهارة.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 تحويل البيانات إلى رؤى استراتيجية</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">نتائج الأسئلة تكشف فوراً <span style="color: #805ad5; font-weight: bold;">مستوى الفهم، المفاهيم الخاطئة، وجذور الضعف</span> لدى الطالبات، مما يساعد المعلمة على <span style="color: #d69e2e; font-weight: bold;">إعادة صياغة التدريس مباشرة</span>.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 تطوير خطط علاجية فردية وجماعية</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">لأن كل سؤال يولَّد بناءً على <span style="color: #38a169; font-weight: bold;">مهارة محددة</span>، فإن نتائجه تصبح <span style="color: #d69e2e; font-weight: bold;">أساساً لبناء برامج علاجية دقيقة وفعّالة</span>.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 رفع مستوى المدرسة عبر استثمار البيانات</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">البيانات التشخيصية الموجهة تساعد على <span style="color: #805ad5; font-weight: bold;">توجيه التدريس، تحسين الوحدات، ومعالجة الفاقد</span> في وقت مبكر قبل التراكم.</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 رابعاً: محور — تحسين نتائج المتعلمين</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">تظهر قوة النموذج في هذا المحور عبر أثره المباشر على التحصيل:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 قيادة مبادرات نوعية ترفع نتائج التعلم</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">القدرة على توليد <span style="color: #38a169; font-weight: bold;">أسئلة فورية ومخصصة</span> يجعل التقويم التكويني جزءًا مستمرًا من الدرس، مما يؤدي إلى <span style="color: #d69e2e; font-weight: bold;">تحسين مستوى الفهم بشكل لحظي</span>.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 ابتكار حلول تعليمية ترفع التحصيل</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">الأسئلة التشخيصية الموجهة تكشف <span style="color: #805ad5; font-weight: bold;">مواطن الضعف بسرعة</span>، مما يؤدي إلى <span style="color: #38a169; font-weight: bold;">تدخل تعليمي سريع يرفع مستوى الطالبات</span>.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 تطوير برامج علاجية مبتكرة للفاقد التعليمي</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">الأسئلة المولدة تصبح <span style="color: #d69e2e; font-weight: bold;">حجر الأساس للبناء العلاجي الفردي</span>، حيث توجه المعلمة إلى <span style="color: #38a169; font-weight: bold;">المهارة غير المتقنة بدقة</span>.</p>
+     </div>
+    </div>
+    <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #10b981;">
+     <h3 style="color: #059669; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">💠 الأثر التربوي والتقني</h3>
+     <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+      <li>🎯 <span style="font-weight: bold;">تقويم تكويني مستمر</span> يواكب سير الدرس لحظياً</li>
+      <li>📊 <span style="font-weight: bold;">تشخيص دقيق للفجوات</span> في كل مهارة ومفهوم</li>
+      <li>⚡ <span style="font-weight: bold;">توليد فوري للأسئلة</span> دون الحاجة لبنوك أسئلة مسبقة</li>
+      <li>🎯 <span style="font-weight: bold;">أسئلة منهجية مخصصة</span> مرتبطة بمصادر التعلم المحددة</li>
+      <li>💡 <span style="font-weight: bold;">تدخل تعليمي سريع</span> قبل تراكم الفاقد التعليمي</li>
+      <li>📈 <span style="font-weight: bold;">رفع جودة التقويم</span> من السطحية إلى العمق</li>
+      <li>🔄 <span style="font-weight: bold;">تحسين مستمر للوحدات الدراسية</span> بناءً على البيانات</li>
+      <li>🚀 <span style="font-weight: bold;">قابلية التعميم</span> على جميع المقررات والمراحل</li>
+     </ul>
+    </div>
+    <div style="background: #f7fafc; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+     <h4 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: bold;">🧰 الأدوات المستخدمة:</h4>
+     <p style="margin: 0 0 1.5rem 0; color: #2d3748; line-height: 1.8;">ChatGPT – Custom GPT – مصادر المقرر الدراسي – منهجية Rubrics – أهداف التعلم – المهارات المستهدفة – نظام توليد أسئلة تشخيصية – تقويم تكويني فوري</p><button onclick="window.open('https://chatgpt.com/g/g-68e4282e10988191ba32821fb9623fa9-ms-d-dhky-lmqrr-tqny-rqmy-2-lm-lm-shdh-lrddy', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';"> 🚀 المساعد الذكي لمقرر تقنية رقمية 2 </button> <button onclick="window.open('https://chatgpt.com/g/g-68d055286c208191b71891737e91019b-ms-d-dhky-lmqrr-tqny-rqmy-3-lm-lm-shdh-lrddy', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(16, 185, 129, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(16, 185, 129, 0.4)';"> 🚀 المساعد الذكي لمقرر تقنية رقمية 3 </button>
+    </div>
+   </div>
+   <div class="info-card" style="margin-top: 2rem;">
+    <div style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">
+     🌐
+    </div>
+    <h2 style="font-size: 2rem; color: #2d3748; margin-bottom: 1rem; font-weight: bold; text-align: center;">"منظومة التقويم المتنوع والتعلم التشاركي المعزز بالتقنية"</h2>
+    <p style="text-align: center; font-size: 1rem; color: #805ad5; font-weight: 600; margin-bottom: 2rem;">(Integrated Digital Assessment Ecosystem)</p>
+    <div style="background: #f7fafc; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">📋 وصف النموذج:</h3>
+     <p class="info-text" style="margin: 0;">تمثل <span style="color: #e53e3e; font-weight: bold;">منظومة التقييم الفردي والجماعي والتقييم الذاتي ابتكارًا تربويًا متقدمًا</span> يحقق متطلبات الدرجة 5 في عدة محاور مهنية، نظراً لقدرتها على <span style="color: #38a169; font-weight: bold;">دمج التقويم، والتحفيز، والإدارة الصفية، وتحليل الأداء</span> في منظومة رقمية متكاملة. <br><br>
+       وتُعد هذه المنظومة مثالًا على: <span style="color: #d69e2e; font-weight: bold;">"نظام التقويم التفاعلي متعدد الأبعاد الداعم للأداء والتحفيز"</span>، وهي <span style="color: #805ad5; font-weight: bold;">أداة تعليمية حديثة تربط بين التقويم الرقمي، التعلّم التعاوني، التقييم التأملي، والتحليل التربوي</span> بصورة مبتكرة.</p>
+    </div>
+    <h3 style="color: #2d3748; font-size: 1.5rem; margin: 2.5rem 0 1.5rem 0; font-weight: bold; text-align: center;">📊 تحقيق متطلبات الدرجة 5 في المحاور المهنية</h3>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 أولاً: محور — تنوع أساليب وأدوات التقويم</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">تُعد هذه المنظومة <span style="color: #e53e3e; font-weight: bold;">نموذجاً متميزاً لتطوير أدوات تقويم رقمية جديدة</span>، لأنها تجمع بين ثلاثة أنماط تقويمية متقدمة:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">1️⃣ التقويم القائم على الأداء الجماعي</h5>
+      <p style="margin: 0 0 1rem 0; color: #2d3748; line-height: 1.8;">من خلال <span style="color: #38a169; font-weight: bold;">لوحة تقييم المجموعات</span> التي تعتمد على:</p>
+      <ul style="margin: 0; padding-right: 2rem; line-height: 1.8; color: #2d3748;">
+       <li>تقييم المخرج الجماعي</li>
+       <li>اكتشاف النقاط الخفية</li>
+       <li>عرض الترتيب اللحظي</li>
+       <li>تحديد مجموعة "الأداء الأبرز"</li>
+      </ul>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">2️⃣ التقويم الفردي التحفيزي المرحلي</h5>
+      <p style="margin: 0 0 1rem 0; color: #2d3748; line-height: 1.8;">حيث تتضمن:</p>
+      <ul style="margin: 0; padding-right: 2rem; line-height: 1.8; color: #2d3748;">
+       <li>تحليل أداء الطالبة داخل الدرس</li>
+       <li>تحديد الطالبة المتميزة</li>
+       <li>تقييم الإجابات وفق مستويات أداء</li>
+       <li>رسائل تحفيزية مخصّصة للفئات المختلفة</li>
+      </ul>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">3️⃣ التقويم الذاتي والتأملي</h5>
+      <p style="margin: 0 0 1rem 0; color: #2d3748; line-height: 1.8;">والذي يعزز <span style="color: #805ad5; font-weight: bold;">مهارات ما وراء المعرفة</span> من خلال:</p>
+      <ul style="margin: 0; padding-right: 2rem; line-height: 1.8; color: #2d3748;">
+       <li>أسئلة التأمل</li>
+       <li>تقييم الطالبة لذاتها (1–5)</li>
+       <li>ربط التعلّم بالمستقبل</li>
+       <li>إجراءات تحسين ذاتية</li>
+      </ul>
+     </div>
+     <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid #10b981;">
+      <p style="margin: 0; color: #059669; font-weight: bold; text-align: center;">✅ يتحقق نص الدليل: "ابتكار أو تطوير أدوات تقويم رقمية ومنهجية جديدة يتم اعتمادها كنموذج متميز"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثانياً: محور — توظيف تقنيات ووسائل التعليم المناسبة</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">تتميز المنظومة بأنها <span style="color: #e53e3e; font-weight: bold;">منصة تفاعلية رقمية</span> تستخدم الويب لتعزيز التعليم من خلال:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+       <li><span style="color: #38a169; font-weight: bold;">لوحات تقييم تفاعلية</span> قابلة للاستخدام عبر روابط URL</li>
+       <li><span style="color: #805ad5; font-weight: bold;">نظام نقاط وترتيب فورية</span> يخلق بيئة تنافسية إيجابية</li>
+       <li><span style="color: #d69e2e; font-weight: bold;">أدوات تحفيز رقمية</span> (اكتشاف النقاط المخفية – اختيار الرقم – تقييم مرحلي)</li>
+       <li><span style="color: #e53e3e; font-weight: bold;">دعم مهارات التفكير العليا</span> عبر التقييم الذاتي والتخطيط</li>
+      </ul>
+     </div>
+     <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid #10b981;">
+      <p style="margin: 0; color: #059669; font-weight: bold; text-align: center;">✅ يتحقق نص الدليل: "يبتكر أدوات تعليمية رقمية جديدة، ويقود مبادرات لدمج التقنية بطرق مبتكرة تحقق أثراً مستداماً"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 ثالثاً: محور — تحليل نتائج المتعلمين وتشخيص مستوياتهم</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">توفّر المنظومة <span style="color: #e53e3e; font-weight: bold;">بيانات تحليلية نوعية</span> تُعد "رؤى استراتيجية" لدعم اتخاذ القرار التعليمي:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+       <li><span style="color: #38a169; font-weight: bold;">تحليل أداء كل مجموعة:</span> (متوسط الأداء – نقاط القوة – مناطق التحسين)</li>
+       <li><span style="color: #805ad5; font-weight: bold;">تحليل أداء الطالبة</span> في التفاعل – المشاركة – جودة الإجابة</li>
+       <li><span style="color: #d69e2e; font-weight: bold;">استخراج مؤشرات حول:</span>
+        <ul style="padding-right: 1.5rem; margin-top: 0.5rem;">
+         <li>الطالبة القيادية</li>
+         <li>الطالبة المتقدمة</li>
+         <li>الطالبة التي تحتاج دعم</li>
+        </ul></li>
+       <li><span style="color: #e53e3e; font-weight: bold;">استخدام هذه البيانات</span> لتوجيه الأنشطة القادمة</li>
+      </ul>
+     </div>
+     <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid #10b981;">
+      <p style="margin: 0; color: #059669; font-weight: bold; text-align: center;">✅ يتحقق نص الدليل: "ابتكار أدوات تحليل وتشخيص متقدمة تُستخدم كمدخلات لتحسين جودة التعليم"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 رابعاً: محور — الإدارة الصفية</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">تُعد هذه المنظومة <span style="color: #e53e3e; font-weight: bold;">نموذجاً مبتكراً للإدارة الصفية الرقمية</span> لأنها:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+       <li>تشجع <span style="color: #38a169; font-weight: bold;">التعاون والعمل الجماعي</span></li>
+       <li>تضبط <span style="color: #805ad5; font-weight: bold;">مشاركة الطالبات</span> عبر نظام نقاط وترتيب</li>
+       <li>تعزز <span style="color: #d69e2e; font-weight: bold;">الانضباط الذاتي</span> عبر التقييم الذاتي والتأمل</li>
+       <li>توفر <span style="color: #e53e3e; font-weight: bold;">آليات تحفيزية فعّالة</span> تدعم السلوك الإيجابي</li>
+       <li>تخلق <span style="color: #dd6b20; font-weight: bold;">بيئة صفية تنافسية ممتعة ومرتبة</span></li>
+      </ul>
+     </div>
+     <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid #10b981;">
+      <p style="margin: 0; color: #059669; font-weight: bold; text-align: center;">✅ يتحقق نص الدليل: "ابتكار نماذج جديدة للإدارة الصفية توظف الأساليب الرقمية التفاعلية وتدعم المشاركة الجماعية"</p>
+     </div>
+    </div>
+    <div style="background: #f0f9ff; padding: 2rem; border-radius: 12px; margin: 1.5rem 0; border-right: 4px solid #667eea;">
+     <h4 style="color: #667eea; font-size: 1.2rem; margin-bottom: 1rem; font-weight: bold;">🟦 خامساً: محور البيئة التعليمية</h4>
+     <p class="info-text" style="margin: 1rem 0 1.5rem 0;">يمكن تقسيم عناصر الابتكار داخل المنظومة إلى <span style="color: #e53e3e; font-weight: bold;">الأدوات الداعمة للتحفيز والتعاون</span>:</p>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 لوحات التقييم الجماعي والفردي</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">تبتكر <span style="color: #38a169; font-weight: bold;">بيئة تعليمية إبداعية</span> تستخدم <span style="color: #e53e3e; font-weight: bold;">Gamification</span> وتحفّز <span style="color: #805ad5; font-weight: bold;">التعلم النشط</span>.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 لوحة التقييم الجماعي</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">تعزز <span style="color: #38a169; font-weight: bold;">التعاون والمسؤولية المشتركة</span> بين الطالبات.</p>
+     </div>
+     <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+      <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 لوحة التقييم الذاتي والتأمل</h5>
+      <p style="margin: 0; color: #2d3748; line-height: 1.8;">ترسّخ <span style="color: #805ad5; font-weight: bold;">ثقافة التفكير والتخطيط الشخصي المستدام</span>.</p>
+     </div>
+     <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 2px solid #10b981;">
+      <p style="margin: 0; color: #059669; font-weight: bold; text-align: center;">✅ يتحقق نص الدليل: "ابتكار بيئة تعليمية محفزة تستخدم التقنية لدعم التعلم النشط والمشاركة الفعّالة"</p>
+     </div>
+    </div>
+    <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #10b981;">
+     <h3 style="color: #059669; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">💠 الأثر التربوي الشامل</h3>
+     <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+      <li>🎯 <span style="font-weight: bold;">تقويم شامل ومتنوع</span> يغطي الأداء الفردي والجماعي والذاتي</li>
+      <li>🤝 <span style="font-weight: bold;">تعزيز التعلم التعاوني</span> والعمل الجماعي بين الطالبات</li>
+      <li>⭐ <span style="font-weight: bold;">رفع الدافعية</span> من خلال التنافس الإيجابي والتحفيز المستمر</li>
+      <li>🧠 <span style="font-weight: bold;">تنمية مهارات التفكير التأملي</span> ومهارات ما وراء المعرفة</li>
+      <li>📊 <span style="font-weight: bold;">توفير بيانات تحليلية دقيقة</span> لتحسين جودة التعليم</li>
+      <li>🎪 <span style="font-weight: bold;">خلق بيئة صفية محفزة</span> قائمة على التفاعل والمشاركة</li>
+      <li>💪 <span style="font-weight: bold;">تعزيز الانضباط الذاتي</span> والمسؤولية الشخصية</li>
+      <li>📈 <span style="font-weight: bold;">تحسين مستمر للأداء</span> من خلال التغذية الراجعة الفورية</li>
+     </ul>
+    </div>
+    <div style="background: #f7fafc; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+     <h4 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: bold;">🧰 الأدوات المستخدمة:</h4>
+     <p style="margin: 0 0 1.5rem 0; color: #2d3748; line-height: 1.8;">HTML / CSS / JavaScript – لوحات تقييم تفاعلية – نظام نقاط ديناميكي – أدوات Gamification – منصات ويب تفاعلية – نماذج تقويم رقمية – أدوات تحليل الأداء – استبيانات التأمل الذاتي</p><button onclick="window.open('https://shathaedu.com/group', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';"> 🚀 نظام تقييم المجموعات </button> <button onclick="window.open('https://shathaedu.com/alone', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4); margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(16, 185, 129, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(16, 185, 129, 0.4)';"> 🚀 نظام التقييم الفردي </button> <button onclick="window.open('https://shathaedu.com/mysite-cycle6', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(245, 158, 11, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(245, 158, 11, 0.4)';"> 🚀 عجلة اتجاهات الأسئلة الستة </button> <button onclick="window.open('https://shathaedu.com/mysite-cyclegirle', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(236, 72, 153, 0.4); margin-bottom: 1rem;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(236, 72, 153, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(236, 72, 153, 0.4)';"> 🚀 عجلة اختيار الطالبات </button> <button onclick="window.open('https://shathaedu.com/mysite-lesson3-timeline', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(139, 92, 246, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(139, 92, 246, 0.4)';"> 🚀 التقييم الذاتي بعد الدرس </button>
+    </div>
+   </div>
+   <div class="info-card" style="margin-top: 2rem;">
+    <div style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">
+     🌟
+    </div>
+    <h2 style="font-size: 2rem; color: #2d3748; margin-bottom: 1rem; font-weight: bold; text-align: center;">"منصة مهنية توحّد المعرفة… وتُعيد تشكيل المجتمع التعليمي"</h2>
+    <div style="background: #f7fafc; padding: 2rem; border-radius: 12px; margin: 2rem 0;">
+     <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold;">📋 وصف النموذج:</h3>
+     <p class="info-text" style="margin: 0;">تم تصميم <span style="color: #e53e3e; font-weight: bold;">صفحة رقمية احترافية</span> تُعدّ <span style="color: #38a169; font-weight: bold;">منصة مهنية متكاملة</span> تجمع المعلمين في فضاء واحد للتعلم، تبادل الخبرات، وتطوير الممارسات المهنية. <br><br>
+       تضم المنصة <span style="color: #d69e2e; font-weight: bold;">مكتبة موارد حديثة</span>، و<span style="color: #805ad5; font-weight: bold;">بنكًا متنوعًا للاستراتيجيات التدريسية</span>، و<span style="color: #e53e3e; font-weight: bold;">مساحة لمشاركة التطبيقات الصفية والنماذج الملهمة</span>، مما يجعلها مركزًا موحدًا للتطوير المهني داخل المدرسة وخارجها. <br><br>
+       تهدف المنصة إلى <span style="color: #38a169; font-weight: bold;">بناء مجتمع مهني مستدام</span> يدعم الابتكار، ويوسّع نطاق تبادل المعرفة، ويعزز جودة الممارسات التعليمية عبر توفير محتوى موثوق وسهل الوصول.</p>
+    </div>
+    <div style="background: linear-gradient(135deg, #667eea15, #764ba215); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #667eea;">
+     <h3 style="color: #667eea; font-size: 1.4rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">🌟 تصنيف الشاهد ضمن معايير الأداء (الدرجة 5)</h3>
+     <p style="text-align: center; font-size: 1.2rem; color: #e53e3e; font-weight: 700; margin: 0;">معيار: التفاعل مع المجتمع المهني – مستوى 5 (الأعلى)</p>
+    </div>
+    <h3 style="color: #2d3748; font-size: 1.5rem; margin: 2.5rem 0 1.5rem 0; font-weight: bold; text-align: center;">📊 تحقيق متطلبات الدرجة 5 في المحاور المهنية</h3>
+    <p class="info-text" style="margin: 1rem 0 1.5rem 0; text-align: center; color: #2d3748;">هذا الشاهد يحقق متطلبات المستوى 5 بوضوح لأنه:</p>
+    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+     <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 يقود مبادرات نوعية أو مشروعات مستدامة لتعزيز المجتمع المهني</h5>
+     <p style="margin: 0; color: #2d3748; line-height: 1.8;">المنصة <span style="color: #38a169; font-weight: bold;">مشروع رقمي مؤسسي يوحّد الموارد</span> ويجعل <span style="color: #805ad5; font-weight: bold;">تبادل الخبرات ممارسة مستدامة</span>.</p>
+    </div>
+    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+     <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 يبتكر آليات أو أدوات جديدة لتبادل الخبرات والمعرفة</h5>
+     <p style="margin: 0; color: #2d3748; line-height: 1.8;">المنصة هي <span style="color: #d69e2e; font-weight: bold;">الأداة المبتكرة</span>: <span style="color: #38a169; font-weight: bold;">بنك استراتيجيات، مكتبة موارد، مشاركة تطبيقات صفية</span> في مكان واحد.</p>
+    </div>
+    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+     <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 ينشر ممارسات مهنية مرجعية على نطاق واسع</h5>
+     <p style="margin: 0; color: #2d3748; line-height: 1.8;">إتاحة <span style="color: #805ad5; font-weight: bold;">الموارد والاستراتيجيات والتطبيقات الصفية</span> يجعل المنصة <span style="color: #e53e3e; font-weight: bold;">مرجعًا للمعلمين داخل المدرسة وخارجها</span>.</p>
+    </div>
+    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+     <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 يسهم في بناء مجتمع تعلم مهني متطور يعزز الأداء الجماعي</h5>
+     <p style="margin: 0; color: #2d3748; line-height: 1.8;">المنصة <span style="color: #38a169; font-weight: bold;">تعزز التعاون</span>، وتفتح <span style="color: #d69e2e; font-weight: bold;">قنوات تبادل معرفي مستمر</span>، وتدعم <span style="color: #805ad5; font-weight: bold;">تطوير الأداء على مستوى المدرسة والمجتمع التعليمي</span>.</p>
+    </div>
+    <div style="background: white; padding: 1.5rem; border-radius: 8px; margin: 1rem 0;">
+     <h5 style="color: #e53e3e; font-size: 1rem; margin-bottom: 0.8rem; font-weight: bold;">📌 يمثل المدرسة/الإدارة في مبادرات مهنية ذات أثر واسع</h5>
+     <p style="margin: 0; color: #2d3748; line-height: 1.8;">المنصة <span style="color: #d69e2e; font-weight: bold;">قابلة للتبني في مدارس أخرى</span>، ما يجعلها <span style="color: #38a169; font-weight: bold;">نموذجًا مرجعيًا للمشاركة المهنية</span>.</p>
+    </div>
+    <div style="background: linear-gradient(135deg, #10b98120, #05966920); padding: 2rem; border-radius: 12px; margin: 2rem 0; border: 2px solid #10b981;">
+     <h3 style="color: #059669; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">💠 الأثر المهني والتعليمي</h3>
+     <ul style="margin: 0; padding-right: 2rem; line-height: 2; color: #2d3748;">
+      <li>🤝 <span style="font-weight: bold;">توحيد المعرفة</span> في فضاء واحد يسهل الوصول إليه</li>
+      <li>📚 <span style="font-weight: bold;">بناء مكتبة موارد مهنية</span> حديثة وشاملة</li>
+      <li>🎯 <span style="font-weight: bold;">توفير بنك استراتيجيات</span> متنوع وقابل للتطبيق</li>
+      <li>💡 <span style="font-weight: bold;">تبادل التطبيقات الصفية</span> والنماذج الملهمة</li>
+      <li>🌍 <span style="font-weight: bold;">نشر الممارسات المرجعية</span> على نطاق واسع</li>
+      <li>⭐ <span style="font-weight: bold;">تعزيز ثقافة التعلم المستمر</span> والتطوير المهني</li>
+      <li>🔄 <span style="font-weight: bold;">دعم الابتكار التربوي</span> والتحديث المستدام</li>
+      <li>🏆 <span style="font-weight: bold;">رفع جودة الأداء الجماعي</span> للمجتمع المدرسي</li>
+     </ul>
+    </div>
+    <div style="background: #f7fafc; padding: 1.5rem; border-radius: 12px; margin-top: 2rem;">
+     <h4 style="color: #667eea; font-size: 1.1rem; margin-bottom: 0.5rem; font-weight: bold;">🧰 الأدوات المستخدمة:</h4>
+     <p style="margin: 0 0 1.5rem 0; color: #2d3748; line-height: 1.8;">منصة رقمية احترافية – نظام إدارة المحتوى – مكتبة موارد تفاعلية – بنك استراتيجيات تدريسية – مساحة مشاركة التطبيقات الصفية – أدوات تبادل الخبرات – محتوى موثوق وسهل الوصول – واجهة مستخدم احترافية</p><button onclick="window.open('https://shathaedu.com/teacher-platform', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.9rem 2rem; border-radius: 10px; font-size: 1.1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(102, 126, 234, 0.5)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(102, 126, 234, 0.4)';"> 🚀 الانتقال إلى المنصة المهنية </button>
+    </div>
+   </div>
+   <div class="info-card" style="margin-top: 2rem;">
+    <div style="text-align: center; font-size: 3rem; margin-bottom: 1.5rem;">
+     📚
+    </div>
+    <h2 style="font-size: 2rem; color: #2d3748; margin-bottom: 1.5rem; font-weight: bold; text-align: center;">شواهد أخرى متفرقة</h2>
+    <div style="background: linear-gradient(135deg, #fef3c7, #fde68a); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-right: 5px solid #f59e0b;">
+     <p class="info-text" style="margin: 0; text-align: center; color: #78350f;">في هذا القسم، نستعرض <span style="color: #dc2626; font-weight: bold;">مجموعة من الشواهد والممارسات المتميزة</span> التي تعكس <span style="color: #059669; font-weight: bold;">التنوع والابتكار في الأداء المهني</span>، وتشمل أدوات، مشاريع، وتطبيقات تربوية تدعم <span style="color: #d97706; font-weight: bold;">التميز في مختلف المحاور المهنية</span>.</p>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;"><!-- شاهد 1 -->
+     <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 4px solid #667eea; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+      <div style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">
+       🎨
+      </div>
+      <h3 style="color: #667eea; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">ملف الإنجازالإلكتروني</h3>
+      <p style="color: #2d3748; line-height: 1.8; margin-bottom: 1.5rem; text-align: center;">ملف رقمي شامل يوثق <span style="color: #e53e3e; font-weight: bold;">الإنجازات المهنية</span> و<span style="color: #38a169; font-weight: bold;">الممارسات المتميزة</span> بطريقة احترافية ومنظمة.</p><button onclick="window.open('https://shathaedu.com', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #667eea, #764ba2); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';"> 🔗 عرض الملف </button>
+     </div><!-- شاهد 2 -->
+     <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 4px solid #10b981; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+      <div style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">
+       📊
+      </div>
+      <h3 style="color: #10b981; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">تقارير التحليل والتشخيص</h3>
+      <p style="color: #2d3748; line-height: 1.8; margin-bottom: 1.5rem; text-align: center;">نماذج متقدمة <span style="color: #e53e3e; font-weight: bold;">لتحليل الأداء</span> و<span style="color: #805ad5; font-weight: bold;">تشخيص احتياجات المتعلمين</span> بدقة عالية.</p><button onclick="window.open('#', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #10b981, #059669); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';"> 🔗 عرض التقارير </button>
+     </div><!-- شاهد 3 -->
+     <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 4px solid #f59e0b; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+      <div style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">
+       💼
+      </div>
+      <h3 style="color: #f59e0b; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">ورش العمل والتدريب</h3>
+      <p style="color: #2d3748; line-height: 1.8; margin-bottom: 1.5rem; text-align: center;">مبادرات <span style="color: #e53e3e; font-weight: bold;">تدريبية متخصصة</span> لنقل <span style="color: #38a169; font-weight: bold;">الخبرات والممارسات المتميزة</span> للزملاء.</p><button onclick="window.open('#', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #f59e0b, #d97706); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';"> 🔗 عرض الورش </button>
+     </div><!-- شاهد 4 -->
+     <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 4px solid #ec4899; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+      <div style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">
+       🎯
+      </div>
+      <h3 style="color: #ec4899; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">خطط علاجية مبتكرة</h3>
+      <p style="color: #2d3748; line-height: 1.8; margin-bottom: 1.5rem; text-align: center;">برامج <span style="color: #e53e3e; font-weight: bold;">علاجية متطورة</span> مبنية على <span style="color: #805ad5; font-weight: bold;">التحليل العميق للبيانات</span> لدعم المتعلمات.</p><button onclick="window.open('#', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #ec4899, #db2777); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';"> 🔗 عرض الخطط </button>
+     </div><!-- شاهد 5 -->
+     <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 4px solid #8b5cf6; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+      <div style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">
+       🌐
+      </div>
+      <h3 style="color: #8b5cf6; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">مشاريع تفاعلية رقمية</h3>
+      <p style="color: #2d3748; line-height: 1.8; margin-bottom: 1.5rem; text-align: center;">مشاريع <span style="color: #e53e3e; font-weight: bold;">تعليمية تفاعلية</span> توظف <span style="color: #38a169; font-weight: bold;">التقنية الحديثة</span> لتعزيز التعلم النشط.</p><button onclick="window.open('#', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #8b5cf6, #7c3aed); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';"> 🔗 عرض المشاريع </button>
+     </div><!-- شاهد 6 -->
+     <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-top: 4px solid #06b6d4; transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,0,0,0.15)';" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,0,0,0.1)';">
+      <div style="text-align: center; font-size: 2.5rem; margin-bottom: 1rem;">
+       📱
+      </div>
+      <h3 style="color: #06b6d4; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">تطبيقات ذكية للتواصل</h3>
+      <p style="color: #2d3748; line-height: 1.8; margin-bottom: 1.5rem; text-align: center;">أدوات <span style="color: #e53e3e; font-weight: bold;">تواصل ذكية</span> مع <span style="color: #805ad5; font-weight: bold;">أولياء الأمور والمجتمع</span> لبناء شراكات فعالة.</p><button onclick="window.open('#', '_blank', 'noopener,noreferrer')" style="background: linear-gradient(135deg, #06b6d4, #0891b2); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 8px; font-size: 1rem; font-weight: bold; cursor: pointer; width: 100%; transition: all 0.3s ease;" onmouseover="this.style.opacity='0.9';" onmouseout="this.style.opacity='1';"> 🔗 عرض التطبيقات </button>
+     </div>
+    </div>
+    <div style="background: linear-gradient(135deg, #dbeafe, #bfdbfe); padding: 2rem; border-radius: 15px; margin-top: 3rem; box-shadow: 0 4px 15px rgba(0,0,0,0.1); border-right: 5px solid #3b82f6;">
+     <h3 style="color: #1e3a8a; font-size: 1.3rem; margin-bottom: 1rem; font-weight: bold; text-align: center;">💡 ملاحظة مهمة</h3>
+     <p class="info-text" style="margin: 0; text-align: center; color: #1e40af;">هذه الشواهد تمثل <span style="color: #dc2626; font-weight: bold;">نماذج متنوعة للممارسات المهنية المتميزة</span> التي تدعم <span style="color: #059669; font-weight: bold;">التطوير المستمر وتحقيق الأثر التربوي الفعال</span>. يتم تحديث هذا القسم بشكل دوري لإضافة شواهد جديدة تعكس <span style="color: #ea580c; font-weight: bold;">التطور المهني المستمر</span>.</p>
+    </div>
+   </div>
+  </div>
+  <script>
+        const defaultConfig = {
+            page_title: "شواهد المعايير المهنية للمعلمة",
+            background_gradient_start: "#667eea",
+            background_gradient_end: "#764ba2",
+            card_accent_color: "#667eea",
+            text_color: "#2d3748",
+            font_family: "Tajawal"
+        };
+
+        async function onConfigChange(config) {
+            document.title = config.page_title || defaultConfig.page_title;
+
+            const fontFamily = config.font_family || defaultConfig.font_family;
+            document.body.style.fontFamily = `'${fontFamily}', Arial, sans-serif`;
+
+            const gradientStart = config.background_gradient_start || defaultConfig.background_gradient_start;
+            const gradientEnd = config.background_gradient_end || defaultConfig.background_gradient_end;
+            document.body.style.background = `linear-gradient(135deg, ${gradientStart} 0%, ${gradientEnd} 100%)`;
+        }
+
+        if (window.elementSdk) {
+            window.elementSdk.init({
+                defaultConfig,
+                onConfigChange,
+                mapToCapabilities: (config) => ({
+                    recolorables: [
+                        {
+                            get: () => config.background_gradient_start || defaultConfig.background_gradient_start,
+                            set: (value) => {
+                                config.background_gradient_start = value;
+                                window.elementSdk.setConfig({ background_gradient_start: value });
+                            }
+                        },
+                        {
+                            get: () => config.card_accent_color || defaultConfig.card_accent_color,
+                            set: (value) => {
+                                config.card_accent_color = value;
+                                window.elementSdk.setConfig({ card_accent_color: value });
+                            }
+                        },
+                        {
+                            get: () => config.text_color || defaultConfig.text_color,
+                            set: (value) => {
+                                config.text_color = value;
+                                window.elementSdk.setConfig({ text_color: value });
+                            }
+                        }
+                    ],
+                    borderables: [],
+                    fontEditable: {
+                        get: () => config.font_family || defaultConfig.font_family,
+                        set: (value) => {
+                            config.font_family = value;
+                            window.elementSdk.setConfig({ font_family: value });
+                        }
+                    },
+                    fontSizeable: undefined
+                }),
+                mapToEditPanelValues: (config) => new Map([
+                    ["page_title", config.page_title || defaultConfig.page_title]
+                ])
+            });
+        }
+    </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a9752bd91dacdf4',t:'MTc2NDk3NzM0MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
