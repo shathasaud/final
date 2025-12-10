@@ -1,0 +1,1939 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام متابعة طالبات الحاسب</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+        body {
+            box-sizing: border-box;
+        }
+
+        /* ================================
+           GLOBAL STYLES
+        =================================*/
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Cairo", sans-serif;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            min-height: 100%;
+            padding: 20px;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        /* ================================
+           HOME PANEL – الصفحة الرئيسية
+        =================================*/
+        #panel-home {
+            text-align: center;
+            background: white;
+            padding: 50px 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 600px;
+            margin: 0 auto;
+            margin-top: 50px;
+        }
+
+        #panel-home h1 {
+            font-size: 36px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        #panel-home p {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        #panel-home button {
+            width: 80%;
+            max-width: 350px;
+            padding: 18px;
+            margin: 12px auto;
+            display: block;
+            font-size: 20px;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        /* ================================
+           RESPONSIVE – تحسينات الجوال
+        =================================*/
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            #panel-home {
+                padding: 30px 20px;
+                margin-top: 20px;
+            }
+
+            #panel-home h1 {
+                font-size: 28px;
+            }
+
+            #panel-home p {
+                font-size: 16px;
+                margin-bottom: 30px;
+            }
+
+            #panel-home button {
+                width: 100%;
+                font-size: 18px;
+                padding: 15px;
+            }
+
+            #panel-teacher,
+            #panel-student {
+                padding: 15px;
+            }
+
+            #panel-teacher h2,
+            #panel-student h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .controls button {
+                width: 100%;
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .stats-bar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 15px;
+            }
+
+            .stat-item {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .class-filter {
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                align-items: stretch;
+            }
+
+            .class-filter label {
+                font-size: 15px;
+                margin-left: 0;
+                margin-bottom: 5px;
+            }
+
+            .class-filter select {
+                width: 100%;
+                font-size: 14px;
+            }
+
+            .class-filter button {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .table-container {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            table {
+                font-size: 12px;
+                min-width: 1200px;
+            }
+
+            th {
+                padding: 12px 8px;
+                font-size: 13px;
+            }
+
+            td {
+                padding: 10px 8px;
+                font-size: 12px;
+            }
+
+            .score-input {
+                width: 50px;
+                padding: 5px;
+                font-size: 13px;
+            }
+
+            .attendance-input {
+                width: 45px;
+            }
+
+            .btn-table {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+
+            .btn-plan,
+            .btn-analysis,
+            .btn-parent {
+                padding: 6px 10px;
+                font-size: 12px;
+            }
+
+            .popup-box {
+                width: 95%;
+                padding: 20px;
+                max-height: 90%;
+                overflow-y: auto;
+            }
+
+            .popup-box h3 {
+                font-size: 20px;
+                margin-bottom: 15px;
+            }
+
+            .popup-box input[type="text"],
+            .popup-box textarea {
+                font-size: 14px;
+                padding: 10px;
+            }
+
+            .popup-box button {
+                padding: 10px 20px;
+                font-size: 14px;
+                margin: 5px;
+            }
+
+            .coop-option {
+                padding: 12px;
+                font-size: 15px;
+            }
+
+            .search-box {
+                padding: 0 10px;
+            }
+
+            .search-box input {
+                width: 100%;
+                max-width: none;
+                margin-left: 0;
+                margin-bottom: 10px;
+                font-size: 15px;
+            }
+
+            #btn-search-student {
+                width: 100%;
+                padding: 12px;
+                font-size: 16px;
+            }
+
+            .info-card {
+                padding: 20px;
+                margin-bottom: 15px;
+            }
+
+            .info-card h3 {
+                font-size: 17px;
+            }
+
+            .info-card p,
+            .info-card span,
+            .info-card li {
+                font-size: 14px;
+            }
+
+            #btn-contact-teacher {
+                width: 100%;
+                padding: 15px;
+                font-size: 16px;
+            }
+
+            #btn-back-student {
+                font-size: 16px;
+            }
+
+            .confirm-dialog {
+                width: 95%;
+                padding: 20px;
+            }
+
+            .confirm-dialog h3 {
+                font-size: 20px;
+            }
+
+            .confirm-dialog p {
+                font-size: 15px;
+            }
+
+            .confirm-dialog button {
+                padding: 10px 20px;
+                font-size: 14px;
+                width: 100%;
+                margin: 5px 0;
+            }
+
+            .toast-message {
+                right: 10px;
+                left: 10px;
+                width: auto;
+                font-size: 14px;
+                padding: 12px 20px;
+            }
+
+            #popup-teacher-login input {
+                font-size: 16px !important;
+            }
+
+            #analysis-text {
+                font-size: 13px;
+                padding: 15px;
+                line-height: 1.7;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #panel-home h1 {
+                font-size: 24px;
+            }
+
+            #panel-home p {
+                font-size: 14px;
+            }
+
+            #panel-teacher h2,
+            #panel-student h2 {
+                font-size: 20px;
+            }
+
+            .stat-item strong {
+                font-size: 24px;
+            }
+
+            .stat-item span {
+                font-size: 12px;
+            }
+
+            table {
+                min-width: 1100px;
+                font-size: 11px;
+            }
+
+            th {
+                padding: 10px 6px;
+                font-size: 12px;
+            }
+
+            td {
+                padding: 8px 6px;
+                font-size: 11px;
+            }
+        }
+
+        #btn-go-teacher {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        #btn-go-student {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+        }
+
+        #panel-home button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* ================================
+           TEACHER PANEL – واجهة المعلمة
+        =================================*/
+        #panel-teacher {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        #panel-teacher h2 {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        /* أزرار التحكم */
+        .controls {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            justify-content: center;
+        }
+
+        .controls button {
+            padding: 12px 20px;
+            font-size: 16px;
+            font-weight: 600;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        #btn-add-student {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(17, 153, 142, 0.3);
+        }
+
+        #btn-save-data {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(79, 172, 254, 0.3);
+        }
+
+        #btn-clear-all {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(250, 112, 154, 0.3);
+        }
+
+        #btn-load-demo {
+            background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(251, 194, 235, 0.3);
+        }
+
+        #btn-back-home {
+            background: linear-gradient(135deg, #89f7fe 0%, #66a6ff 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(137, 247, 254, 0.3);
+        }
+
+        .controls button:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+        }
+
+        .controls button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* الإحصائيات */
+        .stats-bar {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            background: #f3f4f6;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            justify-content: space-around;
+        }
+
+        .stat-item {
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            padding: 15px 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            min-width: 120px;
+            border: 2px solid rgba(102, 126, 234, 0.1);
+            transition: transform 0.2s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .stat-item strong {
+            display: block;
+            font-size: 28px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 5px;
+            font-weight: 700;
+        }
+
+        .stat-item span {
+            font-size: 14px;
+            color: #6b7280;
+        }
+
+        /* فلتر الفصول */
+        .class-filter {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .class-filter label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-left: 10px;
+            color: #374151;
+        }
+
+        .class-filter select {
+            padding: 10px 15px;
+            font-size: 15px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+        }
+
+        .class-filter button {
+            padding: 10px 20px;
+            margin-right: 10px;
+            background: #6366f1;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        /* الجدول */
+        .table-container {
+            overflow-x: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        th {
+            padding: 18px 10px;
+            font-weight: 700;
+            font-size: 15px;
+            text-align: center;
+            border-bottom: 3px solid rgba(255,255,255,0.2);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        td {
+            padding: 12px 10px;
+            text-align: center;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+        }
+
+        tbody tr:hover {
+            background: #f9fafb;
+        }
+
+        /* حقول الإدخال */
+        .score-input {
+            width: 60px;
+            padding: 6px;
+            text-align: center;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .attendance-input {
+            width: 50px;
+        }
+
+        /* أزرار الجدول */
+        .btn-table {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: 0.2s;
+        }
+
+        .btn-coop {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            box-shadow: 0 3px 10px rgba(253, 203, 110, 0.4);
+        }
+
+        .btn-strength {
+            background: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+            box-shadow: 0 3px 10px rgba(0, 184, 148, 0.4);
+        }
+
+        .btn-excellence {
+            background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+            box-shadow: 0 3px 10px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-weakness {
+            background: linear-gradient(135deg, #fab1a0 0%, #ff7675 100%);
+            box-shadow: 0 3px 10px rgba(255, 118, 117, 0.4);
+        }
+
+        .btn-table:hover {
+            opacity: 0.8;
+            transform: scale(1.05);
+        }
+
+        .btn-plan {
+            background: #3b82f6;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .btn-analysis {
+            background: #8b5cf6;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 13px;
+        }
+
+        .btn-parent {
+            background: #ec4899;
+            color: white;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .total-score {
+            font-weight: 700;
+            font-size: 16px;
+            color: #059669;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spinner 0.6s linear infinite;
+        }
+
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ================================
+           POPUPS – النوافذ المنبثقة
+        =================================*/
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+        }
+
+        .popup-box {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 1000;
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .popup-box h3 {
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .popup-box input[type="text"],
+        .popup-box textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 15px;
+            font-family: "Cairo", sans-serif;
+        }
+
+        .popup-box textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .popup-box button {
+            padding: 12px 25px;
+            margin-left: 10px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        .popup-box button:first-of-type {
+            background: #10b981;
+            color: white;
+        }
+
+        .popup-close {
+            background: #6b7280;
+            color: white;
+        }
+
+        .coop-option {
+            display: block;
+            width: 100%;
+            margin: 10px 0;
+            padding: 15px;
+            background: #f3f4f6;
+            border: 2px solid #d1d5db;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .coop-option:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+        }
+
+        #ai-plan {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        #analysis-text {
+            background: #f9fafb;
+            padding: 20px;
+            border-radius: 8px;
+            white-space: pre-line;
+            line-height: 1.8;
+            color: #374151;
+        }
+
+        /* ================================
+           STUDENT PANEL – واجهة الطالبة
+        =================================*/
+        #panel-student {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        #panel-student h2 {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 30px;
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        /* صندوق البحث */
+        .search-box {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            padding: 12px 20px;
+            width: 70%;
+            max-width: 400px;
+            border: 2px solid #d1d5db;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+
+        #btn-search-student {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            padding: 12px 20px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: transform 0.2s;
+        }
+
+        #btn-search-student:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        #btn-back-student {
+            color: #4A90E2;
+            font-weight: 600;
+            font-size: 17px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: underline;
+            margin-top: 20px;
+        }
+
+        /* صناديق المعلومات */
+        #panel-student div[style*="background:white"] {
+            background: #FFFFFF;
+            border: 1px solid #E0E6ED;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        #panel-student h3 {
+            margin-top: 0;
+            color: #2C3E50;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        #panel-student p,
+        #panel-student span {
+            font-size: 15px;
+            color: #333;
+        }
+
+        #st-strength li,
+        #st-excellence li,
+        #st-weakness li {
+            margin: 5px 0;
+            color: #4A4A4A;
+            line-height: 1.6;
+        }
+
+        #panel-student p span {
+            font-weight: 700;
+            color: #4A90E2;
+        }
+
+        #st-strength,
+        #st-excellence,
+        #st-weakness,
+        #st-plan,
+        #st-recommend {
+            padding-right: 10px;
+            line-height: 1.6;
+        }
+
+        .info-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+            border: 2px solid rgba(102, 126, 234, 0.15);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: transform 0.2s;
+        }
+
+        .info-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .confirm-dialog {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            z-index: 10000;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        .confirm-dialog h3 {
+            margin-bottom: 20px;
+            color: #ef4444;
+            font-size: 22px;
+        }
+
+        .confirm-dialog p {
+            margin-bottom: 25px;
+            color: #666;
+            font-size: 16px;
+        }
+
+        .confirm-dialog button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .confirm-yes {
+            background: #ef4444;
+            color: white;
+        }
+
+        .confirm-no {
+            background: #6b7280;
+            color: white;
+        }
+
+        .toast-message {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+            z-index: 10000;
+            font-weight: 600;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+    </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/element_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- ================================
+     HOME PANEL – الصفحة الرئيسية
+================================= -->
+  <div id="panel-home">
+   <h1>🎓 لوحة متابعة التقويم الذكية</h1>
+   <p>التواصل مع أولياء الأمور لمتابعة أداء الطالبة في مادة تقنية رقمية لعام 1447 هـ</p><button id="btn-go-teacher">👩‍🏫 دخول المعلمة</button> <button id="btn-go-student">👨‍👩‍👧 دخول الطالبة/ولي الأمر</button>
+  </div><!-- ================================
+     TEACHER PANEL – واجهة المعلمة
+================================= -->
+  <div id="panel-teacher">
+   <h2>لوحة المعلمة – إدارة بيانات الطالبات</h2><!-- أزرار التحكم -->
+   <div class="controls"><button id="btn-add-student">➕ إضافة طالبة</button> <button id="btn-load-demo">📥 تحميل بيانات تجريبية</button> <button id="btn-clear-all">🗑 مسح الكل</button> <button id="btn-back-home">🏠 العودة للرئيسية</button>
+   </div><!-- الإحصائيات -->
+   <div class="stats-bar">
+    <div class="stat-item"><strong id="stat-total">0</strong> <span>عدد الطالبات</span>
+    </div>
+    <div class="stat-item"><strong id="stat-average">0</strong> <span>المتوسط العام</span>
+    </div>
+    <div class="stat-item"><strong id="stat-attendance">0%</strong> <span>نسبة الحضور</span>
+    </div>
+    <div class="stat-item"><strong id="stat-late">0</strong> <span>واجبات متأخرة</span>
+    </div>
+    <div class="stat-item"><strong id="stat-soon">0</strong> <span>قريبة الموعد</span>
+    </div>
+    <div class="stat-item"><strong id="stat-today">0</strong> <span>مطلوبة اليوم</span>
+    </div>
+   </div><!-- فلتر الفصول -->
+   <div class="class-filter"><label>تصفية حسب الفصل:</label> <select id="class-select"> <option value="">الكل</option> <option value="ثالث 1">ثالث 1</option> <option value="ثالث 2">ثالث 2</option> <option value="ثالث 3">ثالث 3</option> </select> <button id="btn-stat-reset">إلغاء الفلتر</button>
+   </div><!-- الجدول -->
+   <div class="table-container">
+    <table>
+     <thead>
+      <tr>
+       <th>#</th>
+       <th>الاسم الثلاثي</th>
+       <th>الفصل</th>
+       <th>الاختبار (30)</th>
+       <th>النشاط (30)</th>
+       <th>الواجب (20)</th>
+       <th>المناقشة (20)</th>
+       <th>التعاون</th>
+       <th>نقاط القوة</th>
+       <th>نقاط التميز</th>
+       <th>نقاط الضعف</th>
+       <th>المجموع</th>
+       <th>خطة رفع المستوى</th>
+       <th>تحليل الحالة</th>
+       <th>تواصل ولي الأمر</th>
+       <th>الغياب</th>
+      </tr>
+     </thead>
+     <tbody id="students-body"><!-- يتم إضافة الطالبات هنا -->
+     </tbody>
+    </table>
+   </div>
+  </div><!-- ================================
+     STUDENT PANEL – واجهة الطالبة
+================================= -->
+  <div id="panel-student">
+   <h2>👨‍👩‍👧 صفحة الطالبة/ولي الأمر</h2><!-- صندوق البحث -->
+   <div class="search-box"><input type="text" id="student-name-input" placeholder="أدخل الاسم الثلاثي للطالبة"> <button id="btn-search-student">🔍 بحث</button>
+   </div><!-- بطاقة معلومات الطالبة -->
+   <div class="info-card">
+    <h3>📋 معلومات الطالبة</h3>
+    <p><span>الاسم:</span> <span id="st-name">—</span></p>
+    <p><span>الفصل:</span> <span id="st-class">—</span></p>
+    <p><span>المجموع الكلي:</span> <span id="st-total">—</span></p>
+    <p><span>الحالة:</span> <span id="st-status">—</span></p>
+   </div><!-- بطاقة الدرجات التفصيلية -->
+   <div class="info-card">
+    <h3>📊 الدرجات التفصيلية</h3>
+    <p><span>الاختبار (30):</span> <span id="st-exam">—</span></p>
+    <p><span>النشاط (30):</span> <span id="st-activity">—</span></p>
+    <p><span>الواجب (20):</span> <span id="st-homework">—</span></p>
+    <p><span>المناقشة (20):</span> <span id="st-discussion">—</span></p>
+    <p><span>أيام الغياب:</span> <span id="st-attendance">—</span></p>
+   </div><!-- نقاط القوة -->
+   <div class="info-card">
+    <h3>💪 نقاط القوة</h3>
+    <ul id="st-strength"></ul>
+   </div><!-- نقاط التميز -->
+   <div class="info-card">
+    <h3>✨ نقاط التميز</h3>
+    <ul id="st-excellence"></ul>
+   </div><!-- نقاط الضعف -->
+   <div class="info-card">
+    <h3>⚠ نقاط الضعف</h3>
+    <ul id="st-weakness"></ul>
+   </div><!-- خطة رفع المستوى -->
+   <div class="info-card">
+    <h3>📝 خطة رفع المستوى</h3>
+    <p id="st-plan">—</p>
+   </div><!-- توصيات -->
+   <div class="info-card">
+    <h3>💡 توصيات</h3>
+    <p id="st-recommend">—</p>
+   </div><!-- زر التواصل عبر الواتساب --> <button id="btn-contact-teacher" style="width: 100%; padding: 15px; background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); color: white; border: none; border-radius: 12px; font-size: 18px; font-weight: 700; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); transition: transform 0.2s;"> 📱 التواصل مع المعلمة عبر الواتساب </button> <button id="btn-back-student">← العودة للرئيسية</button>
+  </div><!-- ================================
+     POPUPS – النوافذ المنبثقة
+================================= -->
+  <div id="popup-overlay"></div><!-- نافذة نقاط القوة -->
+  <div class="popup-box" id="popup-strength">
+   <h3>💪 إضافة نقطة قوة</h3><input type="text" id="strength-input" placeholder="اكتبي نقطة القوة"> <button id="save-strength">حفظ</button> <button class="popup-close">إغلاق</button>
+  </div><!-- نافذة نقاط التميز -->
+  <div class="popup-box" id="popup-excellence">
+   <h3>✨ إضافة نقطة تميز</h3><input type="text" id="excellence-input" placeholder="اكتبي نقطة التميز"> <button id="save-excellence">حفظ</button> <button class="popup-close">إغلاق</button>
+  </div><!-- نافذة نقاط الضعف -->
+  <div class="popup-box" id="popup-weakness">
+   <h3>⚠ إضافة نقطة ضعف</h3><input type="text" id="weakness-input" placeholder="اكتبي نقطة الضعف"> <button id="save-weakness">حفظ</button> <button class="popup-close">إغلاق</button>
+  </div><!-- نافذة التعاون -->
+  <div class="popup-box" id="popup-coop">
+   <h3>🤝 تقييم التعاون</h3><button class="coop-option" data-value="ممتازة">ممتازة</button> <button class="coop-option" data-value="جيدة">جيدة</button> <button class="coop-option" data-value="متوسطة">متوسطة</button> <button class="coop-option" data-value="ضعيفة">ضعيفة</button> <button class="popup-close">إغلاق</button>
+  </div><!-- نافذة خطة رفع المستوى -->
+  <div class="popup-box" id="popup-plan">
+   <h3>📝 خطة رفع المستوى</h3><textarea id="plan-input" placeholder="اكتبي الخطة هنا..."></textarea> <button id="ai-plan">🤖 توليد بالذكاء الاصطناعي</button> <button id="save-plan">حفظ</button> <button class="popup-close">إغلاق</button>
+  </div><!-- نافذة تحليل الحالة -->
+  <div class="popup-box" id="popup-analysis">
+   <h3>🔎 تحليل حالة الطالبة</h3>
+   <div id="analysis-text"></div><button class="popup-close">إغلاق</button>
+  </div><!-- نافذة تواصل ولي الأمر -->
+  <div class="popup-box" id="popup-parent">
+   <h3>📞 تواصل ولي الأمر</h3><label><input type="radio" name="parent-choice" value="لم يتم"> لم يتم</label><br><label><input type="radio" name="parent-choice" value="تم اليوم"> تم اليوم</label><br><label><input type="radio" name="parent-choice" value="تم قريبًا"> تم قريبًا</label><br><label><input type="radio" name="parent-choice" value="متأخر"> متأخر</label><br><br><button id="save-parent">حفظ</button> <button class="popup-close">إغلاق</button>
+  </div><!-- نافذة دخول المعلمة -->
+  <div class="popup-box" id="popup-teacher-login">
+   <h3>👩‍🏫 دخول المعلمة</h3>
+   <p style="text-align: center; margin-bottom: 20px; color: #666;">أدخلي رقم الدخول (1، 2، 3، أو 4)</p><input type="text" id="teacher-code-input" placeholder="أدخلي رقم الدخول" style="width: 100%; padding: 12px; text-align: center; font-size: 18px; margin-bottom: 20px; border: 2px solid #d1d5db; border-radius: 8px;">
+   <div id="login-error" style="color: #ef4444; text-align: center; margin-bottom: 15px; display: none;">
+    ❌ رقم دخول غير صحيح
+   </div><button id="btn-teacher-login">دخول</button> <button class="popup-close">إلغاء</button>
+  </div>
+  <script>
+/* =========================================
+   النظام الكامل مع Data SDK
+   ========================================= */
+
+// إحضار العناصر الرئيسية
+const panelHome = document.getElementById("panel-home");
+const panelTeacher = document.getElementById("panel-teacher");
+const panelStudent = document.getElementById("panel-student");
+
+const btnGoTeacher = document.getElementById("btn-go-teacher");
+const btnGoStudent = document.getElementById("btn-go-student");
+const btnBackHome = document.getElementById("btn-back-home");
+const btnBackStudent = document.getElementById("btn-back-student");
+
+// دوال التنقل بين الصفحات
+function showPanel(panel) {
+    panelHome.style.display = "none";
+    panelTeacher.style.display = "none";
+    panelStudent.style.display = "none";
+    panel.style.display = "block";
+    window.scrollTo(0, 0);
+}
+
+// دخول المعلمة
+btnGoTeacher.addEventListener("click", function () {
+    document.getElementById("popup-teacher-login").style.display = "block";
+    overlay.style.display = "block";
+});
+
+// دخول الطالبة
+btnGoStudent.addEventListener("click", function () {
+    showPanel(panelStudent);
+});
+
+// زر العودة للصفحة الرئيسية
+btnBackHome.addEventListener("click", function () {
+    showPanel(panelHome);
+});
+
+btnBackStudent.addEventListener("click", function () {
+    showPanel(panelHome);
+});
+
+/* =========================================
+   Data SDK Implementation
+   ========================================= */
+
+let students = [];
+const tableBody = document.getElementById("students-body");
+
+const btnAddStudent = document.getElementById("btn-add-student");
+const btnClearAll = document.getElementById("btn-clear-all");
+const btnLoadDemo = document.getElementById("btn-load-demo");
+const overlay = document.getElementById("popup-overlay");
+
+// Data SDK Handler
+const dataHandler = {
+    onDataChanged(data) {
+        students = data.map(record => ({
+            __backendId: record.__backendId,
+            id: record.id,
+            name: record.name,
+            class: record.class,
+            exam: record.exam,
+            activity: record.activity,
+            homework: record.homework,
+            discussion: record.discussion,
+            coop: record.coop,
+            strength: record.strength ? record.strength.split('|||') : [],
+            excellence: record.excellence ? record.excellence.split('|||') : [],
+            weakness: record.weakness ? record.weakness.split('|||') : [],
+            total: record.total,
+            plan: record.plan,
+            status: record.status,
+            attendance: record.attendance,
+            parent: record.parent,
+            familyCount: record.familyCount
+        }));
+        
+        renderTable();
+    }
+};
+
+// Initialize Data SDK
+async function initDataSdk() {
+    if (window.dataSdk) {
+        const result = await window.dataSdk.init(dataHandler);
+        if (!result.isOk) {
+            console.error("Failed to initialize Data SDK");
+        }
+    }
+}
+
+// تحويل الطالبة إلى صيغة DataObject
+function studentToDataObject(student) {
+    return {
+        id: student.id,
+        name: student.name,
+        class: student.class,
+        exam: student.exam,
+        activity: student.activity,
+        homework: student.homework,
+        discussion: student.discussion,
+        coop: student.coop || "",
+        strength: student.strength.join('|||'),
+        excellence: student.excellence.join('|||'),
+        weakness: student.weakness.join('|||'),
+        total: student.total,
+        plan: student.plan || "",
+        status: student.status || "",
+        attendance: student.attendance,
+        parent: student.parent || "",
+        familyCount: student.familyCount || 0
+    };
+}
+
+// إظهار رسالة Toast
+function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.remove();
+    }, 3000);
+}
+
+// زر مسح جميع البيانات
+btnClearAll.addEventListener("click", function () {
+    const confirmBox = document.createElement('div');
+    confirmBox.className = 'confirm-dialog';
+    confirmBox.innerHTML = `
+        <h3>⚠️ تحذير</h3>
+        <p>هل تريدين مسح كل البيانات؟ لا يمكن التراجع عن هذا الإجراء.</p>
+        <button class="confirm-yes">نعم، امسح الكل</button>
+        <button class="confirm-no">إلغاء</button>
+    `;
+    document.body.appendChild(confirmBox);
+    overlay.style.display = "block";
+    
+    confirmBox.querySelector('.confirm-yes').onclick = async function() {
+        this.disabled = true;
+        this.innerHTML = '<span class="loading-spinner"></span>';
+        
+        for (const student of students) {
+            if (student.__backendId) {
+                const dataObj = { ...studentToDataObject(student), __backendId: student.__backendId };
+                await window.dataSdk.delete(dataObj);
+            }
+        }
+        
+        document.body.removeChild(confirmBox);
+        overlay.style.display = "none";
+        showToast("✔ تم مسح جميع البيانات");
+    };
+    
+    confirmBox.querySelector('.confirm-no').onclick = function() {
+        document.body.removeChild(confirmBox);
+        overlay.style.display = "none";
+    };
+});
+
+// تحميل بيانات تجريبية
+btnLoadDemo.addEventListener("click", async function () {
+    if (students.length >= 999) {
+        showToast("❌ تم الوصول للحد الأقصى من البيانات (999)");
+        return;
+    }
+    
+    this.disabled = true;
+    this.innerHTML = '<span class="loading-spinner"></span> جاري التحميل...';
+    
+    const demoStudents = [
+        { id: Date.now(), name: "سارة محمد الغربي", class: "ثالث 1", exam: 25, activity: 26, homework: 18, discussion: 19, coop: "ممتازة", strength: ["تفاعل ممتاز"], excellence: ["أداء متميز"], weakness: [], total: 0, plan: "", status: "", attendance: 0, parent: "", familyCount: 0 },
+        { id: Date.now() + 1, name: "جود خالد القطيري", class: "ثالث 2", exam: 22, activity: 27, homework: 17, discussion: 18, coop: "جيدة", strength: ["نشيطة"], excellence: [], weakness: ["بحاجة لتحسين"], total: 0, plan: "", status: "", attendance: 1, parent: "", familyCount: 0 }
+    ];
+    
+    for (const student of demoStudents) {
+        calculateTotal(student);
+        const result = await window.dataSdk.create(studentToDataObject(student));
+        if (!result.isOk) {
+            showToast("❌ حدث خطأ أثناء إضافة البيانات");
+        }
+    }
+    
+    this.disabled = false;
+    this.innerHTML = '📥 تحميل بيانات تجريبية';
+    showToast("✔ تم تحميل البيانات التجريبية");
+});
+
+// إضافة طالبة جديدة
+btnAddStudent.addEventListener("click", function () {
+    if (students.length >= 999) {
+        showToast("❌ تم الوصول للحد الأقصى من البيانات (999 طالبة)");
+        return;
+    }
+    
+    const confirmBox = document.createElement('div');
+    confirmBox.className = 'confirm-dialog';
+    confirmBox.innerHTML = `
+        <h3>➕ إضافة طالبة جديدة</h3>
+        <input type="text" id="new-student-name" placeholder="الاسم الثلاثي" style="width: 100%; padding: 10px; margin: 10px 0; border: 2px solid #d1d5db; border-radius: 8px; font-size: 15px;">
+        <input type="text" id="new-student-class" placeholder="الفصل (مثال: ثالث 1)" style="width: 100%; padding: 10px; margin: 10px 0; border: 2px solid #d1d5db; border-radius: 8px; font-size: 15px;">
+        <button class="confirm-yes" style="background: #10b981;">إضافة</button>
+        <button class="confirm-no">إلغاء</button>
+    `;
+    document.body.appendChild(confirmBox);
+    overlay.style.display = "block";
+    
+    confirmBox.querySelector('.confirm-yes').onclick = async function() {
+        const name = document.getElementById("new-student-name").value.trim();
+        const cls = document.getElementById("new-student-class").value.trim();
+        
+        if (!name || !cls) {
+            showToast("❌ يرجى إدخال الاسم والفصل");
+            return;
+        }
+        
+        this.disabled = true;
+        this.innerHTML = '<span class="loading-spinner"></span>';
+        
+        const newStudent = {
+            id: Date.now(),
+            name: name,
+            class: cls,
+            exam: 0,
+            activity: 0,
+            homework: 0,
+            discussion: 0,
+            coop: "",
+            strength: [],
+            excellence: [],
+            weakness: [],
+            total: 0,
+            plan: "",
+            status: "",
+            attendance: 0,
+            parent: "",
+            familyCount: 0
+        };
+        
+        calculateTotal(newStudent);
+        
+        const result = await window.dataSdk.create(studentToDataObject(newStudent));
+        
+        if (result.isOk) {
+            showToast("✔ تمت إضافة الطالبة بنجاح");
+        } else {
+            showToast("❌ حدث خطأ أثناء الإضافة");
+        }
+        
+        document.body.removeChild(confirmBox);
+        overlay.style.display = "none";
+    };
+    
+    confirmBox.querySelector('.confirm-no').onclick = function() {
+        document.body.removeChild(confirmBox);
+        overlay.style.display = "none";
+    };
+});
+
+// حساب المجموع والحالة
+function calculateTotal(s) {
+    s.total = Number(s.exam) + Number(s.activity) + Number(s.homework) + Number(s.discussion);
+    
+    if (s.total >= 95) s.status = "متفوقة";
+    else if (s.total >= 85) s.status = "جيدة جدًا";
+    else if (s.total >= 75) s.status = "جيدة";
+    else if (s.total >= 60) s.status = "متوسطة";
+    else s.status = "تحتاج دعم";
+}
+
+/* =========================================
+   إنشاء الجدول
+   ========================================= */
+
+function renderTable() {
+    tableBody.innerHTML = "";
+    
+    students.forEach((s, index) => {
+        const row = document.createElement("tr");
+        
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${s.name}</td>
+            <td>${s.class}</td>
+            <td><input type="number" class="score-input" value="${s.exam}" data-id="${s.__backendId}" data-field="exam" min="0" max="30"></td>
+            <td><input type="number" class="score-input" value="${s.activity}" data-id="${s.__backendId}" data-field="activity" min="0" max="30"></td>
+            <td><input type="number" class="score-input" value="${s.homework}" data-id="${s.__backendId}" data-field="homework" min="0" max="20"></td>
+            <td><input type="number" class="score-input" value="${s.discussion}" data-id="${s.__backendId}" data-field="discussion" min="0" max="20"></td>
+            <td><button class="btn-table btn-coop" data-id="${s.__backendId}">🤝 ${s.coop || ''}</button></td>
+            <td><button class="btn-table btn-strength" data-id="${s.__backendId}">💪 (${s.strength.length})</button></td>
+            <td><button class="btn-table btn-excellence" data-id="${s.__backendId}">✨ (${s.excellence.length})</button></td>
+            <td><button class="btn-table btn-weakness" data-id="${s.__backendId}">⚠ (${s.weakness.length})</button></td>
+            <td class="total-score">${s.total}</td>
+            <td><button class="btn-plan" data-id="${s.__backendId}">📝</button></td>
+            <td><button class="btn-analysis" data-id="${s.__backendId}">🔎 ${s.status}</button></td>
+            <td><button class="btn-parent" data-id="${s.__backendId}">📞 ${s.parent || ''}</button></td>
+            <td><input type="number" class="score-input attendance-input" value="${s.attendance}" data-id="${s.__backendId}" data-field="attendance" min="0"></td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+    
+    attachEvents();
+    updateStats();
+}
+
+async function updateStudent(backendId, updates) {
+    const student = students.find(s => s.__backendId === backendId);
+    if (!student) return;
+    
+    Object.assign(student, updates);
+    calculateTotal(student);
+    
+    const dataObj = { ...studentToDataObject(student), __backendId: student.__backendId };
+    const result = await window.dataSdk.update(dataObj);
+    
+    if (!result.isOk) {
+        showToast("❌ حدث خطأ أثناء التحديث");
+    }
+}
+
+function attachEvents() {
+    // تحديث الدرجات
+    document.querySelectorAll(".score-input").forEach(input => {
+        input.addEventListener("change", async function () {
+            const backendId = this.dataset.id;
+            const field = this.dataset.field;
+            const value = Number(this.value);
+            
+            await updateStudent(backendId, { [field]: value });
+        });
+    });
+    
+    // نقاط القوة
+    document.querySelectorAll(".btn-strength").forEach(btn => {
+        btn.addEventListener("click", function () {
+            openPopup("strength", this.dataset.id);
+        });
+    });
+    
+    // نقاط التميز
+    document.querySelectorAll(".btn-excellence").forEach(btn => {
+        btn.addEventListener("click", function () {
+            openPopup("excellence", this.dataset.id);
+        });
+    });
+    
+    // نقاط الضعف
+    document.querySelectorAll(".btn-weakness").forEach(btn => {
+        btn.addEventListener("click", function () {
+            openPopup("weakness", this.dataset.id);
+        });
+    });
+    
+    // التعاون
+    document.querySelectorAll(".btn-coop").forEach(btn => {
+        btn.addEventListener("click", function () {
+            openPopup("coop", this.dataset.id);
+        });
+    });
+    
+    // خطة رفع المستوى
+    document.querySelectorAll(".btn-plan").forEach(btn => {
+        btn.addEventListener("click", function () {
+            openPopup("plan", this.dataset.id);
+        });
+    });
+    
+    // تحليل الحالة
+    document.querySelectorAll(".btn-analysis").forEach(btn => {
+        btn.addEventListener("click", function () {
+            openPopup("analysis", this.dataset.id);
+        });
+    });
+    
+    // تواصل ولي الأمر
+    document.querySelectorAll(".btn-parent").forEach(btn => {
+        btn.addEventListener("click", function () {
+            openPopup("parent", this.dataset.id);
+        });
+    });
+}
+
+/* =========================================
+   فلتر الفصول والإحصائيات
+   ========================================= */
+
+const classSelect = document.getElementById("class-select");
+
+classSelect.addEventListener("change", function () {
+    const selected = this.value;
+    
+    if (!selected) {
+        renderTable();
+        return;
+    }
+    
+    const filtered = students.filter(s => s.class === selected);
+    renderFilteredTable(filtered);
+    updateFilteredStats(filtered);
+});
+
+function renderFilteredTable(list) {
+    tableBody.innerHTML = "";
+    
+    list.forEach((s, index) => {
+        const row = document.createElement("tr");
+        
+        row.innerHTML = `
+            <td>${index + 1}</td>
+            <td>${s.name}</td>
+            <td>${s.class}</td>
+            <td>${s.exam}</td>
+            <td>${s.activity}</td>
+            <td>${s.homework}</td>
+            <td>${s.discussion}</td>
+            <td>${s.coop}</td>
+            <td>${s.strength.join("<br>") || "—"}</td>
+            <td>${s.excellence.join("<br>") || "—"}</td>
+            <td>${s.weakness.join("<br>") || "—"}</td>
+            <td class="total-score">${s.total}</td>
+            <td>${s.plan ? "✓" : "—"}</td>
+            <td>${s.status}</td>
+            <td>${s.parent || "—"}</td>
+            <td>${s.attendance}</td>
+        `;
+        
+        tableBody.appendChild(row);
+    });
+}
+
+document.getElementById("btn-stat-reset").addEventListener("click", function () {
+    classSelect.value = "";
+    renderTable();
+});
+
+function updateStats() {
+    if (students.length === 0) {
+        document.getElementById("stat-total").textContent = "0";
+        document.getElementById("stat-average").textContent = "0";
+        document.getElementById("stat-attendance").textContent = "0%";
+        document.getElementById("stat-late").textContent = "0";
+        document.getElementById("stat-soon").textContent = "0";
+        document.getElementById("stat-today").textContent = "0";
+        return;
+    }
+    
+    document.getElementById("stat-total").textContent = students.length;
+    
+    const avg = students.reduce((a, b) => a + b.total, 0) / students.length;
+    document.getElementById("stat-average").textContent = avg.toFixed(1);
+    
+    const attendanceAvg = students.reduce((a, b) => a + (b.attendance || 0), 0);
+    const attendancePercent = 100 - (attendanceAvg / students.length) * 10;
+    document.getElementById("stat-attendance").textContent = Math.max(0, attendancePercent).toFixed(1) + "%";
+    
+    document.getElementById("stat-late").textContent = students.filter(s => s.plan && s.plan.includes("متأخرة")).length;
+    document.getElementById("stat-soon").textContent = students.filter(s => s.plan && s.plan.includes("قريب")).length;
+    document.getElementById("stat-today").textContent = students.filter(s => s.plan && s.plan.includes("اليوم")).length;
+}
+
+function updateFilteredStats(list) {
+    if (list.length === 0) return;
+    
+    document.getElementById("stat-total").textContent = list.length;
+    
+    const avg = list.reduce((a, b) => a + b.total, 0) / list.length;
+    document.getElementById("stat-average").textContent = avg.toFixed(1);
+    
+    const attendanceAvg = list.reduce((a, b) => a + (b.attendance || 0), 0);
+    const attendancePercent = 100 - (attendanceAvg / list.length) * 10;
+    document.getElementById("stat-attendance").textContent = Math.max(0, attendancePercent).toFixed(1) + "%";
+}
+
+/* =========================================
+   النوافذ المنبثقة
+   ========================================= */
+
+let currentBackendId = null;
+
+function openPopup(type, backendId) {
+    currentBackendId = backendId;
+    overlay.style.display = "block";
+    hideAllPopups();
+    
+    if (type === "strength") {
+        document.getElementById("popup-strength").style.display = "block";
+        document.getElementById("strength-input").value = "";
+    }
+    if (type === "excellence") {
+        document.getElementById("popup-excellence").style.display = "block";
+        document.getElementById("excellence-input").value = "";
+    }
+    if (type === "weakness") {
+        document.getElementById("popup-weakness").style.display = "block";
+        document.getElementById("weakness-input").value = "";
+    }
+    if (type === "coop") {
+        document.getElementById("popup-coop").style.display = "block";
+    }
+    if (type === "plan") {
+        const student = students.find(s => s.__backendId === currentBackendId);
+        document.getElementById("popup-plan").style.display = "block";
+        document.getElementById("plan-input").value = student ? student.plan : "";
+    }
+    if (type === "analysis") {
+        showAnalysisPopup();
+    }
+    if (type === "parent") {
+        document.getElementById("popup-parent").style.display = "block";
+    }
+}
+
+function hideAllPopups() {
+    document.querySelectorAll(".popup-box").forEach(p => {
+        p.style.display = "none";
+    });
+}
+
+function closePopup() {
+    hideAllPopups();
+    overlay.style.display = "none";
+}
+
+overlay.addEventListener("click", closePopup);
+
+document.querySelectorAll(".popup-close").forEach(btn => {
+    btn.addEventListener("click", closePopup);
+});
+
+// حفظ نقاط القوة
+document.getElementById("save-strength").addEventListener("click", async function () {
+    const txt = document.getElementById("strength-input").value.trim();
+    const student = students.find(s => s.__backendId === currentBackendId);
+    
+    if (txt && student) {
+        this.disabled = true;
+        this.innerHTML = '<span class="loading-spinner"></span>';
+        
+        student.strength.push(txt);
+        await updateStudent(currentBackendId, { strength: student.strength });
+        
+        closePopup();
+        showToast("✔ تمت الإضافة بنجاح");
+        this.disabled = false;
+        this.textContent = "حفظ";
+    }
+});
+
+// حفظ نقاط التميز
+document.getElementById("save-excellence").addEventListener("click", async function () {
+    const txt = document.getElementById("excellence-input").value.trim();
+    const student = students.find(s => s.__backendId === currentBackendId);
+    
+    if (txt && student) {
+        this.disabled = true;
+        this.innerHTML = '<span class="loading-spinner"></span>';
+        
+        student.excellence.push(txt);
+        await updateStudent(currentBackendId, { excellence: student.excellence });
+        
+        closePopup();
+        showToast("✔ تمت الإضافة بنجاح");
+        this.disabled = false;
+        this.textContent = "حفظ";
+    }
+});
+
+// حفظ نقاط الضعف
+document.getElementById("save-weakness").addEventListener("click", async function () {
+    const txt = document.getElementById("weakness-input").value.trim();
+    const student = students.find(s => s.__backendId === currentBackendId);
+    
+    if (txt && student) {
+        this.disabled = true;
+        this.innerHTML = '<span class="loading-spinner"></span>';
+        
+        student.weakness.push(txt);
+        await updateStudent(currentBackendId, { weakness: student.weakness });
+        
+        closePopup();
+        showToast("✔ تمت الإضافة بنجاح");
+        this.disabled = false;
+        this.textContent = "حفظ";
+    }
+});
+
+// حفظ التعاون
+document.querySelectorAll(".coop-option").forEach(btn => {
+    btn.addEventListener("click", async function () {
+        this.disabled = true;
+        
+        await updateStudent(currentBackendId, { coop: this.dataset.value });
+        
+        closePopup();
+        showToast("✔ تم التحديث بنجاح");
+        this.disabled = false;
+    });
+});
+
+// حفظ خطة رفع المستوى
+document.getElementById("save-plan").addEventListener("click", async function () {
+    const txt = document.getElementById("plan-input").value.trim();
+    
+    this.disabled = true;
+    this.innerHTML = '<span class="loading-spinner"></span>';
+    
+    await updateStudent(currentBackendId, { plan: txt });
+    
+    closePopup();
+    showToast("✔ تم حفظ الخطة بنجاح");
+    this.disabled = false;
+    this.textContent = "حفظ";
+});
+
+// توليد خطة بالذكاء الاصطناعي
+document.getElementById("ai-plan").addEventListener("click", function () {
+    const s = students.find(s => s.__backendId === currentBackendId);
+    
+    if (!s) return;
+    
+    let aiText = `خطة رفع المستوى للطالبة ${s.name}:\n\n`;
+    
+    if (s.total < 60) {
+        aiText += "🔴 تركيز أساسي على مهارات الحضور، الواجبات، والمناقشة.\n";
+    } else if (s.total < 75) {
+        aiText += "🟡 تعزيز مهارات التطبيق العملي والمشاركة.\n";
+    } else {
+        aiText += "🟢 استمرار على نفس الأداء مع تحسينات بسيطة.\n";
+    }
+    
+    aiText += "\nنقاط القوة:\n";
+    aiText += (s.strength.length ? s.strength.map(i => "• " + i).join("\n") : "• لا يوجد");
+    
+    aiText += "\n\nنقاط الضعف:\n";
+    aiText += (s.weakness.length ? s.weakness.map(i => "• " + i).join("\n") : "• لا يوجد");
+    
+    document.getElementById("plan-input").value = aiText;
+});
+
+// تحليل حالة الطالبة
+function showAnalysisPopup() {
+    const student = students.find(s => s.__backendId === currentBackendId);
+    
+    if (!student) return;
+    
+    const txt = `تحليل حالة الطالبة:
+
+الاسم: ${student.name}
+الفصل: ${student.class}
+المجموع: ${student.total} من 100
+الحالة: ${student.status}
+
+نقاط القوة:
+${student.strength.length ? student.strength.map(i => "• " + i).join("\n") : "• لا يوجد"}
+
+نقاط التميز:
+${student.excellence.length ? student.excellence.map(i => "• " + i).join("\n") : "• لا يوجد"}
+
+نقاط الضعف:
+${student.weakness.length ? student.weakness.map(i => "• " + i).join("\n") : "• لا يوجد"}
+
+التعاون: ${student.coop || "—"}
+أيام الغياب: ${student.attendance}
+`;
+    
+    document.getElementById("analysis-text").textContent = txt;
+    document.getElementById("popup-analysis").style.display = "block";
+}
+
+// حفظ تواصل ولي الأمر
+document.getElementById("save-parent").addEventListener("click", async function () {
+    const choice = document.querySelector("input[name='parent-choice']:checked");
+    
+    if (choice) {
+        this.disabled = true;
+        this.innerHTML = '<span class="loading-spinner"></span>';
+        
+        await updateStudent(currentBackendId, { parent: choice.value });
+        
+        closePopup();
+        showToast("✔ تم التحديث بنجاح");
+        this.disabled = false;
+        this.textContent = "حفظ";
+    }
+});
+
+/* =========================================
+   واجهة الطالبة
+   ========================================= */
+
+const btnSearchStudent = document.getElementById("btn-search-student");
+const stNameInput = document.getElementById("student-name-input");
+
+btnSearchStudent.addEventListener("click", function () {
+    const name = stNameInput.value.trim();
+    
+    if (!name) {
+        showToast("❌ يرجى إدخال الاسم");
+        return;
+    }
+    
+    const student = students.find(s => s.name.includes(name));
+    
+    if (!student) {
+        showToast("❌ لم يتم العثور على الطالبة");
+        return;
+    }
+    
+    showStudentPanel(student);
+});
+
+stNameInput.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        btnSearchStudent.click();
+    }
+});
+
+async function showStudentPanel(student) {
+    document.getElementById("st-name").textContent = student.name;
+    document.getElementById("st-class").textContent = student.class;
+    document.getElementById("st-total").textContent = student.total;
+    document.getElementById("st-status").textContent = student.status;
+    
+    document.getElementById("st-exam").textContent = student.exam;
+    document.getElementById("st-activity").textContent = student.activity;
+    document.getElementById("st-homework").textContent = student.homework;
+    document.getElementById("st-discussion").textContent = student.discussion;
+    document.getElementById("st-attendance").textContent = student.attendance;
+    
+    const stStrengthList = document.getElementById("st-strength");
+    const stExcellenceList = document.getElementById("st-excellence");
+    const stWeaknessList = document.getElementById("st-weakness");
+    
+    stStrengthList.innerHTML = student.strength.length ? student.strength.map(i => "<li>" + i + "</li>").join("") : "<li>لا يوجد</li>";
+    stExcellenceList.innerHTML = student.excellence.length ? student.excellence.map(i => "<li>" + i + "</li>").join("") : "<li>لا يوجد</li>";
+    stWeaknessList.innerHTML = student.weakness.length ? student.weakness.map(i => "<li>" + i + "</li>").join("") : "<li>لا يوجد</li>";
+    
+    document.getElementById("st-plan").textContent = student.plan || "لا توجد خطة مسجلة";
+    
+    const recommend = 
+        student.total >= 90 ? "🌟 ننصح بالمشاركة في مسابقات تقنية" :
+        student.total >= 80 ? "💡 يمكن للطالبة تطوير مهاراتها العملية" :
+        student.total >= 70 ? "📘 تحتاج إلى تحسين مهارات التطبيق" :
+        "🔴 تحتاج إلى متابعة مكثفة وخطة دعم";
+    
+    document.getElementById("st-recommend").textContent = recommend;
+    
+    // تحديث عداد دخول الأسرة
+    await updateStudent(student.__backendId, { familyCount: (student.familyCount || 0) + 1 });
+    
+    // ==== زر التواصل عبر الواتساب ====
+    const contactBtn = document.getElementById("btn-contact-teacher");
+    
+    if (contactBtn) {
+        // إزالة أي مستمعات سابقة
+        const newContactBtn = contactBtn.cloneNode(true);
+        contactBtn.parentNode.replaceChild(newContactBtn, contactBtn);
+        
+        // حفظ بيانات الطالبة
+        const studentName = student.name;
+        const studentClass = student.class;
+        const studentTotal = student.total;
+        const studentStatus = student.status;
+        
+        newContactBtn.addEventListener("click", function() {
+            // رسالة تلقائية مخصصة باسم الطالبة ومعلوماتها
+            const defaultMessage = `السلام عليكم ورحمة الله وبركاته أستاذة شذا 🌸
+
+أنا ولي أمر الطالبة: *${studentName}*
+الفصل: ${studentClass}
+
+أود الاستفسار عن مستوى ابنتي في مادة تقنية رقمية.
+
+📊 المجموع الحالي: ${studentTotal} من 100
+📈 الحالة: ${studentStatus}
+
+أرغب في معرفة:
+• كيف يمكنني مساعدة ابنتي لتحسين مستواها؟
+• ما هي نقاط القوة التي يجب التركيز عليها؟
+• هل هناك نقاط ضعف تحتاج إلى دعم إضافي؟
+
+شاكرين لكم جهودكم المتميزة 🙏`;
+
+            const encodedMessage = encodeURIComponent(defaultMessage);
+            const whatsappNumber = "966555320501";
+            const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`;
+            
+            // فتح الواتساب في نافذة جديدة
+            const link = document.createElement('a');
+            link.href = whatsappURL;
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    }
+}
+
+/* =========================================
+   دخول المعلمة
+   ========================================= */
+
+document.getElementById("btn-teacher-login").addEventListener("click", function () {
+    const code = document.getElementById("teacher-code-input").value.trim();
+    const errorDiv = document.getElementById("login-error");
+    
+    if (code === "1" || code === "2" || code === "3" || code === "4") {
+        hideAllPopups();
+        overlay.style.display = "none";
+        showPanel(panelTeacher);
+        document.getElementById("teacher-code-input").value = "";
+        errorDiv.style.display = "none";
+    } else {
+        errorDiv.style.display = "block";
+    }
+});
+
+document.getElementById("teacher-code-input").addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+        document.getElementById("btn-teacher-login").click();
+    }
+});
+
+/* =========================================
+   تحميل البيانات عند فتح الصفحة
+   ========================================= */
+
+initDataSdk();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abb255eb7c3ce00',t:'MTc2NTM1Mjk3MC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
