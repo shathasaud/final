@@ -1,0 +1,1693 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>جدول تقييم الطالبات</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+  <script src="/_sdk/element_sdk.js"></script>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif;
+      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+      min-height: 100%;
+      padding: 20px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .controls {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #42a5f5 0%, #1e88e5 100%);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(33, 150, 243, 0.4);
+    }
+
+    .btn-primary:disabled {
+      background: #bdbdbd;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%);
+      color: white;
+    }
+
+    .btn-success:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(76, 175, 80, 0.4);
+    }
+
+    .btn-danger {
+      background: linear-gradient(135deg, #ef5350 0%, #e53935 100%);
+      color: white;
+      padding: 6px 12px;
+      font-size: 10px;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .evaluation-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1400px;
+      font-size: 9px;
+    }
+
+    .evaluation-table th {
+      background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%);
+      color: white;
+      padding: 8px 4px;
+      font-size: 10px;
+      font-weight: bold;
+      text-align: center;
+      border: 1px solid #1976d2;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .evaluation-table td {
+      padding: 6px 4px;
+      border: 1px solid #e0e0e0;
+      text-align: center;
+      font-size: 10px;
+    }
+
+    .evaluation-table tbody tr {
+      transition: background-color 0.3s ease;
+    }
+
+    .evaluation-table tbody tr:hover {
+      background: #e3f2fd;
+    }
+
+    .student-name-cell {
+      font-weight: bold;
+      color: #1565c0;
+      text-align: right;
+      min-width: 120px;
+      max-width: 120px;
+      position: sticky;
+      right: 0;
+      background: #fff;
+      z-index: 5;
+      font-size: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .evaluation-table tbody tr:hover .student-name-cell {
+      background: #e3f2fd;
+    }
+
+    .select-field {
+      width: 100%;
+      padding: 4px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      font-size: 9px;
+      font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif;
+      transition: border-color 0.3s ease;
+    }
+
+    .select-field:focus {
+      outline: none;
+      border-color: #2196f3;
+    }
+
+    .level-innovation {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: bold;
+    }
+
+    .level-mastery {
+      background: #e3f2fd;
+      color: #1565c0;
+      font-weight: bold;
+    }
+
+    .level-application {
+      background: #fff3e0;
+      color: #ef6c00;
+      font-weight: bold;
+    }
+
+    .level-needs-support {
+      background: #ffebee;
+      color: #c62828;
+      font-weight: bold;
+    }
+
+    .level-not-completed {
+      background: #f5f5f5;
+      color: #757575;
+      font-weight: bold;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 500px;
+      width: 90%;
+      max-height: 90%;
+      overflow-y: auto;
+    }
+
+    .modal-title {
+      font-size: 24px;
+      color: #1565c0;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-weight: bold;
+      color: #424242;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      font-size: 16px;
+      font-family: 'Tajawal', 'Segoe UI', Tahoma, Arial, sans-serif;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #2196f3;
+    }
+
+    .form-actions {
+      display: flex;
+      gap: 10px;
+      justify-content: flex-end;
+      margin-top: 25px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #757575;
+    }
+
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+    }
+
+    .empty-state-text {
+      font-size: 18px;
+      margin-bottom: 25px;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #1565c0;
+      font-size: 16px;
+    }
+
+    .spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid #e3f2fd;
+      border-top-color: #1565c0;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-left: 10px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 20px 15px;
+      }
+
+      .controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container"><!-- Header Cards -->
+   <div style="background: linear-gradient(135deg, #1e88e5 0%, #1565c0 100%); padding: 25px; border-radius: 16px; margin-bottom: 25px; box-shadow: 0 8px 24px rgba(0,0,0,0.15);">
+    <div style="text-align: center; color: white;">
+     <div style="font-size: 48px; margin-bottom: 10px;">
+      📊📚
+     </div>
+     <h1 style="margin: 0 0 8px 0; font-size: 28px; font-weight: 800;">خطة تعلم ومتابعة المهارات العملية</h1>
+     <h2 style="margin: 0 0 8px 0; font-size: 22px; font-weight: 700;">مقرر تقنية رقمية 2</h2>
+     <h3 style="margin: 0 0 8px 0; font-size: 20px; font-weight: 600;">جدول تقييم الطالبات</h3>
+     <p style="margin: 0; font-size: 16px; opacity: 0.95;">برمجة متقدمة (HTML &amp; JavaScript) - الفصل الدراسي الأول</p>
+    </div>
+   </div><!-- Skills Guide Card -->
+   <div style="background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); padding: 20px; border-radius: 16px; margin-bottom: 25px; border-right: 6px solid #9c27b0; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+    <h3 style="color: #6a1b9a; font-size: 22px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 32px;">🎯</span> دليل المهارات (9 مهارات)</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px;">
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 1:</strong><br><span style="color: #424242; font-size: 14px;">وسوم تنسيق الصورة</span>
+     </div>
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 2:</strong><br><span style="color: #424242; font-size: 14px;">وسوم تنسيق النص</span>
+     </div>
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 3:</strong><br><span style="color: #424242; font-size: 14px;">تنسيق الأنماط المضمنة (Inline CSS)</span>
+     </div>
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 4:</strong><br><span style="color: #424242; font-size: 14px;">تنسيق الأنماط الداخلية (Internal CSS)</span>
+     </div>
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 5:</strong><br><span style="color: #424242; font-size: 14px;">تنسيق الأنماط الخارجية (External CSS)</span>
+     </div>
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 6:</strong><br><span style="color: #424242; font-size: 14px;">تقسيم الصفحة باستخدام div</span>
+     </div>
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 7:</strong><br><span style="color: #424242; font-size: 14px;">كتابة مقطع JavaScript</span>
+     </div>
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 8:</strong><br><span style="color: #424242; font-size: 14px;">دوال التفاعل JavaScript</span>
+     </div>
+     <div style="background: white; padding: 12px; border-radius: 10px; border-right: 3px solid #9c27b0;"><strong style="color: #6a1b9a;">المهارة 9:</strong><br><span style="color: #424242; font-size: 14px;">إنشاء جدول HTML كامل</span>
+     </div>
+    </div>
+   </div><!-- Evaluation Criteria Card -->
+   <div style="background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%); padding: 20px; border-radius: 16px; margin-bottom: 25px; border-right: 6px solid #4caf50; box-shadow: 0 6px 20px rgba(0,0,0,0.1);">
+    <h3 style="color: #2e7d32; font-size: 22px; margin: 0 0 15px 0; display: flex; align-items: center; gap: 10px;"><span style="font-size: 32px;">📏</span> معايير مستويات التقييم</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px;">
+     <div style="background: white; padding: 15px; border-radius: 12px; border-right: 4px solid #9c27b0;">
+      <div style="font-size: 24px; margin-bottom: 8px;">
+       🌟
+      </div><strong style="color: #6a1b9a; font-size: 18px;">ابتكار</strong>
+      <ul style="margin: 8px 0 0 0; padding-right: 20px; color: #424242; font-size: 13px; line-height: 1.7;">
+       <li>توسع في تنفيذ المهارة</li>
+       <li>إضافة ابتكارات جديدة</li>
+       <li>دمج مهارات متعددة</li>
+       <li>تقديم حلول إبداعية</li>
+      </ul>
+     </div>
+     <div style="background: white; padding: 15px; border-radius: 12px; border-right: 4px solid #2196f3;">
+      <div style="font-size: 24px; margin-bottom: 8px;">
+       ✅
+      </div><strong style="color: #1565c0; font-size: 18px;">إتقان</strong>
+      <ul style="margin: 8px 0 0 0; padding-right: 20px; color: #424242; font-size: 13px; line-height: 1.7;">
+       <li>تنفيذ صحيح ومتقن</li>
+       <li>استقلالية كاملة</li>
+       <li>فهم واضح للمفاهيم</li>
+       <li>لا أخطاء</li>
+      </ul>
+     </div>
+     <div style="background: white; padding: 15px; border-radius: 12px; border-right: 4px solid #ff9800;">
+      <div style="font-size: 24px; margin-bottom: 8px;">
+       📝
+      </div><strong style="color: #ef6c00; font-size: 18px;">تطبيق</strong>
+      <ul style="margin: 8px 0 0 0; padding-right: 20px; color: #424242; font-size: 13px; line-height: 1.7;">
+       <li>تنفيذ صحيح جزئياً</li>
+       <li>يحتاج بعض التحسين</li>
+       <li>أخطاء بسيطة</li>
+       <li>بحاجة لمزيد من الممارسة</li>
+      </ul>
+     </div>
+     <div style="background: white; padding: 15px; border-radius: 12px; border-right: 4px solid #f44336;">
+      <div style="font-size: 24px; margin-bottom: 8px;">
+       ⚠️
+      </div><strong style="color: #c62828; font-size: 18px;">يحتاج دعم</strong>
+      <ul style="margin: 8px 0 0 0; padding-right: 20px; color: #424242; font-size: 13px; line-height: 1.7;">
+       <li>أخطاء كثيرة</li>
+       <li>عدم إكمال المهمة</li>
+       <li>صعوبة في الفهم</li>
+       <li>يحتاج متابعة فردية</li>
+      </ul>
+     </div>
+    </div>
+   </div>
+   <div class="controls"><button class="btn btn-primary" id="addStudentBtn">➕ إضافة طالبة جديدة</button> <button class="btn btn-primary" id="importExcelBtn">📥 استيراد من إكسل</button> <button class="btn btn-success" id="exportExcelBtn">📤 تصدير إلى إكسل</button> <button class="btn btn-danger" id="clearAllBtn" style="background: linear-gradient(135deg, #ef5350 0%, #e53935 100%); padding: 12px 24px; font-size: 16px;">🗑️ مسح جميع البيانات</button> <input type="file" id="excelFileInput" accept=".xlsx, .xls" style="display: none;"> <button class="btn btn-success" id="addPredefinedBtn" style="display: none;">📋 إضافة الطالبات الثابتات (12 طالبة)</button>
+    <div id="loadingIndicator" class="loading" style="display: none;">
+     جاري الحفظ<span class="spinner"></span>
+    </div>
+   </div>
+   <div id="tableContainer"></div>
+  </div><!-- Modal for Adding Student -->
+  <div class="modal" id="studentModal">
+   <div class="modal-content">
+    <h2 class="modal-title">إضافة طالبة جديدة</h2>
+    <form id="studentForm">
+     <div class="form-group"><label class="form-label" for="studentNameInput">اسم الطالبة *</label> <input type="text" class="form-input" id="studentNameInput" required placeholder="أدخل اسم الطالبة الكامل">
+     </div>
+     <div class="form-actions"><button type="button" class="btn btn-primary" id="cancelBtn">إلغاء</button> <button type="submit" class="btn btn-success" id="saveStudentBtn">حفظ</button>
+     </div>
+    </form>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      page_title: "خطة تعلم ومتابعة المهارات العملية - مقرر تقنية رقمية 2 - جدول تقييم الطالبات",
+      semester_info: "برمجة متقدمة (HTML & JavaScript) - الفصل الدراسي الأول",
+      background_color: "#6a11cb",
+      card_color: "#ffffff",
+      primary_color: "#1565c0",
+      accent_color: "#42a5f5",
+      text_color: "#424242"
+    };
+
+    let studentsData = [];
+    let isLoading = false;
+
+    const skills = [
+      { id: 1, name: "وسوم الصورة", fullName: "وسوم تنسيق الصورة" },
+      { id: 2, name: "وسوم النص", fullName: "وسوم تنسيق النص" },
+      { id: 3, name: "أنماط مضمنة", fullName: "تنسيق الأنماط المضمنة (Inline CSS)" },
+      { id: 4, name: "أنماط داخلية", fullName: "تنسيق الأنماط الداخلية (Internal CSS)" },
+      { id: 5, name: "أنماط خارجية", fullName: "تنسيق الأنماط الخارجية (External CSS)" },
+      { id: 6, name: "تقسيم div", fullName: "تقسيم الصفحة باستخدام div" },
+      { id: 7, name: "JavaScript", fullName: "كتابة مقطع JavaScript" },
+      { id: 8, name: "دوال JS", fullName: "دوال التفاعل JavaScript" },
+      { id: 9, name: "جدول HTML", fullName: "إنشاء جدول HTML كامل" }
+    ];
+
+    const predefinedStudents = [
+      "الهنوف حسين",
+      "بهى بدر العمري",
+      "جوانا محمد الحربي",
+      "دعاء فهد الحربي",
+      "سجى أحمد الحايطي",
+      "سلمى نايف المطيري",
+      "سما علاء بري",
+      "عذاري فايز الحربي",
+      "عروب نمر العمري",
+      "منال سعد المطيري",
+      "ميعاد مخيلف الله الحربي",
+      "ندى نايف الحربي"
+    ];
+
+    let isRendering = false;
+
+    const dataHandler = {
+      onDataChanged(data) {
+        if (isRendering) return;
+        studentsData = data || [];
+        renderTable();
+        updatePredefinedButton();
+      }
+    };
+
+    async function initializeApp() {
+      const result = await window.dataSdk.init(dataHandler);
+      if (!result.isOk) {
+        console.error("Failed to initialize data SDK");
+        return;
+      }
+    }
+
+    function updatePredefinedButton() {
+      const btn = document.getElementById('addPredefinedBtn');
+      if (!btn) return;
+
+      const hasPredefined = studentsData.some(s => s.is_predefined === true);
+      
+      if (!hasPredefined && studentsData.length === 0) {
+        btn.style.display = 'inline-block';
+        btn.textContent = '📋 إضافة الطالبات الثابتات (12 طالبة)';
+      } else if (!hasPredefined && studentsData.length > 0) {
+        btn.style.display = 'inline-block';
+        btn.textContent = '📋 إضافة القائمة الثابتة أيضاً';
+      } else {
+        btn.style.display = 'none';
+      }
+    }
+
+    async function addPredefinedStudents() {
+      if (studentsData.length + predefinedStudents.length > 999) {
+        showMessage("لا يمكن إضافة جميع الطالبات - سيتجاوز الحد الأقصى 999");
+        return;
+      }
+
+      setLoading(true);
+      
+      for (const studentName of predefinedStudents) {
+        const newStudent = {
+          student_name: studentName,
+          is_predefined: true,
+          created_at: new Date().toISOString()
+        };
+
+        skills.forEach(skill => {
+          newStudent[`skill_${skill.id}_attendance`] = "";
+          newStudent[`skill_${skill.id}_level`] = "";
+        });
+
+        const result = await window.dataSdk.create(newStudent);
+        if (!result.isOk) {
+          showMessage("حدث خطأ أثناء إضافة: " + studentName);
+          break;
+        }
+      }
+
+      setLoading(false);
+      showSuccessMessage("✓ تم حفظ جميع الطالبات الثابتات (12 طالبة)");
+    }
+
+    function generateSmartLearningPlans(student) {
+      let plans = [];
+      let performanceScores = [];
+      let attendanceScores = [];
+      let completionScores = [];
+      
+      skills.forEach(skill => {
+        const level = student[`skill_${skill.id}_level`];
+        const attendance = student[`skill_${skill.id}_attendance`];
+        
+        if (level && level !== '' && level !== 'لم تنفذ') {
+          if (level === 'ابتكار') performanceScores.push(4);
+          else if (level === 'إتقان') performanceScores.push(3);
+          else if (level === 'تطبيق') performanceScores.push(2);
+          else if (level === 'يحتاج دعم') performanceScores.push(1);
+        }
+        
+        if (attendance === 'حاضرة') attendanceScores.push(1);
+        if (level && level !== '' && level !== 'لم تنفذ') completionScores.push(1);
+      });
+      
+      const avgPerformance = performanceScores.length > 0 ? 
+        performanceScores.reduce((a, b) => a + b, 0) / performanceScores.length : 0;
+      const attendanceRate = attendanceScores.length / skills.length;
+      const completionRate = completionScores.length / skills.length;
+      
+      let learningStyle = '';
+      let timeAllocation = '';
+      let supportLevel = '';
+      
+      if (avgPerformance >= 3.5) {
+        learningStyle = '🌟 متعلمة متقدمة - تفضل التحديات والمشاريع المعقدة';
+        timeAllocation = '⏱️ 30-45 دقيقة يومياً للمشاريع الإبداعية';
+        supportLevel = '👤 تعلم ذاتي + قيادة مجموعات';
+      } else if (avgPerformance >= 2.5) {
+        learningStyle = '✅ متعلمة مستقرة - تحتاج للتشجيع والتنوع';
+        timeAllocation = '⏱️ 20-30 دقيقة يومياً للممارسة والتطوير';
+        supportLevel = '👥 تعلم تعاوني + توجيه دوري';
+      } else if (avgPerformance >= 1.5) {
+        learningStyle = '📝 متعلمة تحتاج للتكرار والتبسيط';
+        timeAllocation = '⏱️ 15-25 دقيقة يومياً لتعزيز الأساسيات';
+        supportLevel = '👥 دعم فردي + شرح مبسط';
+      } else if (avgPerformance > 0) {
+        learningStyle = '🆘 متعلمة تحتاج لتدخل فوري ودعم مكثف';
+        timeAllocation = '⏱️ 10-15 دقيقة يومياً لبناء الثقة';
+        supportLevel = '👥 متابعة فردية يومية + أمثلة بسيطة جداً';
+      }
+      
+      if (performanceScores.length === 0) {
+        return '<div style="text-align: center; color: #9e9e9e; padding: 20px; font-size: 11px;">🧠 <strong>بانتظار التقييم</strong><br><br>سيتم إنشاء خطة تعلم مرنة وذكية<br>بعد تقييم المهارات الأولى</div>';
+      }
+      
+      let planHTML = '<div style="background: linear-gradient(135deg, #e8eaf6 0%, #c5cae9 100%); padding: 15px; border-radius: 12px; margin-bottom: 15px; border-right: 5px solid #5c6bc0;">';
+      planHTML += '<div style="font-weight: bold; color: #3949ab; margin-bottom: 10px; font-size: 13px;">🧠 التحليل الشخصي للطالبة</div>';
+      planHTML += '<div style="font-size: 11px; color: #283593; line-height: 1.8;">';
+      planHTML += `<strong>📊 معدل الأداء:</strong> ${(avgPerformance * 25).toFixed(0)}%<br>`;
+      planHTML += `<strong>📅 معدل الحضور:</strong> ${(attendanceRate * 100).toFixed(0)}%<br>`;
+      planHTML += `<strong>✔️ معدل الإنجاز:</strong> ${(completionRate * 100).toFixed(0)}%<br><br>`;
+      planHTML += `${learningStyle}<br>`;
+      planHTML += `${timeAllocation}<br>`;
+      planHTML += `${supportLevel}`;
+      planHTML += '</div></div>';
+      
+      plans.push(planHTML);
+      
+      skills.forEach(skill => {
+        const level = student[`skill_${skill.id}_level`];
+        const attendance = student[`skill_${skill.id}_attendance`];
+        
+        if (!level || level === '') return;
+        
+        if (level === 'لم تنفذ') {
+          let skillPlan = '<div style="margin-bottom: 12px; padding: 12px; border-radius: 8px; border-right: 4px solid #9e9e9e; background: #f5f5f5;">';
+          skillPlan += `<div style="font-weight: bold; color: #616161; margin-bottom: 6px; font-size: 11px;">⏸️ م${skill.id}: ${skill.name}</div>`;
+          skillPlan += '<div style="font-size: 10px; color: #757575; line-height: 1.6;">';
+          skillPlan += '<strong>لم يتم التنفيذ بعد</strong><br>';
+          skillPlan += '📋 الخطة المقترحة:<br>';
+          skillPlan += '1️⃣ البدء بمثال توضيحي بسيط<br>';
+          skillPlan += '2️⃣ متابعة خطوة بخطوة مع المعلمة<br>';
+          skillPlan += '3️⃣ تخصيص وقت للتطبيق العملي<br>';
+          skillPlan += '4️⃣ تقييم بعد الإكمال';
+          skillPlan += '</div></div>';
+          plans.push(skillPlan);
+          return;
+        }
+        
+        let skillPlan = '<div style="margin-bottom: 12px; padding: 12px; border-radius: 8px; border-right: 4px solid ';
+        
+        if (level === 'ابتكار') {
+          skillPlan += '#9c27b0; background: #f3e5f5;">';
+          skillPlan += `<div style="font-weight: bold; color: #6a1b9a; margin-bottom: 6px; font-size: 11px;">💎 م${skill.id}: ${skill.name}</div>`;
+          skillPlan += '<div style="font-size: 10px; color: #4a148c; line-height: 1.6;">';
+          skillPlan += '<strong>مسار الإبداع المتقدم:</strong><br>';
+          skillPlan += '1️⃣ تصميم مشروع شخصي يطبق هذه المهارة<br>';
+          skillPlan += '2️⃣ دمجها مع 2-3 مهارات أخرى<br>';
+          skillPlan += '3️⃣ تقديم عرض أو شرح للصف<br>';
+          skillPlan += '4️⃣ استكشاف ميزات متقدمة ذاتياً';
+          skillPlan += '</div></div>';
+        }
+        else if (level === 'إتقان') {
+          if (attendance === 'حاضرة') {
+            skillPlan += '#00897b; background: #e0f2f1;">';
+            skillPlan += `<div style="font-weight: bold; color: #00695c; margin-bottom: 6px; font-size: 11px;">🎯 م${skill.id}: ${skill.name}</div>`;
+            skillPlan += '<div style="font-size: 10px; color: #004d40; line-height: 1.6;">';
+            skillPlan += '<strong>مسار التطوير نحو الإبداع:</strong><br>';
+            skillPlan += '• حاولي إضافة لمسة إبداعية في المشروع القادم<br>';
+            skillPlan += '• طبقي المهارة في سياق مختلف<br>';
+            skillPlan += '• ساعدي زميلة تحتاج الدعم<br>';
+            skillPlan += '• تحدي: أضيفي ميزة جديدة لم نتعلمها';
+            skillPlan += '</div></div>';
+          } else {
+            skillPlan += '#0288d1; background: #e1f5fe;">';
+            skillPlan += `<div style="font-weight: bold; color: #01579b; margin-bottom: 6px; font-size: 11px;">⚡ م${skill.id}: ${skill.name}</div>`;
+            skillPlan += '<div style="font-size: 10px; color: #01579b; line-height: 1.6;">';
+            skillPlan += '<strong>خطة التثبيت:</strong><br>';
+            if (attendance === 'غائبة') {
+              skillPlan += '⚠️ تعويض الغياب: مراجعة الشرح المسجل<br>';
+            }
+            skillPlan += '• تطبيق 2-3 أمثلة مشابهة<br>';
+            skillPlan += '• الاستعداد للانتقال للمستوى التالي';
+            skillPlan += '</div></div>';
+          }
+        }
+        else if (level === 'تطبيق') {
+          skillPlan += '#f57c00; background: #fff3e0;">';
+          skillPlan += `<div style="font-weight: bold; color: #e65100; margin-bottom: 6px; font-size: 11px;">🔧 م${skill.id}: ${skill.name}</div>`;
+          skillPlan += '<div style="font-size: 10px; color: #bf360c; line-height: 1.6;">';
+          skillPlan += '<strong>خطة التحسين المرنة:</strong><br>';
+          
+          if (avgPerformance >= 2.5) {
+            skillPlan += '• يبدو أن الباقي جيد، ركزي على هذه المهارة<br>';
+            skillPlan += '• 3 تمارين إضافية فقط<br>';
+            skillPlan += '• مراجعة مع زميلة متفوقة<br>';
+            skillPlan += '• إعادة التقييم بعد 3 أيام';
+          } else {
+            skillPlan += '• قد تحتاجين دعماً شاملاً<br>';
+            skillPlan += '• 5-7 تمارين تدريجية<br>';
+            skillPlan += '• جلسة مراجعة مع المعلمة<br>';
+            skillPlan += '• متابعة أسبوعية';
+          }
+          
+          if (attendance === 'غائبة') {
+            skillPlan += '<br>⚠️ الغياب سبب رئيسي - يجب التعويض';
+          }
+          skillPlan += '</div></div>';
+        }
+        else if (level === 'يحتاج دعم') {
+          skillPlan += '#d32f2f; background: #ffebee;">';
+          skillPlan += `<div style="font-weight: bold; color: #b71c1c; margin-bottom: 6px; font-size: 11px;">🆘 م${skill.id}: ${skill.name}</div>`;
+          skillPlan += '<div style="font-size: 10px; color: #b71c1c; line-height: 1.6;">';
+          skillPlan += '<strong>خطة التدخل الفوري المخصصة:</strong><br>';
+          
+          if (attendance === 'غائبة') {
+            skillPlan += '🔴 <u>السبب الرئيسي: الغياب</u><br>';
+            skillPlan += '1️⃣ حضور جلسة تعويضية (20 دقيقة)<br>';
+            skillPlan += '2️⃣ مشاهدة فيديو تعليمي قصير<br>';
+          } else {
+            skillPlan += '🔴 <u>السبب: صعوبة في الفهم</u><br>';
+            skillPlan += '1️⃣ إعادة الشرح بطريقة مختلفة<br>';
+            skillPlan += '2️⃣ استخدام أمثلة بصرية<br>';
+          }
+          
+          skillPlan += '3️⃣ تمرين واحد بسيط يومياً (10 دقائق)<br>';
+          skillPlan += '4️⃣ متابعة يومية حتى التحسن<br>';
+          skillPlan += '5️⃣ تواصل مع ولي الأمر<br>';
+          skillPlan += '📅 إعادة التقييم بعد 5 أيام';
+          skillPlan += '</div></div>';
+        }
+        
+        plans.push(skillPlan);
+      });
+      
+      let closingMessage = '<div style="background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%); padding: 12px; border-radius: 8px; border-right: 4px solid #fbc02d; margin-top: 10px;">';
+      closingMessage += '<div style="font-size: 11px; color: #f57f17; line-height: 1.6;">';
+      
+      if (avgPerformance >= 3.5) {
+        closingMessage += '🎉 <strong>رسالة تحفيزية:</strong><br>';
+        closingMessage += 'أداؤك رائع! استمري في التميز وساعدي زميلاتك.';
+      } else if (avgPerformance >= 2.5) {
+        closingMessage += '💪 <strong>رسالة تشجيعية:</strong><br>';
+        closingMessage += 'مستواك جيد! القليل من الجهد سيجعلك متميزة.';
+      } else if (avgPerformance >= 1.5) {
+        closingMessage += '🌱 <strong>رسالة أمل:</strong><br>';
+        closingMessage += 'لا تستسلمي! كل خطوة للأمام هي إنجاز.';
+      } else {
+        closingMessage += '💙 <strong>رسالة دعم:</strong><br>';
+        closingMessage += 'نحن معك! سننجح معاً خطوة بخطوة.';
+      }
+      
+      closingMessage += '</div></div>';
+      plans.push(closingMessage);
+      
+      return plans.join('');
+    }
+
+    function generateLearningPlans(student) {
+      let plans = [];
+      
+      skills.forEach(skill => {
+        const level = student[`skill_${skill.id}_level`];
+        
+        if (!level || level === '') return;
+        
+        let planHTML = '<div style="margin-bottom: 15px; padding: 12px; border-radius: 8px; border-right: 4px solid ';
+        
+        if (level === 'ابتكار') {
+          planHTML += '#4caf50; background: #e8f5e9;">';
+          planHTML += `<div style="font-weight: bold; color: #2e7d32; margin-bottom: 6px; font-size: 12px;">🌟 م${skill.id}: ${skill.fullName}</div>`;
+          planHTML += '<div style="font-size: 10px; color: #1b5e20; line-height: 1.5;">';
+          planHTML += '<strong>المستوى: ابتكار ممتاز!</strong><br>';
+          planHTML += '✓ توسع في تنفيذ المهارة<br>';
+          planHTML += '✓ تكليف بمشروع متقدم يدمج هذه المهارة مع مهارات أخرى<br>';
+          planHTML += '✓ تشجيعها على مساعدة زميلاتها<br>';
+          planHTML += '✓ عرض عملها كنموذج ملهم للصف<br>';
+          planHTML += '✓ توفير تحديات إضافية لتنمية الإبداع';
+          planHTML += '</div></div>';
+        } 
+        else if (level === 'إتقان') {
+          planHTML += '#2196f3; background: #e3f2fd;">';
+          planHTML += `<div style="font-weight: bold; color: #1565c0; margin-bottom: 6px; font-size: 12px;">✅ م${skill.id}: ${skill.fullName}</div>`;
+          planHTML += '<div style="font-size: 10px; color: #0d47a1; line-height: 1.5;">';
+          planHTML += '<strong>المستوى: إتقان جيد</strong><br>';
+          planHTML += '• تشجيع على إضافة لمسات إبداعية<br>';
+          planHTML += '• تكليف بمشروع تطبيقي أكثر تعقيداً<br>';
+          planHTML += '• مشاركة أفكار متقدمة في هذه المهارة<br>';
+          planHTML += '• الانتقال للمستوى التالي من الصعوبة';
+          planHTML += '</div></div>';
+        }
+        else if (level === 'تطبيق') {
+          planHTML += '#ff9800; background: #fff3e0;">';
+          planHTML += `<div style="font-weight: bold; color: #ef6c00; margin-bottom: 6px; font-size: 12px;">📝 م${skill.id}: ${skill.fullName}</div>`;
+          planHTML += '<div style="font-size: 10px; color: #e65100; line-height: 1.5;">';
+          planHTML += '<strong>المستوى: تطبيق - يحتاج تحسين</strong><br>';
+          planHTML += '📚 <u>الخطة العلاجية:</u><br>';
+          planHTML += '• تكليف بـ 3-5 تمارين إضافية مشابهة<br>';
+          planHTML += '• مراجعة الأخطاء الشائعة معها<br>';
+          planHTML += '• توفير أمثلة واضحة للمقارنة<br>';
+          planHTML += '• متابعة أسبوعية حتى الوصول للإتقان<br>';
+          planHTML += '⏰ تخصيص 15 دقيقة للممارسة يومياً';
+          planHTML += '</div></div>';
+        }
+        else if (level === 'يحتاج دعم') {
+          planHTML += '#f44336; background: #ffebee;">';
+          planHTML += `<div style="font-weight: bold; color: #c62828; margin-bottom: 6px; font-size: 12px;">🆘 م${skill.id}: ${skill.fullName}</div>`;
+          planHTML += '<div style="font-size: 10px; color: #b71c1c; line-height: 1.5;">';
+          planHTML += '<strong>المستوى: يحتاج دعم مكثف</strong><br>';
+          planHTML += '🚨 <u>خطة تدخل فوري:</u><br>';
+          planHTML += '1️⃣ جلسة فردية (20-30 دقيقة) لإعادة الشرح<br>';
+          planHTML += '2️⃣ استخدام فيديوهات تعليمية مبسطة<br>';
+          planHTML += '3️⃣ تطبيق عملي مباشر خطوة بخطوة<br>';
+          planHTML += '4️⃣ تكليف بمهمة بسيطة جداً للبداية<br>';
+          planHTML += '5️⃣ متابعة يومية لمدة أسبوع<br>';
+          planHTML += '6️⃣ التواصل مع ولي الأمر للدعم المنزلي<br>';
+          planHTML += '📅 إعادة التقييم بعد أسبوع';
+          planHTML += '</div></div>';
+        }
+        else if (level === 'لم تنفذ') {
+          planHTML += '#9e9e9e; background: #f5f5f5;">';
+          planHTML += `<div style="font-weight: bold; color: #616161; margin-bottom: 6px; font-size: 12px;">⏸️ م${skill.id}: ${skill.fullName}</div>`;
+          planHTML += '<div style="font-size: 10px; color: #757575; line-height: 1.5;">';
+          planHTML += '<strong>المستوى: لم تنفذ</strong><br>';
+          planHTML += '📋 <u>الخطة المقترحة:</u><br>';
+          planHTML += '• البدء بمثال توضيحي بسيط<br>';
+          planHTML += '• متابعة خطوة بخطوة مع المعلمة<br>';
+          planHTML += '• تخصيص وقت كافٍ للتطبيق العملي<br>';
+          planHTML += '• إعادة التقييم بعد الإكمال';
+          planHTML += '</div></div>';
+        }
+        
+        plans.push(planHTML);
+      });
+      
+      if (plans.length === 0) {
+        return '<div style="text-align: center; color: #9e9e9e; padding: 20px; font-size: 11px;">لم يتم تقييم أي مهارة بعد<br>ستظهر الخطط التعليمية عند بدء التقييم</div>';
+      }
+      
+      return plans.join('');
+    }
+
+    function generateMissingSkillsAlert(student) {
+      let weakSkills = [];
+      let criticalSkills = [];
+
+      skills.forEach(skill => {
+        const level = student[`skill_${skill.id}_level`];
+        const skillName = skill.name;
+        
+        if (level === 'يحتاج دعم') {
+          criticalSkills.push({ id: skill.id, name: skillName });
+        } else if (level === 'تطبيق') {
+          weakSkills.push({ id: skill.id, name: skillName });
+        }
+      });
+
+      if (criticalSkills.length === 0 && weakSkills.length === 0) {
+        return '';
+      }
+
+      let alertHTML = '<div style="border: 2px solid #d32f2f; border-radius: 8px; padding: 12px; margin-bottom: 15px; background: #ffebee;">';
+      
+      if (criticalSkills.length > 0) {
+        alertHTML += '<div style="display: flex; align-items: center; margin-bottom: 10px;">';
+        alertHTML += '<span style="font-size: 20px; margin-left: 8px;">🚨</span>';
+        alertHTML += '<strong style="color: #c62828; font-size: 13px;">تنبيه: مهارات حرجة تحتاج تدخل فوري!</strong>';
+        alertHTML += '</div>';
+        alertHTML += '<ul style="margin: 8px 0; padding-right: 20px; color: #b71c1c; font-size: 11px;">';
+        criticalSkills.forEach(skill => {
+          alertHTML += `<li><strong>م${skill.id}:</strong> ${skill.name} - <span style="color: #d32f2f;">يحتاج دعم مكثف</span></li>`;
+        });
+        alertHTML += '</ul>';
+      }
+
+      if (weakSkills.length > 0) {
+        if (criticalSkills.length > 0) {
+          alertHTML += '<hr style="border: none; border-top: 1px solid #ffcdd2; margin: 10px 0;">';
+        }
+        alertHTML += '<div style="display: flex; align-items: center; margin-bottom: 8px;">';
+        alertHTML += '<span style="font-size: 18px; margin-left: 8px;">⚠️</span>';
+        alertHTML += '<strong style="color: #ef6c00; font-size: 12px;">مهارات تحتاج تحسين:</strong>';
+        alertHTML += '</div>';
+        alertHTML += '<ul style="margin: 5px 0; padding-right: 20px; color: #e65100; font-size: 11px;">';
+        weakSkills.forEach(skill => {
+          alertHTML += `<li><strong>م${skill.id}:</strong> ${skill.name} - <span style="color: #ef6c00;">بحاجة لمزيد من الممارسة</span></li>`;
+        });
+        alertHTML += '</ul>';
+      }
+
+      if (criticalSkills.length > 0) {
+        alertHTML += '<div style="background: #fff; padding: 8px; border-radius: 6px; margin-top: 10px; border-right: 3px solid #f44336;">';
+        alertHTML += '<strong style="color: #c62828; font-size: 11px;">📌 إجراءات مقترحة:</strong>';
+        alertHTML += '<ul style="margin: 5px 0; padding-right: 20px; font-size: 10px; color: #424242;">';
+        alertHTML += '<li>جلسة فردية لإعادة الشرح</li>';
+        alertHTML += '<li>أمثلة تطبيقية مبسطة</li>';
+        alertHTML += '<li>متابعة يومية حتى التحسن</li>';
+        alertHTML += '<li>التواصل مع ولي الأمر</li>';
+        alertHTML += '</ul>';
+        alertHTML += '</div>';
+      } else if (weakSkills.length > 0) {
+        alertHTML += '<div style="background: #fff; padding: 8px; border-radius: 6px; margin-top: 10px; border-right: 3px solid #ff9800;">';
+        alertHTML += '<strong style="color: #ef6c00; font-size: 11px;">💡 نصيحة:</strong>';
+        alertHTML += '<p style="margin: 5px 0; font-size: 10px; color: #424242;">تكليف بتمارين إضافية في هذه المهارات للوصول للإتقان</p>';
+        alertHTML += '</div>';
+      }
+
+      alertHTML += '</div>';
+      return alertHTML;
+    }
+
+    function generateFeedback(student) {
+      let feedback = [];
+      let absentCount = 0;
+      let notCompletedCount = 0;
+      let needsSupportCount = 0;
+      let masteryCount = 0;
+      let innovationCount = 0;
+
+      skills.forEach(skill => {
+        const attendance = student[`skill_${skill.id}_attendance`];
+        const level = student[`skill_${skill.id}_level`];
+
+        if (attendance === 'غائبة') absentCount++;
+        if (level === 'لم تنفذ') notCompletedCount++;
+        if (level === 'يحتاج دعم') needsSupportCount++;
+        if (level === 'إتقان') masteryCount++;
+        if (level === 'ابتكار') innovationCount++;
+      });
+
+      if (absentCount >= 3) {
+        feedback.push('⚠️ <strong>تنبيه:</strong> الغياب المتكرر يؤثر على التقدم. يُنصح بالتواصل مع ولي الأمر والتعويض من خلال جلسة فردية.');
+      }
+      
+      if (needsSupportCount >= 3) {
+        feedback.push('🆘 <strong>إجراء فوري:</strong> تحتاج دعماً مكثفاً. الحلول:<br>• إعادة شرح المفاهيم الأساسية<br>• تقديم أمثلة مبسطة<br>• تخصيص وقت إضافي للممارسة<br>• استخدام فيديوهات تعليمية مساعدة');
+      } else if (needsSupportCount > 0) {
+        feedback.push('📌 <strong>توصية:</strong> بحاجة لتعزيز في بعض المهارات. ننصح بـ:<br>• مراجعة الأمثلة المشروحة<br>• التطبيق العملي المتكرر<br>• طلب المساعدة عند الحاجة');
+      }
+
+      if (notCompletedCount >= 3) {
+        feedback.push('📋 <strong>متابعة:</strong> عدم إكمال المهام يعيق التقدم. يُقترح:<br>• وضع جدول زمني واضح<br>• تقسيم المهام لأجزاء صغيرة<br>• تحفيز بنظام المكافآت');
+      }
+
+      if (innovationCount >= 3) {
+        feedback.push('🌟 <strong>ممتاز:</strong> أداء متميز! استمري في الإبداع وساعدي زميلاتك.');
+      } else if (masteryCount >= 5) {
+        feedback.push('✅ <strong>جيد جداً:</strong> مستوى متقن. حاولي إضافة لمسات إبداعية في المشاريع القادمة.');
+      }
+
+      if (feedback.length === 0) {
+        feedback.push('📊 <strong>البداية:</strong> استمري في الحضور والتطبيق المنتظم لتحقيق نتائج أفضل.');
+      }
+
+      return feedback.join('<br><br>');
+    }
+
+    function generateAIPrediction(student) {
+      let predictions = [];
+      let attendanceRate = 0;
+      let completionRate = 0;
+      let performanceScores = [];
+      let evaluatedCount = 0;
+
+      skills.forEach(skill => {
+        const attendance = student[`skill_${skill.id}_attendance`];
+        const level = student[`skill_${skill.id}_level`];
+
+        if (level && level !== '' && level !== 'لم تنفذ') {
+          evaluatedCount++;
+          
+          if (attendance === 'حاضرة') attendanceRate++;
+          if (level !== 'لم تنفذ') completionRate++;
+          
+          if (level === 'ابتكار') performanceScores.push(4);
+          else if (level === 'إتقان') performanceScores.push(3);
+          else if (level === 'تطبيق') performanceScores.push(2);
+          else if (level === 'يحتاج دعم') performanceScores.push(1);
+        }
+      });
+
+      if (evaluatedCount === 0) {
+        return '<div style="text-align: center; color: #9e9e9e; padding: 15px; font-size: 11px;">🤖 <strong>بانتظار التقييم</strong><br><br>لم يتم تقييم أي مهارة بعد.<br>سيتم التنبؤ بالأداء المستقبلي<br>بعد تقييم المهارات.</div>';
+      }
+
+      attendanceRate = (attendanceRate / evaluatedCount) * 100;
+      completionRate = (completionRate / evaluatedCount) * 100;
+      const avgPerformance = performanceScores.length > 0 ? 
+        performanceScores.reduce((a, b) => a + b, 0) / performanceScores.length : 0;
+
+      predictions.push(`🤖 <strong>التحليل الذكي (${evaluatedCount} من 9 مهارات):</strong><br>`);
+
+      if (attendanceRate < 60) {
+        predictions.push('• <span style="color: #d32f2f;">⚠️ احتمالية ضعف الأداء المستقبلي: <strong>عالية</strong></span><br>السبب: معدل الحضور منخفض (' + Math.round(attendanceRate) + '%)');
+      } else if (attendanceRate >= 90) {
+        predictions.push('• <span style="color: #388e3c;">✓ احتمالية النجاح المتميز: <strong>مرتفعة</strong></span><br>السبب: الحضور المنتظم (' + Math.round(attendanceRate) + '%)');
+      }
+
+      if (avgPerformance >= 3.5) {
+        predictions.push('<br>• <strong>التوقع:</strong> ستحقق مستوى <span style="color: #2e7d32;">ابتكار</span> في المهارات القادمة<br>• <strong>التوصية:</strong> تحدي الطالبة بمشاريع متقدمة');
+      } else if (avgPerformance >= 2.5) {
+        predictions.push('<br>• <strong>التوقع:</strong> ستحافظ على مستوى <span style="color: #1565c0;">إتقان</span><br>• <strong>التوصية:</strong> تشجيع الإبداع والتوسع');
+      } else if (avgPerformance >= 1.5) {
+        predictions.push('<br>• <strong>التوقع:</strong> قد تواجه صعوبات في المهارات المتقدمة<br>• <strong>التوصية:</strong> تقوية الأساسيات قبل المتابعة');
+      } else if (avgPerformance > 0) {
+        predictions.push('<br>• <strong>التوقع:</strong> <span style="color: #c62828;">خطر عدم إكمال المقرر</span><br>• <strong>التوصية:</strong> تدخل فوري ودعم مكثف مطلوب');
+      }
+
+      if (completionRate < 50 && evaluatedCount > 0) {
+        predictions.push('<br><br>⏳ <strong>نمط التنفيذ:</strong> غير منتظم<br>• يُتوقع تأخر في إنجاز المشاريع النهائية');
+      }
+
+      const recentSkills = performanceScores.slice(-3);
+      if (recentSkills.length >= 3) {
+        const trend = recentSkills[2] - recentSkills[0];
+        if (trend > 0) {
+          predictions.push('<br><br>📈 <strong>المسار:</strong> تحسن ملحوظ - استمري!');
+        } else if (trend < 0) {
+          predictions.push('<br><br>📉 <strong>المسار:</strong> تراجع في الأداء - تحتاج متابعة');
+        }
+      }
+
+      return predictions.join('');
+    }
+
+    function getFeedbackColor(student) {
+      let needsSupportCount = 0;
+      let absentCount = 0;
+      
+      skills.forEach(skill => {
+        if (student[`skill_${skill.id}_level`] === 'يحتاج دعم') needsSupportCount++;
+        if (student[`skill_${skill.id}_attendance`] === 'غائبة') absentCount++;
+      });
+
+      if (needsSupportCount >= 3 || absentCount >= 3) return '#ffebee';
+      if (needsSupportCount > 0) return '#fff3e0';
+      return '#f1f8e9';
+    }
+
+    function getPredictionColor(student) {
+      let performanceScores = [];
+      
+      skills.forEach(skill => {
+        const level = student[`skill_${skill.id}_level`];
+        if (level === 'ابتكار') performanceScores.push(4);
+        else if (level === 'إتقان') performanceScores.push(3);
+        else if (level === 'تطبيق') performanceScores.push(2);
+        else if (level === 'يحتاج دعم') performanceScores.push(1);
+      });
+
+      if (performanceScores.length === 0) return '#f5f5f5';
+
+      const avgPerformance = performanceScores.reduce((a, b) => a + b, 0) / performanceScores.length;
+
+      if (avgPerformance >= 3.5) return '#e8f5e9';
+      if (avgPerformance >= 2.5) return '#e3f2fd';
+      if (avgPerformance >= 1.5) return '#fff3e0';
+      return '#ffebee';
+    }
+
+    function getSmartPlanColor(student) {
+      let performanceScores = [];
+      
+      skills.forEach(skill => {
+        const level = student[`skill_${skill.id}_level`];
+        if (level && level !== '') {
+          if (level === 'ابتكار') performanceScores.push(4);
+          else if (level === 'إتقان') performanceScores.push(3);
+          else if (level === 'تطبيق') performanceScores.push(2);
+          else if (level === 'يحتاج دعم') performanceScores.push(1);
+        }
+      });
+
+      if (performanceScores.length === 0) return '#fafafa';
+
+      const avgPerformance = performanceScores.reduce((a, b) => a + b, 0) / performanceScores.length;
+
+      if (avgPerformance >= 3.5) return '#f3e5f5';
+      if (avgPerformance >= 2.5) return '#e0f2f1';
+      if (avgPerformance >= 1.5) return '#fff8e1';
+      return '#fce4ec';
+    }
+
+    function renderTable() {
+      if (isRendering) return;
+      isRendering = true;
+
+      const container = document.getElementById('tableContainer');
+      
+      if (studentsData.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">👩‍🎓</div>
+            <div class="empty-state-text">لا توجد طالبات مسجلات بعد</div>
+            <button class="btn btn-primary" onclick="openStudentModal()">➕ إضافة أول طالبة</button>
+          </div>
+        `;
+        isRendering = false;
+        return;
+      }
+
+      let tableHTML = `
+        <div class="table-wrapper">
+          <table class="evaluation-table">
+            <thead>
+              <tr>
+                <th rowspan="2" style="min-width: 150px;">اسم الطالبة</th>
+                ${skills.map(skill => `
+                  <th colspan="2">م${skill.id}<br><small>${skill.name}</small></th>
+                `).join('')}
+                <th rowspan="2" style="min-width: 200px;">🎯 تغذية فورية وعلاجية</th>
+                <th rowspan="2" style="min-width: 200px;">🤖 التنبؤ الذكي</th>
+                <th rowspan="2" style="min-width: 250px;">📚 الخطط التعليمية</th>
+                <th rowspan="2" style="min-width: 280px;">🧠 خطط تعلم مرنة ذكية</th>
+                <th rowspan="2" style="min-width: 80px;">إجراءات</th>
+              </tr>
+              <tr>
+                ${skills.map(() => `
+                  <th>حضور</th>
+                  <th>مستوى</th>
+                `).join('')}
+              </tr>
+            </thead>
+            <tbody>
+              ${studentsData.map(student => `
+                <tr>
+                  <td class="student-name-cell">${student.student_name}</td>
+                  ${skills.map(skill => `
+                    <td>
+                      <select class="select-field" onchange="updateStudentField('${student.__backendId}', 'skill_${skill.id}_attendance', this.value)">
+                        <option value="">-</option>
+                        <option value="حاضرة" ${student[`skill_${skill.id}_attendance`] === 'حاضرة' ? 'selected' : ''}>حاضرة</option>
+                        <option value="غائبة" ${student[`skill_${skill.id}_attendance`] === 'غائبة' ? 'selected' : ''}>غائبة</option>
+                      </select>
+                    </td>
+                    <td>
+                      <select class="select-field ${getLevelClass(student[`skill_${skill.id}_level`])}" onchange="updateStudentField('${student.__backendId}', 'skill_${skill.id}_level', this.value)">
+                        <option value="">-</option>
+                        <option value="ابتكار" ${student[`skill_${skill.id}_level`] === 'ابتكار' ? 'selected' : ''}>ابتكار</option>
+                        <option value="إتقان" ${student[`skill_${skill.id}_level`] === 'إتقان' ? 'selected' : ''}>إتقان</option>
+                        <option value="تطبيق" ${student[`skill_${skill.id}_level`] === 'تطبيق' ? 'selected' : ''}>تطبيق</option>
+                        <option value="يحتاج دعم" ${student[`skill_${skill.id}_level`] === 'يحتاج دعم' ? 'selected' : ''}>يحتاج دعم</option>
+                        <option value="لم تنفذ" ${student[`skill_${skill.id}_level`] === 'لم تنفذ' ? 'selected' : ''}>لم تنفذ</option>
+                      </select>
+                    </td>
+                  `).join('')}
+                  <td style="background: ${getFeedbackColor(student)}; padding: 8px; text-align: right; font-size: 9px; line-height: 1.5;">
+                    ${generateMissingSkillsAlert(student)}
+                    ${generateFeedback(student)}
+                  </td>
+                  <td style="background: ${getPredictionColor(student)}; padding: 8px; text-align: right; font-size: 9px; line-height: 1.5;">
+                    ${generateAIPrediction(student)}
+                  </td>
+                  <td style="background: #fafafa; padding: 8px; text-align: right; font-size: 9px; line-height: 1.5; max-height: 350px; overflow-y: auto;">
+                    ${generateLearningPlans(student)}
+                  </td>
+                  <td style="background: ${getSmartPlanColor(student)}; padding: 8px; text-align: right; font-size: 9px; line-height: 1.5; max-height: 350px; overflow-y: auto;">
+                    ${generateSmartLearningPlans(student)}
+                  </td>
+                  <td style="text-align: center;">
+                    <button class="btn btn-danger" onclick="deleteStudent('${student.__backendId}')">حذف</button>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      `;
+
+      container.innerHTML = tableHTML;
+      
+      setTimeout(() => {
+        isRendering = false;
+      }, 100);
+    }
+
+    function getLevelClass(level) {
+      switch(level) {
+        case 'ابتكار': return 'level-innovation';
+        case 'إتقان': return 'level-mastery';
+        case 'تطبيق': return 'level-application';
+        case 'يحتاج دعم': return 'level-needs-support';
+        case 'لم تنفذ': return 'level-not-completed';
+        default: return '';
+      }
+    }
+
+    async function addStudent(studentName) {
+      if (studentsData.length >= 999) {
+        showMessage("تم الوصول للحد الأقصى (999 طالبة). يرجى حذف بعض الطالبات أولاً.");
+        return;
+      }
+
+      setLoading(true);
+      const newStudent = {
+        student_name: studentName,
+        created_at: new Date().toISOString()
+      };
+
+      skills.forEach(skill => {
+        newStudent[`skill_${skill.id}_attendance`] = "";
+        newStudent[`skill_${skill.id}_level`] = "";
+      });
+
+      const result = await window.dataSdk.create(newStudent);
+      setLoading(false);
+
+      if (result.isOk) {
+        closeStudentModal();
+        showSuccessMessage("✓ تم حفظ الطالبة بنجاح");
+      } else {
+        showMessage("حدث خطأ أثناء إضافة الطالبة. يرجى المحاولة مرة أخرى.");
+      }
+    }
+
+    async function updateStudentField(backendId, field, value) {
+      const student = studentsData.find(s => s.__backendId === backendId);
+      if (!student) return;
+
+      setLoading(true);
+      const updatedStudent = { ...student, [field]: value };
+      const result = await window.dataSdk.update(updatedStudent);
+      setLoading(false);
+
+      if (result.isOk) {
+        showSuccessMessage("✓ تم حفظ التعديل");
+      } else {
+        showMessage("حدث خطأ أثناء التحديث. يرجى المحاولة مرة أخرى.");
+      }
+    }
+
+    async function deleteStudent(backendId) {
+      const student = studentsData.find(s => s.__backendId === backendId);
+      if (!student) return;
+
+      if (student.is_predefined === true) {
+        showMessage("لا يمكن حذف الطالبات الثابتات في القائمة الأساسية");
+        return;
+      }
+
+      const confirmDiv = document.createElement('div');
+      confirmDiv.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); z-index: 10000; text-align: center;';
+      confirmDiv.innerHTML = `
+        <p style="font-size: 18px; margin-bottom: 20px; color: #424242;">هل أنت متأكد من حذف الطالبة: <strong>${student.student_name}</strong>؟</p>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button class="btn btn-primary" onclick="this.parentElement.parentElement.remove()">إلغاء</button>
+          <button class="btn btn-danger" onclick="confirmDelete('${backendId}')">تأكيد الحذف</button>
+        </div>
+      `;
+      document.body.appendChild(confirmDiv);
+    }
+
+    async function confirmDelete(backendId) {
+      document.querySelectorAll('div').forEach(div => {
+        if (div.textContent.includes('هل أنت متأكد')) div.remove();
+      });
+
+      const student = studentsData.find(s => s.__backendId === backendId);
+      if (!student) return;
+
+      setLoading(true);
+      const result = await window.dataSdk.delete(student);
+      setLoading(false);
+
+      if (result.isOk) {
+        showSuccessMessage("✓ تم حفظ الحذف");
+      } else {
+        showMessage("حدث خطأ أثناء الحذف. يرجى المحاولة مرة أخرى.");
+      }
+    }
+
+    function openStudentModal() {
+      document.getElementById('studentModal').classList.add('active');
+      document.getElementById('studentNameInput').value = '';
+      document.getElementById('studentNameInput').focus();
+    }
+
+    function closeStudentModal() {
+      document.getElementById('studentModal').classList.remove('active');
+    }
+
+    function setLoading(loading) {
+      isLoading = loading;
+      const indicator = document.getElementById('loadingIndicator');
+      const addBtn = document.getElementById('addStudentBtn');
+      const addPredefinedBtn = document.getElementById('addPredefinedBtn');
+      const saveBtn = document.getElementById('saveStudentBtn');
+      
+      if (loading) {
+        indicator.style.display = 'block';
+        if (addBtn) addBtn.disabled = true;
+        if (addPredefinedBtn) addPredefinedBtn.disabled = true;
+        if (saveBtn) saveBtn.disabled = true;
+      } else {
+        indicator.style.display = 'none';
+        if (addBtn) addBtn.disabled = false;
+        if (addPredefinedBtn) addPredefinedBtn.disabled = false;
+        if (saveBtn) saveBtn.disabled = false;
+      }
+    }
+
+    function showMessage(message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; background: #323232; color: white; padding: 16px 24px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 10000;';
+      messageDiv.textContent = message;
+      document.body.appendChild(messageDiv);
+      setTimeout(() => messageDiv.remove(), 3000);
+    }
+
+    function showSuccessMessage(message) {
+      const messageDiv = document.createElement('div');
+      messageDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; background: linear-gradient(135deg, #66bb6a 0%, #4caf50 100%); color: white; padding: 12px 20px; border-radius: 12px; box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4); z-index: 10000; font-weight: bold; font-size: 14px; display: flex; align-items: center; gap: 8px;';
+      messageDiv.innerHTML = `<span style="font-size: 18px;">✓</span><span>${message}</span>`;
+      document.body.appendChild(messageDiv);
+      setTimeout(() => {
+        messageDiv.style.transition = 'opacity 0.3s ease';
+        messageDiv.style.opacity = '0';
+        setTimeout(() => messageDiv.remove(), 300);
+      }, 2000);
+    }
+
+    async function handleExcelImport(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+
+      setLoading(true);
+      
+      try {
+        const data = await readExcelFile(file);
+        await importStudentsFromExcel(data);
+      } catch (error) {
+        showMessage('❌ حدث خطأ أثناء قراءة الملف: ' + error.message);
+      } finally {
+        setLoading(false);
+        event.target.value = '';
+      }
+    }
+
+    function readExcelFile(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.onload = (e) => {
+          try {
+            const data = new Uint8Array(e.target.result);
+            const workbook = XLSX.read(data, { type: 'array' });
+            const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+            const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+            resolve(jsonData);
+          } catch (error) {
+            reject(error);
+          }
+        };
+        
+        reader.onerror = () => reject(new Error('فشل في قراءة الملف'));
+        reader.readAsArrayBuffer(file);
+      });
+    }
+
+    async function importStudentsFromExcel(data) {
+      if (data.length < 2) {
+        throw new Error('الملف فارغ أو لا يحتوي على بيانات');
+      }
+
+      const headers = data[0];
+      const studentNameIndex = headers.findIndex(h => 
+        h && (h.toString().includes('اسم') || h.toString().includes('الطالبة') || h.toString().includes('Student'))
+      );
+
+      if (studentNameIndex === -1) {
+        throw new Error('لم يتم العثور على عمود اسم الطالبة');
+      }
+
+      const skillColumns = [];
+      headers.forEach((header, index) => {
+        if (!header) return;
+        const headerStr = header.toString();
+        
+        for (let i = 1; i <= 9; i++) {
+          if (headerStr.includes(`م${i}`) || headerStr.includes(`المهارة ${i}`)) {
+            if (headerStr.includes('حضور') || headerStr.includes('Attendance')) {
+              skillColumns.push({ skillId: i, type: 'attendance', index });
+            } else if (headerStr.includes('مستوى') || headerStr.includes('Level')) {
+              skillColumns.push({ skillId: i, type: 'level', index });
+            }
+          }
+        }
+      });
+
+      let importedCount = 0;
+      let skippedCount = 0;
+
+      for (let i = 1; i < data.length; i++) {
+        const row = data[i];
+        if (!row || row.length === 0) continue;
+
+        const studentName = row[studentNameIndex];
+        if (!studentName || studentName.toString().trim() === '') continue;
+
+        if (studentsData.length + importedCount >= 999) {
+          showMessage(`تم الوصول للحد الأقصى. تم استيراد ${importedCount} طالبة.`);
+          break;
+        }
+
+        const newStudent = {
+          student_name: studentName.toString().trim(),
+          created_at: new Date().toISOString()
+        };
+
+        skills.forEach(skill => {
+          newStudent[`skill_${skill.id}_attendance`] = "";
+          newStudent[`skill_${skill.id}_level`] = "";
+        });
+
+        skillColumns.forEach(col => {
+          const value = row[col.index];
+          if (value) {
+            const fieldName = `skill_${col.skillId}_${col.type}`;
+            newStudent[fieldName] = value.toString().trim();
+          }
+        });
+
+        const result = await window.dataSdk.create(newStudent);
+        
+        if (result.isOk) {
+          importedCount++;
+        } else {
+          skippedCount++;
+        }
+      }
+
+      if (importedCount === 0) {
+        throw new Error('لم يتم استيراد أي طالبة. تأكدي من صحة البيانات.');
+      }
+
+      showSuccessMessage(`✓ تم حفظ ${importedCount} طالبة من Excel${skippedCount > 0 ? ` (تم تخطي ${skippedCount})` : ''}`);
+    }
+
+    function exportToExcel() {
+      if (studentsData.length === 0) {
+        showMessage('⚠️ لا توجد بيانات للتصدير');
+        return;
+      }
+
+      const exportData = [];
+      
+      const headers = ['اسم الطالبة'];
+      skills.forEach(skill => {
+        headers.push(`م${skill.id} حضور`);
+        headers.push(`م${skill.id} مستوى`);
+      });
+      headers.push('التغذية الفورية');
+      headers.push('التنبؤ الذكي');
+      exportData.push(headers);
+
+      studentsData.forEach(student => {
+        const row = [student.student_name];
+        
+        skills.forEach(skill => {
+          row.push(student[`skill_${skill.id}_attendance`] || '');
+          row.push(student[`skill_${skill.id}_level`] || '');
+        });
+        
+        const feedback = generateFeedbackText(student);
+        const prediction = generatePredictionText(student);
+        row.push(feedback);
+        row.push(prediction);
+        
+        exportData.push(row);
+      });
+
+      const ws = XLSX.utils.aoa_to_sheet(exportData);
+      
+      const colWidths = [
+        { wch: 25 },
+        ...Array(18).fill({ wch: 12 }),
+        { wch: 40 },
+        { wch: 40 }
+      ];
+      ws['!cols'] = colWidths;
+
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'تقييم الطالبات');
+
+      const date = new Date();
+      const fileName = `تقييم_الطالبات_${date.getFullYear()}-${(date.getMonth()+1).toString().padStart(2,'0')}-${date.getDate().toString().padStart(2,'0')}.xlsx`;
+      
+      XLSX.writeFile(wb, fileName);
+      showMessage('✅ تم تصدير البيانات بنجاح!');
+    }
+
+    function generateFeedbackText(student) {
+      let needsSupportCount = 0;
+      let absentCount = 0;
+      let innovationCount = 0;
+      let masteryCount = 0;
+
+      skills.forEach(skill => {
+        const attendance = student[`skill_${skill.id}_attendance`];
+        const level = student[`skill_${skill.id}_level`];
+        if (attendance === 'غائبة') absentCount++;
+        if (level === 'يحتاج دعم') needsSupportCount++;
+        if (level === 'ابتكار') innovationCount++;
+        if (level === 'إتقان') masteryCount++;
+      });
+
+      let feedback = '';
+      if (absentCount >= 3) feedback += 'تنبيه: غياب متكرر. ';
+      if (needsSupportCount >= 3) feedback += 'يحتاج دعم مكثف. ';
+      if (innovationCount >= 3) feedback += 'أداء متميز! ';
+      else if (masteryCount >= 5) feedback += 'مستوى جيد جداً. ';
+      
+      return feedback || 'استمري في التقدم';
+    }
+
+    function generatePredictionText(student) {
+      let performanceScores = [];
+      let evaluatedCount = 0;
+
+      skills.forEach(skill => {
+        const level = student[`skill_${skill.id}_level`];
+        if (level && level !== '' && level !== 'لم تنفذ') {
+          evaluatedCount++;
+          if (level === 'ابتكار') performanceScores.push(4);
+          else if (level === 'إتقان') performanceScores.push(3);
+          else if (level === 'تطبيق') performanceScores.push(2);
+          else if (level === 'يحتاج دعم') performanceScores.push(1);
+        }
+      });
+
+      if (evaluatedCount === 0) return 'بانتظار التقييم';
+
+      const avgPerformance = performanceScores.reduce((a, b) => a + b, 0) / performanceScores.length;
+
+      if (avgPerformance >= 3.5) return 'توقع: أداء متميز مستمر';
+      if (avgPerformance >= 2.5) return 'توقع: مستوى جيد';
+      if (avgPerformance >= 1.5) return 'توقع: يحتاج تحسين';
+      return 'توقع: يحتاج دعم عاجل';
+    }
+
+    async function clearAllData() {
+      const confirmDiv = document.createElement('div');
+      confirmDiv.style.cssText = 'position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); background: white; padding: 30px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); z-index: 10000; text-align: center; max-width: 400px;';
+      confirmDiv.innerHTML = `
+        <div style="font-size: 48px; margin-bottom: 15px;">⚠️</div>
+        <p style="font-size: 18px; margin-bottom: 15px; color: #424242; font-weight: bold;">تحذير: عملية خطرة!</p>
+        <p style="font-size: 16px; margin-bottom: 20px; color: #666;">هل أنت متأكد من حذف <strong style="color: #d32f2f;">جميع الطالبات</strong> وبياناتهن؟<br><br>لا يمكن التراجع عن هذا الإجراء!</p>
+        <div style="display: flex; gap: 10px; justify-content: center;">
+          <button class="btn btn-primary" onclick="this.parentElement.parentElement.remove()">إلغاء</button>
+          <button class="btn btn-danger" onclick="confirmClearAll()">تأكيد المسح الكامل</button>
+        </div>
+      `;
+      document.body.appendChild(confirmDiv);
+    }
+
+    async function confirmClearAll() {
+      document.querySelectorAll('div').forEach(div => {
+        if (div.textContent.includes('تحذير: عملية خطرة')) div.remove();
+      });
+
+      if (studentsData.length === 0) {
+        showMessage('⚠️ لا توجد بيانات لحذفها');
+        return;
+      }
+
+      setLoading(true);
+      
+      let deletedCount = 0;
+      let failedCount = 0;
+
+      for (const student of studentsData) {
+        const result = await window.dataSdk.delete(student);
+        if (result.isOk) {
+          deletedCount++;
+        } else {
+          failedCount++;
+        }
+      }
+
+      setLoading(false);
+
+      if (failedCount === 0) {
+        showSuccessMessage(`✓ تم حفظ المسح الكامل (${deletedCount} طالبة)`);
+      } else {
+        showMessage(`⚠️ تم حذف ${deletedCount} طالبة، فشل حذف ${failedCount}`);
+      }
+    }
+
+    window.openStudentModal = openStudentModal;
+    window.updateStudentField = updateStudentField;
+    window.deleteStudent = deleteStudent;
+    window.confirmDelete = confirmDelete;
+    window.clearAllData = clearAllData;
+    window.confirmClearAll = confirmClearAll;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const addStudentBtn = document.getElementById('addStudentBtn');
+      const addPredefinedBtn = document.getElementById('addPredefinedBtn');
+      const cancelBtn = document.getElementById('cancelBtn');
+      const importExcelBtn = document.getElementById('importExcelBtn');
+      const exportExcelBtn = document.getElementById('exportExcelBtn');
+      const clearAllBtn = document.getElementById('clearAllBtn');
+      const excelFileInput = document.getElementById('excelFileInput');
+      const studentForm = document.getElementById('studentForm');
+      const studentModal = document.getElementById('studentModal');
+
+      if (addStudentBtn) {
+        addStudentBtn.addEventListener('click', openStudentModal);
+      }
+
+      if (addPredefinedBtn) {
+        addPredefinedBtn.addEventListener('click', addPredefinedStudents);
+      }
+
+      if (cancelBtn) {
+        cancelBtn.addEventListener('click', closeStudentModal);
+      }
+
+      if (importExcelBtn) {
+        importExcelBtn.addEventListener('click', () => {
+          if (excelFileInput) excelFileInput.click();
+        });
+      }
+
+      if (exportExcelBtn) {
+        exportExcelBtn.addEventListener('click', exportToExcel);
+      }
+
+      if (clearAllBtn) {
+        clearAllBtn.addEventListener('click', clearAllData);
+      }
+
+      if (excelFileInput) {
+        excelFileInput.addEventListener('change', handleExcelImport);
+      }
+
+      if (studentForm) {
+        studentForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const studentName = document.getElementById('studentNameInput').value.trim();
+          if (studentName) {
+            addStudent(studentName);
+          }
+        });
+      }
+
+      if (studentModal) {
+        studentModal.addEventListener('click', (e) => {
+          if (e.target.id === 'studentModal') {
+            closeStudentModal();
+          }
+        });
+      }
+    });
+
+    async function onConfigChange(config) {
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const cardColor = config.card_color || defaultConfig.card_color;
+
+      document.body.style.background = `linear-gradient(135deg, ${backgroundColor} 0%, #2575fc 100%)`;
+      document.querySelector('.container').style.background = cardColor;
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              config.background_color = value;
+              window.elementSdk.setConfig({ background_color: value });
+            }
+          },
+          {
+            get: () => config.card_color || defaultConfig.card_color,
+            set: (value) => {
+              config.card_color = value;
+              window.elementSdk.setConfig({ card_color: value });
+            }
+          },
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              config.primary_color = value;
+              window.elementSdk.setConfig({ primary_color: value });
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              config.accent_color = value;
+              window.elementSdk.setConfig({ accent_color: value });
+            }
+          },
+          {
+            get: () => config.text_color || defaultConfig.text_color,
+            set: (value) => {
+              config.text_color = value;
+              window.elementSdk.setConfig({ text_color: value });
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: undefined,
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["page_title", config.page_title || defaultConfig.page_title],
+        ["semester_info", config.semester_info || defaultConfig.semester_info]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+
+    initializeApp();
+
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abb291002f7ce00',t:'MTc2NTM1MzEyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
