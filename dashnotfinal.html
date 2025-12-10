@@ -1,0 +1,1325 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>نظام التقويم الذكي</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <style>
+    body {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+      background: #F5F7FB;
+      min-height: 100%;
+    }
+    
+    * {
+      box-sizing: border-box;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .header {
+      background: linear-gradient(135deg, #2563EB 0%, #1d4ed8 100%);
+      color: white;
+      padding: 32px;
+      border-radius: 16px;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+    }
+
+    .header h1 {
+      margin: 0 0 8px 0;
+      font-size: 32px;
+      font-weight: 700;
+    }
+
+    .header p {
+      margin: 0;
+      font-size: 16px;
+      opacity: 0.95;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 2px solid #e2e8f0;
+      overflow-x: auto;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      background: none;
+      border: none;
+      font-family: 'Cairo', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+
+    .tab:hover {
+      color: #2563EB;
+    }
+
+    .tab.active {
+      color: #2563EB;
+      border-bottom-color: #2563EB;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .kpi-card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .kpi-label {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 8px;
+    }
+
+    .kpi-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 4px;
+    }
+
+    .kpi-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .badge-excellent { background: #dcfce7; color: #16a34a; }
+    .badge-good { background: #dbeafe; color: #1e40af; }
+    .badge-fair { background: #fef3c7; color: #a16207; }
+    .badge-poor { background: #fee2e2; color: #dc2626; }
+
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .student-card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+
+    .student-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-color: #2563EB;
+    }
+
+    .student-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .student-info {
+      font-size: 14px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    .student-score {
+      font-size: 24px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .score-excellent { color: #16a34a; }
+    .score-good { color: #1e40af; }
+    .score-fair { color: #ca8a04; }
+    .score-poor { color: #dc2626; }
+
+    .detail-view {
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .detail-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .detail-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 8px;
+    }
+
+    .detail-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .chip {
+      padding: 6px 12px;
+      background: #f1f5f9;
+      border-radius: 12px;
+      font-size: 13px;
+      color: #475569;
+    }
+
+    .back-btn {
+      padding: 10px 20px;
+      background: #f1f5f9;
+      border: none;
+      border-radius: 8px;
+      font-family: 'Cairo', sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .back-btn:hover {
+      background: #e2e8f0;
+    }
+
+    .feedback-box {
+      background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+      border: 2px solid #0ea5e9;
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+
+    .feedback-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0c4a6e;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .feedback-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #0c4a6e;
+    }
+
+    .charts-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .chart-card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+
+    .chart-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 16px;
+    }
+
+    .chart-content {
+      height: 250px;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 100%;
+      gap: 12px;
+      padding: 20px 0;
+    }
+
+    .bar-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .bar {
+      width: 100%;
+      background: linear-gradient(180deg, #2563EB 0%, #1d4ed8 100%);
+      border-radius: 8px 8px 0 0;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .bar:hover {
+      opacity: 0.8;
+    }
+
+    .bar-value {
+      position: absolute;
+      top: -25px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: 700;
+      color: #1e293b;
+      white-space: nowrap;
+    }
+
+    .bar-label {
+      font-size: 12px;
+      color: #64748b;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .table-card {
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    th {
+      background: #f8fafc;
+      padding: 12px;
+      text-align: right;
+      font-weight: 600;
+      color: #475569;
+      font-size: 14px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    td {
+      padding: 12px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+      font-size: 14px;
+    }
+
+    tr:hover {
+      background: #f8fafc;
+    }
+
+    .kind-badge {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .kind-written { background: #dbeafe; color: #1e40af; }
+    .kind-practical { background: #dcfce7; color: #15803d; }
+    .kind-homework { background: #fef3c7; color: #a16207; }
+    .kind-discussion { background: #fce7f3; color: #9f1239; }
+    .kind-teamwork { background: #e0e7ff; color: #4338ca; }
+
+    .form-section {
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      margin-bottom: 24px;
+    }
+
+    .form-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 24px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 14px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 8px;
+    }
+
+    .form-input, .form-select, .form-textarea {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Cairo', sans-serif;
+      transition: border-color 0.2s;
+    }
+
+    .form-textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-input:focus, .form-select:focus, .form-textarea:focus {
+      outline: none;
+      border-color: #2563EB;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Cairo', sans-serif;
+    }
+
+    .btn-primary {
+      background: #2563EB;
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-primary:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #64748b;
+    }
+
+    .empty-state-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+    }
+
+    .empty-state-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 8px;
+    }
+
+    .empty-state-text {
+      font-size: 14px;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.6s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .limit-warning {
+      background: #fef3c7;
+      border: 2px solid #fbbf24;
+      color: #92400e;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .success-message {
+      background: #dcfce7;
+      border: 2px solid #22c55e;
+      color: #14532d;
+      padding: 16px;
+      border-radius: 12px;
+      margin-bottom: 16px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .charts-row {
+        grid-template-columns: 1fr;
+      }
+      
+      .kpis {
+        grid-template-columns: 1fr;
+      }
+
+      .students-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body>
+  <div class="container">
+   <div class="header">
+    <h1 id="main-title">نظام التقويم الذكي</h1>
+    <p id="subtitle">نظرة عامة وتقارير فردية للطالبات</p>
+   </div>
+   <div class="tabs"><button class="tab active" data-tab="overview" id="overview-tab">📊 نظرة عامة</button> <button class="tab" data-tab="students" id="students-tab">👥 تقارير الطالبات</button> <button class="tab" data-tab="add" id="add-tab">➕ إضافة بيانات</button>
+   </div><!-- Overview Tab -->
+   <div class="tab-content active" id="overview-content">
+    <div id="overview-limit-warning" class="limit-warning" style="display: none;">
+     ⚠️ تم الوصول للحد الأقصى (999 سجل). يرجى حذف بعض السجلات أولاً.
+    </div>
+    <div class="kpis" id="overview-kpis"></div>
+    <div class="charts-row">
+     <div class="chart-card">
+      <div class="chart-title">
+       متوسط الأداء حسب نوع التقييم
+      </div>
+      <div class="chart-content">
+       <div class="bar-chart" id="kind-chart"></div>
+      </div>
+     </div>
+    </div>
+    <div class="table-card">
+     <div class="chart-title">
+      آخر التقييمات المسجّلة
+     </div>
+     <div id="overview-table"></div>
+    </div>
+   </div><!-- Students Tab -->
+   <div class="tab-content" id="students-content">
+    <div id="students-list-view">
+     <div class="students-grid" id="students-grid"></div>
+    </div>
+    <div id="student-detail-view" style="display: none;">
+     <div class="detail-view">
+      <div class="detail-header">
+       <div>
+        <div class="detail-title" id="detail-student-name"></div>
+        <div class="detail-chips" id="detail-chips"></div>
+       </div><button class="back-btn" id="back-to-list">← العودة للقائمة</button>
+      </div>
+      <div class="feedback-box" id="feedback-box">
+       <div class="feedback-title">
+        ✨ التغذية الراجعة الذكية
+       </div>
+       <div class="feedback-text" id="feedback-text"></div>
+      </div>
+      <div class="kpis" id="detail-kpis"></div>
+      <div class="charts-row">
+       <div class="chart-card">
+        <div class="chart-title">
+         الأداء حسب نوع التقييم
+        </div>
+        <div class="chart-content">
+         <div class="bar-chart" id="detail-kind-chart"></div>
+        </div>
+       </div>
+      </div>
+      <div class="table-card">
+       <div class="chart-title">
+        تفاصيل التقييمات
+       </div>
+       <div id="detail-table"></div>
+      </div>
+     </div>
+    </div>
+   </div><!-- Add Data Tab -->
+   <div class="tab-content" id="add-content">
+    <div id="add-limit-warning" class="limit-warning" style="display: none;">
+     ⚠️ تم الوصول للحد الأقصى (999 سجل). يرجى حذف بعض السجلات أولاً.
+    </div>
+    <div id="success-message" class="success-message" style="display: none;"></div>
+    <div class="form-section">
+     <div class="form-title">
+      ➕ إضافة درجة طالبة
+     </div>
+     <form id="score-form">
+      <div class="form-grid">
+       <div class="form-group"><label class="form-label" for="student-select">اختر الطالبة</label> <select id="student-select" class="form-select" required> <option value="">-- اختر طالبة --</option> </select>
+       </div>
+       <div class="form-group"><label class="form-label" for="assessment-title">عنوان التقييم</label> <input type="text" id="assessment-title" class="form-input" required placeholder="مثال: اختبار الوحدة الأولى">
+       </div>
+       <div class="form-group"><label class="form-label" for="assessment-kind">نوع التقييم</label> <select id="assessment-kind" class="form-select" required> <option value="">اختر النوع</option> <option value="written">كتابي</option> <option value="practical">عملي</option> <option value="homework">واجب منزلي</option> <option value="discussion">مناقشة</option> <option value="teamwork">عمل جماعي</option> </select>
+       </div>
+       <div class="form-group"><label class="form-label" for="assessment-date">التاريخ</label> <input type="date" id="assessment-date" class="form-input" required>
+       </div>
+       <div class="form-group"><label class="form-label" for="max-score">الدرجة الكاملة</label> <input type="number" id="max-score" class="form-input" required min="1" placeholder="100">
+       </div>
+       <div class="form-group"><label class="form-label" for="weight">الوزن النسبي (%)</label> <input type="number" id="weight" class="form-input" required min="0" max="100" placeholder="20">
+       </div>
+       <div class="form-group"><label class="form-label" for="student-score">درجة الطالبة</label> <input type="number" id="student-score" class="form-input" required min="0" placeholder="85">
+       </div>
+      </div>
+      <div class="form-group"><label class="form-label" for="teacher-note">ملاحظة المعلم (اختياري)</label> <textarea id="teacher-note" class="form-textarea" placeholder="أدخل ملاحظاتك هنا..."></textarea>
+      </div><button type="submit" class="btn btn-primary" id="submit-score-btn"> <span id="submit-score-text">حفظ الدرجة</span> </button>
+     </form>
+    </div>
+    <div class="form-section">
+     <div class="form-title">
+      👤 إضافة طالبة جديدة
+     </div>
+     <form id="student-form">
+      <div class="form-grid">
+       <div class="form-group"><label class="form-label" for="full-name">الاسم الكامل</label> <input type="text" id="full-name" class="form-input" required placeholder="مثال: فاطمة أحمد">
+       </div>
+       <div class="form-group"><label class="form-label" for="class-name">الفصل</label> <input type="text" id="class-name" class="form-input" required placeholder="مثال: 3-أ">
+       </div>
+       <div class="form-group"><label class="form-label" for="guardian-name">اسم ولي الأمر</label> <input type="text" id="guardian-name" class="form-input" required placeholder="مثال: أحمد محمد">
+       </div>
+       <div class="form-group"><label class="form-label" for="guardian-phone">هاتف ولي الأمر</label> <input type="tel" id="guardian-phone" class="form-input" placeholder="مثال: 0501234567">
+       </div>
+       <div class="form-group"><label class="form-label" for="guardian-email">بريد ولي الأمر</label> <input type="email" id="guardian-email" class="form-input" placeholder="مثال: parent@example.com">
+       </div>
+      </div><button type="submit" class="btn btn-primary" id="submit-student-btn"> <span id="submit-student-text">إضافة الطالبة</span> </button>
+     </form>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      main_title: "نظام التقويم الذكي",
+      subtitle: "نظرة عامة وتقارير فردية للطالبات",
+      overview_tab_label: "نظرة عامة",
+      students_tab_label: "تقارير الطالبات",
+      add_data_label: "إضافة بيانات"
+    };
+
+    let allRecords = [];
+    let isSubmitting = false;
+    let currentStudentId = null;
+
+    const dataHandler = {
+      onDataChanged(data) {
+        allRecords = data;
+        updateAllViews();
+      }
+    };
+
+    async function onConfigChange(config) {
+      document.getElementById('main-title').textContent = config.main_title || defaultConfig.main_title;
+      document.getElementById('subtitle').textContent = config.subtitle || defaultConfig.subtitle;
+      document.getElementById('overview-tab').innerHTML = `📊 ${config.overview_tab_label || defaultConfig.overview_tab_label}`;
+      document.getElementById('students-tab').innerHTML = `👥 ${config.students_tab_label || defaultConfig.students_tab_label}`;
+      document.getElementById('add-tab').innerHTML = `➕ ${config.add_data_label || defaultConfig.add_data_label}`;
+    }
+
+    function updateAllViews() {
+      updateOverviewTab();
+      updateStudentsTab();
+      updateStudentDropdown();
+      updateLimitWarnings();
+    }
+
+    function updateLimitWarnings() {
+      const isAtLimit = allRecords.length >= 999;
+      document.getElementById('overview-limit-warning').style.display = isAtLimit ? 'block' : 'none';
+      document.getElementById('add-limit-warning').style.display = isAtLimit ? 'block' : 'none';
+      document.getElementById('submit-score-btn').disabled = isAtLimit;
+      document.getElementById('submit-student-btn').disabled = isAtLimit;
+    }
+
+    function getStudents() {
+      const studentMap = new Map();
+      allRecords.forEach(record => {
+        if (record.student_id && !studentMap.has(record.student_id)) {
+          studentMap.set(record.student_id, {
+            student_id: record.student_id,
+            full_name: record.full_name,
+            class_name: record.class_name,
+            guardian_name: record.guardian_name,
+            guardian_phone: record.guardian_phone,
+            guardian_email: record.guardian_email
+          });
+        }
+      });
+      return Array.from(studentMap.values());
+    }
+
+    function getScoreRecords() {
+      return allRecords.filter(r => r.assessment_id);
+    }
+
+    function updateOverviewTab() {
+      const scoreRecords = getScoreRecords();
+      const students = getStudents();
+
+      // Update KPIs
+      const kpisHtml = `
+        <div class="kpi-card">
+          <div class="kpi-label">عدد الطالبات</div>
+          <div class="kpi-value">${students.length}</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">عدد التقييمات</div>
+          <div class="kpi-value">${scoreRecords.length}</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">متوسط الفصل</div>
+          <div class="kpi-value">${calculateClassAverage(scoreRecords)}%</div>
+          <span class="kpi-badge ${getPerformanceBadgeClass(calculateClassAverage(scoreRecords))}">
+            ${getPerformanceLabel(calculateClassAverage(scoreRecords))}
+          </span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">إجمالي السجلات</div>
+          <div class="kpi-value">${allRecords.length}</div>
+        </div>
+      `;
+      document.getElementById('overview-kpis').innerHTML = kpisHtml;
+
+      // Update chart
+      updateKindChart('kind-chart', scoreRecords);
+
+      // Update table
+      updateOverviewTable(scoreRecords);
+    }
+
+    function calculateClassAverage(scoreRecords) {
+      if (scoreRecords.length === 0) return 0;
+      const total = scoreRecords.reduce((sum, r) => {
+        const pct = (r.student_score / r.assessment_max_score) * 100;
+        return sum + pct;
+      }, 0);
+      return (total / scoreRecords.length).toFixed(1);
+    }
+
+    function updateKindChart(chartId, scoreRecords) {
+      const kindData = calculateKindAverages(scoreRecords);
+      const chartEl = document.getElementById(chartId);
+
+      if (kindData.length === 0) {
+        chartEl.innerHTML = '<div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #64748b;">لا توجد بيانات لعرضها</div>';
+        return;
+      }
+
+      const maxValue = Math.max(...kindData.map(k => k.avg));
+      
+      let html = '';
+      kindData.forEach(kind => {
+        const heightPct = (kind.avg / maxValue) * 100;
+        html += `
+          <div class="bar-item">
+            <div class="bar" style="height: ${heightPct}%">
+              <div class="bar-value">${kind.avg}%</div>
+            </div>
+            <div class="bar-label">${kind.label}</div>
+          </div>
+        `;
+      });
+
+      chartEl.innerHTML = html;
+    }
+
+    function calculateKindAverages(scoreRecords) {
+      const kinds = {
+        'written': { label: 'كتابي', total: 0, count: 0 },
+        'practical': { label: 'عملي', total: 0, count: 0 },
+        'homework': { label: 'واجب', total: 0, count: 0 },
+        'discussion': { label: 'مناقشة', total: 0, count: 0 },
+        'teamwork': { label: 'جماعي', total: 0, count: 0 }
+      };
+
+      scoreRecords.forEach(record => {
+        if (kinds[record.assessment_kind]) {
+          const pct = (record.student_score / record.assessment_max_score) * 100;
+          kinds[record.assessment_kind].total += pct;
+          kinds[record.assessment_kind].count++;
+        }
+      });
+
+      return Object.entries(kinds)
+        .filter(([_, data]) => data.count > 0)
+        .map(([kind, data]) => ({
+          kind,
+          label: data.label,
+          avg: (data.total / data.count).toFixed(1)
+        }));
+    }
+
+    function updateOverviewTable(scoreRecords) {
+      const tableEl = document.getElementById('overview-table');
+
+      if (scoreRecords.length === 0) {
+        tableEl.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📊</div>
+            <div class="empty-state-title">لا توجد تقييمات بعد</div>
+            <div class="empty-state-text">ابدأ بإضافة طالبات ودرجاتهن</div>
+          </div>
+        `;
+        return;
+      }
+
+      const sorted = [...scoreRecords].sort((a, b) => 
+        new Date(b.assessment_date) - new Date(a.assessment_date)
+      ).slice(0, 10);
+
+      let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>الطالبة</th>
+              <th>التقييم</th>
+              <th>النوع</th>
+              <th>التاريخ</th>
+              <th>الدرجة</th>
+              <th>النسبة%</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      sorted.forEach(record => {
+        const pct = ((record.student_score / record.assessment_max_score) * 100).toFixed(1);
+        const scoreClass = getScoreClass(pct);
+        const kindClass = `kind-${record.assessment_kind}`;
+        const kindText = getKindText(record.assessment_kind);
+        const formattedDate = new Date(record.assessment_date).toLocaleDateString('ar-SA');
+
+        html += `
+          <tr>
+            <td>${record.full_name}</td>
+            <td>${record.assessment_title}</td>
+            <td><span class="kind-badge ${kindClass}">${kindText}</span></td>
+            <td>${formattedDate}</td>
+            <td>${record.student_score} / ${record.assessment_max_score}</td>
+            <td class="${scoreClass}">${pct}%</td>
+          </tr>
+        `;
+      });
+
+      html += '</tbody></table>';
+      tableEl.innerHTML = html;
+    }
+
+    function updateStudentsTab() {
+      const students = getStudents();
+      const gridEl = document.getElementById('students-grid');
+
+      if (students.length === 0) {
+        gridEl.innerHTML = `
+          <div class="empty-state" style="grid-column: 1/-1;">
+            <div class="empty-state-icon">👥</div>
+            <div class="empty-state-title">لا توجد طالبات بعد</div>
+            <div class="empty-state-text">ابدأ بإضافة طالبة جديدة من تبويب "إضافة بيانات"</div>
+          </div>
+        `;
+        return;
+      }
+
+      let html = '';
+      students.forEach(student => {
+        const studentScores = getScoreRecords().filter(r => r.student_id === student.student_id);
+        const avg = studentScores.length > 0 ? calculateStudentAverage(studentScores) : 0;
+        const scoreClass = getScoreClass(avg);
+        const statusLabel = getPerformanceLabel(avg);
+
+        html += `
+          <div class="student-card" onclick="showStudentDetail('${student.student_id}')">
+            <div class="student-name">${student.full_name}</div>
+            <div class="student-info">الفصل: ${student.class_name} • ${studentScores.length} تقييم</div>
+            <div class="student-score ${scoreClass}">${avg}%</div>
+            <span class="kpi-badge ${getPerformanceBadgeClass(avg)}">${statusLabel}</span>
+          </div>
+        `;
+      });
+
+      gridEl.innerHTML = html;
+    }
+
+    function calculateStudentAverage(studentScores) {
+      if (studentScores.length === 0) return 0;
+      let totalWeighted = 0;
+      let totalWeight = 0;
+
+      studentScores.forEach(record => {
+        const pct = (record.student_score / record.assessment_max_score) * 100;
+        totalWeighted += pct * record.assessment_weight;
+        totalWeight += record.assessment_weight;
+      });
+
+      return totalWeight > 0 ? (totalWeighted / totalWeight).toFixed(1) : 0;
+    }
+
+    function showStudentDetail(studentId) {
+      currentStudentId = studentId;
+      const students = getStudents();
+      const student = students.find(s => s.student_id === studentId);
+      if (!student) return;
+
+      const studentScores = getScoreRecords().filter(r => r.student_id === studentId);
+
+      document.getElementById('students-list-view').style.display = 'none';
+      document.getElementById('student-detail-view').style.display = 'block';
+
+      // Header
+      document.getElementById('detail-student-name').textContent = student.full_name;
+      
+      const chipsHtml = `
+        <span class="chip">الفصل: ${student.class_name}</span>
+        <span class="chip">ولي الأمر: ${student.guardian_name}</span>
+        ${student.guardian_phone ? `<span class="chip">📞 ${student.guardian_phone}</span>` : ''}
+        ${student.guardian_email ? `<span class="chip">📧 ${student.guardian_email}</span>` : ''}
+      `;
+      document.getElementById('detail-chips').innerHTML = chipsHtml;
+
+      // Feedback
+      const feedback = generateFeedback(studentScores);
+      document.getElementById('feedback-text').innerHTML = feedback;
+
+      // KPIs
+      const avg = calculateStudentAverage(studentScores);
+      const kpisHtml = `
+        <div class="kpi-card">
+          <div class="kpi-label">المعدل العام المرجّح</div>
+          <div class="kpi-value">${avg}%</div>
+          <span class="kpi-badge ${getPerformanceBadgeClass(avg)}">${getPerformanceLabel(avg)}</span>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">عدد التقييمات</div>
+          <div class="kpi-value">${studentScores.length}</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">أعلى درجة</div>
+          <div class="kpi-value">${getHighestScore(studentScores)}%</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">أدنى درجة</div>
+          <div class="kpi-value">${getLowestScore(studentScores)}%</div>
+        </div>
+      `;
+      document.getElementById('detail-kpis').innerHTML = kpisHtml;
+
+      // Chart
+      updateKindChart('detail-kind-chart', studentScores);
+
+      // Table
+      updateDetailTable(studentScores);
+    }
+
+    function generateFeedback(studentScores) {
+      if (studentScores.length === 0) {
+        return 'لا توجد تقييمات كافية لتوليد تغذية راجعة.';
+      }
+
+      const kindAverages = calculateKindAverages(studentScores);
+      const overall = calculateStudentAverage(studentScores);
+
+      if (kindAverages.length === 0) {
+        return 'لا توجد بيانات كافية لتوليد تغذية راجعة مفصلة.';
+      }
+
+      const sorted = [...kindAverages].sort((a, b) => parseFloat(b.avg) - parseFloat(a.avg));
+      const strengths = sorted.slice(0, 2);
+      const improvements = sorted.slice(-2).reverse();
+
+      let feedback = '';
+
+      // نقاط القوة
+      if (strengths.length > 0) {
+        feedback += `تُظهر الطالبة تميزاً واضحاً في ${strengths.map(s => `${s.label} (${s.avg}%)`).join(' و')}، `;
+        feedback += 'مما يعكس فهماً عميقاً واستيعاباً جيداً للمفاهيم. ';
+      }
+
+      // فرص التحسين
+      if (improvements.length > 0 && parseFloat(improvements[0].avg) < 80) {
+        feedback += `يُنصح بالتركيز على تحسين ${improvements[0].label} من خلال `;
+        feedback += 'ممارسة إضافية وحل تمارين متنوعة خلال الأسبوع القادم. ';
+        
+        if (improvements.length > 1 && parseFloat(improvements[1].avg) < 80) {
+          feedback += `كما يمكن تعزيز ${improvements[1].label} بالمشاركة الفعالة والمراجعة المنتظمة. `;
+        }
+      }
+
+      // جملة ختامية
+      if (overall >= 85) {
+        feedback += 'استمري في هذا الأداء الرائع! 🌟';
+      } else if (overall >= 70) {
+        feedback += 'بالجهد المستمر ستصلين لمستويات أعلى! 💪';
+      } else {
+        feedback += 'نحن واثقون من قدرتك على التحسن مع الدعم المناسب! 🎯';
+      }
+
+      return feedback;
+    }
+
+    function getHighestScore(studentScores) {
+      if (studentScores.length === 0) return 0;
+      const scores = studentScores.map(r => (r.student_score / r.assessment_max_score) * 100);
+      return Math.max(...scores).toFixed(1);
+    }
+
+    function getLowestScore(studentScores) {
+      if (studentScores.length === 0) return 0;
+      const scores = studentScores.map(r => (r.student_score / r.assessment_max_score) * 100);
+      return Math.min(...scores).toFixed(1);
+    }
+
+    function updateDetailTable(studentScores) {
+      const tableEl = document.getElementById('detail-table');
+
+      if (studentScores.length === 0) {
+        tableEl.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-state-icon">📋</div>
+            <div class="empty-state-title">لا توجد تقييمات</div>
+          </div>
+        `;
+        return;
+      }
+
+      const sorted = [...studentScores].sort((a, b) => 
+        new Date(b.assessment_date) - new Date(a.assessment_date)
+      );
+
+      let html = `
+        <table>
+          <thead>
+            <tr>
+              <th>المهمة</th>
+              <th>النوع</th>
+              <th>التاريخ</th>
+              <th>الدرجة</th>
+              <th>من</th>
+              <th>النسبة%</th>
+              <th>ملاحظة المعلم</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+
+      sorted.forEach(record => {
+        const pct = ((record.student_score / record.assessment_max_score) * 100).toFixed(1);
+        const scoreClass = getScoreClass(pct);
+        const kindClass = `kind-${record.assessment_kind}`;
+        const kindText = getKindText(record.assessment_kind);
+        const formattedDate = new Date(record.assessment_date).toLocaleDateString('ar-SA');
+
+        html += `
+          <tr>
+            <td>${record.assessment_title}</td>
+            <td><span class="kind-badge ${kindClass}">${kindText}</span></td>
+            <td>${formattedDate}</td>
+            <td>${record.student_score}</td>
+            <td>${record.assessment_max_score}</td>
+            <td class="${scoreClass}">${pct}%</td>
+            <td>${record.teacher_note || '-'}</td>
+          </tr>
+        `;
+      });
+
+      html += '</tbody></table>';
+      tableEl.innerHTML = html;
+    }
+
+    function updateStudentDropdown() {
+      const students = getStudents();
+      const selectEl = document.getElementById('student-select');
+      
+      let html = '<option value="">-- اختر طالبة --</option>';
+      students.forEach(student => {
+        html += `<option value="${student.student_id}">${student.full_name} (${student.class_name})</option>`;
+      });
+      
+      selectEl.innerHTML = html;
+    }
+
+    function getKindText(kind) {
+      const kinds = {
+        'written': 'كتابي',
+        'practical': 'عملي',
+        'homework': 'واجب',
+        'discussion': 'مناقشة',
+        'teamwork': 'جماعي'
+      };
+      return kinds[kind] || kind;
+    }
+
+    function getScoreClass(score) {
+      const s = parseFloat(score);
+      if (s >= 85) return 'score-excellent';
+      if (s >= 70) return 'score-good';
+      if (s >= 60) return 'score-fair';
+      return 'score-poor';
+    }
+
+    function getPerformanceBadgeClass(score) {
+      const s = parseFloat(score);
+      if (s >= 85) return 'badge-excellent';
+      if (s >= 70) return 'badge-good';
+      if (s >= 60) return 'badge-fair';
+      return 'badge-poor';
+    }
+
+    function getPerformanceLabel(score) {
+      const s = parseFloat(score);
+      if (s >= 85) return 'ممتاز';
+      if (s >= 70) return 'جيد جداً';
+      if (s >= 60) return 'جيد';
+      return 'مقبول';
+    }
+
+    // Tab switching
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        const targetTab = tab.dataset.tab;
+        
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+        
+        tab.classList.add('active');
+        document.getElementById(`${targetTab}-content`).classList.add('active');
+      });
+    });
+
+    // Back to list
+    document.getElementById('back-to-list').addEventListener('click', () => {
+      document.getElementById('students-list-view').style.display = 'block';
+      document.getElementById('student-detail-view').style.display = 'none';
+      currentStudentId = null;
+    });
+
+    // Student form
+    document.getElementById('student-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (isSubmitting || allRecords.length >= 999) return;
+      
+      isSubmitting = true;
+      const submitBtn = document.getElementById('submit-student-btn');
+      const submitText = document.getElementById('submit-student-text');
+      submitBtn.disabled = true;
+      submitText.innerHTML = '<span class="loading"></span>';
+
+      const studentId = `student_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
+      
+      const studentData = {
+        record_type: 'student',
+        student_id: studentId,
+        full_name: document.getElementById('full-name').value,
+        class_name: document.getElementById('class-name').value,
+        guardian_name: document.getElementById('guardian-name').value,
+        guardian_phone: document.getElementById('guardian-phone').value,
+        guardian_email: document.getElementById('guardian-email').value,
+        assessment_id: '',
+        assessment_title: '',
+        assessment_kind: '',
+        assessment_date: '',
+        assessment_max_score: 0,
+        assessment_weight: 0,
+        student_score: 0,
+        teacher_note: ''
+      };
+
+      const result = await window.dataSdk.create(studentData);
+
+      if (result.isOk) {
+        document.getElementById('student-form').reset();
+        showSuccessMessage('تم إضافة الطالبة بنجاح! ✅');
+      } else {
+        showCustomAlert('حدث خطأ أثناء إضافة الطالبة. يرجى المحاولة مرة أخرى.');
+      }
+
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      submitText.textContent = 'إضافة الطالبة';
+    });
+
+    // Score form
+    document.getElementById('score-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      if (isSubmitting || allRecords.length >= 999) return;
+      
+      isSubmitting = true;
+      const submitBtn = document.getElementById('submit-score-btn');
+      const submitText = document.getElementById('submit-score-text');
+      submitBtn.disabled = true;
+      submitText.innerHTML = '<span class="loading"></span>';
+
+      const studentId = document.getElementById('student-select').value;
+      const student = getStudents().find(s => s.student_id === studentId);
+
+      const scoreData = {
+        record_type: 'score',
+        student_id: studentId,
+        full_name: student.full_name,
+        class_name: student.class_name,
+        guardian_name: student.guardian_name,
+        guardian_phone: student.guardian_phone,
+        guardian_email: student.guardian_email,
+        assessment_id: `assess_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
+        assessment_title: document.getElementById('assessment-title').value,
+        assessment_kind: document.getElementById('assessment-kind').value,
+        assessment_date: document.getElementById('assessment-date').value,
+        assessment_max_score: parseFloat(document.getElementById('max-score').value),
+        assessment_weight: parseFloat(document.getElementById('weight').value),
+        student_score: parseFloat(document.getElementById('student-score').value),
+        teacher_note: document.getElementById('teacher-note').value
+      };
+
+      const result = await window.dataSdk.create(scoreData);
+
+      if (result.isOk) {
+        document.getElementById('score-form').reset();
+        showSuccessMessage('تم حفظ الدرجة بنجاح! ✅');
+      } else {
+        showCustomAlert('حدث خطأ أثناء حفظ الدرجة. يرجى المحاولة مرة أخرى.');
+      }
+
+      isSubmitting = false;
+      submitBtn.disabled = false;
+      submitText.textContent = 'حفظ الدرجة';
+    });
+
+    function showSuccessMessage(message) {
+      const msgEl = document.getElementById('success-message');
+      msgEl.textContent = message;
+      msgEl.style.display = 'block';
+      setTimeout(() => {
+        msgEl.style.display = 'none';
+      }, 5000);
+    }
+
+    function showCustomAlert(message) {
+      const msgEl = document.getElementById('success-message');
+      msgEl.textContent = message;
+      msgEl.style.display = 'block';
+      msgEl.style.background = '#fee2e2';
+      msgEl.style.borderColor = '#ef4444';
+      msgEl.style.color = '#7f1d1d';
+      setTimeout(() => {
+        msgEl.style.display = 'none';
+        msgEl.style.background = '#dcfce7';
+        msgEl.style.borderColor = '#22c55e';
+        msgEl.style.color = '#14532d';
+      }, 5000);
+    }
+
+    window.showStudentDetail = showStudentDetail;
+
+    async function init() {
+      if (window.dataSdk) {
+        const initResult = await window.dataSdk.init(dataHandler);
+        if (!initResult.isOk) {
+          console.error('Failed to initialize data SDK');
+        }
+      }
+
+      if (window.elementSdk) {
+        window.elementSdk.init({
+          defaultConfig,
+          onConfigChange,
+          mapToCapabilities: (config) => ({
+            recolorables: [],
+            borderables: [],
+            fontEditable: undefined,
+            fontSizeable: undefined
+          }),
+          mapToEditPanelValues: (config) => new Map([
+            ["main_title", config.main_title || defaultConfig.main_title],
+            ["subtitle", config.subtitle || defaultConfig.subtitle],
+            ["overview_tab_label", config.overview_tab_label || defaultConfig.overview_tab_label],
+            ["students_tab_label", config.students_tab_label || defaultConfig.students_tab_label],
+            ["add_data_label", config.add_data_label || defaultConfig.add_data_label]
+          ])
+        });
+
+        await onConfigChange(window.elementSdk.config);
+      }
+
+      document.getElementById('assessment-date').valueAsDate = new Date();
+    }
+
+    init();
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abb32b605689350',t:'MTc2NTM1MzUxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
