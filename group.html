@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام تقييم المجموعات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .star {
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 1.5rem;
+        }
+        
+        .star:hover {
+            transform: scale(1.2);
+        }
+        
+        .star.filled {
+            color: #fbbf24;
+            text-shadow: 0 0 10px rgba(251, 191, 36, 0.5);
+        }
+        
+        .star.empty {
+            color: #d1d5db;
+        }
+        
+        .group-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .motivational-text {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+        
+        .ranking-modal {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .medal {
+            font-size: 2rem;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+        
+        .number-button {
+            transition: all 0.3s ease;
+        }
+        
+        .number-button:hover {
+            transform: scale(1.05);
+        }
+        
+        .number-button.selected {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: scale(0.95);
+        }
+        
+        .points-display {
+            animation: slideInUp 0.5s ease-out;
+        }
+        
+        .golden-effect {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            animation: goldGlow 2s infinite alternate;
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes goldGlow {
+            from {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            }
+            to {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 0.8);
+            }
+        }
+    </style>
+</head>
+<body class="p-6">
+    <div class="max-w-7xl mx-auto">
+        <!-- العنوان الرئيسي -->
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-white mb-4">✨ نظام تقييم المجموعات ✨</h1>
+            <p class="text-xl text-white opacity-90">قيمي أداء المجموعات وشاهدي الترتيب النهائي</p>
+        </div>
+
+        <!-- قسم تقييم الإجابات الفردية المميزة -->
+        <div class="bg-white bg-opacity-95 backdrop-filter backdrop-blur-lg rounded-2xl p-8 mb-8 shadow-2xl border border-white border-opacity-20">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">تقييم الإجابات الجماعية المميزة</h2>
+                <div class="bg-gradient-to-r from-purple-100 to-blue-100 rounded-xl p-6 mb-6">
+                    <h3 class="text-2xl font-bold text-purple-700 mb-4">🎲 جربي حظك واختاري رقمك 🎲</h3>
+                    <p class="text-gray-600 mb-4">تحت كل رقم نقاط عشوائية مخفية (قيم من 1 إلى 5) تظهر عند الضغط على الرقم</p>
+                    
+                    <!-- شبكة الأرقام -->
+                    <div class="grid grid-cols-5 gap-3 mb-6" id="numbersGrid">
+                        <!-- سيتم إنشاء الأرقام هنا بواسطة JavaScript -->
+                    </div>
+                    
+
+                    
+
+                </div>
+                
+                <!-- معايير التقييم -->
+                <div class="bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl p-6 border-2 border-yellow-200">
+                    <div class="flex justify-center items-center mb-4 space-x-4">
+                        <span class="text-3xl">🏆</span>
+                        <span class="text-3xl">✨</span>
+                        <span class="text-3xl">🌟</span>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 mb-4">جميع المجموعات مبدعة!</h4>
+                    <h5 class="text-lg font-semibold text-gray-700 mb-4">تقييم الأداء للمجموعات حسب المعايير التالية:</h5>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        <div class="bg-white rounded-lg p-4 shadow-md border-r-4 border-pink-400">
+                            <h5 class="font-bold text-pink-600 mb-2">صحة الإجابة</h5>
+                            <p class="text-sm text-gray-600">دقة المعلومات والحقائق</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md border-r-4 border-blue-400">
+                            <h5 class="font-bold text-blue-600 mb-2">الدقة</h5>
+                            <p class="text-sm text-gray-600">وضوح وتفصيل الإجابة</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md border-r-4 border-green-400">
+                            <h5 class="font-bold text-green-600 mb-2">الشمولية</h5>
+                            <p class="text-sm text-gray-600">تغطية جميع جوانب السؤال</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md border-r-4 border-purple-400">
+                            <h5 class="font-bold text-purple-600 mb-2">مهارات التفكير العليا</h5>
+                            <p class="text-sm text-gray-600">مهارات التحليل والإبداع</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md border-r-4 border-indigo-400">
+                            <h5 class="font-bold text-indigo-600 mb-2">التعاون مع المجموعة</h5>
+                            <p class="text-sm text-gray-600">العمل الجماعي والتشارك</p>
+                        </div>
+                        <div class="bg-white rounded-lg p-4 shadow-md border-r-4 border-orange-400">
+                            <h5 class="font-bold text-orange-600 mb-2">حل المشكلات</h5>
+                            <p class="text-sm text-gray-600">القدرة على إيجاد الحلول</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- شبكة المجموعات -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8" id="groupsContainer">
+            <!-- سيتم إنشاء المجموعات هنا بواسطة JavaScript -->
+        </div>
+
+        <!-- زر الترتيب -->
+        <div class="text-center">
+            <button onclick="showRanking()" class="bg-gradient-to-r from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600 text-white font-bold py-4 px-8 rounded-full text-xl shadow-lg transform hover:scale-105 transition-all duration-300">
+                🏆 ترتيب المجموعات 🏆
+            </button>
+        </div>
+    </div>
+
+    <!-- نافذة الترتيب -->
+    <div id="rankingModal" class="fixed inset-0 ranking-modal hidden items-center justify-center z-50">
+        <div class="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 max-h-96 overflow-y-auto">
+            <div class="text-center mb-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">🏆 ترتيب المجموعات 🏆</h2>
+                <p class="text-gray-600 mb-3">النتائج مرتبة حسب متوسط التقييم</p>
+                <div class="bg-gradient-to-r from-yellow-100 to-orange-100 rounded-lg p-4 border-2 border-yellow-300">
+                    <p class="text-lg font-bold text-orange-700">🌟 جميع المجموعات أبدعت وتستحق التقدير! 🌟</p>
+                    <p class="text-sm text-gray-600 mt-2">كل مجهود يستحق الاحتفال والفخر ✨</p>
+                </div>
+            </div>
+            <div id="rankingList" class="space-y-4">
+                <!-- سيتم إنشاء قائمة الترتيب هنا -->
+            </div>
+            <div class="text-center mt-6">
+                <button onclick="hideRanking()" class="bg-gray-500 hover:bg-gray-600 text-white font-bold py-2 px-6 rounded-full">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const criteria = [
+            'التقييم العام'
+        ];
+
+        const motivationalMessages = {
+            1: ['ابدئي من جديد! 💪', 'كل بداية صعبة! 🌱', 'الطريق طويل لكن ممكن! ✨'],
+            2: ['تحسن ملحوظ! 👍', 'على الطريق الصحيح! 🛤️', 'استمري بهذا الجهد! 💫'],
+            3: ['عمل متقدم رائع! 🌟', 'أداء مميز! 🎯', 'تقدم ممتاز! 🚀'],
+            4: ['عمل خبير متقن! 👑', 'مستوى احترافي! 💎', 'أداء استثنائي! ⭐'],
+            5: ['عمل مبدع رائع! 🎨', 'إبداع لا محدود! 🌈', 'أنتم نجوم حقيقية! ✨']
+        };
+
+        let groupsData = [];
+
+        // إنشاء المجموعات
+        function initializeGroups() {
+            const container = document.getElementById('groupsContainer');
+            
+            for (let i = 1; i <= 6; i++) {
+                const groupData = {
+                    id: i,
+                    name: `المجموعة ${i}`,
+                    ratings: {},
+                    average: 0
+                };
+                
+                criteria.forEach(criterion => {
+                    groupData.ratings[criterion] = 0;
+                });
+                
+                groupsData.push(groupData);
+                
+                const groupCard = createGroupCard(groupData);
+                container.appendChild(groupCard);
+            }
+        }
+
+        // إنشاء بطاقة المجموعة
+        function createGroupCard(groupData) {
+            const card = document.createElement('div');
+            card.className = 'group-card rounded-2xl p-6 shadow-xl';
+            
+            card.innerHTML = `
+                <div class="text-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">${groupData.name}</h3>
+                    <div class="w-16 h-1 bg-gradient-to-r from-blue-400 to-purple-500 mx-auto rounded-full"></div>
+                </div>
+                
+                <div class="bg-yellow-50 rounded-lg p-6 mb-6">
+                    <div class="flex justify-between items-center">
+                        <span class="font-semibold text-gray-700 text-lg">التقييم العام</span>
+                        <div class="flex space-x-1" data-group="${groupData.id}" data-criterion="التقييم العام">
+                            ${[1,2,3,4,5].map(star => `
+                                <span class="star empty" data-rating="${star}" onclick="rateCriterion(${groupData.id}, 'التقييم العام', ${star})">⭐</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <div class="bg-gradient-to-r from-blue-100 to-purple-100 rounded-lg p-4 mb-4">
+                        <p class="text-lg font-bold text-gray-700">المتوسط: <span id="average-${groupData.id}">0.0</span> ⭐</p>
+                    </div>
+                    <div class="motivational-text text-lg font-bold" id="motivation-${groupData.id}">
+                        
+                    </div>
+                </div>
+            `;
+            
+            return card;
+        }
+
+        // تقييم معيار
+        function rateCriterion(groupId, criterion, rating) {
+            const group = groupsData.find(g => g.id === groupId);
+            group.ratings[criterion] = rating;
+            
+            // تحديث النجوم
+            const starsContainer = document.querySelector(`[data-group="${groupId}"][data-criterion="${criterion}"]`);
+            const stars = starsContainer.querySelectorAll('.star');
+            
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.remove('empty');
+                    star.classList.add('filled');
+                } else {
+                    star.classList.remove('filled');
+                    star.classList.add('empty');
+                }
+            });
+            
+            // حساب المتوسط
+            updateGroupAverage(groupId);
+        }
+
+        // تحديث متوسط المجموعة
+        function updateGroupAverage(groupId) {
+            const group = groupsData.find(g => g.id === groupId);
+            const ratings = Object.values(group.ratings);
+            const validRatings = ratings.filter(r => r > 0);
+            
+            if (validRatings.length > 0) {
+                group.average = validRatings.reduce((sum, rating) => sum + rating, 0) / validRatings.length;
+            } else {
+                group.average = 0;
+            }
+            
+            // تحديث العرض
+            document.getElementById(`average-${groupId}`).textContent = group.average.toFixed(1);
+            
+            // تحديث الرسالة التحفيزية
+            updateMotivationalMessage(groupId, group.average);
+        }
+
+        // تحديث الرسالة التحفيزية
+        function updateMotivationalMessage(groupId, average) {
+            const motivationElement = document.getElementById(`motivation-${groupId}`);
+            
+            if (average === 0) {
+                motivationElement.textContent = '';
+                return;
+            }
+            
+            let level;
+            if (average <= 1.5) level = 1;
+            else if (average <= 2.5) level = 2;
+            else if (average <= 3.5) level = 3;
+            else if (average <= 4.5) level = 4;
+            else level = 5;
+            
+            const messages = motivationalMessages[level];
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            motivationElement.textContent = randomMessage;
+        }
+
+
+
+        // عرض الترتيب
+        function showRanking() {
+            const validGroups = groupsData.filter(group => group.average > 0);
+            
+            if (validGroups.length === 0) {
+                alert('يرجى تقييم مجموعة واحدة على الأقل!');
+                return;
+            }
+            
+            validGroups.sort((a, b) => b.average - a.average);
+            
+            const rankingList = document.getElementById('rankingList');
+            rankingList.innerHTML = '';
+            
+            validGroups.forEach((group, index) => {
+                const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : '🏅';
+                
+                // رسائل تحفيزية حسب المركز
+                const rankMessages = {
+                    0: ['مبروك الفوز! 🎉', 'أنتم الأفضل! 👑', 'إنجاز رائع! ✨'],
+                    1: ['المركز الثاني ممتاز! 🌟', 'أداء مميز جداً! 💫', 'تقدم رائع! 🚀'],
+                    2: ['المركز الثالث رائع! 🎯', 'عمل جماعي مميز! 👏', 'استمروا بالتميز! 💪']
+                };
+                
+                const defaultMessages = ['أداء جيد! 👍', 'عمل رائع! ⭐', 'استمروا! 💪'];
+                const messages = rankMessages[index] || defaultMessages;
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                
+                const rankItem = document.createElement('div');
+                rankItem.className = 'flex items-center justify-between bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 border-2 border-transparent hover:border-blue-200 transition-all duration-300';
+                
+                rankItem.innerHTML = `
+                    <div class="flex items-center space-x-4">
+                        <span class="medal">${medal}</span>
+                        <div>
+                            <h4 class="font-bold text-lg text-gray-800">${group.name}</h4>
+                            <p class="text-gray-600">المركز ${index + 1}</p>
+                            <p class="text-sm font-semibold text-purple-600">${randomMessage}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="text-2xl font-bold text-blue-600">${group.average.toFixed(1)} ⭐</p>
+                        <p class="text-sm text-gray-500">من 5.0</p>
+                    </div>
+                `;
+                
+                rankingList.appendChild(rankItem);
+            });
+            
+            document.getElementById('rankingModal').classList.remove('hidden');
+            document.getElementById('rankingModal').classList.add('flex');
+        }
+
+        // إخفاء الترتيب
+        function hideRanking() {
+            document.getElementById('rankingModal').classList.add('hidden');
+            document.getElementById('rankingModal').classList.remove('flex');
+        }
+
+        // إغلاق النافذة عند النقر خارجها
+        document.getElementById('rankingModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                hideRanking();
+            }
+        });
+
+        // بيانات لعبة الأرقام
+        let selectedNumbers = [];
+        let numberResults = {};
+        
+        const encouragingMessages = [
+            "رائعة! 🌟", "مميزة! ✨", "أحسنتِ! 👏", "إبداع! 🎨", "ممتازة! ⭐",
+            "متألقة! 💫", "مبدعة! 🚀", "رائعة جداً! 🌈", "فخورة بك! 💎", "استمري! 🔥"
+        ];
+        
+        // توليد نقاط عشوائية من 1 إلى 5
+        function generateRandomPoints() {
+            return Math.floor(Math.random() * 5) + 1; // من 1 إلى 5
+        }
+        
+        // اختيار رسالة تحفيزية عشوائية
+        function getRandomMessage() {
+            return encouragingMessages[Math.floor(Math.random() * encouragingMessages.length)];
+        }
+
+        // إنشاء شبكة الأرقام
+        function initializeNumbersGame() {
+            const numbersGrid = document.getElementById('numbersGrid');
+            
+            // مجموعة ألوان متنوعة للأزرار
+            const buttonColors = [
+                'bg-gradient-to-br from-pink-400 to-rose-500 hover:from-pink-500 hover:to-rose-600',
+                'bg-gradient-to-br from-purple-400 to-indigo-500 hover:from-purple-500 hover:to-indigo-600',
+                'bg-gradient-to-br from-blue-400 to-cyan-500 hover:from-blue-500 hover:to-cyan-600',
+                'bg-gradient-to-br from-green-400 to-emerald-500 hover:from-green-500 hover:to-emerald-600',
+                'bg-gradient-to-br from-yellow-400 to-orange-500 hover:from-yellow-500 hover:to-orange-600',
+                'bg-gradient-to-br from-red-400 to-pink-500 hover:from-red-500 hover:to-pink-600',
+                'bg-gradient-to-br from-indigo-400 to-purple-500 hover:from-indigo-500 hover:to-purple-600',
+                'bg-gradient-to-br from-teal-400 to-blue-500 hover:from-teal-500 hover:to-blue-600'
+            ];
+            
+            for (let i = 1; i <= 15; i++) {
+                // إنشاء زر الرقم
+                const numberButton = document.createElement('button');
+                const colorClass = buttonColors[(i - 1) % buttonColors.length];
+                numberButton.className = `number-button ${colorClass} text-white font-bold text-xl py-4 px-4 rounded-xl shadow-lg hover:shadow-xl`;
+                numberButton.textContent = i;
+                numberButton.onclick = () => selectNumber(i);
+                numberButton.id = `number-${i}`;
+                numbersGrid.appendChild(numberButton);
+            }
+        }
+
+        // اختيار رقم
+        function selectNumber(number) {
+            const buttonElement = document.getElementById(`number-${number}`);
+            
+            // إذا كان الرقم محدد مسبقاً، إعادة توليد النقاط والرسالة
+            if (selectedNumbers.includes(number)) {
+                const points = generateRandomPoints();
+                const message = getRandomMessage();
+                numberResults[number] = { points, message };
+                showResult(number, points, message);
+                return;
+            }
+            
+            // إضافة الرقم للمحددة
+            selectedNumbers.push(number);
+            
+            // توليد النقاط والرسالة
+            const points = generateRandomPoints();
+            const message = getRandomMessage();
+            numberResults[number] = { points, message };
+            
+            // عرض النتيجة
+            showResult(number, points, message);
+        }
+
+        // عرض النتيجة
+        function showResult(number, points, message) {
+            const buttonElement = document.getElementById(`number-${number}`);
+            
+            // تحديد التأثير الخاص للنقاط العالية
+            const isHighScore = points >= 4;
+            
+            if (isHighScore) {
+                buttonElement.className = 'number-button bg-gradient-to-br from-yellow-400 to-orange-500 text-white font-bold text-sm py-4 px-2 rounded-xl shadow-lg golden-effect';
+            } else {
+                buttonElement.className = 'number-button bg-gradient-to-br from-green-400 to-blue-500 text-white font-bold text-sm py-4 px-2 rounded-xl shadow-lg';
+            }
+            
+            // عرض النقاط والرسالة على الزر
+            buttonElement.innerHTML = `
+                <div class="text-center">
+                    <div class="text-lg font-bold mb-1">
+                        ${points} ⭐
+                    </div>
+                    <div class="text-xs font-semibold">
+                        ${message}
+                    </div>
+                </div>
+            `;
+        }
+
+        // تهيئة التطبيق
+        initializeGroups();
+        initializeNumbersGame();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abaf57d30b39350',t:'MTc2NTM1MTAwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
