@@ -1,0 +1,1480 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التأمل الذاتي للمعلمة</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            box-sizing: border-box;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+        
+        * {
+            font-family: 'Tajawal', sans-serif;
+        }
+        
+        .reflection-card {
+            transition: all 0.3s ease;
+        }
+        
+        .reflection-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .completed-section {
+            background: linear-gradient(135deg, #10b981, #059669);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-pink-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-4xl">
+        <!-- Header -->
+        <div class="text-center mb-8">
+            <div class="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full mb-4">
+                <span class="text-3xl">🧘‍♀️</span>
+            </div>
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">التأمل الذاتي للمعلمة شذا الردادي</h1>
+            <p class="text-gray-600 text-lg">رحلة التطوير المهني والنمو الشخصي</p>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="bg-white rounded-lg shadow-md p-6 mb-8">
+            <div class="flex justify-between items-center mb-2">
+                <span class="text-sm font-medium text-gray-700">التقدم العام</span>
+                <span class="text-sm font-medium text-gray-700" id="progressText">0%</span>
+            </div>
+            <div class="w-full bg-gray-200 rounded-full h-3">
+                <div class="progress-bar bg-gradient-to-r from-purple-500 to-pink-500 h-3 rounded-full" id="progressBar" style="width: 0%"></div>
+            </div>
+        </div>
+
+        <!-- Course Lessons Button -->
+        <div class="text-center mb-8">
+            <!-- Continuous Reflection Message -->
+            <div class="bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-lg p-6 mb-6 max-w-3xl mx-auto">
+                <div class="flex items-center justify-center mb-3">
+                    <span class="text-2xl ml-3">🌟</span>
+                    <h3 class="text-lg font-semibold text-amber-800">رحلة التأمل المستمرة</h3>
+                </div>
+                <p class="text-amber-700 text-center leading-relaxed">
+                    رحلة التأمل تكون مستمرة على مدار العام الدراسي من خلال تأمل المعلمة بكل وحدة من وحدات المقرر، 
+                    مما يساعد على التطوير المهني المستمر وتحسين الممارسات التعليمية بشكل دوري ومنتظم.
+                </p>
+            </div>
+            
+            <button class="bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700 text-white px-8 py-4 rounded-lg transition-all transform hover:scale-105 shadow-lg" onclick="showCourseLessons()">
+                <div class="flex items-center justify-center">
+                    <span class="text-2xl ml-3">📚</span>
+                    <div class="text-right">
+                        <div class="text-lg font-bold">قائمة دروس المقرر</div>
+                        <div class="text-sm opacity-90">عرض جميع دروس المنهج</div>
+                    </div>
+                </div>
+            </button>
+        </div>
+
+        <!-- SWOT Method -->
+        <div id="swotMethod" class="space-y-6 mb-8">
+            <div class="bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-lg p-6">
+                <h2 class="text-2xl font-bold mb-2">تحليل SWOT للممارسات التعليمية</h2>
+                <p>تحليل شامل لنقاط القوة والضعف والفرص والتهديدات</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-xl">💪</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-green-700">نقاط القوة (Strengths)</h4>
+                    </div>
+                    <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" rows="12">• امتلاك خبرة معرفية ومهارات تقنية متخصصة.
+• القدرة على إدارة الصف وتحفيز الطالبات.
+• شغف بالعملية التعليمية وحب المهنة.
+• مرونة في تعديل طرق التدريس بما يتناسب مع الموقف.
+• الالتزام والانضباط في أداء المهام التعليمية.
+• بناء علاقات إيجابية وداعمة مع المعلمات والطالبات.
+• استخدام استراتيجيات تدريس متنوعة (أنشطة، تعليم بالتلعيب، تعليم متعاون).
+• مهارة في طرح أسئلة تحفز التفكير النقدي والإبداعي.
+• تنمية مهارات الطالبات من خلال ربط الدروس بالحياة الواقعية.
+• استخدام أساليب تقويم متنوعة (تكويني، مرحلي، نهائي) بطرق مختلفة (شفوي، عملي، إلكتروني).
+• القدرة على توظيف أدوات رقمية حديثة Canva، Quizzez، ChatGPT، وتوظيفها في تصميم أنشطة الدرس.
+• مواكبة لمستجدات التقنية بما يتماشى مع رؤية السعودية 2030.</textarea>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-xl">⚠️</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-red-700">نقاط الضعف (Weaknesses)</h4>
+                    </div>
+                    <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" rows="8">• الاعتماد أحيانًا على طرق تقليدية في شرح بعض المفاهيم.
+• عدم توفر أجهزة حاسب آلي لدى بعض الطالبات مما يؤدي إلى البحث عن توفر برامج بديلة لمواكبة المنهج المقرر 
+• تفاوت مستويات الطالبات في إتقان الأدوات التقنية مما يبطئ سير الدرس.
+• صعوبة تطبيق كل المشاريع العملية بسبب تعطل الأجهزة أو عدم توفر الإنترنت.</textarea>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-xl">🚀</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-blue-700">الفرص (Opportunities)</h4>
+                    </div>
+                    <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="8">• الاستفادة من برامج التطوير المهني والتحول الرقمي المقدمة من وزارة التعليم.
+• فتح آفاق الإبداع عبر دمج مهارات القرن 21 (التفكير النقدي، الإبداع، حل المشكلات).
+• توفر أدوات الذكاء الاصطناعي التي تسهل إعداد الدروس والأنشطة.
+• ارتفاع وعي الطالبات بالتقنية مما يسهل دمج أنشطة حديثة.
+• توفر تقنيات الواقع المعزز والواقع الافتراضي في التعليم.
+• المبادرات التعليمية المحلية والعالمية لدعم المعلمين المبدعين.
+• إمكانية المشاركة في منصات تعليمية لبناء محتوى تفاعلي رقمي.
+• حضور ورش العمل والدورات التدريبية في مجال التقنية التعليمية.
+• الانضمام إلى مجتمعات التعلم المهنية مع المعلمات الأخريات.
+• الاستفادة من المنصات التعليمية الرقمية مثل منصة مدرستي وعين.
+• تطبيق استراتيجيات التعلم النشط والتعلم القائم على المشاريع.
+• تبادل الخبرات مع المعلمات المتميزات في المدرسة والمنطقة.</textarea>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-orange-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-xl">⚡</span>
+                        </div>
+                        <h4 class="text-lg font-semibold text-orange-700">التهديدات (Threats)</h4>
+                    </div>
+                    <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" rows="8">• ضعف مشاركة بعض أولياء الأمور في العملية التعليمية.
+• فجوة رقمية بين الطالبات (البعض لديه وصول جيد للتقنية والبعض لا).
+• التنافسية العالية بين المعلمين في التميز والابتكار.
+• عزوف بعض الطالبات عن المشاركة أو ضعف الدافعية للتعلم.
+• تحديات جيل الألفية والجيل الرقمي (سرعة الملل، ضعف التركيز).
+• سرعة تطور مجالات التقنية مما يجعل بعض المحتوى سريع التقادم.</textarea>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h4 class="text-lg font-semibold text-gray-800 mb-4">خطة العمل المستقبلية</h4>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">كيف ستستفيدين من نقاط القوة؟</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" rows="2" placeholder="خطة الاستفادة من نقاط القوة..."></textarea>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">كيف ستعالجين نقاط الضعف؟</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent" rows="2" placeholder="خطة معالجة نقاط الضعف..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="bg-purple-500 hover:bg-purple-600 text-white px-8 py-3 rounded-lg transition-colors" onclick="completeReflectionMethod('swot')">
+                    حفظ التحليل ✓
+                </button>
+            </div>
+        </div>
+
+        <!-- Reflection Questions Method -->
+        <div id="questionsMethod" class="space-y-6 mb-8">
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-6">
+                <h2 class="text-2xl font-bold mb-2">أسئلة التفكير التأملي</h2>
+                <p>بطاقات أسئلة دورية للتأمل العميق في الممارسات التعليمية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xl">🔄</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">بطاقة التغيير</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="block text-sm font-medium text-gray-700">ما التغيير الذي سأقوم به في تدريسي غداً؟</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="4" placeholder="اكتبي التغيير المطلوب..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xl">⭐</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">بطاقة القرارات</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="block text-sm font-medium text-gray-700">ما أفضل قرار اتخذته هذا الأسبوع؟</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" rows="4" placeholder="اكتبي أفضل قراراتك..."></textarea>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xl">🎯</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">بطاقة التحديات</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <label class="block text-sm font-medium text-gray-700">ما التحدي المتكرر وكيف سأعالجه؟</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" rows="4" placeholder="اكتبي التحدي وخطة المعالجة..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg transition-colors" onclick="completeReflectionMethod('questions')">
+                    حفظ التأملات ✓
+                </button>
+            </div>
+        </div>
+
+        <!-- 3-2-1 Method -->
+        <div id="method321" class="space-y-6 mb-8">
+            <div class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-6">
+                <h2 class="text-2xl font-bold mb-2">روتين 3-2-1 تأملي</h2>
+                <p>تقييم سريع وفعال بعد كل حصة دراسية</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xl font-bold text-green-600">3</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">ثلاثة أشياء نجحت</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="النجاح الأول...">
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="النجاح الثاني...">
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="النجاح الثالث...">
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xl font-bold text-yellow-600">2</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">شيئان يحتاجان تحسين</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent" placeholder="التحسين الأول...">
+                        <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent" placeholder="التحسين الثاني...">
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-6">
+                    <div class="text-center mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                            <span class="text-xl font-bold text-red-600">1</span>
+                        </div>
+                        <h4 class="font-semibold text-gray-800">شيء واحد سأغيّره مستقبلاً</h4>
+                    </div>
+                    <div class="space-y-3">
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" rows="4" placeholder="اكتبي التغيير المطلوب وخطة التنفيذ..."></textarea>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button class="bg-green-500 hover:bg-green-600 text-white px-8 py-3 rounded-lg transition-colors" onclick="completeReflectionMethod('321')">
+                    حفظ التقييم ✓
+                </button>
+            </div>
+        </div>
+
+        <!-- Course Selection Section -->
+        <div id="courseSelectionSection" class="space-y-6 mb-8" style="display: none;">
+            <div class="bg-gradient-to-r from-indigo-500 to-indigo-600 text-white rounded-lg p-6">
+                <h2 class="text-2xl font-bold mb-2">اختيار المقرر</h2>
+                <p>اختاري المقرر الذي تريدين عرض دروسه</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer" onclick="showCourseDetails('digital2')">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">💻</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">تقنية رقمية 2</h3>
+                        <p class="text-gray-600 mb-4">المرحلة الثانوية - الفصل الأول</p>
+                        <div class="bg-blue-50 rounded-lg p-3">
+                            <p class="text-sm text-blue-700">5 دروس متاحة</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all transform hover:scale-105 cursor-pointer" onclick="showCourseDetails('digital3')">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl">🖥️</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">تقنية رقمية 3</h3>
+                        <p class="text-gray-600 mb-4">المرحلة الثانوية - الفصل الثاني</p>
+                        <div class="bg-green-50 rounded-lg p-3">
+                            <p class="text-sm text-green-700">3 دروس متاحة</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Digital Technology 2 Lessons -->
+        <div id="digital2LessonsSection" class="space-y-6 mb-8" style="display: none;">
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-6">
+                <h2 class="text-2xl font-bold mb-2">دروس تقنية رقمية 2</h2>
+                <p>جميع دروس مقرر تقنية رقمية 2 مع إمكانية التأمل في كل درس</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="selectLesson('تقنية رقمية 2 - الدرس الأول: علم البيانات')">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-lg font-bold text-blue-600">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">الدرس الأول</h4>
+                            <p class="text-sm text-gray-600">علم البيانات</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="selectLesson('تقنية رقمية 2 - الدرس الثاني: الذكاء الاصطناعي')">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-lg font-bold text-green-600">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">الدرس الثاني</h4>
+                            <p class="text-sm text-gray-600">الذكاء الاصطناعي</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="selectLesson('تقنية رقمية 2 - الدرس الثالث: البرمجة بلغة HTML')">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-lg font-bold text-yellow-600">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">الدرس الثالث</h4>
+                            <p class="text-sm text-gray-600">البرمجة بلغة HTML</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="selectLesson('تقنية رقمية 2 - الدرس الرابع: التصميم الرسومي')">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-lg font-bold text-purple-600">4</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">الدرس الرابع</h4>
+                            <p class="text-sm text-gray-600">التصميم الرسومي</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="selectLesson('تقنية رقمية 2 - الدرس الخامس: التسويق الالكتروني')">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-lg font-bold text-red-600">5</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">الدرس الخامس</h4>
+                            <p class="text-sm text-gray-600">التسويق الالكتروني</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Digital Technology 3 Lessons -->
+        <div id="digital3LessonsSection" class="space-y-6 mb-8" style="display: none;">
+            <div class="bg-gradient-to-r from-green-500 to-green-600 text-white rounded-lg p-6">
+                <h2 class="text-2xl font-bold mb-2">دروس تقنية رقمية 3</h2>
+                <p>جميع دروس مقرر تقنية رقمية 3 مع إمكانية التأمل في كل درس</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="selectLesson('تقنية رقمية 3 - الدرس الأول: أساسيات تخطيط المشروع')">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-lg font-bold text-blue-600">1</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">الدرس الأول</h4>
+                            <p class="text-sm text-gray-600">أساسيات تخطيط المشروع</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="selectLesson('تقنية رقمية 3 - الدرس الثاني: دورة حياة النظام')">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-lg font-bold text-green-600">2</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">الدرس الثاني</h4>
+                            <p class="text-sm text-gray-600">دورة حياة النظام</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white rounded-lg shadow-md p-4 hover:shadow-lg transition-shadow cursor-pointer" onclick="selectLesson('تقنية رقمية 3 - الدرس الثالث: تطبيقات الهواتف الذكية')">
+                    <div class="flex items-center mb-3">
+                        <div class="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center ml-3">
+                            <span class="text-lg font-bold text-yellow-600">3</span>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800">الدرس الثالث</h4>
+                            <p class="text-sm text-gray-600">تطبيقات الهواتف الذكية</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to Main Button -->
+        <div class="text-center mb-8" id="backToMainButton" style="display: none;">
+            <button class="bg-gray-500 hover:bg-gray-600 text-white px-6 py-2 rounded-lg transition-colors" onclick="showMainReflection()">
+                ← العودة للأقسام الأساسية
+            </button>
+        </div>
+
+        <!-- Original Reflection Sections -->
+        <div class="space-y-6" id="reflectionSections">
+            <!-- Section 1: Teaching Methods -->
+            <div id="teachingMethodsSection" class="space-y-6 mb-8">
+                <div class="bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-2">طرق التدريس</h2>
+                    <p>تأمل في الاستراتيجيات التعليمية المستخدمة</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">📚</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">الطرق الفعّالة</h4>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-medium text-gray-700">ما أكثر طرق التدريس فعالية التي استخدمتها هذا الأسبوع؟</label>
+                            <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="4" placeholder="اكتبي الطرق الفعّالة..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">⚠️</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">التحديات</h4>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-medium text-gray-700">ما التحديات التي واجهتها في التدريس؟</label>
+                            <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent" rows="4" placeholder="اكتبي التحديات والصعوبات..."></textarea>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 rounded-lg transition-colors" onclick="completeSection('methods')">
+                        حفظ التأملات ✓
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 2: Student Interaction -->
+            <div class="reflection-card bg-white rounded-lg shadow-md p-6" data-section="interaction">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center ml-4">
+                        <span class="text-2xl">👥</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">التفاعل مع الطلاب</h3>
+                        <p class="text-gray-600">تأمل في العلاقات والتواصل مع الطلاب</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">كيف كان مستوى تفاعل الطلاب في الحصص؟</label>
+                        <div class="flex space-x-4 space-x-reverse">
+                            <label class="flex items-center">
+                                <input type="radio" name="interaction_level" value="excellent" class="ml-2">
+                                <span>ممتاز</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="interaction_level" value="good" class="ml-2">
+                                <span>جيد</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="interaction_level" value="needs_improvement" class="ml-2">
+                                <span>يحتاج تحسين</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">ما الاستراتيجيات التي يمكن تطبيقها لتحسين التفاعل؟</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" rows="3" placeholder="اكتبي أفكارك هنا..."></textarea>
+                    </div>
+                    
+                    <button class="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition-colors" onclick="completeSection('interaction')">
+                        إكمال هذا القسم ✓
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 3: Professional Development -->
+            <div id="professionalDevelopmentSection" class="space-y-6 mb-8">
+                <div class="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white rounded-lg p-6">
+                    <h2 class="text-2xl font-bold mb-2">التطوير المهني</h2>
+                    <p>تأمل في النمو والتعلم المستمر</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">🌱</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">المهارات الجديدة</h4>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-medium text-gray-700">ما المهارات الجديدة التي تعلمتها مؤخراً؟</label>
+                            <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-yellow-500 focus:border-transparent" rows="4" placeholder="اكتبي المهارات والإنجازات..."></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg shadow-md p-6">
+                        <div class="text-center mb-4">
+                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                                <span class="text-xl">🎯</span>
+                            </div>
+                            <h4 class="font-semibold text-gray-800">أهداف التطوير</h4>
+                        </div>
+                        <div class="space-y-3">
+                            <label class="block text-sm font-medium text-gray-700">ما أهدافك للتطوير في الفترة القادمة؟</label>
+                            <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="الهدف الأول...">
+                            <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="الهدف الثاني...">
+                            <input type="text" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="الهدف الثالث...">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <button class="bg-yellow-500 hover:bg-yellow-600 text-white px-8 py-3 rounded-lg transition-colors" onclick="completeSection('development')">
+                        حفظ التأملات ✓
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 4: Post-Lesson Reflection -->
+            <div class="reflection-card bg-white rounded-lg shadow-md p-6" data-section="postlesson">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center ml-4">
+                        <span class="text-2xl">📝</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">التأمل بعد الحصة</h3>
+                        <p class="text-gray-600">تقييم مباشر لما حدث في الحصة</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">كيف حققت أهداف الدرس؟</label>
+                        <div class="space-y-2">
+                            <label class="flex items-center">
+                                <input type="radio" name="lesson_goals" value="fully" class="ml-2">
+                                <span>تم تحقيق جميع الأهداف</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="lesson_goals" value="partially" class="ml-2">
+                                <span>تم تحقيق معظم الأهداف</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="lesson_goals" value="minimal" class="ml-2">
+                                <span>تم تحقيق بعض الأهداف</span>
+                            </label>
+                            <label class="flex items-center">
+                                <input type="radio" name="lesson_goals" value="none" class="ml-2">
+                                <span>لم يتم تحقيق الأهداف</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">ما أبرز سلوك طلابي لاحظته؟</label>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" rows="2" placeholder="اكتبي ملاحظاتك حول سلوك الطلاب..."></textarea>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">ما أداة تقنية استخدمتها وكانت فعّالة؟</label>
+                        <div class="grid grid-cols-2 gap-2 mb-3">
+                            <label class="flex items-center p-2 border rounded-lg hover:bg-orange-50 cursor-pointer">
+                                <input type="checkbox" class="ml-2">
+                                <span>العرض التقديمي</span>
+                            </label>
+                            <label class="flex items-center p-2 border rounded-lg hover:bg-orange-50 cursor-pointer">
+                                <input type="checkbox" class="ml-2">
+                                <span>الفيديو التعليمي</span>
+                            </label>
+                            <label class="flex items-center p-2 border rounded-lg hover:bg-orange-50 cursor-pointer">
+                                <input type="checkbox" class="ml-2">
+                                <span>التطبيقات التفاعلية</span>
+                            </label>
+                            <label class="flex items-center p-2 border rounded-lg hover:bg-orange-50 cursor-pointer">
+                                <input type="checkbox" class="ml-2">
+                                <span>السبورة الذكية</span>
+                            </label>
+                        </div>
+                        <textarea class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent" rows="2" placeholder="اكتبي تفاصيل إضافية حول الأدوات المستخدمة..."></textarea>
+                    </div>
+                    
+                    <button class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition-colors" onclick="completeSection('postlesson')">
+                        إكمال هذا القسم ✓
+                    </button>
+                </div>
+            </div>
+
+            <!-- Section 5: Self-Care -->
+            <div class="reflection-card bg-white rounded-lg shadow-md p-6" data-section="selfcare">
+                <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 bg-pink-100 rounded-full flex items-center justify-center ml-4">
+                        <span class="text-2xl">💝</span>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-800">الرعاية الذاتية</h3>
+                        <p class="text-gray-600">تأمل في الصحة النفسية والجسدية</p>
+                    </div>
+                </div>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">كيف تقيمين مستوى الضغط النفسي لديك؟</label>
+                        <div class="flex items-center space-x-4 space-x-reverse">
+                            <span class="text-sm text-gray-600">منخفض</span>
+                            <input type="range" min="1" max="10" value="5" class="flex-1" id="stressLevel">
+                            <span class="text-sm text-gray-600">مرتفع</span>
+                            <span class="bg-pink-100 px-3 py-1 rounded-full text-sm font-medium" id="stressValue">5</span>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">ما الأنشطة التي تساعدك على الاسترخاء؟</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <label class="flex items-center p-2 border rounded-lg hover:bg-pink-50 cursor-pointer">
+                                <input type="checkbox" class="ml-2">
+                                <span>القراءة</span>
+                            </label>
+                            <label class="flex items-center p-2 border rounded-lg hover:bg-pink-50 cursor-pointer">
+                                <input type="checkbox" class="ml-2">
+                                <span>المشي</span>
+                            </label>
+                            <label class="flex items-center p-2 border rounded-lg hover:bg-pink-50 cursor-pointer">
+                                <input type="checkbox" class="ml-2">
+                                <span>التأمل</span>
+                            </label>
+                            <label class="flex items-center p-2 border rounded-lg hover:bg-pink-50 cursor-pointer">
+                                <input type="checkbox" class="ml-2">
+                                <span>الرياضة</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <button class="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg transition-colors" onclick="completeSection('selfcare')">
+                        إكمال هذا القسم ✓
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+
+        <!-- Summary Section -->
+        <div class="bg-white rounded-lg shadow-md p-6 mt-8" id="summarySection" style="display: none;">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <span class="text-3xl">🎉</span>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-2">أحسنت! لقد أكملت جلسة التأمل الذاتي</h3>
+                <p class="text-gray-600 mb-6">التأمل الذاتي خطوة مهمة في رحلة التطوير المهني</p>
+                
+                <div class="bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg p-6 mb-6">
+                    <h4 class="font-semibold text-gray-800 mb-3">نصائح للمتابعة:</h4>
+                    <ul class="text-right space-y-2 text-gray-700">
+                        <li>• راجعي تأملاتك بانتظام</li>
+                        <li>• ضعي خطة عمل للتحسينات المطلوبة</li>
+                        <li>• شاركي خبراتك مع الزميلات</li>
+                        <li>• احتفلي بإنجازاتك الصغيرة</li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <button class="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white px-8 py-3 rounded-lg transition-all transform hover:scale-105 ml-4" onclick="printReflectionReport()">
+                        طباعة تقرير التأمل 🖨️
+                    </button>
+                    <button class="bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white px-8 py-3 rounded-lg transition-all transform hover:scale-105" onclick="resetReflection()">
+                        بدء جلسة تأمل جديدة
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let completedSections = new Set();
+        let completedMethods = new Set();
+        const totalSections = 5;
+        let selectedLesson = '';
+        let selectedDate = '';
+
+        // Update stress level display
+        document.getElementById('stressLevel').addEventListener('input', function() {
+            document.getElementById('stressValue').textContent = this.value;
+        });
+
+        // Show course lessons
+        function showCourseLessons() {
+            // Hide all other sections
+            document.getElementById('swotMethod').style.display = 'none';
+            document.getElementById('questionsMethod').style.display = 'none';
+            document.getElementById('method321').style.display = 'none';
+            document.getElementById('reflectionSections').style.display = 'none';
+            document.getElementById('digital2LessonsSection').style.display = 'none';
+            document.getElementById('digital3LessonsSection').style.display = 'none';
+            
+            // Show course selection section
+            document.getElementById('courseSelectionSection').style.display = 'block';
+            document.getElementById('backToMainButton').style.display = 'block';
+            
+            // Scroll to course selection section
+            document.getElementById('courseSelectionSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Show course details
+        function showCourseDetails(courseType) {
+            // Hide course selection
+            document.getElementById('courseSelectionSection').style.display = 'none';
+            
+            // Show specific course lessons
+            if (courseType === 'digital2') {
+                document.getElementById('digital2LessonsSection').style.display = 'block';
+                document.getElementById('digital2LessonsSection').scrollIntoView({ behavior: 'smooth' });
+            } else if (courseType === 'digital3') {
+                document.getElementById('digital3LessonsSection').style.display = 'block';
+                document.getElementById('digital3LessonsSection').scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Select a lesson
+        function selectLesson(lessonName) {
+            selectedLesson = lessonName;
+            selectedDate = new Date().toLocaleDateString('ar-SA');
+            
+            alert(`تم اختيار: ${lessonName}\n\nيمكنك الآن التأمل في هذا الدرس باستخدام الأساليب المختلفة المتاحة.`);
+            
+            // Return to main reflection after selecting lesson
+            setTimeout(() => {
+                showMainReflection();
+            }, 1500);
+        }
+
+        // Show reflection method
+        function showReflectionMethod(method) {
+            // Hide optional methods
+            document.getElementById('questionsMethod').style.display = 'none';
+            document.getElementById('method321').style.display = 'none';
+            document.getElementById('reflectionSections').style.display = 'none';
+            document.getElementById('courseLessonsSection').style.display = 'none';
+            document.getElementById('backToMainButton').style.display = 'block';
+            
+            // Show selected method (SWOT stays visible always)
+            if (method === 'questions') {
+                document.getElementById('questionsMethod').style.display = 'block';
+            } else if (method === '321') {
+                document.getElementById('method321').style.display = 'block';
+            } else if (method === 'swot') {
+                // SWOT is always visible, just scroll to it
+                document.getElementById('swotMethod').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('backToMainButton').style.display = 'none';
+                document.getElementById('reflectionSections').style.display = 'block';
+                return;
+            }
+        }
+
+        // Show main reflection sections
+        function showMainReflection() {
+            document.getElementById('questionsMethod').style.display = 'none';
+            document.getElementById('method321').style.display = 'none';
+            document.getElementById('courseSelectionSection').style.display = 'none';
+            document.getElementById('digital2LessonsSection').style.display = 'none';
+            document.getElementById('digital3LessonsSection').style.display = 'none';
+            document.getElementById('backToMainButton').style.display = 'none';
+            document.getElementById('reflectionSections').style.display = 'block';
+            document.getElementById('swotMethod').style.display = 'block';
+            // SWOT stays visible always
+        }
+
+        // Complete reflection method
+        function completeReflectionMethod(method) {
+            completedMethods.add(method);
+            
+            // Show success message
+            const methodNames = {
+                'questions': 'أسئلة التفكير التأملي',
+                '321': 'روتين 3-2-1 تأملي',
+                'swot': 'تحليل SWOT'
+            };
+            
+            alert(`تم حفظ ${methodNames[method]} بنجاح! 🎉`);
+            
+            // Optionally return to main view
+            setTimeout(() => {
+                const userChoice = confirm('هل تريدين العودة للصفحة الرئيسية لاختيار أسلوب آخر؟');
+                if (userChoice) {
+                    showMainReflection();
+                }
+            }, 1000);
+        }
+
+        function completeSection(sectionName) {
+            if (completedSections.has(sectionName)) return;
+            
+            completedSections.add(sectionName);
+            
+            // Mark section as completed
+            const sectionElement = document.querySelector(`[data-section="${sectionName}"]`);
+            sectionElement.classList.add('completed-section');
+            sectionElement.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+            sectionElement.style.color = 'white';
+            
+            // Update button
+            const button = sectionElement.querySelector('button');
+            button.innerHTML = 'تم الإكمال ✓';
+            button.disabled = true;
+            button.classList.remove('hover:bg-blue-600', 'hover:bg-green-600', 'hover:bg-yellow-600', 'hover:bg-pink-600');
+            button.classList.add('bg-white', 'text-green-600');
+            
+            // Update progress
+            updateProgress();
+            
+            // Show summary if all sections completed
+            if (completedSections.size === totalSections) {
+                setTimeout(() => {
+                    document.getElementById('summarySection').style.display = 'block';
+                    document.getElementById('summarySection').classList.add('fade-in');
+                    document.getElementById('summarySection').scrollIntoView({ behavior: 'smooth' });
+                }, 500);
+            }
+        }
+
+        function updateProgress() {
+            const progress = (completedSections.size / totalSections) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+            document.getElementById('progressText').textContent = Math.round(progress) + '%';
+        }
+
+        function resetReflection() {
+            completedSections.clear();
+            
+            // Reset all sections
+            document.querySelectorAll('.reflection-card').forEach(section => {
+                section.classList.remove('completed-section');
+                section.style.background = '';
+                section.style.color = '';
+                
+                // Reset forms
+                section.querySelectorAll('textarea, input[type="text"]').forEach(input => {
+                    input.value = '';
+                });
+                section.querySelectorAll('input[type="radio"], input[type="checkbox"]').forEach(input => {
+                    input.checked = false;
+                });
+                
+                // Reset buttons
+                const button = section.querySelector('button');
+                button.innerHTML = 'إكمال هذا القسم ✓';
+                button.disabled = false;
+                button.className = button.className.replace('bg-white text-green-600', '');
+                
+                // Restore original button colors
+                if (section.dataset.section === 'methods') {
+                    button.className = 'bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg transition-colors';
+                } else if (section.dataset.section === 'interaction') {
+                    button.className = 'bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg transition-colors';
+                } else if (section.dataset.section === 'development') {
+                    button.className = 'bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-2 rounded-lg transition-colors';
+                } else if (section.dataset.section === 'postlesson') {
+                    button.className = 'bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded-lg transition-colors';
+                } else if (section.dataset.section === 'selfcare') {
+                    button.className = 'bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-lg transition-colors';
+                } else if (section.dataset.section === 'reflectivequestions') {
+                    button.className = 'bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg transition-colors';
+                }
+            });
+            
+            // Reset stress level
+            document.getElementById('stressLevel').value = 5;
+            document.getElementById('stressValue').textContent = '5';
+            
+            // Hide summary
+            document.getElementById('summarySection').style.display = 'none';
+            
+            // Reset progress
+            updateProgress();
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Print reflection report
+        function printReflectionReport() {
+            const reportWindow = window.open('', '_blank');
+            const currentDate = new Date().toLocaleDateString('ar-SA');
+            const currentTime = new Date().toLocaleTimeString('ar-SA');
+            
+            // Collect all input data
+            function collectFormData() {
+                let formData = {};
+                
+                // SWOT Analysis Data
+                const swotTextareas = document.querySelectorAll('#swotMethod textarea');
+                if (swotTextareas.length > 0) {
+                    formData.swot = {
+                        strengths: swotTextareas[0]?.value || '',
+                        weaknesses: swotTextareas[1]?.value || '',
+                        opportunities: swotTextareas[2]?.value || '',
+                        threats: swotTextareas[3]?.value || '',
+                        strengthsPlan: swotTextareas[4]?.value || '',
+                        weaknessesPlan: swotTextareas[5]?.value || ''
+                    };
+                }
+                
+                // Reflection Questions Data
+                const questionsTextareas = document.querySelectorAll('#questionsMethod textarea');
+                if (questionsTextareas.length > 0) {
+                    formData.questions = {
+                        change: questionsTextareas[0]?.value || '',
+                        decisions: questionsTextareas[1]?.value || '',
+                        challenges: questionsTextareas[2]?.value || ''
+                    };
+                }
+                
+                // 3-2-1 Method Data
+                const method321Inputs = document.querySelectorAll('#method321 input, #method321 textarea');
+                if (method321Inputs.length > 0) {
+                    formData.method321 = {
+                        success1: method321Inputs[0]?.value || '',
+                        success2: method321Inputs[1]?.value || '',
+                        success3: method321Inputs[2]?.value || '',
+                        improvement1: method321Inputs[3]?.value || '',
+                        improvement2: method321Inputs[4]?.value || '',
+                        futureChange: method321Inputs[5]?.value || ''
+                    };
+                }
+                
+                // Teaching Methods Data
+                const teachingTextareas = document.querySelectorAll('#teachingMethodsSection textarea');
+                if (teachingTextareas.length > 0) {
+                    formData.teaching = {
+                        effective: teachingTextareas[0]?.value || '',
+                        challenges: teachingTextareas[1]?.value || ''
+                    };
+                }
+                
+                // Student Interaction Data
+                const interactionSection = document.querySelector('[data-section="interaction"]');
+                if (interactionSection) {
+                    const interactionLevel = interactionSection.querySelector('input[name="interaction_level"]:checked')?.value || '';
+                    const strategies = interactionSection.querySelector('textarea')?.value || '';
+                    formData.interaction = { level: interactionLevel, strategies: strategies };
+                }
+                
+                // Professional Development Data
+                const devTextareas = document.querySelectorAll('#professionalDevelopmentSection textarea, #professionalDevelopmentSection input[type="text"]');
+                if (devTextareas.length > 0) {
+                    formData.development = {
+                        newSkills: devTextareas[0]?.value || '',
+                        goal1: devTextareas[1]?.value || '',
+                        goal2: devTextareas[2]?.value || '',
+                        goal3: devTextareas[3]?.value || ''
+                    };
+                }
+                
+                // Post-lesson Reflection Data
+                const postLessonSection = document.querySelector('[data-section="postlesson"]');
+                if (postLessonSection) {
+                    const lessonGoals = postLessonSection.querySelector('input[name="lesson_goals"]:checked')?.value || '';
+                    const studentBehavior = postLessonSection.querySelectorAll('textarea')[0]?.value || '';
+                    const techTools = postLessonSection.querySelectorAll('textarea')[1]?.value || '';
+                    const checkedTools = Array.from(postLessonSection.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.nextElementSibling.textContent);
+                    formData.postLesson = { goals: lessonGoals, behavior: studentBehavior, tools: techTools, checkedTools: checkedTools };
+                }
+                
+                // Self-care Data
+                const selfCareSection = document.querySelector('[data-section="selfcare"]');
+                if (selfCareSection) {
+                    const stressLevel = document.getElementById('stressLevel')?.value || '5';
+                    const relaxationActivities = Array.from(selfCareSection.querySelectorAll('input[type="checkbox"]:checked')).map(cb => cb.nextElementSibling.textContent);
+                    formData.selfCare = { stress: stressLevel, activities: relaxationActivities };
+                }
+                
+                return formData;
+            }
+            
+            const formData = collectFormData();
+            
+            const reportContent = `
+                <!DOCTYPE html>
+                <html lang="ar" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>تقرير التأمل الذاتي</title>
+                    <style>
+                        @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
+                        body { 
+                            font-family: 'Tajawal', sans-serif; 
+                            margin: 20px; 
+                            line-height: 1.8; 
+                            color: #333;
+                            background: #fff;
+                        }
+                        .header { 
+                            text-align: center; 
+                            border-bottom: 3px solid #6366f1; 
+                            padding-bottom: 25px; 
+                            margin-bottom: 35px;
+                            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                            color: white;
+                            padding: 30px;
+                            border-radius: 10px;
+                            margin: -20px -20px 35px -20px;
+                        }
+                        .header h1 { margin: 0 0 10px 0; font-size: 28px; }
+                        .header h2 { margin: 0; font-size: 18px; opacity: 0.9; }
+                        
+                        .info-section { 
+                            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); 
+                            padding: 20px; 
+                            border-radius: 12px; 
+                            margin-bottom: 25px;
+                            border: 1px solid #e2e8f0;
+                            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                        }
+                        .info-section p { margin: 8px 0; font-size: 16px; }
+                        
+                        .lesson-info { 
+                            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); 
+                            padding: 20px; 
+                            border-radius: 12px; 
+                            margin-bottom: 25px; 
+                            border-right: 5px solid #3b82f6;
+                            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.1);
+                        }
+                        
+                        .section { 
+                            margin-bottom: 30px; 
+                            background: #fff;
+                            border: 1px solid #e5e7eb;
+                            border-radius: 12px;
+                            padding: 20px;
+                            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+                        }
+                        .section-title { 
+                            color: #1f2937; 
+                            font-weight: bold; 
+                            margin-bottom: 15px; 
+                            font-size: 20px;
+                            padding-bottom: 8px;
+                            border-bottom: 2px solid #e5e7eb;
+                        }
+                        
+                        .data-item { 
+                            background: #f9fafb; 
+                            padding: 15px; 
+                            margin: 10px 0; 
+                            border-radius: 8px;
+                            border-right: 4px solid #6366f1;
+                        }
+                        .data-label { 
+                            font-weight: bold; 
+                            color: #374151; 
+                            margin-bottom: 5px;
+                            font-size: 14px;
+                        }
+                        .data-value { 
+                            color: #1f2937; 
+                            background: white;
+                            padding: 10px;
+                            border-radius: 6px;
+                            border: 1px solid #e5e7eb;
+                            min-height: 20px;
+                        }
+                        
+                        .swot-grid { 
+                            display: grid; 
+                            grid-template-columns: 1fr 1fr; 
+                            gap: 15px; 
+                            margin: 15px 0;
+                        }
+                        .swot-item { 
+                            padding: 15px; 
+                            border-radius: 8px; 
+                            border: 1px solid #e5e7eb;
+                        }
+                        .swot-strengths { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-right: 4px solid #22c55e; }
+                        .swot-weaknesses { background: linear-gradient(135deg, #fee2e2, #fecaca); border-right: 4px solid #ef4444; }
+                        .swot-opportunities { background: linear-gradient(135deg, #dbeafe, #bfdbfe); border-right: 4px solid #3b82f6; }
+                        .swot-threats { background: linear-gradient(135deg, #fed7aa, #fdba74); border-right: 4px solid #f97316; }
+                        
+                        .method321-grid { 
+                            display: grid; 
+                            grid-template-columns: 1fr 1fr 1fr; 
+                            gap: 15px; 
+                            margin: 15px 0;
+                        }
+                        .method321-item { 
+                            padding: 15px; 
+                            border-radius: 8px; 
+                            border: 1px solid #e5e7eb;
+                        }
+                        .method321-success { background: linear-gradient(135deg, #dcfce7, #bbf7d0); border-right: 4px solid #22c55e; }
+                        .method321-improvement { background: linear-gradient(135deg, #fef3c7, #fde68a); border-right: 4px solid #f59e0b; }
+                        .method321-change { background: linear-gradient(135deg, #fee2e2, #fecaca); border-right: 4px solid #ef4444; }
+                        
+                        .checkbox-list { 
+                            display: flex; 
+                            flex-wrap: wrap; 
+                            gap: 10px; 
+                            margin: 10px 0;
+                        }
+                        .checkbox-item { 
+                            background: #6366f1; 
+                            color: white; 
+                            padding: 5px 12px; 
+                            border-radius: 20px; 
+                            font-size: 14px;
+                        }
+                        
+                        .stress-indicator { 
+                            display: inline-block; 
+                            background: #ef4444; 
+                            color: white; 
+                            padding: 8px 16px; 
+                            border-radius: 25px; 
+                            font-weight: bold;
+                            margin: 5px 0;
+                        }
+                        
+                        .footer { 
+                            margin-top: 40px; 
+                            text-align: center; 
+                            border-top: 2px solid #e5e7eb; 
+                            padding-top: 20px;
+                            color: #6b7280;
+                            font-style: italic;
+                        }
+                        
+                        @media print { 
+                            body { margin: 0; font-size: 12px; }
+                            .section { break-inside: avoid; }
+                            .swot-grid, .method321-grid { grid-template-columns: 1fr; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="header">
+                        <h1>🧘‍♀️ تقرير التأمل الذاتي للمعلمة</h1>
+                        <h2>المملكة العربية السعودية - وزارة التعليم</h2>
+                    </div>
+                    
+                    <div class="info-section">
+                        <p><strong>👩‍🏫 اسم المعلمة:</strong> شذا الردادي</p>
+                        <p><strong>👩‍💼 اسم مديرة المدرسة:</strong> فاطمة البدراني</p>
+                        <p><strong>📅 تاريخ التقرير:</strong> ${currentDate}</p>
+                        <p><strong>🕐 وقت الإنشاء:</strong> ${currentTime}</p>
+                        <p><strong>📊 نسبة الإنجاز:</strong> ${Math.round((completedSections.size / totalSections) * 100)}%</p>
+                    </div>
+                    
+                    ${selectedLesson ? `
+                    <div class="lesson-info">
+                        <h3>📚 معلومات الدرس المختار</h3>
+                        <p><strong>اسم الدرس:</strong> ${selectedLesson}</p>
+                        <p><strong>تاريخ اختيار الدرس:</strong> ${selectedDate}</p>
+                    </div>
+                    ` : ''}
+                    
+                    ${formData.swot ? `
+                    <div class="section">
+                        <h3 class="section-title">📊 تحليل SWOT للممارسات التعليمية</h3>
+                        <div class="swot-grid">
+                            <div class="swot-item swot-strengths">
+                                <div class="data-label">💪 نقاط القوة</div>
+                                <div class="data-value">${formData.swot.strengths || 'لم يتم الإدخال'}</div>
+                            </div>
+                            <div class="swot-item swot-weaknesses">
+                                <div class="data-label">⚠️ نقاط الضعف</div>
+                                <div class="data-value">${formData.swot.weaknesses || 'لم يتم الإدخال'}</div>
+                            </div>
+                            <div class="swot-item swot-opportunities">
+                                <div class="data-label">🚀 الفرص</div>
+                                <div class="data-value">${formData.swot.opportunities || 'لم يتم الإدخال'}</div>
+                            </div>
+                            <div class="swot-item swot-threats">
+                                <div class="data-label">⚡ التهديدات</div>
+                                <div class="data-value">${formData.swot.threats || 'لم يتم الإدخال'}</div>
+                            </div>
+                        </div>
+                        ${formData.swot.strengthsPlan || formData.swot.weaknessesPlan ? `
+                        <div style="margin-top: 20px;">
+                            <h4 style="color: #6366f1; margin-bottom: 15px;">📋 خطة العمل المستقبلية</h4>
+                            ${formData.swot.strengthsPlan ? `
+                            <div class="data-item">
+                                <div class="data-label">الاستفادة من نقاط القوة</div>
+                                <div class="data-value">${formData.swot.strengthsPlan}</div>
+                            </div>
+                            ` : ''}
+                            ${formData.swot.weaknessesPlan ? `
+                            <div class="data-item">
+                                <div class="data-label">معالجة نقاط الضعف</div>
+                                <div class="data-value">${formData.swot.weaknessesPlan}</div>
+                            </div>
+                            ` : ''}
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    
+                    ${formData.questions ? `
+                    <div class="section">
+                        <h3 class="section-title">❓ أسئلة التفكير التأملي</h3>
+                        ${formData.questions.change ? `
+                        <div class="data-item">
+                            <div class="data-label">🔄 التغيير المطلوب غداً</div>
+                            <div class="data-value">${formData.questions.change}</div>
+                        </div>
+                        ` : ''}
+                        ${formData.questions.decisions ? `
+                        <div class="data-item">
+                            <div class="data-label">⭐ أفضل قرار هذا الأسبوع</div>
+                            <div class="data-value">${formData.questions.decisions}</div>
+                        </div>
+                        ` : ''}
+                        ${formData.questions.challenges ? `
+                        <div class="data-item">
+                            <div class="data-label">🎯 التحدي المتكرر وخطة المعالجة</div>
+                            <div class="data-value">${formData.questions.challenges}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    
+                    ${formData.method321 ? `
+                    <div class="section">
+                        <h3 class="section-title">🎯 روتين 3-2-1 التأملي</h3>
+                        <div class="method321-grid">
+                            <div class="method321-item method321-success">
+                                <div class="data-label">✅ ثلاثة أشياء نجحت</div>
+                                <div class="data-value">${formData.method321.success1 || 'لم يتم الإدخال'}</div>
+                                <div class="data-value">${formData.method321.success2 || 'لم يتم الإدخال'}</div>
+                                <div class="data-value">${formData.method321.success3 || 'لم يتم الإدخال'}</div>
+                            </div>
+                            <div class="method321-item method321-improvement">
+                                <div class="data-label">🔧 شيئان يحتاجان تحسين</div>
+                                <div class="data-value">${formData.method321.improvement1 || 'لم يتم الإدخال'}</div>
+                                <div class="data-value">${formData.method321.improvement2 || 'لم يتم الإدخال'}</div>
+                            </div>
+                            <div class="method321-item method321-change">
+                                <div class="data-label">🔄 شيء واحد سأغيّره مستقبلاً</div>
+                                <div class="data-value">${formData.method321.futureChange || 'لم يتم الإدخال'}</div>
+                            </div>
+                        </div>
+                    </div>
+                    ` : ''}
+                    
+                    ${formData.teaching ? `
+                    <div class="section">
+                        <h3 class="section-title">📚 طرق التدريس</h3>
+                        ${formData.teaching.effective ? `
+                        <div class="data-item">
+                            <div class="data-label">✨ الطرق الفعّالة المستخدمة</div>
+                            <div class="data-value">${formData.teaching.effective}</div>
+                        </div>
+                        ` : ''}
+                        ${formData.teaching.challenges ? `
+                        <div class="data-item">
+                            <div class="data-label">⚠️ التحديات في التدريس</div>
+                            <div class="data-value">${formData.teaching.challenges}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    
+                    ${formData.interaction ? `
+                    <div class="section">
+                        <h3 class="section-title">👥 التفاعل مع الطلاب</h3>
+                        ${formData.interaction.level ? `
+                        <div class="data-item">
+                            <div class="data-label">📊 مستوى تفاعل الطلاب</div>
+                            <div class="data-value">${formData.interaction.level === 'excellent' ? 'ممتاز' : formData.interaction.level === 'good' ? 'جيد' : 'يحتاج تحسين'}</div>
+                        </div>
+                        ` : ''}
+                        ${formData.interaction.strategies ? `
+                        <div class="data-item">
+                            <div class="data-label">💡 استراتيجيات تحسين التفاعل</div>
+                            <div class="data-value">${formData.interaction.strategies}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    
+                    ${formData.development ? `
+                    <div class="section">
+                        <h3 class="section-title">🌱 التطوير المهني</h3>
+                        ${formData.development.newSkills ? `
+                        <div class="data-item">
+                            <div class="data-label">🎓 المهارات الجديدة المكتسبة</div>
+                            <div class="data-value">${formData.development.newSkills}</div>
+                        </div>
+                        ` : ''}
+                        ${(formData.development.goal1 || formData.development.goal2 || formData.development.goal3) ? `
+                        <div class="data-item">
+                            <div class="data-label">🎯 أهداف التطوير المستقبلية</div>
+                            ${formData.development.goal1 ? `<div class="data-value">• ${formData.development.goal1}</div>` : ''}
+                            ${formData.development.goal2 ? `<div class="data-value">• ${formData.development.goal2}</div>` : ''}
+                            ${formData.development.goal3 ? `<div class="data-value">• ${formData.development.goal3}</div>` : ''}
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    
+                    ${formData.postLesson ? `
+                    <div class="section">
+                        <h3 class="section-title">📝 التأمل بعد الحصة</h3>
+                        ${formData.postLesson.goals ? `
+                        <div class="data-item">
+                            <div class="data-label">🎯 تحقيق أهداف الدرس</div>
+                            <div class="data-value">${formData.postLesson.goals === 'fully' ? 'تم تحقيق جميع الأهداف' : formData.postLesson.goals === 'partially' ? 'تم تحقيق معظم الأهداف' : formData.postLesson.goals === 'minimal' ? 'تم تحقيق بعض الأهداف' : 'لم يتم تحقيق الأهداف'}</div>
+                        </div>
+                        ` : ''}
+                        ${formData.postLesson.behavior ? `
+                        <div class="data-item">
+                            <div class="data-label">👨‍🎓 ملاحظات حول سلوك الطلاب</div>
+                            <div class="data-value">${formData.postLesson.behavior}</div>
+                        </div>
+                        ` : ''}
+                        ${formData.postLesson.checkedTools && formData.postLesson.checkedTools.length > 0 ? `
+                        <div class="data-item">
+                            <div class="data-label">💻 الأدوات التقنية المستخدمة</div>
+                            <div class="checkbox-list">
+                                ${formData.postLesson.checkedTools.map(tool => `<span class="checkbox-item">${tool}</span>`).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                        ${formData.postLesson.tools ? `
+                        <div class="data-item">
+                            <div class="data-label">🔧 تفاصيل إضافية حول الأدوات</div>
+                            <div class="data-value">${formData.postLesson.tools}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    
+                    ${formData.selfCare ? `
+                    <div class="section">
+                        <h3 class="section-title">💝 الرعاية الذاتية</h3>
+                        <div class="data-item">
+                            <div class="data-label">📊 مستوى الضغط النفسي</div>
+                            <div class="data-value">
+                                <span class="stress-indicator">${formData.selfCare.stress}/10</span>
+                                ${formData.selfCare.stress <= 3 ? ' (منخفض)' : formData.selfCare.stress <= 6 ? ' (متوسط)' : ' (مرتفع)'}
+                            </div>
+                        </div>
+                        ${formData.selfCare.activities && formData.selfCare.activities.length > 0 ? `
+                        <div class="data-item">
+                            <div class="data-label">🧘‍♀️ أنشطة الاسترخاء المفضلة</div>
+                            <div class="checkbox-list">
+                                ${formData.selfCare.activities.map(activity => `<span class="checkbox-item">${activity}</span>`).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    ` : ''}
+                    
+                    <div class="section">
+                        <h3 class="section-title">📈 ملخص الإنجاز</h3>
+                        <div class="data-item">
+                            <div class="data-label">✅ الأقسام المكتملة (${completedSections.size}/${totalSections})</div>
+                            <div class="checkbox-list">
+                                ${Array.from(completedSections).map(section => {
+                                    const sectionNames = {
+                                        'methods': 'طرق التدريس',
+                                        'interaction': 'التفاعل مع الطلاب',
+                                        'development': 'التطوير المهني',
+                                        'postlesson': 'التأمل بعد الحصة',
+                                        'selfcare': 'الرعاية الذاتية'
+                                    };
+                                    return `<span class="checkbox-item">${sectionNames[section] || section}</span>`;
+                                }).join('')}
+                            </div>
+                        </div>
+                        ${completedMethods.size > 0 ? `
+                        <div class="data-item">
+                            <div class="data-label">🎯 أساليب التأمل المستخدمة</div>
+                            <div class="checkbox-list">
+                                ${Array.from(completedMethods).map(method => {
+                                    const methodNames = {
+                                        'swot': 'تحليل SWOT',
+                                        'questions': 'أسئلة التفكير التأملي',
+                                        '321': 'روتين 3-2-1 تأملي'
+                                    };
+                                    return `<span class="checkbox-item">${methodNames[method] || method}</span>`;
+                                }).join('')}
+                            </div>
+                        </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="footer">
+                        <p>🌟 هذا التقرير تم إنشاؤه تلقائياً من نظام التأمل الذاتي للمعلمة</p>
+                        <p>نظام متطور لتطوير الممارسات التعليمية والنمو المهني المستمر</p>
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            reportWindow.document.write(reportContent);
+            reportWindow.document.close();
+            
+            // Auto print after a short delay
+            setTimeout(() => {
+                reportWindow.print();
+            }, 500);
+        }
+
+        // Initialize
+        updateProgress();
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abac029a13b9350',t:'MTc2NTM0ODgyNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
