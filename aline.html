@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تقييم الإجابات الفردية المميزة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            text-align: center;
+            color: #4a5568;
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .dice-card {
+            background: linear-gradient(135deg, #f8faff 0%, #e8f2ff 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #667eea;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dice-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0%, 100% { background-position: 200% 0; }
+            50% { background-position: -200% 0; }
+        }
+
+        .dice-title {
+            font-size: 24px;
+            color: #2d3748;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .numbers-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .number-btn {
+            width: 60px;
+            height: 60px;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .number-btn:nth-child(1) { background: linear-gradient(45deg, #ff6b6b, #ee5a24); box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3); }
+        .number-btn:nth-child(2) { background: linear-gradient(45deg, #4facfe, #00f2fe); box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3); }
+        .number-btn:nth-child(3) { background: linear-gradient(45deg, #43e97b, #38f9d7); box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3); }
+        .number-btn:nth-child(4) { background: linear-gradient(45deg, #a855f7, #c084fc); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); }
+        .number-btn:nth-child(5) { background: linear-gradient(45deg, #ffd700, #ffb347); box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3); }
+        .number-btn:nth-child(6) { background: linear-gradient(45deg, #ff8a9b, #ff6b9d); box-shadow: 0 4px 15px rgba(255, 138, 155, 0.3); }
+        .number-btn:nth-child(7) { background: linear-gradient(45deg, #20bf6b, #01a3a4); box-shadow: 0 4px 15px rgba(32, 191, 107, 0.3); }
+        .number-btn:nth-child(8) { background: linear-gradient(45deg, #fd79a8, #e84393); box-shadow: 0 4px 15px rgba(253, 121, 168, 0.3); }
+        .number-btn:nth-child(9) { background: linear-gradient(45deg, #6c5ce7, #a29bfe); box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3); }
+        .number-btn:nth-child(10) { background: linear-gradient(45deg, #fd7f6f, #7eb77f); box-shadow: 0 4px 15px rgba(253, 127, 111, 0.3); }
+        .number-btn:nth-child(11) { background: linear-gradient(45deg, #feb47b, #ff7675); box-shadow: 0 4px 15px rgba(254, 180, 123, 0.3); }
+        .number-btn:nth-child(12) { background: linear-gradient(45deg, #74b9ff, #0984e3); box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3); }
+        .number-btn:nth-child(13) { background: linear-gradient(45deg, #55a3ff, #003d82); box-shadow: 0 4px 15px rgba(85, 163, 255, 0.3); }
+        .number-btn:nth-child(14) { background: linear-gradient(45deg, #fd79a8, #fdcb6e); box-shadow: 0 4px 15px rgba(253, 121, 168, 0.3); }
+        .number-btn:nth-child(15) { background: linear-gradient(45deg, #e17055, #d63031); box-shadow: 0 4px 15px rgba(225, 112, 85, 0.3); }
+
+        .number-btn:hover {
+            transform: translateY(-3px);
+        }
+
+        .number-btn:nth-child(1):hover { box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4); }
+        .number-btn:nth-child(2):hover { box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4); }
+        .number-btn:nth-child(3):hover { box-shadow: 0 8px 25px rgba(67, 233, 123, 0.4); }
+        .number-btn:nth-child(4):hover { box-shadow: 0 8px 25px rgba(168, 85, 247, 0.4); }
+        .number-btn:nth-child(5):hover { box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4); }
+        .number-btn:nth-child(6):hover { box-shadow: 0 8px 25px rgba(255, 138, 155, 0.4); }
+        .number-btn:nth-child(7):hover { box-shadow: 0 8px 25px rgba(32, 191, 107, 0.4); }
+        .number-btn:nth-child(8):hover { box-shadow: 0 8px 25px rgba(253, 121, 168, 0.4); }
+        .number-btn:nth-child(9):hover { box-shadow: 0 8px 25px rgba(108, 92, 231, 0.4); }
+        .number-btn:nth-child(10):hover { box-shadow: 0 8px 25px rgba(253, 127, 111, 0.4); }
+        .number-btn:nth-child(11):hover { box-shadow: 0 8px 25px rgba(254, 180, 123, 0.4); }
+        .number-btn:nth-child(12):hover { box-shadow: 0 8px 25px rgba(116, 185, 255, 0.4); }
+        .number-btn:nth-child(13):hover { box-shadow: 0 8px 25px rgba(85, 163, 255, 0.4); }
+        .number-btn:nth-child(14):hover { box-shadow: 0 8px 25px rgba(253, 121, 168, 0.4); }
+        .number-btn:nth-child(15):hover { box-shadow: 0 8px 25px rgba(225, 112, 85, 0.4); }
+
+        .number-btn:active {
+            transform: translateY(0);
+        }
+
+        .number-btn.selected {
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .number-btn:disabled {
+            background: #bdc3c7;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+            opacity: 0.6;
+        }
+
+        .number-btn.revealed {
+            position: relative;
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            box-shadow: 0 4px 15px rgba(46, 204, 113, 0.3);
+        }
+
+        .points-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: linear-gradient(45deg, #f39c12, #e67e22);
+            color: white;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: bold;
+            animation: bounceIn 0.6s ease-out;
+            box-shadow: 0 2px 8px rgba(243, 156, 18, 0.4);
+        }
+
+        .points-badge.high-points {
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            animation: bounceIn 0.6s ease-out, goldGlow 2s infinite alternate;
+        }
+
+        .encouragement-message {
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            color: #2c3e50;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            animation: slideUp 0.5s ease-out;
+            border: 2px solid #f39c12;
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        @keyframes goldGlow {
+            0% { box-shadow: 0 2px 8px rgba(255, 215, 0, 0.4); }
+            100% { box-shadow: 0 4px 20px rgba(255, 215, 0, 0.8); }
+        }
+
+        @keyframes slideUp {
+            0% { transform: translateX(-50%) translateY(10px); opacity: 0; }
+            100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+        }
+
+        .instruction {
+            text-align: center;
+            color: #666;
+            font-size: 16px;
+            margin: 20px 0;
+            font-style: italic;
+        }
+
+        .awards-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 32px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 2px solid #fbbf24;
+        }
+
+        .awards {
+            font-size: 64px;
+            margin-bottom: 24px;
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .criteria {
+            background: linear-gradient(to right, #fffbeb, #fed7aa, #fecaca);
+            padding: 24px;
+            border-radius: 16px;
+            margin: 24px 0;
+            border: 2px solid #fbbf24;
+        }
+
+        .criteria-title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #1f2937;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .criteria-list {
+            color: #374151;
+            font-size: 16px;
+            line-height: 1.6;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 16px;
+        }
+
+        .criteria-item {
+            padding: 12px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .criteria-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        .criteria-correctness {
+            background: linear-gradient(45deg, #ec4899, #f472b6);
+            box-shadow: 0 4px 15px rgba(236, 72, 153, 0.3);
+        }
+
+        .criteria-accuracy {
+            background: linear-gradient(45deg, #2563eb, #3b82f6);
+            box-shadow: 0 4px 15px rgba(37, 99, 235, 0.3);
+        }
+
+        .criteria-comprehensive {
+            background: linear-gradient(45deg, #059669, #10b981);
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        .criteria-thinking {
+            background: linear-gradient(45deg, #7c3aed, #8b5cf6);
+            box-shadow: 0 4px 15px rgba(124, 58, 237, 0.3);
+        }
+
+        .award-goes-to {
+            margin-top: 24px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #1f2937;
+            text-align: center;
+        }
+
+        .chapters-card {
+            background: linear-gradient(135deg, #fffbf0 0%, #fff4e0 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #f39c12;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapters-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #f39c12, #e67e22, #f39c12);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .chapters-title {
+            text-align: center;
+            font-size: 22px;
+            color: #2d3748;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .chapter-btn {
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .chapter-btn:nth-child(1) {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.3);
+        }
+
+        .chapter-btn:nth-child(2) {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.3);
+        }
+
+        .chapter-btn:nth-child(3) {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            box-shadow: 0 6px 20px rgba(67, 233, 123, 0.3);
+        }
+
+        .chapter-btn:nth-child(4) {
+            background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.3);
+        }
+
+        .chapter-btn:nth-child(5) {
+            background: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.3);
+        }
+
+        .chapter-btn:nth-child(1):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.4);
+        }
+
+        .chapter-btn:nth-child(2):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(79, 172, 254, 0.4);
+        }
+
+        .chapter-btn:nth-child(3):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(67, 233, 123, 0.4);
+        }
+
+        .chapter-btn:nth-child(4):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(168, 85, 247, 0.4);
+        }
+
+        .chapter-btn:nth-child(5):hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        .chapter-btn:active {
+            transform: translateY(-2px);
+        }
+
+        .points-display {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            z-index: 1000;
+            border: 3px solid #f39c12;
+            display: none;
+        }
+
+        .points-display.show {
+            display: block;
+            animation: popIn 0.5s ease-out;
+        }
+
+        @keyframes popIn {
+            0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+            100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+        }
+
+        .points-number {
+            font-size: 48px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .close-btn {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 999;
+            display: none;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        .winner-celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.9) 0%, rgba(255, 140, 0, 0.9) 100%);
+            z-index: 2000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .winner-celebration.show {
+            display: flex;
+            animation: celebrationFadeIn 1s ease-out;
+        }
+
+        @keyframes celebrationFadeIn {
+            0% { opacity: 0; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .winner-card {
+            background: white;
+            padding: 40px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.3);
+            border: 5px solid #ffd700;
+            position: relative;
+            overflow: hidden;
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        .winner-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: linear-gradient(90deg, #ff6b6b, #4facfe, #43e97b, #a855f7, #ffd700);
+            background-size: 300% 100%;
+            animation: rainbowShimmer 3s ease-in-out infinite;
+        }
+
+        @keyframes rainbowShimmer {
+            0%, 100% { background-position: 0% 0; }
+            50% { background-position: 100% 0; }
+        }
+
+        .winner-title {
+            font-size: 32px;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .winner-name {
+            font-size: 36px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin: 30px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            background: linear-gradient(45deg, #ff6b6b, #4facfe, #43e97b);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientText 3s ease-in-out infinite;
+        }
+
+        @keyframes gradientText {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .winner-message {
+            font-size: 20px;
+            color: #2c3e50;
+            margin: 25px 0;
+            font-weight: bold;
+        }
+
+        .celebration-emojis {
+            font-size: 48px;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        .celebration-emojis-extended {
+            font-size: 52px;
+            margin: 15px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-20px); }
+            60% { transform: translateY(-10px); }
+        }
+
+        .close-celebration-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .close-celebration-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+        }
+
+        .winner-header {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .winner-badge {
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            color: #2c3e50;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .reset-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 10px rgba(52, 152, 219, 0.3);
+        }
+
+        .reset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+
+        .celebration-emojis-extended {
+            font-size: 52px;
+            margin: 15px 0;
+            animation: bounce 2s infinite;
+        }
+
+        .achievement-details {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 25px 0;
+            border: 2px solid #dee2e6;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .achievement-icon {
+            font-size: 24px;
+            margin-left: 15px;
+            width: 40px;
+            text-align: center;
+        }
+
+        .achievement-text {
+            font-size: 16px;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        .congratulations-section {
+            background: linear-gradient(45deg, #ff6b6b, #4facfe);
+            border-radius: 20px;
+            padding: 15px;
+            margin: 20px 0;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .congratulations-text {
+            font-size: 22px;
+            color: white;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .celebration-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        .rewards-btn {
+            background: linear-gradient(45deg, #8b5cf6, #7c3aed);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+        }
+
+        .rewards-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+        }
+
+        .students-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 3000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .students-modal.show {
+            display: flex;
+            animation: modalFadeIn 0.5s ease-out;
+        }
+
+        @keyframes modalFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        .students-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 3px solid #667eea;
+            position: relative;
+        }
+
+        .students-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #667eea, #764ba2, #667eea);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .students-title {
+            text-align: center;
+            font-size: 24px;
+            color: #2d3748;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .student-btn {
+            background: linear-gradient(135deg, #f8faff 0%, #e8f2ff 100%);
+            border: 1px solid #667eea;
+            border-radius: 25px;
+            padding: 30px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .student-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .student-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+        }
+
+        .student-name {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.3;
+            margin: 8px 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .student-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 8px auto;
+            background: linear-gradient(to right, #f472b6, #8b5cf6);
+            color: white;
+        }
+
+        .student-award {
+            background: linear-gradient(to left, #facc15, #f97316);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .student-award:hover {
+            background: linear-gradient(to left, #eab308, #ea580c);
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* نظام الألوان الجديد للطالبات - 6 ألوان تتكرر */
+        
+        /* الطالبة رقم 1, 7, 13, 19... → أزرق */
+        .student-btn:nth-child(6n+1) {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-color: #bfdbfe;
+        }
+        .student-btn:nth-child(6n+1) .student-number {
+            background: linear-gradient(45deg, #2563eb, #1d4ed8);
+        }
+        .student-btn:nth-child(6n+1) .student-name {
+            color: #1e40af;
+        }
+        /* الطالبة رقم 2, 8, 14, 20... → بنفسجي */
+        .student-btn:nth-child(6n+2) {
+            background: linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%);
+            border-color: #d8b4fe;
+        }
+        .student-btn:nth-child(6n+2) .student-number {
+            background: linear-gradient(45deg, #7c3aed, #6d28d9);
+        }
+        .student-btn:nth-child(6n+2) .student-name {
+            color: #5b21b6;
+        }
+
+        /* الطالبة رقم 3, 9, 15, 21... → أخضر */
+        .student-btn:nth-child(6n+3) {
+            background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%);
+            border-color: #86efac;
+        }
+        .student-btn:nth-child(6n+3) .student-number {
+            background: linear-gradient(45deg, #16a34a, #15803d);
+        }
+        .student-btn:nth-child(6n+3) .student-name {
+            color: #14532d;
+        }
+
+        /* الطالبة رقم 4, 10, 16, 22... → أحمر */
+        .student-btn:nth-child(6n+4) {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border-color: #fca5a5;
+        }
+        .student-btn:nth-child(6n+4) .student-number {
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+        }
+        .student-btn:nth-child(6n+4) .student-name {
+            color: #991b1b;
+        }
+
+        /* الطالبة رقم 5, 11, 17, 23... → أصفر */
+        .student-btn:nth-child(6n+5) {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border-color: #fde68a;
+        }
+        .student-btn:nth-child(6n+5) .student-number {
+            background: linear-gradient(45deg, #d97706, #b45309);
+        }
+        .student-btn:nth-child(6n+5) .student-name {
+            color: #92400e;
+        }
+
+        /* الطالبة رقم 6, 12, 18, 24... → نيلي */
+        .student-btn:nth-child(6n+6) {
+            background: linear-gradient(135deg, #f0f9ff 0%, #c7d2fe 100%);
+            border-color: #a5b4fc;
+        }
+        .student-btn:nth-child(6n+6) .student-number {
+            background: linear-gradient(45deg, #4338ca, #3730a3);
+        }
+        .student-btn:nth-child(6n+6) .student-name {
+            color: #312e81;
+        }
+
+        .close-students-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 0 auto;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+        }
+
+        .close-students-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        .close-students-list-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 20px auto 0;
+            display: block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .close-students-list-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .students-card {
+                margin: 10px;
+                padding: 20px;
+                max-height: 90vh;
+            }
+            
+            .students-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .student-btn {
+                padding: 25px 20px;
+                font-size: 16px;
+                min-height: 140px;
+            }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background: #ff6b6b;
+            animation: confettiFall 3s linear infinite;
+            border-radius: 2px;
+        }
+
+        .confetti:nth-child(2n) { background: #4facfe; animation-delay: 0.5s; width: 8px; height: 8px; }
+        .confetti:nth-child(3n) { background: #43e97b; animation-delay: 1s; width: 12px; height: 12px; }
+        .confetti:nth-child(4n) { background: #a855f7; animation-delay: 1.5s; width: 9px; height: 9px; }
+        .confetti:nth-child(5n) { background: #ffd700; animation-delay: 2s; width: 11px; height: 11px; }
+        .confetti:nth-child(6n) { background: #ff8a9b; animation-delay: 2.5s; width: 10px; height: 10px; }
+
+        @keyframes confettiFall {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-20px); }
+        }
+
+        .fireworks {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            animation: fireworksExplode 2s ease-out infinite;
+        }
+
+        @keyframes fireworksExplode {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .students-list-card {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 3px solid #0ea5e9;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .students-list-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: linear-gradient(90deg, #0ea5e9, #0284c7, #0ea5e9);
+            background-size: 200% 100%;
+            animation: shimmer 3s ease-in-out infinite;
+        }
+
+        .students-list-title {
+            text-align: center;
+            font-size: 24px;
+            color: #0c4a6e;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .students-list-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .student-list-btn {
+            background: linear-gradient(135deg, #fefefe 0%, #f8fafc 100%);
+            border: 1px solid #0ea5e9;
+            border-radius: 25px;
+            padding: 30px 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Tajawal', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 160px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .student-list-btn:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3);
+        }
+
+        .student-list-number {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            margin-bottom: 8px;
+        }
+
+        .student-list-name {
+            font-size: 16px;
+            font-weight: 600;
+            text-align: center;
+            line-height: 1.3;
+            margin: 8px 0;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            color: #0c4a6e;
+        }
+
+        .student-list-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 8px auto;
+            background: linear-gradient(to right, #f472b6, #8b5cf6);
+            color: white;
+        }
+
+        .student-list-award {
+            background: linear-gradient(to left, #facc15, #f97316);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-align: center;
+            margin-top: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .student-list-award:hover {
+            background: linear-gradient(to left, #eab308, #ea580c);
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* نظام الألوان للطالبات في القائمة الثابتة - 6 ألوان تتكرر */
+        
+        /* الطالبة رقم 1, 7, 13, 19... → أزرق */
+        .student-list-btn:nth-child(6n+1) {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+            border-color: #bfdbfe;
+        }
+        .student-list-btn:nth-child(6n+1) .student-list-number {
+            background: linear-gradient(45deg, #2563eb, #1d4ed8);
+        }
+        .student-list-btn:nth-child(6n+1) .student-list-name {
+            color: #1e40af;
+        }
+
+        /* الطالبة رقم 2, 8, 14, 20... → بنفسجي */
+        .student-list-btn:nth-child(6n+2) {
+            background: linear-gradient(135deg, #faf5ff 0%, #e9d5ff 100%);
+            border-color: #d8b4fe;
+        }
+        .student-list-btn:nth-child(6n+2) .student-list-number {
+            background: linear-gradient(45deg, #7c3aed, #6d28d9);
+        }
+        .student-list-btn:nth-child(6n+2) .student-list-name {
+            color: #5b21b6;
+        }
+
+        /* الطالبة رقم 3, 9, 15, 21... → أخضر */
+        .student-list-btn:nth-child(6n+3) {
+            background: linear-gradient(135deg, #f0fdf4 0%, #bbf7d0 100%);
+            border-color: #86efac;
+        }
+        .student-list-btn:nth-child(6n+3) .student-list-number {
+            background: linear-gradient(45deg, #16a34a, #15803d);
+        }
+        .student-list-btn:nth-child(6n+3) .student-list-name {
+            color: #14532d;
+        }
+
+        /* الطالبة رقم 4, 10, 16, 22... → أحمر */
+        .student-list-btn:nth-child(6n+4) {
+            background: linear-gradient(135deg, #fef2f2 0%, #fecaca 100%);
+            border-color: #fca5a5;
+        }
+        .student-list-btn:nth-child(6n+4) .student-list-number {
+            background: linear-gradient(45deg, #dc2626, #b91c1c);
+        }
+        .student-list-btn:nth-child(6n+4) .student-list-name {
+            color: #991b1b;
+        }
+
+        /* الطالبة رقم 5, 11, 17, 23... → أصفر */
+        .student-list-btn:nth-child(6n+5) {
+            background: linear-gradient(135deg, #fefce8 0%, #fef3c7 100%);
+            border-color: #fde68a;
+        }
+        .student-list-btn:nth-child(6n+5) .student-list-number {
+            background: linear-gradient(45deg, #d97706, #b45309);
+        }
+        .student-list-btn:nth-child(6n+5) .student-list-name {
+            color: #92400e;
+        }
+
+        /* الطالبة رقم 6, 12, 18, 24... → نيلي */
+        .student-list-btn:nth-child(6n+6) {
+            background: linear-gradient(135deg, #f0f9ff 0%, #c7d2fe 100%);
+            border-color: #a5b4fc;
+        }
+        .student-list-btn:nth-child(6n+6) .student-list-number {
+            background: linear-gradient(45deg, #4338ca, #3730a3);
+        }
+        .student-list-btn:nth-child(6n+6) .student-list-name {
+            color: #312e81;
+        }
+
+        .students-list-footer {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 25px;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .students-count {
+            font-size: 16px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .points-info {
+            font-size: 16px;
+            color: #475569;
+            font-weight: 600;
+        }
+
+        .points-value {
+            color: #dc2626;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            .numbers-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 10px;
+            }
+            
+            .number-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 18px;
+            }
+            
+            .points-badge {
+                width: 20px;
+                height: 20px;
+                font-size: 10px;
+                top: -8px;
+                right: -8px;
+            }
+            
+            .encouragement-message {
+                font-size: 10px;
+                padding: 3px 8px;
+                bottom: -30px;
+            }
+            
+            .criteria-list {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .criteria-item {
+                margin: 5px 0;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+
+            .students-list-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .student-list-btn {
+                padding: 25px 20px;
+                font-size: 16px;
+                min-height: 140px;
+            }
+
+            .students-list-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">تقييم الإجابات الفردية المميزة</h1>
+        
+        <div class="dice-card">
+            <div class="dice-title">🎲 جربي حظك واختاري رقمك 🎲</div>
+            
+            <div class="numbers-grid">
+                <button class="number-btn" onclick="selectNumber(1)">1</button>
+                <button class="number-btn" onclick="selectNumber(2)">2</button>
+                <button class="number-btn" onclick="selectNumber(3)">3</button>
+                <button class="number-btn" onclick="selectNumber(4)">4</button>
+                <button class="number-btn" onclick="selectNumber(5)">5</button>
+                <button class="number-btn" onclick="selectNumber(6)">6</button>
+                <button class="number-btn" onclick="selectNumber(7)">7</button>
+                <button class="number-btn" onclick="selectNumber(8)">8</button>
+                <button class="number-btn" onclick="selectNumber(9)">9</button>
+                <button class="number-btn" onclick="selectNumber(10)">10</button>
+                <button class="number-btn" onclick="selectNumber(11)">11</button>
+                <button class="number-btn" onclick="selectNumber(12)">12</button>
+                <button class="number-btn" onclick="selectNumber(13)">13</button>
+                <button class="number-btn" onclick="selectNumber(14)">14</button>
+                <button class="number-btn" onclick="selectNumber(15)">15</button>
+            </div>
+            
+            <div class="instruction">انقري على أي رقم لاكتشاف النقاط المخفية (كل رقم يُختار مرة واحدة فقط)</div>
+        </div>
+
+        <div class="awards-section">
+            <div class="awards">🏆 ✨ 🌟</div>
+            
+            <div class="criteria">
+                <div class="criteria-title">
+                    جميع الإجابات رائعة لكن أفضل إجابة من الجوانب التالية:
+                </div>
+                <div class="criteria-list">
+                    <div class="criteria-item criteria-correctness">صحة الإجابة</div>
+                    <div class="criteria-item criteria-accuracy">الدقة</div>
+                    <div class="criteria-item criteria-comprehensive">الشمولية</div>
+                    <div class="criteria-item criteria-thinking">مهارة التفكير العليا</div>
+                </div>
+                <div class="award-goes-to">
+                    تذهب إلى:
+                </div>
+            </div>
+        </div>
+
+        <div id="studentsContainer">
+            <div class="chapters-card">
+                <div class="chapters-title">اختاري الفصل</div>
+                
+                <div class="chapters-grid">
+                    <button class="chapter-btn" onclick="selectChapter('ثالث 1')">
+                        ثالث 1<br>
+                        <small>الفصل الأول</small>
+                    </button>
+                    
+                    <button class="chapter-btn" onclick="selectChapter('ثالث 2')">
+                        ثالث 2<br>
+                        <small>الفصل الثاني</small>
+                    </button>
+                    
+                    <button class="chapter-btn" onclick="selectChapter('ثالث 3')">
+                        ثالث 3<br>
+                        <small>الفصل الثالث</small>
+                    </button>
+                    
+                    <button class="chapter-btn" onclick="selectChapter('ثالث 4')">
+                        ثالث 4<br>
+                        <small>الفصل الرابع</small>
+                    </button>
+                    
+                    <button class="chapter-btn" onclick="selectChapter('ثاني إدارة')">
+                        ثاني إدارة<br>
+                        <small>الفصل الخامس</small>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closePointsDisplay()"></div>
+    
+    <div class="points-display" id="pointsDisplay">
+        <div style="font-size: 24px; color: #2c3e50; margin-bottom: 10px;">🎉 تهانينا! 🎉</div>
+        <div>لقد حصلت على:</div>
+        <div class="points-number" id="pointsNumber">0</div>
+        <div style="color: #666;">نقطة مخفية!</div>
+        <button class="close-btn" onclick="closePointsDisplay()">إغلاق</button>
+    </div>
+
+    <div class="students-modal" id="studentsModal">
+        <div class="students-card">
+            <div class="students-title">🌟 اختاري الطالبة المتميزة 🌟</div>
+            
+            <div class="students-grid" id="studentsGrid">
+                <!-- Students will be populated here -->
+            </div>
+            
+            <button class="close-students-btn" onclick="closeStudentsModal()">إغلاق</button>
+        </div>
+    </div>
+
+    <div class="winner-celebration" id="winnerCelebration">
+        <div class="winner-card">
+            <div class="winner-header">
+                <div class="winner-badge">🏆 اختيار كأفضل إجابة</div>
+                <div class="reset-btn" onclick="resetEvaluation()">🔄 إعادة التقييم العودة إلى صفحة التقييم الفردي</div>
+            </div>
+            
+            <div class="celebration-emojis-extended">🎉✨🌟👏🏆💫🎊🌈💎🎯🚀</div>
+            <div class="winner-title">🏆 الطالبة المتميزة 🏆</div>
+            
+            <div class="winner-name" id="winnerName">اسم الطالبة</div>
+            <div class="winner-message" id="winnerMessage">رسالة تحفيزية</div>
+            
+            <div style="font-size: 24px; margin: 15px 0;">⭐💫✨🌟⭐💫✨</div>
+            
+            <div class="achievement-details">
+                <div class="achievement-item">
+                    <span class="achievement-icon">🎯</span>
+                    <span class="achievement-text">التميز في: الشمولية والدقة</span>
+                </div>
+                
+                <div class="achievement-item">
+                    <span class="achievement-icon">🧠</span>
+                    <span class="achievement-text">مهارة التفكير العليا: التحليل والتقييم والإبداع</span>
+                </div>
+                
+                <div class="achievement-item">
+                    <span class="achievement-icon">⭐</span>
+                    <span class="achievement-text">مستوى الإجابة: نموذجية ومتقنة</span>
+                </div>
+            </div>
+            
+            <div class="congratulations-section">
+                <div class="congratulations-text">🌟 مبروك يا مبدعة! 🌟</div>
+            </div>
+            
+            <div style="margin: 20px 0; font-size: 18px; color: #666;">
+                إجمالي النقاط المحصلة: <span id="totalPointsDisplay" style="color: #e74c3c; font-weight: bold;">0</span>
+            </div>
+            
+            <div class="celebration-buttons">
+                <button class="rewards-btn" onclick="goToRewards()">العودة إلى صفحة المكافآت 🎊</button>
+                <button class="close-celebration-btn" onclick="closeCelebration()">إغلاق الاحتفال</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let selectedNumbers = new Set();
+        let totalPoints = 0;
+        
+        const encouragementMessages = [
+            "رائعة! 🌟", "مميزة! ✨", "أحسنتِ! 👏", "إبداع! 🎨", 
+            "ممتازة! ⭐", "متألقة! 💫", "مبدعة! 🚀", "رائعة جداً! 🌈", 
+            "فخورة بك! 💎", "استمري! 🔥"
+        ];
+
+        function selectNumber(number) {
+            const button = event.target;
+            
+            if (selectedNumbers.has(number)) {
+                // Toggle - hide points if already revealed
+                if (button.classList.contains('revealed')) {
+                    const badge = button.querySelector('.points-badge');
+                    const message = button.querySelector('.encouragement-message');
+                    if (badge) badge.remove();
+                    if (message) message.remove();
+                    button.classList.remove('revealed');
+                    button.style.position = 'static';
+                }
+                return;
+            }
+
+            // Add to selected numbers
+            selectedNumbers.add(number);
+            
+            // Generate random points (1-5)
+            const points = Math.floor(Math.random() * 5) + 1;
+            totalPoints += points;
+            
+            // Mark as revealed and add visual elements
+            button.classList.add('revealed');
+            button.style.position = 'relative';
+            
+            // Create points badge
+            const pointsBadge = document.createElement('div');
+            pointsBadge.className = 'points-badge';
+            if (points >= 4) {
+                pointsBadge.classList.add('high-points');
+            }
+            pointsBadge.innerHTML = `${points}⭐`;
+            button.appendChild(pointsBadge);
+            
+            // Create encouragement message
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'encouragement-message';
+            const randomMessage = encouragementMessages[Math.floor(Math.random() * encouragementMessages.length)];
+            messageDiv.textContent = randomMessage;
+            button.appendChild(messageDiv);
+            
+            // Add sparkle effect for high points
+            if (points >= 4) {
+                createSpecialSparkles(button);
+            }
+        }
+        
+        function createSpecialSparkles(element) {
+            const rect = element.getBoundingClientRect();
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.innerHTML = '✨';
+                    sparkle.style.position = 'fixed';
+                    sparkle.style.left = (rect.left + Math.random() * rect.width) + 'px';
+                    sparkle.style.top = (rect.top + Math.random() * rect.height) + 'px';
+                    sparkle.style.fontSize = '16px';
+                    sparkle.style.pointerEvents = 'none';
+                    sparkle.style.zIndex = '1001';
+                    sparkle.style.animation = 'sparkleFloat 2s ease-out forwards';
+                    
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 2000);
+                }, i * 200);
+            }
+        }
+
+        function showPointsDisplay(points) {
+            const overlay = document.getElementById('overlay');
+            const pointsDisplay = document.getElementById('pointsDisplay');
+            const pointsNumber = document.getElementById('pointsNumber');
+            
+            pointsNumber.textContent = points;
+            overlay.classList.add('show');
+            pointsDisplay.classList.add('show');
+        }
+
+        function closePointsDisplay() {
+            const overlay = document.getElementById('overlay');
+            const pointsDisplay = document.getElementById('pointsDisplay');
+            
+            overlay.classList.remove('show');
+            pointsDisplay.classList.remove('show');
+        }
+
+        // بيانات جميع الفصول
+        const classData = {
+            'ثالث 1': {
+                title: 'قائمة طالبات ثالث 1',
+                students: [
+                    "ابتسام عمر", "أثير بنت سويلم بن شالح الرشيدي", "اجوان غالب رشاد الحربي",
+                    "اجوان موسى بن سعود الحربي", "المى مدشوش بن سعد الشمراني", "أماني شيهان صقر الجابري",
+                    "بشرى عبدالرحمن عمر المطيري", "جمانة عبدالله بن محمد حبيب عبدالله", "جنى اسحاق علي عثمان",
+                    "جنى حمد بن شباب الحربي", "جوري محمد حسين السيد", "دارين محمد غازي العمري",
+                    "دانا سعيد محمد الخثعمي", "رتاج معاذ ابن عبدالله العنيزي", "رحاب عبدالرحمن بن فيحان اللهيبي",
+                    "ريفال عبدالله دخيل العامري", "ريما حجاب بن راشد الحربي", "ساره سالم عبدالله الخلف",
+                    "سدن فهد بن فازع المطيري", "سدين سعد سعود الترجمي", "شهد حباب مرزوق الحربي",
+                    "شهد عبدالله رزقان المطيري", "عبير فيصل محمد الشيخ", "غادة محمد حمود الشهري",
+                    "غدي مصطفى عبدالحفيظ سليمان", "فاطمه حاتم بن محمد سفرجي", "فاطمه خالد احمد باحشوان",
+                    "لانا هاني حامد العوفي الحربي", "لمار عبدالواحد سليمان العوفي", "لميس فهد يوسف مظهر",
+                    "ليان محمد بن ابراهيم بن احمد فلاته", "ليان محمد بن عبدالرحمن المطيري", "مارية رابع محمد هوساوي",
+                    "ميان مشاري بن مصطفي حميد", "هلا ساير بن هليل الحربي", "يسر عبيد بن بشير الرشيدي"
+                ]
+            },
+            'ثالث 2': {
+                title: 'قائمة طالبات ثالث 2',
+                students: [
+                    "آمنه احمد بن عبدالقيوم محمد", "اروى حسين عباد المطيري", "اروى فهد منيع الله المطيري",
+                    "اروي بنت سالم بن حمد بن منيف", "الاء فهد بن سالم الحربي", "الهنوف مطر بن مسعود الشاماني",
+                    "ايلان سعيد بن سعيد المحمادى", "بسمه بنيدر بن مساعد الحربي", "بشرى زيد مزيد الحربي",
+                    "جنا فواز بن محمد بن عواد العدهي الرشيدي", "جنى ثامر سند المطيري", "حور عبدالله حمود العنزي",
+                    "دانه احمد بن مبروك المطيري", "دانية احمد بن غانم مقنص", "ديما عبدالله ظافر الزهراني",
+                    "رزان سيف صياف العمري", "رزان نبيل حسن عيسوي", "رغد عبدالله بن سليمان الخريجي",
+                    "رفيف رابح بن طالع السحيمي", "ريماس احمد حامد السهلي", "ريوف محمد فهيد السبيعي",
+                    "زهرة خالد بن محمداسحاق ابراهيم", "سلاف محمد سامر الحربي", "شيرين حسن محمد العلياني",
+                    "صبا محمد بن معوض العمري", "عائشة حسين عبدالله عمودي", "لانا محمد بن حامد الأحمدي",
+                    "لمار سلطان ابن محارب الحربي", "لمار سليمان بن معلا الاحمدي", "لمار عامر غويزى المطيرى",
+                    "لنا محمد بن حامد الأحمدي", "ليان فهد بن سعود البلادي", "ليان محمد بن حمد الرويثي",
+                    "لينا عبدالله بن دخيل الله البلوي", "ملاك انس - عسكر", "ميرال احمد محمد الحربي",
+                    "ندى صالح حامد الحربي", "نوره علي بن ربيع الرويثي", "هناء صالح حامد الحربي"
+                ]
+            },
+            'ثالث 3': {
+                title: 'قائمة طالبات ثالث 3',
+                students: [
+                    "ابتسام الحميدي بن بطيان المطيري", "اسماء يوسف بن حويجر الحربي", "افنان عبدالله بن سعود العمري",
+                    "الهنوف مطر بن سعد الحربي", "امل شاكر رابح العمري", "بيان بنت لاحق بن محمد الشاطري المطيري",
+                    "جنى عبيدالله عبدالله الحربي", "جواهر سليم مطر العوفي", "جود ماجد بن خضران الحربي",
+                    "جوري بنت عبد الهادي بن عبدالكريم السحيمي", "دارين سلطان بن مقبل الحربي", "ديم عبدالله بن عبدالعزيز السلامه",
+                    "رهاف حمدي بن عوض الجابري", "رهام سالم مشبب الشهري", "روزا فهد محمد يوسف",
+                    "ريتال هاشم صديق فرغلي", "ريلام سلمان بن متعب الجهني", "ريمه صالح بن علي الصيعري",
+                    "ريناد معتق بن معيض الحربي", "سعاد صلاح بن فؤاد علي", "شادن بندر بدر المطيري",
+                    "شادن خالد محمد موقد", "طيف ذياب هديبان العوفي", "طيف فهد علي العمري",
+                    "فرح مبارك محمدسعيد اليوبى", "فرح محمد فواز الرحيلي", "لانا ماجد بن صالح الكريدا",
+                    "لمى عبدالعزيز بن ناصر آل مقبل", "لمى عبيد مقيبل الحربي", "ليان فواز بن متعب المخلفي",
+                    "ميار طلال بن علي الحربي", "ميان مسعد مبرك المطيري", "هدى احمد هاشم الأحمد",
+                    "هيا خالد حاسن العمري", "وجدان فريح علي المطيري", "ود احمد مقحم العنزي",
+                    "يارا خالد نافع نفيع الجابري الشاماني"
+                ]
+            },
+            'ثالث 4': {
+                title: 'قائمة طالبات ثالث 4',
+                students: [
+                    "ابرار غنيمان نافع الحربي", "امياز مرزوق بن سلمان الحسيني", "بتول خالد اسماعيل الانصاري",
+                    "تسنيم ناصر منصور العباسى", "جنا عائش بن مفلح الحربي", "جنى حامد بن نفل الحربي",
+                    "جنى ذيب منور العوفي", "حلا عبدالرحمن بن غالي السحيمي", "حنان حسين بن مزعل الحربي",
+                    "ربى منيف بن رزيق الحربي", "رزان مسلم بن شباب الرشيدي", "رغد طلال بن راجح الحربي",
+                    "روز فواز بن مبارك الردادي", "رولا جزاء بن مرشود المطيري", "ريم فؤاد ابن بتاع البلادي",
+                    "ريناد عبده يحي عزي", "ريهام ماجد بن مسعود بن مطر الشاماني", "سميه محمد حسن محمد",
+                    "شفاء ناصر راشد الحربي", "غلا ضيف الله مرزوق المطيري", "كنوز جمال علي المطيري",
+                    "لانا عبدالرحمن عايض السحيمي", "لمار عبدالعزيز محمد سليمان بدير", "لمار موسى سليمان العلاوي",
+                    "ليان عادل احمد المنصري", "ليان معوض عوض الحربي", "ليليا فهيد بن عبدالله بن محمد الشمري",
+                    "مها عبدالكريم صياف الحربي", "مها محمد بن ذياب المطيري", "مهاد محمد بدر عبدالله",
+                    "مياسة حمزه يوسف عفيفي", "نرمين سلطان مطر المطيري", "نوره عبدالمحسن مناور المطيري",
+                    "هدى محمد السعد", "وئام احمد عبد القيوم عبد الله", "وئام بسام محمد صالح"
+                ]
+            },
+            'ثاني إدارة': {
+                title: 'قائمة طالبات ثاني إدارة',
+                students: [
+                    "الهنوف حسين بن معيض بن دليم", "بهى بنت بدر بن لافي الشاماني العمري", "جوان محمد سامر الحربي",
+                    "دعاء فهد محمد الحربي", "سجى أحمد عيد الحايطي", "سلمى نايف عويض المطيري",
+                    "سما علاء ابراهيم بري", "عذاري فايز معيض الحربي", "عروب نمر بن ضيف الله العمري",
+                    "منال سعد سعدي العمري", "ميعاد دخيل الله نافع الحربي", "ندى نايف رزيق الحربي"
+                ]
+            }
+        };
+
+        const motivationalMessages = [
+            "ممتازة جدًا يا نجمة الصف! 🌟",
+            "إبداعك يُلهم زميلاتك! ✨",
+            "إجابتك نموذج يُحتذى به! 🏆",
+            "تفكيرك العميق يدل على فهم شامل! 🧠",
+            "إجابتك تعكس مهارات تفكير عليا رائعة! 💎",
+            "تحليلك المتميز يظهر قدرتك على التفكير النقدي! 🎯",
+            "شموليّة إجابتك تدل على إتقانك للموضوع! 📚",
+            "ربطك بين المفاهيم يُظهر عمق فهمك! 🔗",
+            "إبداعك في الحل يدل على تفكير خارج الصندوق! 💡",
+            "دقّة تحليلك وشمولية عرضك مُبهرة! 🎨",
+            "قدرتك على التقييم والنقد البناء متميزة! ⚖️",
+            "تطبيقك للمفاهيم في سياقات جديدة رائع! 🚀",
+            "مهارتك في التركيب والإبداع ملهمة! 🌈",
+            "عمق تفكيرك وأصالة أفكارك مميزة! 💫",
+            "قدرتك على حل المشكلات بطريقة إبداعية فريدة! 🧩",
+            "إجابتك الشاملة تغطي جميع جوانب السؤال! 📋",
+            "شمولية تحليلك ودقة استنتاجاتك مبهرة! 🔍",
+            "تطبيقك لمهارات التفكير العليا بإتقان رائع! 🎓",
+            "قدرتك على التفكير التحليلي والإبداعي معًا فريدة! 🌟",
+            "مهارتك في التحليل المقارن والتفكير النقدي عالية! 📊",
+            "قدرتك على التقييم الموضوعي والنقد البناء متقنة! 🎯",
+            "إبداعك في تقديم حلول شاملة ومبتكرة ملهم! 💡",
+            "تفوقك في التفكير الاستراتيجي وحل المشكلات المعقدة رائع! 🧠"
+        ];
+
+        function selectChapter(chapterName) {
+            // تحديث مظهر الزر المختار
+            const button = event.target;
+            const originalText = button.innerHTML;
+            
+            button.style.background = 'linear-gradient(135deg, #2ecc71 0%, #27ae60 100%)';
+            button.innerHTML = `✓ تم اختيار ${chapterName}`;
+            
+            // تحميل قائمة طالبات الفصل المختار
+            loadClassStudents(chapterName);
+            
+            setTimeout(() => {
+                button.style.background = button.style.background.includes('ff6b6b') ? 'linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%)' :
+                                       button.style.background.includes('4facfe') ? 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)' :
+                                       button.style.background.includes('43e97b') ? 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)' :
+                                       button.style.background.includes('a855f7') ? 'linear-gradient(135deg, #a855f7 0%, #c084fc 100%)' :
+                                       'linear-gradient(135deg, #ffd700 0%, #ffb347 100%)';
+                button.innerHTML = originalText;
+            }, 2000);
+        }
+
+        function loadClassStudents(selectedClass) {
+            // البحث عن بيانات الفصل المختار
+            const classInfo = classData[selectedClass];
+            
+            if (!classInfo) {
+                alert(`عذراً، لا توجد بيانات للفصل ${selectedClass}`);
+                return;
+            }
+
+            // البحث عن الحاوي أو إنشاؤه
+            let studentsListContainer = document.getElementById('studentsListContainer');
+            if (!studentsListContainer) {
+                studentsListContainer = document.createElement('div');
+                studentsListContainer.id = 'studentsListContainer';
+                studentsListContainer.className = 'mt-8';
+                document.getElementById('studentsContainer').appendChild(studentsListContainer);
+            }
+
+            // تحديث محتوى قائمة الطالبات
+            studentsListContainer.innerHTML = `
+                <div class="students-list-card">
+                    <div class="students-list-title">🌟 قائمة الطالبات المتميزات في ${selectedClass} 🌟</div>
+                    
+                    <div class="students-list-grid">
+                        ${classInfo.students.map((student, index) => `
+                            <button class="student-list-btn" onclick="selectStudentFromList('${student}')">
+                                <div class="student-list-number">${index + 1}</div>
+                                <div class="student-list-name">${student}</div>
+                                <div class="student-list-icon">👩‍🎓</div>
+                                <div class="student-list-award">🏆 اختيار كأفضل إجابة</div>
+                            </button>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="students-list-footer">
+                        <div class="students-count">إجمالي عدد الطالبات: ${classInfo.students.length}</div>
+                        <div class="points-info">إجمالي النقاط المحصلة: <span class="points-value">${totalPoints}</span></div>
+                    </div>
+                    
+                    <button class="close-students-list-btn" onclick="closeStudentsList()">إغلاق قائمة الطالبات</button>
+                </div>
+            `;
+        }
+
+        function selectStudentFromList(studentName) {
+            // Get random motivational message
+            const randomMessage = motivationalMessages[Math.floor(Math.random() * motivationalMessages.length)];
+            
+            // Show winner celebration
+            showWinnerCelebration(studentName, randomMessage);
+        }
+
+
+
+        // Add some sparkle effects
+        function createSparkle() {
+            const sparkle = document.createElement('div');
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'fixed';
+            sparkle.style.left = Math.random() * window.innerWidth + 'px';
+            sparkle.style.top = Math.random() * window.innerHeight + 'px';
+            sparkle.style.fontSize = '20px';
+            sparkle.style.pointerEvents = 'none';
+            sparkle.style.zIndex = '1001';
+            sparkle.style.animation = 'sparkleFloat 3s ease-out forwards';
+            
+            document.body.appendChild(sparkle);
+            
+            setTimeout(() => {
+                sparkle.remove();
+            }, 3000);
+        }
+
+        // Add sparkle animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleFloat {
+                0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+                100% { opacity: 0; transform: translateY(-100px) rotate(360deg); }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Create sparkles periodically
+        setInterval(createSparkle, 2000);
+
+        function showWinnerCelebration(studentName, message) {
+            const winnerCelebration = document.getElementById('winnerCelebration');
+            const winnerName = document.getElementById('winnerName');
+            const winnerMessage = document.getElementById('winnerMessage');
+            const totalPointsDisplay = document.getElementById('totalPointsDisplay');
+            
+            winnerName.textContent = studentName;
+            winnerMessage.textContent = message;
+            totalPointsDisplay.textContent = totalPoints;
+            
+            winnerCelebration.classList.add('show');
+            
+            // Create confetti
+            createConfetti();
+            
+            // Create fireworks
+            createFireworks();
+        }
+
+        function closeCelebration() {
+            const winnerCelebration = document.getElementById('winnerCelebration');
+            
+            // Add fade out animation
+            winnerCelebration.style.animation = 'fadeOut 0.5s ease-in-out';
+            
+            setTimeout(() => {
+                winnerCelebration.classList.remove('show');
+                winnerCelebration.style.animation = '';
+                
+                // Clear confetti and fireworks
+                const confetti = document.querySelectorAll('.confetti');
+                const fireworks = document.querySelectorAll('.fireworks');
+                
+                confetti.forEach(c => c.remove());
+                fireworks.forEach(f => f.remove());
+            }, 500);
+        }
+
+        function createConfetti() {
+            const celebration = document.getElementById('winnerCelebration');
+            const confettiEmojis = ['🎊', '🎈', '🌈', '💎', '🎯', '🚀', '⭐', '💫', '✨', '🌟'];
+            
+            // Create 50 confetti pieces
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    confetti.style.animationDelay = Math.random() * 2 + 's';
+                    
+                    // Randomly choose between colored squares and emojis
+                    if (Math.random() > 0.7) {
+                        confetti.innerHTML = confettiEmojis[Math.floor(Math.random() * confettiEmojis.length)];
+                        confetti.style.background = 'transparent';
+                        confetti.style.fontSize = '16px';
+                        confetti.style.width = '20px';
+                        confetti.style.height = '20px';
+                    }
+                    
+                    celebration.appendChild(confetti);
+                    
+                    setTimeout(() => {
+                        confetti.remove();
+                    }, 5000);
+                }, i * 100);
+            }
+        }
+
+        function createFireworks() {
+            const celebration = document.getElementById('winnerCelebration');
+            const colors = ['#ff6b6b', '#4facfe', '#43e97b', '#a855f7', '#ffd700'];
+            
+            for (let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'fireworks';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    firework.style.background = colors[Math.floor(Math.random() * colors.length)];
+                    firework.style.animationDelay = Math.random() * 1 + 's';
+                    
+                    celebration.appendChild(firework);
+                    
+                    setTimeout(() => {
+                        firework.remove();
+                    }, 3000);
+                }, i * 200);
+            }
+        }
+
+        function resetEvaluation() {
+            // Reset all selected numbers
+            selectedNumbers.clear();
+            totalPoints = 0;
+            
+            // Reset all number buttons
+            const numberButtons = document.querySelectorAll('.number-btn');
+            numberButtons.forEach(button => {
+                button.classList.remove('revealed');
+                button.style.position = 'static';
+                
+                // Remove badges and messages
+                const badge = button.querySelector('.points-badge');
+                const message = button.querySelector('.encouragement-message');
+                if (badge) badge.remove();
+                if (message) message.remove();
+            });
+            
+            // Close celebration
+            closeCelebration();
+            
+            // Show success message
+            alert('تم إعادة تعيين التقييم بنجاح! 🔄\nيمكنك الآن البدء من جديد واختيار أرقام جديدة.');
+        }
+
+        function goToRewards() {
+            alert('🎊 تهانينا! 🎊\n\nتم تسجيل إنجازك في صفحة المكافآت!\n\n🏆 الإنجازات المحققة:\n✅ أفضل إجابة في التقييم الفردي\n✅ تميز في الشمولية والدقة\n✅ إتقان مهارات التفكير العليا\n✅ مستوى إجابة نموذجية\n\n🌟 استمري في التميز والإبداع! 🌟');
+            closeCelebration();
+        }
+
+        function closeStudentsList() {
+            const studentsListContainer = document.getElementById('studentsListContainer');
+            if (studentsListContainer) {
+                // إضافة تأثير الاختفاء
+                studentsListContainer.style.animation = 'fadeOut 0.5s ease-in-out';
+                
+                setTimeout(() => {
+                    studentsListContainer.remove();
+                }, 500);
+            }
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abaee5680cb9350',t:'MTc2NTM1MDcxNi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
