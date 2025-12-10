@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحليل أنماط التعلم</title>
+    <style>
+        body {
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .title-section {
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0 0 10px 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .title-section p {
+            margin: 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .header-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 16px;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .stats-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .stats-table {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .stats-table h3 {
+            color: #667eea;
+            margin: 0 0 15px 0;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e9ecef;
+        }
+        
+        th {
+            background: #667eea;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+        
+        .visual-row { background: rgba(255, 99, 132, 0.1) !important; }
+        .kinesthetic-row { background: rgba(54, 162, 235, 0.1) !important; }
+        .auditory-row { background: rgba(255, 205, 86, 0.1) !important; }
+        .reading-row { background: rgba(75, 192, 192, 0.1) !important; }
+        
+        .chart-section {
+            text-align: center;
+            margin: 40px 0;
+        }
+        
+        .chart-container {
+            display: inline-block;
+            position: relative;
+            margin: 20px;
+        }
+        
+        .classes-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .class-table {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid #e9ecef;
+        }
+        
+        .class-table h4 {
+            color: #764ba2;
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            text-align: center;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        
+        .total-students {
+            text-align: center;
+            margin: 30px 0;
+            font-size: 20px;
+            font-weight: bold;
+            color: #667eea;
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            border: 2px solid #667eea;
+        }
+        
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 3px;
+        }
+        
+        .students-list-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .show-students-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .show-students-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(5px);
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 0;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 800px;
+            max-height: 80vh;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        
+        .close {
+            color: white;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .close:hover {
+            color: #f0f0f0;
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        
+        .class-selector {
+            margin-bottom: 30px;
+        }
+        
+        .class-selector h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .class-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .class-btn {
+            background: #f8f9fa;
+            border: 2px solid #667eea;
+            color: #667eea;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-family: 'Tajawal', sans-serif;
+            font-weight: 500;
+        }
+        
+        .class-btn:hover, .class-btn.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .students-list {
+            min-height: 200px;
+        }
+        
+        .select-class-msg {
+            text-align: center;
+            color: #666;
+            font-style: italic;
+            margin-top: 50px;
+        }
+        
+        .student-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-right: 5px solid;
+            transition: all 0.3s ease;
+        }
+        
+        .student-item:hover {
+            transform: translateX(-5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .student-name {
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .student-pattern {
+            padding: 5px 15px;
+            border-radius: 20px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .visual-pattern { background: #FF6384; }
+        .kinesthetic-pattern { background: #36A2EB; }
+        .auditory-pattern { background: #FFCD56; color: #333; }
+        .reading-pattern { background: #4BC0C0; }
+        
+        .visual-border { border-right-color: #FF6384; }
+        .kinesthetic-border { border-right-color: #36A2EB; }
+        .auditory-border { border-right-color: #FFCD56; }
+        .reading-border { border-right-color: #4BC0C0; }
+        
+        @media (max-width: 768px) {
+            .stats-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .title-section {
+                text-align: center;
+            }
+            
+            .header h1 {
+                font-size: 20px;
+            }
+            
+            .header-info {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .classes-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-content {
+                width: 95%;
+                margin: 10% auto;
+            }
+            
+            .class-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .student-item {
+                flex-direction: column;
+                text-align: center;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="title-section">
+                    <h1>تحليل أنماط التعلم للصف الثالث ثانوي - المسار العام</h1>
+                    <p>لمادة تقنية رقمية 3 - الفصل الدراسي الأول لعام 1447 هـ</p>
+                </div>
+            </div>
+            <div class="header-info">
+                <div>معلمة المادة / شذا الردادي</div>
+                <div>مديرة المدرسة / فاطمة البدراني</div>
+            </div>
+        </div>
+        
+        <div class="content">
+            <div class="classes-section">
+                <div class="class-table">
+                    <h4>طالبات: فصل ثالث عام 1</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نوع النمط</th>
+                                <th>عدد الطالبات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="visual-row">
+                                <td>النمط البصري</td>
+                                <td>10</td>
+                            </tr>
+                            <tr class="kinesthetic-row">
+                                <td>النمط الحركي</td>
+                                <td>10</td>
+                            </tr>
+                            <tr class="auditory-row">
+                                <td>النمط السمعي</td>
+                                <td>3</td>
+                            </tr>
+                            <tr class="reading-row">
+                                <td>النمط القرائي الكتابي</td>
+                                <td>8</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="class-table">
+                    <h4>طالبات: فصل ثالث عام 2</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نوع النمط</th>
+                                <th>عدد الطالبات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="visual-row">
+                                <td>النمط البصري</td>
+                                <td>6</td>
+                            </tr>
+                            <tr class="kinesthetic-row">
+                                <td>النمط الحركي</td>
+                                <td>5</td>
+                            </tr>
+                            <tr class="auditory-row">
+                                <td>النمط السمعي</td>
+                                <td>6</td>
+                            </tr>
+                            <tr class="reading-row">
+                                <td>النمط القرائي الكتابي</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="class-table">
+                    <h4>طالبات: فصل ثالث عام 3</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نوع النمط</th>
+                                <th>عدد الطالبات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="visual-row">
+                                <td>النمط البصري</td>
+                                <td>11</td>
+                            </tr>
+                            <tr class="kinesthetic-row">
+                                <td>النمط الحركي</td>
+                                <td>5</td>
+                            </tr>
+                            <tr class="auditory-row">
+                                <td>النمط السمعي</td>
+                                <td>8</td>
+                            </tr>
+                            <tr class="reading-row">
+                                <td>النمط القرائي الكتابي</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="class-table">
+                    <h4>طالبات: فصل ثالث عام 4</h4>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نوع النمط</th>
+                                <th>عدد الطالبات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="visual-row">
+                                <td>النمط البصري</td>
+                                <td>15</td>
+                            </tr>
+                            <tr class="kinesthetic-row">
+                                <td>النمط الحركي</td>
+                                <td>6</td>
+                            </tr>
+                            <tr class="auditory-row">
+                                <td>النمط السمعي</td>
+                                <td>6</td>
+                            </tr>
+                            <tr class="reading-row">
+                                <td>النمط القرائي الكتابي</td>
+                                <td>4</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <div class="stats-table">
+                    <h3>الإحصائيات العددية</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نوع النمط</th>
+                                <th>عدد الطالبات</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="visual-row">
+                                <td>النمط البصري</td>
+                                <td>42</td>
+                            </tr>
+                            <tr class="kinesthetic-row">
+                                <td>النمط الحركي</td>
+                                <td>26</td>
+                            </tr>
+                            <tr class="auditory-row">
+                                <td>النمط السمعي</td>
+                                <td>23</td>
+                            </tr>
+                            <tr class="reading-row">
+                                <td>النمط القرائي الكتابي</td>
+                                <td>18</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="stats-table">
+                    <h3>الإحصائيات المئوية</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>نوع النمط</th>
+                                <th>النسبة المئوية</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="visual-row">
+                                <td>النمط البصري</td>
+                                <td>38.53%</td>
+                            </tr>
+                            <tr class="kinesthetic-row">
+                                <td>النمط الحركي</td>
+                                <td>23.85%</td>
+                            </tr>
+                            <tr class="auditory-row">
+                                <td>النمط السمعي</td>
+                                <td>21.10%</td>
+                            </tr>
+                            <tr class="reading-row">
+                                <td>النمط القرائي الكتابي</td>
+                                <td>16.51%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <div class="chart-section">
+                <h3 style="color: #667eea; margin-bottom: 20px;">الرسم البياني الدائري للإحصائيات المئوية</h3>
+                <div class="chart-container">
+                    <canvas id="pieChart" width="400" height="400"></canvas>
+                </div>
+                <div class="legend">
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FF6384;"></div>
+                        <span>النمط البصري (38.53%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #36A2EB;"></div>
+                        <span>النمط الحركي (23.85%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #FFCD56;"></div>
+                        <span>النمط السمعي (21.10%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #4BC0C0;"></div>
+                        <span>النمط القرائي الكتابي (16.51%)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="total-students">
+                عدد الطالبات الكلي: 109 طالبة
+            </div>
+            
+            <div class="students-list-section">
+                <button id="showStudentsBtn" class="show-students-btn">
+                    قائمة بأسماء الطالبات والأنماط
+                </button>
+                <button id="showReportBtn" class="show-students-btn" style="margin-right: 20px;">
+                    تقرير أنماط التعلم
+                </button>
+            </div>
+            
+            <div id="studentsModal" class="modal">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3>قائمة بأسماء الطالبات والأنماط</h3>
+                        <span class="close">&times;</span>
+                    </div>
+                    <div class="modal-body">
+                        <div class="class-selector">
+                            <h4>اختر الفصل:</h4>
+                            <div class="class-buttons">
+                                <button class="class-btn" data-class="class1">ثالث 1</button>
+                                <button class="class-btn" data-class="class2">ثالث 2</button>
+                                <button class="class-btn" data-class="class3">ثالث 3</button>
+                                <button class="class-btn" data-class="class4">ثالث 4</button>
+                            </div>
+                        </div>
+                        
+                        <div id="studentsList" class="students-list">
+                            <p class="select-class-msg">يرجى اختيار فصل لعرض قائمة الطالبات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // رسم الرسم البياني الدائري
+        function drawPieChart() {
+            const canvas = document.getElementById('pieChart');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const radius = 150;
+            
+            // مسح الرسم السابق
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // البيانات
+            const data = [
+                { label: 'النمط البصري', value: 38.53, color: '#FF6384' },
+                { label: 'النمط الحركي', value: 23.85, color: '#36A2EB' },
+                { label: 'النمط السمعي', value: 21.10, color: '#FFCD56' },
+                { label: 'النمط القرائي الكتابي', value: 16.51, color: '#4BC0C0' }
+            ];
+            
+            let currentAngle = -Math.PI / 2; // البدء من الأعلى
+            
+            // رسم القطاعات
+            data.forEach((segment, index) => {
+                const sliceAngle = (segment.value / 100) * 2 * Math.PI;
+                
+                // رسم القطاع
+                ctx.beginPath();
+                ctx.moveTo(centerX, centerY);
+                ctx.arc(centerX, centerY, radius, currentAngle, currentAngle + sliceAngle);
+                ctx.closePath();
+                ctx.fillStyle = segment.color;
+                ctx.fill();
+                
+                // رسم الحدود
+                ctx.strokeStyle = '#fff';
+                ctx.lineWidth = 3;
+                ctx.stroke();
+                
+                // إضافة النص
+                const textAngle = currentAngle + sliceAngle / 2;
+                const textX = centerX + Math.cos(textAngle) * (radius * 0.7);
+                const textY = centerY + Math.sin(textAngle) * (radius * 0.7);
+                
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 14px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(segment.value + '%', textX, textY);
+                
+                currentAngle += sliceAngle;
+            });
+            
+            // إضافة عنوان في المنتصف
+            ctx.fillStyle = '#667eea';
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('أنماط التعلم', centerX, centerY - 10);
+            ctx.font = '14px Arial';
+            ctx.fillText('109 طالبة', centerX, centerY + 10);
+        }
+        
+        // رسم الرسم البياني عند تحميل الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(drawPieChart, 100);
+        });
+        
+        window.addEventListener('load', drawPieChart);
+        
+        // بيانات الطالبات لكل فصل
+        const studentsData = {
+            class1: [
+                { name: 'أثير بنت سويلم بن شالح الرشيدي', pattern: 'visual' },
+                { name: 'جنى حمد بن شباب الحربي', pattern: 'visual' },
+                { name: 'دانا سعيد محمد الخثعمي', pattern: 'visual' },
+                { name: 'رحاب عبدالرحمن بن فيحان اللهيبي', pattern: 'visual' },
+                { name: 'شهد عبدالله رزقان المطيري', pattern: 'visual' },
+                { name: 'غدي مصطفى عبدالحفيظ سليمان', pattern: 'visual' },
+                { name: 'لمار عبدالواحد سليمان العوفي', pattern: 'visual' },
+                { name: 'لميس فهد يوسف مظهر', pattern: 'visual' },
+                { name: 'ليان محمد بن ابراهيم بن احمد فلاته', pattern: 'visual' },
+                { name: 'يسر عبيد بن بشير الرشيدي', pattern: 'visual' },
+                { name: 'اجوان غالب رشاد الحربي', pattern: 'kinesthetic' },
+                { name: 'المى مدشوش بن سعد الشمراني', pattern: 'kinesthetic' },
+                { name: 'أماني شيهان صقر الجابري', pattern: 'kinesthetic' },
+                { name: 'دارين محمد غازي العمري', pattern: 'kinesthetic' },
+                { name: 'رتاج معاذ ابن عبدالله العنيزي', pattern: 'kinesthetic' },
+                { name: 'ساره سالم عبدالله الخلف', pattern: 'kinesthetic' },
+                { name: 'عبير فيصل محمد الشيخ', pattern: 'kinesthetic' },
+                { name: 'فاطمه حاتم بن محمد سفرجي', pattern: 'kinesthetic' },
+                { name: 'فاطمه خالد احمد باحشوان', pattern: 'kinesthetic' },
+                { name: 'ميان مشاري بن مصطفي حميد', pattern: 'kinesthetic' },
+                { name: 'ريما حجاب بن راشد الحربي', pattern: 'auditory' },
+                { name: 'سدين سعد سعود الترجمي', pattern: 'auditory' },
+                { name: 'غادة محمد حمود الشهري', pattern: 'auditory' },
+                { name: 'ابتسام - - عمر', pattern: 'reading' },
+                { name: 'اجوان موسى بن سعود الحربي', pattern: 'reading' },
+                { name: 'جمانة عبدالله بن محمدحبيب عبدالله', pattern: 'reading' },
+                { name: 'جوري محمد حسين السيد', pattern: 'reading' },
+                { name: 'لانا هاني حامد العوفي الحربي', pattern: 'reading' },
+                { name: 'ليان محمد بن عبدالرحمن المطيري', pattern: 'reading' },
+                { name: 'مارية رابع محمد هوساوي', pattern: 'reading' },
+                { name: 'هلا ساير بن هليل الحربي', pattern: 'reading' }
+            ],
+            class2: [
+                { name: 'رغد عبدالله سليمان الخريجي', pattern: 'visual' },
+                { name: 'ميرال احمد الأحمدي', pattern: 'visual' },
+                { name: 'دانه احمد المطيري', pattern: 'visual' },
+                { name: 'لنا الأحمدي', pattern: 'visual' },
+                { name: 'جنى فواز الرشيدي', pattern: 'visual' },
+                { name: 'لمار سلطان محارب الحربي', pattern: 'visual' },
+                { name: 'صبا نحزن العمري', pattern: 'kinesthetic' },
+                { name: 'نوره علي ربيع الرويثي', pattern: 'kinesthetic' },
+                { name: 'لانا محمد حامد الأحمدي', pattern: 'kinesthetic' },
+                { name: 'ملاك انس', pattern: 'kinesthetic' },
+                { name: 'حور عبدالله حمود العنزي', pattern: 'kinesthetic' },
+                { name: 'ليان فهد سعود البلادي', pattern: 'auditory' },
+                { name: 'جود ماجد الحربي', pattern: 'auditory' },
+                { name: 'جنى ثامر سند المطيري', pattern: 'auditory' },
+                { name: 'شيرين العلياني', pattern: 'auditory' },
+                { name: 'دانيه احمد مقنص', pattern: 'auditory' },
+                { name: 'بسمه بنيدر السحيمي', pattern: 'auditory' },
+                { name: 'امنه احمد محمد', pattern: 'reading' },
+                { name: 'زهرة خالد محمداسحاق ابراهيم', pattern: 'reading' },
+                { name: 'سلاف محمد الحربي', pattern: 'reading' }
+            ],
+            class3: [
+                { name: 'طيف فهد العمري', pattern: 'visual' },
+                { name: 'الهنوف مطر سعد الحربي', pattern: 'visual' },
+                { name: 'إبتسام الحميدي المطيري', pattern: 'visual' },
+                { name: 'ريمه صالح الصيعري', pattern: 'visual' },
+                { name: 'ميار طلال الحربي', pattern: 'visual' },
+                { name: 'أفنان عبدالله سعود العمري', pattern: 'visual' },
+                { name: 'بيان لاحق المطيري', pattern: 'visual' },
+                { name: 'ميان مسعد المطيري', pattern: 'visual' },
+                { name: 'ريلام سلمان الجهني', pattern: 'visual' },
+                { name: 'ريتال هاشم صديق فرغلي', pattern: 'visual' },
+                { name: 'هيا خالد العمري', pattern: 'visual' },
+                { name: 'فرح مبارك اليوبي', pattern: 'kinesthetic' },
+                { name: 'اسماء يوسف حويجر العياضي', pattern: 'kinesthetic' },
+                { name: 'يارا خالد الشاماني', pattern: 'kinesthetic' },
+                { name: 'ريهاف حمدي', pattern: 'kinesthetic' },
+                { name: 'فرح محمد الرحيلي', pattern: 'kinesthetic' },
+                { name: 'ديم السلامه', pattern: 'auditory' },
+                { name: 'سعاد صلاح فؤاد علي', pattern: 'auditory' },
+                { name: 'لانا ماجد الكريدا', pattern: 'auditory' },
+                { name: 'جنى عبيد الله عبد الله الحربي', pattern: 'auditory' },
+                { name: 'لمى عبيد الحربي', pattern: 'auditory' },
+                { name: 'طيف ذياب هديبان العوفي', pattern: 'auditory' },
+                { name: 'ريناد معتق معيض الحربي', pattern: 'auditory' },
+                { name: 'جواهر سليم العوفي', pattern: 'auditory' },
+                { name: 'دارين سلطان الحربي', pattern: 'reading' },
+                { name: 'روزا فهد اليوسف', pattern: 'reading' },
+                { name: 'لمى عبدالعزيز', pattern: 'reading' }
+            ],
+            class4: [
+                { name: 'هدى محمد احمد السعد', pattern: 'visual' },
+                { name: 'شفاء ناصر راشد الحربي', pattern: 'visual' },
+                { name: 'كنوز جمال المطيري', pattern: 'visual' },
+                { name: 'وئام بسام محمد صالح', pattern: 'visual' },
+                { name: 'أمياز مرزوق سلمان الحسيني', pattern: 'visual' },
+                { name: 'جنى حامد الحربي', pattern: 'visual' },
+                { name: 'مياسة حمزة يوسف عفيفي', pattern: 'visual' },
+                { name: 'لانا عبد الرحمن السحيمي', pattern: 'visual' },
+                { name: 'ليان معوض عوض الحربي', pattern: 'visual' },
+                { name: 'بتول خالد الانصاري', pattern: 'visual' },
+                { name: 'أبرار غنيمان الحربي', pattern: 'visual' },
+                { name: 'ريهام ماجد الشاماني', pattern: 'visual' },
+                { name: 'تسنيم ناصر منصور العباسي', pattern: 'visual' },
+                { name: 'رولا جزاء المطيري', pattern: 'visual' },
+                { name: 'سميه محمد حسن محمد', pattern: 'visual' },
+                { name: 'روز فواز الردادي', pattern: 'kinesthetic' },
+                { name: 'جنا عائش الحربي', pattern: 'kinesthetic' },
+                { name: 'نوره عبدالمحسن المطيري', pattern: 'kinesthetic' },
+                { name: 'جنى ذيب العوفي', pattern: 'kinesthetic' },
+                { name: 'ريم فؤاد بتاع البلادي', pattern: 'kinesthetic' },
+                { name: 'ليان عادل احمد المنصري', pattern: 'kinesthetic' },
+                { name: 'مها عبدالكريم صياف الحربي', pattern: 'auditory' },
+                { name: 'وئام احمد الحساني', pattern: 'auditory' },
+                { name: 'نرمين سلطان المطيري', pattern: 'auditory' },
+                { name: 'مها محمد المطيري', pattern: 'auditory' },
+                { name: 'حنان حسين الحربي', pattern: 'auditory' },
+                { name: 'ربى منيف الحربي', pattern: 'auditory' },
+                { name: 'ليليا فهيد الشمري', pattern: 'reading' },
+                { name: 'لمار موسى العلاوي', pattern: 'reading' },
+                { name: 'لمار عبد العزيز محمد البدير', pattern: 'reading' },
+                { name: 'حلا عبد الرحمن', pattern: 'reading' }
+            ]
+        };
+        
+        const patternNames = {
+            visual: 'النمط البصري',
+            kinesthetic: 'النمط الحركي',
+            auditory: 'النمط السمعي',
+            reading: 'النمط القرائي الكتابي'
+        };
+        
+        // إظهار النافذة المنبثقة
+        document.getElementById('showStudentsBtn').addEventListener('click', function() {
+            document.getElementById('studentsModal').style.display = 'block';
+        });
+        
+        // إظهار تقرير أنماط التعلم
+        document.getElementById('showReportBtn').addEventListener('click', function() {
+            generateReport();
+        });
+        
+        // إغلاق النافذة المنبثقة
+        document.querySelector('.close').addEventListener('click', function() {
+            document.getElementById('studentsModal').style.display = 'none';
+        });
+        
+        // إغلاق النافذة عند النقر خارجها
+        window.addEventListener('click', function(event) {
+            const modal = document.getElementById('studentsModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+        
+        // معالجة أزرار الفصول
+        document.querySelectorAll('.class-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                // إزالة التحديد من جميع الأزرار
+                document.querySelectorAll('.class-btn').forEach(btn => btn.classList.remove('active'));
+                
+                // تحديد الزر المضغوط
+                this.classList.add('active');
+                
+                // عرض قائمة الطالبات للفصل المحدد
+                const classKey = this.getAttribute('data-class');
+                displayStudents(classKey);
+            });
+        });
+        
+        // عرض قائمة الطالبات
+        function displayStudents(classKey) {
+            const studentsList = document.getElementById('studentsList');
+            const students = studentsData[classKey];
+            
+            if (!students) {
+                studentsList.innerHTML = '<p class="select-class-msg">لا توجد بيانات لهذا الفصل</p>';
+                return;
+            }
+            
+            let html = '';
+            students.forEach(student => {
+                html += `
+                    <div class="student-item ${student.pattern}-border">
+                        <span class="student-name">${student.name}</span>
+                        <span class="student-pattern ${student.pattern}-pattern">
+                            ${patternNames[student.pattern]}
+                        </span>
+                    </div>
+                `;
+            });
+            
+            studentsList.innerHTML = html;
+        }
+        
+        // إنشاء تقرير أنماط التعلم
+        function generateReport() {
+            const reportWindow = window.open('', '_blank', 'width=800,height=600');
+            
+            const reportContent = `
+                <!DOCTYPE html>
+                <html lang="ar" dir="rtl">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>تقرير أنماط التعلم</title>
+                    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+                    <style>
+                        body {
+                            font-family: 'Tajawal', sans-serif;
+                            margin: 20px;
+                            background: #f8f9fa;
+                            color: #333;
+                        }
+                        .header {
+                            text-align: center;
+                            background: linear-gradient(135deg, #667eea, #764ba2);
+                            color: white;
+                            padding: 30px;
+                            border-radius: 10px;
+                            margin-bottom: 30px;
+                        }
+                        .header h1 {
+                            margin: 0 0 10px 0;
+                            font-size: 24px;
+                        }
+                        .header p {
+                            margin: 5px 0;
+                            opacity: 0.9;
+                        }
+                        .summary {
+                            background: white;
+                            padding: 20px;
+                            border-radius: 10px;
+                            margin-bottom: 20px;
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        }
+                        .summary h2 {
+                            color: #667eea;
+                            margin-bottom: 15px;
+                        }
+                        .stats-grid {
+                            display: grid;
+                            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                            gap: 15px;
+                            margin: 20px 0;
+                        }
+                        .stat-card {
+                            background: #f8f9fa;
+                            padding: 15px;
+                            border-radius: 8px;
+                            text-align: center;
+                            border-right: 4px solid;
+                        }
+                        .visual-card { border-right-color: #FF6384; }
+                        .kinesthetic-card { border-right-color: #36A2EB; }
+                        .auditory-card { border-right-color: #FFCD56; }
+                        .reading-card { border-right-color: #4BC0C0; }
+                        .stat-number {
+                            font-size: 24px;
+                            font-weight: bold;
+                            color: #667eea;
+                        }
+                        .stat-label {
+                            font-size: 14px;
+                            color: #666;
+                            margin-top: 5px;
+                        }
+                        .recommendations {
+                            background: white;
+                            padding: 20px;
+                            border-radius: 10px;
+                            margin-bottom: 20px;
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        }
+                        .recommendations h2 {
+                            color: #667eea;
+                            margin-bottom: 15px;
+                        }
+                        .recommendation-item {
+                            background: #f8f9fa;
+                            padding: 15px;
+                            margin: 10px 0;
+                            border-radius: 8px;
+                            border-right: 4px solid #667eea;
+                        }
+                        .recommendation-item h3 {
+                            margin: 0 0 10px 0;
+                            color: #333;
+                        }
+                        .print-btn {
+                            background: #667eea;
+                            color: white;
+                            border: none;
+                            padding: 10px 20px;
+                            border-radius: 5px;
+                            cursor: pointer;
+                            font-size: 16px;
+                            font-family: 'Tajawal', sans-serif;
+                            font-weight: 600;
+                            margin: 20px 0;
+                        }
+                        .print-btn:hover {
+                            background: #5a6fd8;
+                        }
+                        .introduction, .learning-styles, .results, .conclusion {
+                            background: white;
+                            padding: 20px;
+                            border-radius: 10px;
+                            margin-bottom: 20px;
+                            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                        }
+                        .introduction h2, .learning-styles h2, .results h2, .conclusion h2 {
+                            color: #667eea;
+                            margin-bottom: 15px;
+                            text-align: center;
+                        }
+                        .style-item {
+                            background: #f8f9fa;
+                            padding: 15px;
+                            margin: 15px 0;
+                            border-radius: 8px;
+                            border-right: 4px solid #667eea;
+                        }
+                        .style-item h3 {
+                            margin: 0 0 10px 0;
+                            color: #333;
+                            font-size: 16px;
+                        }
+                        .style-item p {
+                            margin: 0;
+                            line-height: 1.6;
+                        }
+                        .result-item {
+                            background: #f8f9fa;
+                            padding: 10px 15px;
+                            margin: 10px 0;
+                            border-radius: 5px;
+                            border-right: 3px solid #667eea;
+                        }
+                        .result-item p {
+                            margin: 0;
+                            line-height: 1.6;
+                        }
+                        @media print {
+                            .print-btn { display: none; }
+                            body { background: white; }
+                        }
+                    </style>
+                </head>
+                <body>
+                    <div class="logo-section" style="text-align: center; margin-bottom: 20px;">
+                        <svg width="120" height="120" viewBox="0 0 120 120" style="margin: 0 auto;">
+                            <circle cx="60" cy="60" r="55" fill="#667eea" stroke="#764ba2" stroke-width="3"/>
+                            <circle cx="60" cy="60" r="45" fill="white"/>
+                            <text x="60" y="45" text-anchor="middle" fill="#667eea" font-size="12" font-weight="bold">وزارة التعليم</text>
+                            <text x="60" y="60" text-anchor="middle" fill="#764ba2" font-size="10">المملكة العربية السعودية</text>
+                            <text x="60" y="75" text-anchor="middle" fill="#667eea" font-size="8">إدارة التعليم</text>
+                            <path d="M35 85 Q60 95 85 85" stroke="#764ba2" stroke-width="2" fill="none"/>
+                        </svg>
+                    </div>
+
+                    <div class="header">
+                        <h1>تقرير تحليل أنماط التعلم</h1>
+                        <p>الصف الثالث ثانوي - المسار العام</p>
+                        <p>مادة تقنية رقمية 3 - الفصل الدراسي الأول لعام 1447 هـ</p>
+                        <p>معلمة المادة: شذا الردادي | مديرة المدرسة: فاطمة البدراني</p>
+                    </div>
+                    
+                    <div class="introduction">
+                        <h2>المقدمة</h2>
+                        <p>تُعد أنماط التعلم من العوامل المهمة في تحسين العملية التعليمية، حيث تساعد المعلمين على فهم الطرق المختلفة التي يتعلم بها الطلاب ويستوعبون المعلومات. إن معرفة أنماط التعلم المفضلة للطلاب تمكن المعلمين من تصميم استراتيجيات تدريسية متنوعة تلبي احتياجات جميع الطلاب، مما يؤدي إلى تحسين مستوى الفهم والاستيعاب وزيادة الدافعية للتعلم.</p>
+                    </div>
+                    
+                    <div class="learning-styles">
+                        <h2>أنماط التعلم الأربعة</h2>
+                        
+                        <div class="style-item">
+                            <h3>النمط البصري (Visual Learning)</h3>
+                            <p>يفضل أصحاب هذا النمط التعلم من خلال الرؤية والمشاهدة، ويستفيدون من الصور والرسوم البيانية والمخططات والألوان في عملية التعلم.</p>
+                        </div>
+                        
+                        <div class="style-item">
+                            <h3>النمط السمعي (Auditory Learning)</h3>
+                            <p>يتعلم أصحاب هذا النمط بشكل أفضل من خلال الاستماع والمناقشة، ويفضلون المحاضرات والحوارات والتسجيلات الصوتية.</p>
+                        </div>
+                        
+                        <div class="style-item">
+                            <h3>النمط الحركي (Kinesthetic Learning)</h3>
+                            <p>يحتاج أصحاب هذا النمط إلى التعلم من خلال الممارسة والتطبيق العملي، ويفضلون الأنشطة التفاعلية والتجارب المعملية.</p>
+                        </div>
+                        
+                        <div class="style-item">
+                            <h3>النمط القرائي/الكتابي (Reading/Writing Learning)</h3>
+                            <p>يفضل أصحاب هذا النمط التعلم من خلال القراءة والكتابة، ويستفيدون من النصوص والقوائم والملاحظات المكتوبة.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="results">
+                        <h2>نتائج التصنيف</h2>
+                        <div class="result-item">
+                            <p><strong>1.</strong> تم تصنيف الطالبات وفق استبانة أنماط التعلم.</p>
+                        </div>
+                        <div class="result-item">
+                            <p><strong>2.</strong> أظهرت النتائج وجود تنوع في الأنماط بين الطالبات، وهو ما يعكس الفروق الفردية في أساليب التعلم.</p>
+                        </div>
+                    </div>
+
+                    <div class="summary">
+                        <h2>ملخص الإحصائيات</h2>
+                        <div class="stats-grid">
+                            <div class="stat-card visual-card">
+                                <div class="stat-number">42</div>
+                                <div class="stat-label">النمط البصري (38.53%)</div>
+                            </div>
+                            <div class="stat-card kinesthetic-card">
+                                <div class="stat-number">26</div>
+                                <div class="stat-label">النمط الحركي (23.85%)</div>
+                            </div>
+                            <div class="stat-card auditory-card">
+                                <div class="stat-number">23</div>
+                                <div class="stat-label">النمط السمعي (21.10%)</div>
+                            </div>
+                            <div class="stat-card reading-card">
+                                <div class="stat-number">18</div>
+                                <div class="stat-label">النمط القرائي الكتابي (16.51%)</div>
+                            </div>
+                        </div>
+                        <p style="text-align: center; font-size: 18px; font-weight: bold; color: #667eea;">
+                            إجمالي عدد الطالبات: 109 طالبة
+                        </p>
+                    </div>
+                    
+                    <div class="recommendations">
+                        <h2>التوصيات التعليمية</h2>
+                        
+                        <div class="recommendation-item">
+                            <h3>للنمط البصري (38.53% من الطالبات)</h3>
+                            <p>• استخدام الرسوم البيانية والمخططات والصور التوضيحية</p>
+                            <p>• تطبيق الألوان والرموز البصرية في العروض التقديمية</p>
+                            <p>• استخدام الخرائط الذهنية والمفاهيمية</p>
+                            <p>• توفير مواد تعليمية مرئية ومقاطع فيديو تعليمية</p>
+                        </div>
+                        
+                        <div class="recommendation-item">
+                            <h3>للنمط الحركي (23.85% من الطالبات)</h3>
+                            <p>• تطبيق الأنشطة العملية والتجارب المعملية</p>
+                            <p>• استخدام النماذج والمجسمات التفاعلية</p>
+                            <p>• تنظيم ورش عمل ومشاريع جماعية</p>
+                            <p>• السماح بالحركة أثناء التعلم والمناقشة</p>
+                        </div>
+                        
+                        <div class="recommendation-item">
+                            <h3>للنمط السمعي (21.10% من الطالبات)</h3>
+                            <p>• استخدام المحاضرات والشرح الصوتي</p>
+                            <p>• تطبيق المناقشات الجماعية والحوارات</p>
+                            <p>• استخدام التسجيلات الصوتية والبودكاست</p>
+                            <p>• تشجيع التعلم من خلال الموسيقى والإيقاع</p>
+                        </div>
+                        
+                        <div class="recommendation-item">
+                            <h3>للنمط القرائي الكتابي (16.51% من الطالبات)</h3>
+                            <p>• توفير النصوص والكتب والمراجع المكتوبة</p>
+                            <p>• استخدام القوائم والجداول المنظمة</p>
+                            <p>• تطبيق أنشطة الكتابة والتلخيص</p>
+                            <p>• تشجيع تدوين الملاحظات والمذكرات</p>
+                        </div>
+                    </div>
+                    
+                    <div class="conclusion">
+                        <h2>الخاتمة</h2>
+                        <p>في ضوء نتائج هذا التحليل، تؤكد الدراسة على ضرورة مراعاة الفروق الفردية في التدريس وتنويع الاستراتيجيات التعليمية لتلبية احتياجات جميع الطالبات. إن فهم أنماط التعلم المختلفة يساعد في خلق بيئة تعليمية شاملة وفعالة تضمن تحقيق أفضل النتائج التعليمية لجميع الطالبات، بغض النظر عن نمط تعلمهن المفضل.</p>
+                    </div>
+
+                    <div style="text-align: center;">
+                        <button class="print-btn" onclick="window.print()">طباعة التقرير</button>
+                        <button class="print-btn" onclick="window.history.back()" style="background: #6c757d; margin-right: 15px;">
+                            الرجوع للصفحة السابقة
+                        </button>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px; color: #666; font-size: 12px;">
+                        تم إنشاء هذا التقرير في: ${new Date().toLocaleDateString('ar-SA')}
+                    </div>
+                </body>
+                </html>
+            `;
+            
+            reportWindow.document.write(reportContent);
+            reportWindow.document.close();
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abad13e41eece18',t:'MTc2NTM0OTUyNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
