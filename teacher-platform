@@ -1,0 +1,1995 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="/_sdk/element_sdk.js"></script>
+  <title>منصة معلم - المشروع المتكامل</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&amp;family=Tajawal:wght@400;500;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Cairo', 'Tajawal', sans-serif;
+      background: linear-gradient(135deg, #FFF7DD 0%, #EEF1DA 50%, #FFF7DD 100%);
+      color: #1581BF;
+      line-height: 1.9;
+      overflow-x: hidden;
+      position: relative;
+    }
+    
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(59, 182, 177, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(128, 161, 186, 0.08) 0%, transparent 50%),
+                  radial-gradient(circle at 50% 20%, rgba(145, 196, 195, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
+      animation: backgroundFloat 15s ease-in-out infinite;
+    }
+
+    @keyframes backgroundFloat {
+      0%, 100% { 
+        background-position: 0% 0%, 100% 100%, 50% 0%;
+      }
+      50% { 
+        background-position: 100% 100%, 0% 0%, 50% 100%;
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Navigation */
+    .nav-bar {
+      background: rgba(255, 247, 221, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 3px solid transparent;
+      border-image: linear-gradient(90deg, #3DB6B1, #F6B1CE, #3DB6B1) 1;
+      animation: slideDown 0.5s ease;
+    }
+
+    @keyframes slideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .nav-logo {
+      font-size: 28px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #3DB6B1 0%, #1581BF 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-shadow: 0 2px 10px rgba(61, 182, 177, 0.3);
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .nav-logo:hover {
+      transform: scale(1.05);
+    }
+
+    .nav-logo::before {
+      content: '✨';
+      position: absolute;
+      right: -35px;
+      top: -5px;
+      font-size: 20px;
+      animation: sparkle 2s infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 1; transform: scale(1) rotate(0deg); }
+      50% { opacity: 0.5; transform: scale(1.2) rotate(180deg); }
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: #1581BF;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      padding: 12px 20px;
+      border-radius: 12px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(246, 177, 206, 0.3), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .nav-links a:hover::before {
+      left: 100%;
+    }
+
+    .nav-links a:hover {
+      background: linear-gradient(135deg, #3DB6B1 0%, #91C4C3 100%);
+      color: white;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(61, 182, 177, 0.4);
+    }
+
+    .nav-links a.active {
+      background: linear-gradient(135deg, #F6B1CE 0%, #FF8F8F 100%);
+      color: white;
+      box-shadow: 0 6px 20px rgba(246, 177, 206, 0.4);
+      transform: translateY(-2px);
+    }
+
+    /* Pages Container */
+    .page {
+      display: none;
+      min-height: calc(100% - 100px);
+      animation: fadeInScale 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      position: relative;
+      z-index: 1;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeInScale {
+      from { 
+        opacity: 0; 
+        transform: translateY(30px) scale(0.95);
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Cover Page */
+    .cover-page {
+      background: linear-gradient(135deg, #80A1BA 0%, #91C4C3 100%);
+      min-height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      padding: 80px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cover-page::before {
+      content: '';
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, rgba(180, 222, 189, 0.3) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -250px;
+      right: -250px;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .cover-page::after {
+      content: '';
+      position: absolute;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(173, 178, 212, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      bottom: -200px;
+      left: -200px;
+      animation: float 8s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-30px) rotate(180deg); }
+    }
+
+    .cover-icon {
+      font-size: 140px;
+      margin-bottom: 32px;
+      animation: bounceIn 1s ease, pulse 2s ease-in-out 1s infinite, rotate360 20s linear infinite;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 10px 30px rgba(236, 72, 153, 0.5));
+    }
+
+    @keyframes bounceIn {
+      0% { transform: scale(0) rotate(0deg); opacity: 0; }
+      50% { transform: scale(1.1) rotate(180deg); }
+      100% { transform: scale(1) rotate(360deg); opacity: 1; }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.08) rotate(5deg); }
+    }
+
+    @keyframes rotate360 {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .cover-page h1 {
+      font-size: 58px;
+      font-weight: 900;
+      margin-bottom: 24px;
+      text-shadow: 0 6px 20px rgba(0,0,0,0.3);
+      line-height: 1.3;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease 0.3s backwards, shimmer 3s linear infinite, textGlow 2s ease-in-out infinite alternate;
+      background: linear-gradient(to right, #FFFFFF, #FDE68A, #FEF3C7, #FFFFFF);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      font-family: 'Tajawal', sans-serif;
+      letter-spacing: 2px;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 0% center; }
+      100% { background-position: 200% center; }
+    }
+
+    @keyframes textGlow {
+      from { filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5)); }
+      to { filter: drop-shadow(0 0 20px rgba(254, 243, 199, 0.9)); }
+    }
+    
+    @keyframes cardGlowPulse {
+      0%, 100% { box-shadow: 0 15px 50px rgba(102, 126, 234, 0.4); }
+      50% { box-shadow: 0 20px 70px rgba(118, 75, 162, 0.6); }
+    }
+    
+    @keyframes iconBounce {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(5deg); }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .cover-page p {
+      font-size: 26px;
+      font-weight: 500;
+      opacity: 0.95;
+      max-width: 850px;
+      line-height: 2;
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+      animation: fadeInUp 0.8s ease 0.5s backwards;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .cover-button {
+      background: linear-gradient(135deg, #F6B1CE 0%, #FF8F8F 100%);
+      color: white;
+      padding: 20px 56px;
+      font-size: 24px;
+      font-weight: 800;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 10px 30px rgba(246, 177, 206, 0.4);
+      font-family: 'Tajawal', sans-serif;
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      animation: fadeInUp 0.8s ease 0.7s backwards, buttonPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes buttonPulse {
+      0%, 100% { box-shadow: 0 10px 30px rgba(246, 177, 206, 0.4); }
+      50% { box-shadow: 0 15px 50px rgba(255, 143, 143, 0.7); }
+    }
+
+    .cover-button::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+
+    .cover-button:hover::before {
+      width: 300px;
+      height: 300px;
+    }
+
+    .cover-button:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 15px 40px rgba(246, 177, 206, 0.6);
+    }
+
+    .cover-button:active {
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    /* Platform Page */
+    .platform-hero {
+      background: linear-gradient(135deg, #B4DEBD 0%, #CCE5CF 100%);
+      color: white;
+      padding: 80px 24px;
+      text-align: center;
+    }
+
+    .platform-hero h2 {
+      font-size: 44px;
+      font-weight: 700;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    .platform-hero p {
+      font-size: 22px;
+      opacity: 0.95;
+      margin-bottom: 32px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-button {
+      background: #F6B1CE;
+      color: white;
+      padding: 16px 40px;
+      font-size: 20px;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 16px rgba(246, 177, 206, 0.3);
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .hero-button:hover {
+      background: #F2AEBB;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(246, 177, 206, 0.4);
+    }
+
+    /* Grid Section */
+    .grid-section {
+      padding: 80px 24px;
+      background: #FFF7DD;
+    }
+
+    .grid-section h2 {
+      font-size: 42px;
+      color: #1581BF;
+      text-align: center;
+      margin-bottom: 60px;
+      font-weight: 900;
+      position: relative;
+      padding-bottom: 20px;
+      animation: titleFloat 3s ease-in-out infinite;
+      font-family: 'Tajawal', sans-serif;
+      letter-spacing: 1px;
+    }
+
+    @keyframes titleFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    .grid-section h2::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 5px;
+      background: linear-gradient(90deg, #F6B1CE, #F2AEBB, #FF8F8F);
+      border-radius: 10px;
+      animation: underlineGlow 2s ease-in-out infinite;
+    }
+
+    @keyframes underlineGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(246, 177, 206, 0.5); }
+      50% { box-shadow: 0 0 20px rgba(242, 174, 187, 0.8); }
+    }
+
+    .grid-section h2::before {
+      content: '✨';
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -8px;
+      font-size: 20px;
+      color: #F6B1CE;
+      animation: sparkleBottom 2s infinite;
+    }
+
+    @keyframes sparkleBottom {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .grid-item {
+      background: linear-gradient(135deg, #ffffff 0%, #EEF1DA 100%);
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border-right: 5px solid #91C4C3;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: cardFadeIn 0.6s ease-out backwards;
+    }
+
+    @keyframes cardFadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    .grid-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100px;
+      height: 100px;
+      background: radial-gradient(circle, rgba(180, 222, 189, 0.15) 0%, transparent 70%);
+      border-radius: 50%;
+      transform: translate(30%, -30%);
+      transition: all 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .grid-item::before {
+        animation: circleFloat 4s ease-in-out infinite;
+      }
+
+      @keyframes circleFloat {
+        0%, 100% { transform: translate(30%, -30%); }
+        50% { transform: translate(35%, -35%); }
+      }
+
+      .grid-item:hover::before {
+        transform: translate(20%, -20%) scale(1.8);
+        background: radial-gradient(circle, rgba(145, 196, 195, 0.25) 0%, transparent 70%);
+      }
+
+      .grid-item:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(61, 182, 177, 0.25);
+        border-right-color: #3DB6B1;
+      }
+
+      .grid-item:hover h3 {
+        color: #3DB6B1;
+        transform: translateX(-5px);
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .grid-item:active {
+        transform: scale(0.98);
+        box-shadow: 0 4px 15px rgba(61, 182, 177, 0.2);
+      }
+    }
+
+    .grid-item h3 {
+      font-size: 26px;
+      color: #1581BF;
+      margin-bottom: 16px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .grid-item:hover h3 {
+      color: #3DB6B1;
+      transform: translateX(-5px);
+    }
+
+    .grid-item p {
+      font-size: 18px;
+      color: #374151;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Content Section */
+    .content-section {
+      padding: 80px 24px;
+      background: #FFF7DD;
+    }
+
+    .content-section h2 {
+      font-size: 36px;
+      color: #1581BF;
+      text-align: center;
+      margin-bottom: 48px;
+      font-weight: 700;
+    }
+
+    .content-section ul {
+      list-style: none;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .content-section li {
+      padding: 24px 32px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ffffff 0%, #EEF1DA 100%);
+      border-right: 6px solid #91C4C3;
+      border-radius: 16px;
+      font-size: 20px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+      position: relative;
+      overflow: hidden;
+      animation: slideInRight 0.5s ease-out backwards;
+    }
+
+    @keyframes slideInRight {
+      from { 
+        opacity: 0; 
+        transform: translateX(30px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(0); 
+      }
+    }
+
+    .content-section li::before {
+      content: '✦';
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 24px;
+      color: #91C4C3;
+      opacity: 0.3;
+      transition: all 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .content-section li::before {
+        animation: iconSpin 3s linear infinite;
+      }
+
+      @keyframes iconSpin {
+        from { transform: translateY(-50%) rotate(0deg); }
+        to { transform: translateY(-50%) rotate(360deg); }
+      }
+
+      .content-section li:hover::before {
+        opacity: 1;
+        transform: translateY(-50%) rotate(180deg) scale(1.3);
+        color: #3DB6B1;
+      }
+
+      .content-section li:hover {
+        transform: translateX(-8px);
+        box-shadow: 0 8px 30px rgba(61, 182, 177, 0.25);
+        background: linear-gradient(135deg, #ffffff 0%, #D5E5D5 100%);
+        border-right-color: #3DB6B1;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .content-section li:active {
+        transform: scale(0.98);
+        box-shadow: 0 2px 10px rgba(61, 182, 177, 0.2);
+      }
+    }
+
+    /* Strategies Page */
+    .strategies-header {
+      background: linear-gradient(135deg, #ADB2D4 0%, #9BB4C0 100%);
+      color: white;
+      padding: 60px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      animation: headerGradient 10s ease infinite;
+      background-size: 200% 200%;
+    }
+
+    @keyframes headerGradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    .strategies-header::before {
+      content: '';
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(246, 177, 206, 0.2) 0%, transparent 70%);
+      border-radius: 50%;
+      top: -150px;
+      left: 10%;
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .strategies-header::after {
+      content: '';
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+      border-radius: 50%;
+      bottom: -125px;
+      right: 10%;
+      animation: float 7s ease-in-out infinite reverse;
+    }
+
+    .strategies-header h2 {
+      font-size: 46px;
+      font-weight: 900;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .strategies-content {
+      padding: 60px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .strategy-list {
+      display: grid;
+      gap: 24px;
+    }
+
+    .strategy-card {
+      background: linear-gradient(145deg, #ffffff 0%, #EEF1DA 100%);
+      padding: 36px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      border-right: 6px solid #91C4C3;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: strategyCardEnter 0.5s ease-out backwards;
+    }
+
+    @keyframes strategyCardEnter {
+      from { 
+        opacity: 0; 
+        transform: translateX(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(0); 
+      }
+    }
+
+    .strategy-card::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      right: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(14, 165, 233, 0.08) 0%, transparent 70%);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .strategy-card::after {
+        animation: cardGlow 5s ease-in-out infinite;
+      }
+
+      @keyframes cardGlow {
+        0%, 100% { transform: scale(1); }
+        50% { transform: scale(1.1); }
+      }
+
+      .strategy-card:hover::after {
+        opacity: 1;
+      }
+
+      .strategy-card:hover {
+        transform: translateX(-6px) translateY(-4px);
+        box-shadow: 0 12px 35px rgba(14, 165, 233, 0.25);
+        border-right-color: #0EA5E9;
+      }
+
+      .strategy-card:hover h3 {
+        color: #0A9396;
+        transform: translateX(-4px);
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .strategy-card:active {
+        transform: scale(0.98);
+        box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+      }
+    }
+
+    .strategy-card h3 {
+      font-size: 28px;
+      color: #013A63;
+      margin-bottom: 18px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .strategy-card p {
+      font-size: 19px;
+      color: #475569;
+      line-height: 1.9;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .strategy-meta {
+      display: flex;
+      gap: 20px;
+      font-size: 15px;
+      color: #0A9396;
+      font-weight: 600;
+    }
+
+    /* Evidence Page */
+    .evidence-header {
+      background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+      color: white;
+      padding: 48px 24px;
+      text-align: center;
+    }
+
+    .evidence-header h2 {
+      font-size: 40px;
+      font-weight: 700;
+    }
+
+    .evidence-content {
+      padding: 60px 24px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .evidence-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+
+    .evidence-card {
+      background: linear-gradient(145deg, #ffffff 0%, #F0F9FF 100%);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      border-top: 6px solid #0284C7;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      animation: cardSlideUp 0.6s ease-out backwards;
+    }
+
+    @keyframes cardSlideUp {
+      from { 
+        opacity: 0; 
+        transform: translateY(20px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateY(0); 
+      }
+    }
+
+    .evidence-card::before {
+      content: '';
+      position: absolute;
+      top: -100%;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(180deg, rgba(14, 165, 233, 0.15) 0%, transparent 100%);
+      transition: top 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .evidence-card:hover::before {
+        top: 0;
+      }
+
+      .evidence-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(14, 165, 233, 0.25);
+        border-top-color: #0EA5E9;
+      }
+
+      .evidence-card:hover h3 {
+        color: #0A9396;
+        transform: scale(1.03);
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .evidence-card:active {
+        transform: scale(0.98);
+        box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);
+      }
+    }
+
+    .evidence-card h3 {
+      font-size: 26px;
+      color: #013A63;
+      margin-bottom: 18px;
+      font-weight: 800;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .evidence-card p {
+      font-size: 18px;
+      color: #374151;
+      line-height: 1.9;
+      position: relative;
+      z-index: 1;
+    }
+
+    .evidence-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 15px;
+      font-weight: 700;
+      margin-top: 16px;
+      box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
+      animation: badgePulse 2s ease-in-out infinite;
+    }
+
+    @keyframes badgePulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .evidence-badge:hover {
+      transform: scale(1.15);
+      box-shadow: 0 6px 25px rgba(14, 165, 233, 0.5);
+      background: linear-gradient(135deg, #0284C7 0%, #0369A1 100%);
+    }
+
+    /* PDF Guide Page Styles */
+    .pdf-section {
+      background: white;
+      padding: 32px;
+      border-radius: 12px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+      margin-bottom: 28px;
+    }
+
+    .pdf-section-title {
+      font-size: 28px;
+      color: #013A63;
+      margin-bottom: 16px;
+      font-weight: 700;
+      border-right: 5px solid #FFB703;
+      padding-right: 16px;
+    }
+
+    .pdf-text {
+      font-size: 19px;
+      color: #555;
+      line-height: 1.8;
+    }
+
+    .strategy-box {
+      background: linear-gradient(145deg, #ffffff 0%, #F0F9FF 100%);
+      padding: 40px;
+      border-radius: 24px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+      margin-bottom: 32px;
+      border: 3px solid #0284C7;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .strategy-box::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(10, 147, 150, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .strategy-box:hover::before {
+        left: 100%;
+      }
+
+      .strategy-box:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 15px 50px rgba(10, 147, 150, 0.2);
+        border-color: #FFB703;
+      }
+
+      .strategy-box:hover .strategy-header h3 {
+        color: #0A9396;
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .strategy-box:active {
+        transform: scale(0.99);
+        box-shadow: 0 6px 25px rgba(10, 147, 150, 0.15);
+      }
+    }
+
+    .strategy-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 28px;
+      padding-bottom: 24px;
+      border-bottom: 3px dashed #cbd5e1;
+      position: relative;
+      z-index: 1;
+    }
+
+    .strategy-icon {
+      font-size: 56px;
+      filter: drop-shadow(0 4px 10px rgba(10, 147, 150, 0.3));
+      animation: iconFloat 3s ease-in-out infinite;
+    }
+
+    @keyframes iconFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .strategy-header h3 {
+      font-size: 30px;
+      color: #0C4A6E;
+      font-weight: 900;
+      margin: 0;
+      transition: color 0.3s ease;
+    }
+
+    .strategy-box:hover .strategy-header h3 {
+      color: #0A9396;
+    }
+
+    .strategy-steps {
+      display: grid;
+      gap: 16px;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      background: linear-gradient(135deg, #FEF3C7 0%, #FDE68A 100%);
+      padding: 24px 28px;
+      border-radius: 16px;
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+      position: relative;
+      overflow: hidden;
+      animation: stepFadeIn 0.4s ease-out backwards;
+    }
+
+    @keyframes stepFadeIn {
+      from { 
+        opacity: 0; 
+        transform: translateX(15px); 
+      }
+      to { 
+        opacity: 1; 
+        transform: translateX(0); 
+      }
+    }
+
+    .step-item::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 4px;
+      height: 0;
+      background: linear-gradient(180deg, #DB2777, #F59E0B);
+      transition: height 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .step-item:hover::before {
+        height: 100%;
+      }
+
+      .step-item:hover {
+        background: linear-gradient(135deg, #FDE68A 0%, #FCD34D 100%);
+        transform: translateX(-6px);
+        border-color: #F59E0B;
+        box-shadow: 0 8px 25px rgba(245, 158, 11, 0.25);
+      }
+
+      .step-item:hover .step-number {
+        transform: rotate(360deg) scale(1.15);
+        background: linear-gradient(135deg, #F59E0B 0%, #EF4444 100%);
+        box-shadow: 0 6px 25px rgba(245, 158, 11, 0.5);
+        animation: none;
+      }
+
+      .step-item:hover p {
+        color: #DB2777;
+        transform: translateX(-3px);
+      }
+    }
+
+    @media (hover: none) and (pointer: coarse) {
+      .step-item:active {
+        transform: scale(0.97);
+        box-shadow: 0 4px 15px rgba(245, 158, 11, 0.2);
+      }
+    }
+
+    .step-number {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      background: linear-gradient(135deg, #DB2777 0%, #7C3AED 100%);
+      color: white;
+      border-radius: 50%;
+      font-size: 22px;
+      font-weight: 800;
+      flex-shrink: 0;
+      box-shadow: 0 4px 15px rgba(219, 39, 119, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .step-number {
+        animation: numberBounce 2s ease-in-out infinite;
+      }
+
+      @keyframes numberBounce {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-5px); }
+      }
+    }
+
+    .step-item p {
+      font-size: 19px;
+      color: #7C3AED;
+      font-weight: 700;
+      margin: 0;
+      transition: all 0.3s ease;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .nav-links {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .cover-page h1 {
+        font-size: 36px;
+      }
+
+      .cover-page p {
+        font-size: 18px;
+      }
+
+      .platform-hero h2 {
+        font-size: 32px;
+      }
+
+      .grid-section h2,
+      .content-section h2 {
+        font-size: 28px;
+      }
+    }
+  </style>
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Navigation -->
+  <nav class="nav-bar">
+   <div class="nav-container">
+    <div class="nav-logo">
+     منصة معلم
+    </div>
+    <ul class="nav-links">
+     <li><a href="#" class="nav-link active" data-page="cover">الصفحة الرئيسية</a></li>
+     <li><a href="#" class="nav-link" data-page="library">مكتبة الموارد</a></li>
+     <li><a href="#" class="nav-link" data-page="strategies">استراتيجيات التعلم</a></li>
+     <li><a href="#" class="nav-link" data-page="assessment">دليل التقييم</a></li>
+     <li><a href="#" class="nav-link" data-page="forum">المجتمع المهني</a></li>
+    </ul>
+   </div>
+  </nav><!-- Cover Page -->
+  <div class="page active" id="cover-page">
+   <div class="cover-page">
+    <div class="cover-icon">
+     📚
+    </div>
+    <h1 id="cover-title">منصة معلم - المشروع المهني المتكامل</h1>
+    <p id="cover-subtitle">منصة رقمية - لوحة معلومات - مكتبة استراتيجيات - شواهد رسمية</p>
+    <p style="font-size: 22px; margin-top: 20px; opacity: 0.95; font-weight: 600;">إعداد وتصميم: شذا الردادي، فاطمة عجوة</p><button class="cover-button" onclick="navigateToPage('library')">استكشف المشروع</button>
+   </div>
+   <section class="content-section" style="background: #F0F9FF; padding: 60px 24px;">
+    <div class="container">
+     <div style="max-width: 900px; margin: 0 auto 80px; background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%); padding: 48px; border-radius: 24px; box-shadow: 0 15px 50px rgba(14, 165, 233, 0.4); border-right: 6px solid #0284C7; position: relative; overflow: hidden; animation: cardGlowPulse 3s ease-in-out infinite;">
+      <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255, 183, 3, 0.3) 0%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+      <div style="position: absolute; bottom: -80px; left: -80px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%); border-radius: 50%; animation: float 8s ease-in-out infinite reverse;"></div>
+      <div style="display: flex; align-items: center; gap: 20px; margin-bottom: 24px; position: relative; z-index: 1;"><span style="font-size: 56px; filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3)); animation: iconBounce 2s ease-in-out infinite;">🎯</span>
+       <h3 style="font-size: 32px; color: #ffffff; font-weight: 800; margin: 0; text-shadow: 0 4px 15px rgba(0,0,0,0.3);">وصف المبادرة</h3>
+      </div>
+      <p style="font-size: 20px; color: #ffffff; line-height: 2; text-align: justify; position: relative; z-index: 1; margin: 0;">قمت بابتكار منصة مهنية رقمية (معلم) تهدف إلى تعزيز المجتمع المهني ودعم تبادل المعرفة بين المعلمين، وتضم مكتبة موارد وبنك استراتيجيات، دليل تقييم، ونماذج قابلة للتحميل.</p>
+     </div>
+     <h2>لماذا منصة معلم؟</h2>
+     <ul>
+      <li>تدعم المجتمع المهني داخل المدرسة وخارجها</li>
+      <li>توحد الموارد في منصة واحدة</li>
+      <li>تسهل الوصول للاستراتيجيات الحديثة</li>
+      <li>تتيح مشاركة التطبيقات الصفية</li>
+      <li>تعزز تبادل الخبرات بين المعلمين</li>
+     </ul>
+    </div>
+   </section>
+  </div><!-- Strategies Page -->
+  <div class="page" id="strategies-page">
+   <div class="strategies-header">
+    <h2>استراتيجيات التعلم - دليل شامل وبنك تطبيقي</h2>
+    <p style="font-size: 20px; margin-top: 16px; opacity: 0.95;">40+ استراتيجية مبتكرة مع فيديوهات شرح وأدلة تطبيق وخطوات عملية</p>
+   </div>
+   <div class="strategies-content"><!-- Overview Cards -->
+    <div class="evidence-grid" style="margin-bottom: 60px;">
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       📖
+      </div>
+      <h3>40+ استراتيجية مبتكرة</h3>
+      <p>مجموعة شاملة من الاستراتيجيات التعليمية الحديثة المبنية على الأبحاث والتطبيقات الميدانية الناجحة.</p><span class="evidence-badge">جاهزة للتطبيق</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       🎥
+      </div>
+      <h3>فيديوهات قصيرة</h3>
+      <p>شرح مرئي مختصر لكل استراتيجية يوضح طريقة التطبيق والخطوات العملية بشكل سهل وميسر.</p><span class="evidence-badge">3-5 دقائق</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       📄
+      </div>
+      <h3>أدلة تطبيق PDF</h3>
+      <p>دليل تطبيق تفصيلي قابل للطباعة لكل استراتيجية يحتوي على الخطوات والأمثلة والنصائح التطبيقية.</p><span class="evidence-badge">قابل للطباعة</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       ✨
+      </div>
+      <h3>أمثلة ميدانية</h3>
+      <p>تطبيقات حقيقية تم تنفيذها داخل الفصول الدراسية مع نتائج ملموسة وتجارب معلمين ميدانيين.</p><span class="evidence-badge">تجارب حقيقية</span>
+     </div>
+    </div><!-- Innovative Strategies Section -->
+    <div style="margin-top: 0px; padding: 60px 40px; background: linear-gradient(135deg, #FFB703 0%, #FF9500 100%); border-radius: 20px; color: white; text-align: center; box-shadow: 0 10px 40px rgba(255, 183, 3, 0.3); position: relative; overflow: hidden;">
+     <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%); border-radius: 50%;"></div>
+     <div style="position: absolute; bottom: -80px; left: -80px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%); border-radius: 50%;"></div>
+     <div style="font-size: 72px; margin-bottom: 24px; position: relative; z-index: 1; animation: pulse 2s ease-in-out infinite;">
+      💡
+     </div>
+     <h2 style="font-size: 42px; font-weight: 900; margin-bottom: 20px; color: white; position: relative; z-index: 1; text-shadow: 0 4px 15px rgba(0,0,0,0.2);">استراتيجيات مبتكرة</h2>
+     <p style="font-size: 22px; opacity: 0.95; max-width: 850px; margin: 0 auto 36px; line-height: 1.8; position: relative; z-index: 1; font-weight: 600;">استراتيجيات تعليمية مبتكرة تم ابتكارها من قبل معلمات المدرسة الثانوية الخامسة والأربعون</p>
+     <p style="font-size: 19px; opacity: 0.9; max-width: 750px; margin: 0 auto 48px; line-height: 1.7; position: relative; z-index: 1;">أفكار إبداعية غير تقليدية نابعة من التجربة الميدانية والممارسة الفعلية داخل الفصول الدراسية</p><button id="show-innovative-btn" onclick="showInnovativeStrategies(event)" style="background: white; color: #FF9500; border: none; padding: 20px 48px; border-radius: 50px; font-size: 22px; font-weight: 800; cursor: pointer; font-family: 'Cairo', sans-serif; box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2); transition: all 0.4s ease; position: relative; z-index: 1;"> 🌟 اكتشف الاستراتيجيات المبتكرة </button>
+    </div><!-- Innovative Strategies Content (Hidden Initially) -->
+    <div id="innovative-strategies-content" style="display: none; margin-top: 60px;">
+     <h2 style="font-size: 38px; color: #FF9500; margin-bottom: 48px; text-align: center; font-weight: 900; position: relative; padding-bottom: 20px;">✨ استراتيجيات معلمات الثانوية 45 المبتكرة</h2><!-- Innovative Strategy Cards -->
+     <div class="strategy-list">
+      <div class="strategy-card" style="border-right: 5px solid #FF9500; background: linear-gradient(145deg, #FFFBF0 0%, #FFF8E1 100%);">
+       <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+        <h3 style="margin: 0; color: #FF9500;">استراتيجية الصندوق السحري</h3><span style="background: linear-gradient(135deg, #FFB703 0%, #FF9500 100%); color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;">⭐ مبتكرة</span>
+       </div>
+       <p style="color: #333;">استراتيجية تفاعلية تعتمد على صندوق يحتوي على بطاقات ملونة لكل منها سؤال أو مهمة. الطالبات يسحبن البطاقات عشوائيا مما يخلق عنصر المفاجأة والحماس.</p>
+       <div style="margin: 20px 0; padding: 16px; background: white; border-radius: 10px; border-right: 4px solid #FF9500;">
+        <p style="margin: 0; color: #555; font-size: 16px;"><strong style="color: #FF9500;">💡 الفكرة:</strong> تحويل التقييم التقليدي إلى تجربة ممتعة تعزز المشاركة.</p>
+       </div>
+       <div class="strategy-meta" style="color: #FF9500;"><span>⏱ المدة: 15-25 دقيقة</span> <span>👥 جميع المراحل</span>
+       </div>
+       <div style="margin-top: 16px; padding: 16px; background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border-radius: 10px;">
+        <p style="margin: 0; font-size: 15px; color: #555;"><strong style="color: #FF9500;">👩‍🏫 المبتكرة:</strong> أ. سارة المطيري - معلمة الرياضيات</p>
+       </div>
+      </div>
+      <div class="strategy-card" style="border-right: 5px solid #FF9500; background: linear-gradient(145deg, #FFFBF0 0%, #FFF8E1 100%);">
+       <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+        <h3 style="margin: 0; color: #FF9500;">استراتيجية محطات التعلم الدائرية</h3><span style="background: linear-gradient(135deg, #FFB703 0%, #FF9500 100%); color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;">⭐ مبتكرة</span>
+       </div>
+       <p style="color: #333;">تقسيم الفصل إلى محطات دائرية (5-6 محطات) كل محطة تحتوي على نشاط مختلف. الطالبات يتنقلن بين المحطات في توقيت محدد مع موسيقى خفيفة.</p>
+       <div style="margin: 20px 0; padding: 16px; background: white; border-radius: 10px; border-right: 4px solid #FF9500;">
+        <p style="margin: 0; color: #555; font-size: 16px;"><strong style="color: #FF9500;">💡 الفكرة:</strong> دمج التعلم النشط مع الحركة الفيزيائية لزيادة التركيز.</p>
+       </div>
+       <div class="strategy-meta" style="color: #FF9500;"><span>⏱ المدة: 40-50 دقيقة</span> <span>👥 المتوسط والثانوي</span>
+       </div>
+       <div style="margin-top: 16px; padding: 16px; background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border-radius: 10px;">
+        <p style="margin: 0; font-size: 15px; color: #555;"><strong style="color: #FF9500;">👩‍🏫 المبتكرة:</strong> أ. نورة العتيبي - معلمة اللغة العربية</p>
+       </div>
+      </div>
+      <div class="strategy-card" style="border-right: 5px solid #FF9500; background: linear-gradient(145deg, #FFFBF0 0%, #FFF8E1 100%);">
+       <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+        <h3 style="margin: 0; color: #FF9500;">استراتيجية الشخصية التاريخية الحية</h3><span style="background: linear-gradient(135deg, #FFB703 0%, #FF9500 100%); color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;">⭐ مبتكرة</span>
+       </div>
+       <p style="color: #333;">الطالبات يتقمصن شخصيات تاريخية أو علمية ويعدن تجسيد موقف تاريخي بأسلوب حواري تفاعلي مع تحضير حوارات وملابس بسيطة.</p>
+       <div style="margin: 20px 0; padding: 16px; background: white; border-radius: 10px; border-right: 4px solid #FF9500;">
+        <p style="margin: 0; color: #555; font-size: 16px;"><strong style="color: #FF9500;">💡 الفكرة:</strong> جعل المعلومات التاريخية حية وقريبة من خلال التمثيل.</p>
+       </div>
+       <div class="strategy-meta" style="color: #FF9500;"><span>⏱ المدة: حصة كاملة</span> <span>👥 جميع المراحل</span>
+       </div>
+       <div style="margin-top: 16px; padding: 16px; background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border-radius: 10px;">
+        <p style="margin: 0; font-size: 15px; color: #555;"><strong style="color: #FF9500;">👩‍🏫 المبتكرة:</strong> أ. مريم الدوسري - معلمة التاريخ</p>
+       </div>
+      </div>
+      <div class="strategy-card" style="border-right: 5px solid #FF9500; background: linear-gradient(145deg, #FFFBF0 0%, #FFF8E1 100%);">
+       <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 16px;">
+        <h3 style="margin: 0; color: #FF9500;">استراتيجية التحدي اليومي</h3><span style="background: linear-gradient(135deg, #FFB703 0%, #FF9500 100%); color: white; padding: 6px 16px; border-radius: 20px; font-size: 13px; font-weight: 700;">⭐ مبتكرة</span>
+       </div>
+       <p style="color: #333;">في بداية كل حصة، يعرض تحدي صغير (لغز، مسألة رياضية) على الشاشة. أول طالبة تحله تحصل على نقاط ويوثق اسمها في "لوحة الشرف".</p>
+       <div style="margin: 20px 0; padding: 16px; background: white; border-radius: 10px; border-right: 4px solid #FF9500;">
+        <p style="margin: 0; color: #555; font-size: 16px;"><strong style="color: #FF9500;">💡 الفكرة:</strong> تنشيط الأذهان في بداية الحصة وخلق جو تنافسي إيجابي.</p>
+       </div>
+       <div class="strategy-meta" style="color: #FF9500;"><span>⏱ المدة: 5-7 دقائق</span> <span>👥 جميع المراحل</span>
+       </div>
+       <div style="margin-top: 16px; padding: 16px; background: linear-gradient(135deg, #FFF3E0 0%, #FFE0B2 100%); border-radius: 10px;">
+        <p style="margin: 0; font-size: 15px; color: #555;"><strong style="color: #FF9500;">👩‍🏫 المبتكرة:</strong> أ. ريم الشمري - معلمة الفيزياء</p>
+       </div>
+      </div>
+     </div>
+     <div style="text-align: center; margin-top: 60px;"><button id="hide-innovative-btn" onclick="hideInnovativeStrategies(event)" style="background: linear-gradient(135deg, #FFB703 0%, #FF9500 100%); color: white; border: none; padding: 16px 40px; border-radius: 50px; font-size: 20px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; box-shadow: 0 6px 20px rgba(255, 183, 3, 0.3); transition: all 0.3s ease;"> إخفاء الاستراتيجيات ⬆ </button>
+     </div>
+    </div><!-- New Guide Card -->
+    <div style="margin-top: 60px; background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%); padding: 48px 40px; border-radius: 20px; box-shadow: 0 12px 40px rgba(14, 165, 233, 0.4); text-align: center; position: relative; overflow: hidden;">
+     <div style="position: absolute; top: -50px; right: -50px; width: 200px; height: 200px; background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%); border-radius: 50%; animation: float 6s ease-in-out infinite;"></div>
+     <div style="position: absolute; bottom: -80px; left: -80px; width: 250px; height: 250px; background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%); border-radius: 50%; animation: float 8s ease-in-out infinite reverse;"></div>
+     <div style="font-size: 72px; margin-bottom: 24px; position: relative; z-index: 1; animation: pulse 2s ease-in-out infinite;">
+      📖
+     </div>
+     <h2 style="font-size: 38px; font-weight: 900; margin-bottom: 20px; color: white; position: relative; z-index: 1; text-shadow: 0 4px 15px rgba(0,0,0,0.2); font-family: 'Tajawal', sans-serif;">دليل الاستراتيجيات التطبيقي</h2>
+     <p style="font-size: 22px; opacity: 0.95; max-width: 800px; margin: 0 auto; line-height: 1.9; position: relative; z-index: 1; color: white; font-weight: 600;">خطوات عملية مفصلة لتطبيق أهم الاستراتيجيات التعليمية في الفصل الدراسي</p>
+    </div><!-- Strategy 1: 3-2-1 -->
+    <div class="strategy-box" style="margin-top: 40px;">
+     <div class="strategy-header"><span class="strategy-icon">📝</span>
+      <h3>استراتيجية 3-2-1</h3>
+     </div>
+     <p style="font-size: 18px; color: #555; margin-bottom: 24px; line-height: 1.8;">استراتيجية تقييم وتلخيص سريعة تساعد الطالبات على تنظيم أفكارهن وتحديد ما تعلمنه وما يحتجن لمعرفته أكثر.</p>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">1</span>
+       <p>الطالبة تكتب 3 معلومات أو مفاهيم تعلمتها من الدرس</p>
+      </div>
+      <div class="step-item"><span class="step-number">2</span>
+       <p>تسجل 2 أفكار جديدة أو مثيرة للاهتمام اكتشفتها</p>
+      </div>
+      <div class="step-item"><span class="step-number">3</span>
+       <p>تطرح 1 سؤال للتوسع أو شيء تريد معرفة المزيد عنه</p>
+      </div>
+     </div>
+     <div style="margin-top: 24px; padding: 20px; background: #F1FAFF; border-right: 4px solid #FFB703; border-radius: 8px;">
+      <p style="font-size: 16px; color: #555; margin: 0; line-height: 1.8;"><strong style="color: #013A63;">📌 متى تستخدم:</strong> في نهاية الحصة كتقييم سريع، أو بعد قراءة نص، أو مشاهدة فيديو تعليمي.</p>
+     </div>
+     <div style="margin-top: 20px; text-align: center;"><button style="background: white; color: #0A9396; border: 2px solid #0A9396; padding: 12px 32px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 16px; transition: all 0.3s ease;">✨ أمثلة ميدانية</button>
+     </div>
+    </div><!-- Strategy 2: Active Learning -->
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">✨</span>
+      <h3>استراتيجية التعلم النشط</h3>
+     </div>
+     <p style="font-size: 18px; color: #555; margin-bottom: 24px; line-height: 1.8;">استراتيجية تشرك الطالبات بفاعلية في عملية التعلم من خلال الأنشطة الجماعية والفردية التي تتطلب التفكير والمشاركة.</p>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">1</span>
+       <p>تقسيم الطالبات إلى مجموعات صغيرة (3-5 طالبات)</p>
+      </div>
+      <div class="step-item"><span class="step-number">2</span>
+       <p>توزيع المهام والأدوار على كل عضوة في المجموعة</p>
+      </div>
+      <div class="step-item"><span class="step-number">3</span>
+       <p>تنفيذ النشاط بشكل تعاوني مع تبادل الأفكار</p>
+      </div>
+      <div class="step-item"><span class="step-number">4</span>
+       <p>عرض النتائج ومشاركة ما توصلت إليه المجموعة</p>
+      </div>
+     </div>
+     <div style="margin-top: 24px; padding: 20px; background: #F1FAFF; border-right: 4px solid #FFB703; border-radius: 8px;">
+      <p style="font-size: 16px; color: #555; margin: 0; line-height: 1.8;"><strong style="color: #013A63;">💡 أمثلة تطبيقية:</strong> حل مشكلة رياضية، تحليل نص أدبي، إجراء تجربة علمية، إنشاء عرض تقديمي.</p>
+     </div>
+     <div style="margin-top: 20px; text-align: center;"><button style="background: white; color: #0A9396; border: 2px solid #0A9396; padding: 12px 32px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 16px; transition: all 0.3s ease;">✨ أمثلة ميدانية</button>
+     </div>
+    </div><!-- Strategy 3: Visual Thinking -->
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">🎨</span>
+      <h3>استراتيجية التفكير المرئي</h3>
+     </div>
+     <p style="font-size: 18px; color: #555; margin-bottom: 24px; line-height: 1.8;">استخدام الصور والرسوم والمخططات البصرية لتحفيز التفكير العميق وتطوير مهارات الملاحظة والتحليل لدى الطالبات.</p>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">1</span>
+       <p>عرض صورة أو رسم بياني أو مخطط مرتبط بالموضوع</p>
+      </div>
+      <div class="step-item"><span class="step-number">2</span>
+       <p>طرح أسئلة استنباطية: ماذا تلاحظين؟ ماذا تستنتجين؟ ما الذي يجعلك تقولين ذلك؟</p>
+      </div>
+      <div class="step-item"><span class="step-number">3</span>
+       <p>مناقشة جماعية للنقاط الأساسية والتفسيرات المختلفة</p>
+      </div>
+      <div class="step-item"><span class="step-number">4</span>
+       <p>ربط الملاحظات بمفاهيم الدرس وحل المهمة المطلوبة</p>
+      </div>
+     </div>
+     <div style="margin-top: 24px; padding: 20px; background: #F1FAFF; border-right: 4px solid #FFB703; border-radius: 8px;">
+      <p style="font-size: 16px; color: #555; margin: 0; line-height: 1.8;"><strong style="color: #013A63;">💡 أنواع المصادر المرئية:</strong> لوحات فنية، رسوم بيانية، خرائط، صور تاريخية، تجارب علمية مصورة.</p>
+     </div>
+     <div style="margin-top: 20px; text-align: center;"><button style="background: white; color: #0A9396; border: 2px solid #0A9396; padding: 12px 32px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 16px; transition: all 0.3s ease;">✨ أمثلة ميدانية</button>
+     </div>
+    </div><!-- Strategy 4: Think-Pair-Share -->
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">💬</span>
+      <h3>استراتيجية فكر-زاوج-شارك</h3>
+     </div>
+     <p style="font-size: 18px; color: #555; margin-bottom: 24px; line-height: 1.8;">استراتيجية تشجع على التفكير الفردي أولا، ثم المشاركة مع زميلة، وأخيرا المشاركة مع المجموعة الكبيرة.</p>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">1</span>
+       <p><strong>فكر:</strong> الطالبة تفكر بشكل فردي في السؤال أو المشكلة (1-2 دقيقة)</p>
+      </div>
+      <div class="step-item"><span class="step-number">2</span>
+       <p><strong>زاوج:</strong> تناقش أفكارها مع زميلة بجانبها (2-3 دقائق)</p>
+      </div>
+      <div class="step-item"><span class="step-number">3</span>
+       <p><strong>شارك:</strong> كل زوج يشارك أفكاره مع الصف كاملا</p>
+      </div>
+     </div>
+     <div style="margin-top: 24px; padding: 20px; background: #F1FAFF; border-right: 4px solid #FFB703; border-radius: 8px;">
+      <p style="font-size: 16px; color: #555; margin: 0; line-height: 1.8;"><strong style="color: #013A63;">💡 الفوائد:</strong> تمنح جميع الطالبات فرصة للتفكير والمشاركة، تبني الثقة قبل المشاركة الجماعية، تعزز مهارات الاستماع والحوار.</p>
+     </div>
+     <div style="margin-top: 20px; text-align: center;"><button style="background: white; color: #0A9396; border: 2px solid #0A9396; padding: 12px 32px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 16px; transition: all 0.3s ease;">✨ أمثلة ميدانية</button>
+     </div>
+    </div><!-- Strategy 5: Mind Mapping -->
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">🗺️</span>
+      <h3>استراتيجية الخرائط الذهنية</h3>
+     </div>
+     <p style="font-size: 18px; color: #555; margin-bottom: 24px; line-height: 1.8;">أداة بصرية قوية لتنظيم المعلومات وربط الأفكار بطريقة تساعد على الفهم العميق والتذكر طويل المدى.</p>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">1</span>
+       <p>كتابة الموضوع الرئيسي في منتصف الورقة أو الشاشة</p>
+      </div>
+      <div class="step-item"><span class="step-number">2</span>
+       <p>رسم فروع رئيسية تمثل الأفكار أو المواضيع الفرعية</p>
+      </div>
+      <div class="step-item"><span class="step-number">3</span>
+       <p>إضافة فروع ثانوية للتفاصيل والأمثلة</p>
+      </div>
+      <div class="step-item"><span class="step-number">4</span>
+       <p>استخدام الألوان والرموز والصور لتعزيز الذاكرة البصرية</p>
+      </div>
+     </div>
+     <div style="margin-top: 24px; padding: 20px; background: #F1FAFF; border-right: 4px solid #FFB703; border-radius: 8px;">
+      <p style="font-size: 16px; color: #555; margin: 0; line-height: 1.8;"><strong style="color: #013A63;">💡 أدوات رقمية:</strong> MindMeister, Coggle, Canva Mind Maps - أو ببساطة ورقة وأقلام ملونة!</p>
+     </div>
+     <div style="margin-top: 20px; text-align: center;"><button style="background: white; color: #0A9396; border: 2px solid #0A9396; padding: 12px 32px; border-radius: 8px; font-weight: 600; cursor: pointer; font-family: 'Cairo', sans-serif; font-size: 16px; transition: all 0.3s ease;">✨ أمثلة ميدانية</button>
+     </div>
+    </div>
+   </div>
+  </div><!-- Assessment Guide Page -->
+  <div class="page" id="assessment-page">
+   <div class="strategies-header">
+    <h2>دليل التقويم المعتمد</h2>
+    <p style="font-size: 20px; margin-top: 16px; opacity: 0.95;">أدوات تقويم شاملة ومعتمدة للارتقاء بجودة التعلم</p>
+   </div>
+   <div class="strategies-content"><!-- Overview Cards -->
+    <div class="evidence-grid" style="margin-bottom: 60px;">
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       📊
+      </div>
+      <h3>Rubrics جاهزة للاستخدام</h3>
+      <p>معايير تقييم واضحة ومفصلة لمختلف المهام التعليمية مع مستويات الأداء المحددة بدقة.</p><span class="evidence-badge">20+ Rubric</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       ✅
+      </div>
+      <h3>أدوات تقييم أداء عملي</h3>
+      <p>قوائم مراجعة وأدوات تقييم للمهارات العملية والمشاريع والأداء الصفي والمهام التطبيقية.</p><span class="evidence-badge">متنوعة</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       👥
+      </div>
+      <h3>قوالب تقييم ذاتي وبين الأقران</h3>
+      <p>نماذج تساعد الطالبات على تقييم أنفسهن وزميلاتهن لتعزيز المسؤولية والتفكير التأملي.</p><span class="evidence-badge">10+ قالب</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       🤖
+      </div>
+      <h3>تقييمات ذكية بالذكاء الاصطناعي</h3>
+      <p>أمثلة وأفكار لاستخدام أدوات الذكاء الاصطناعي في توليد أسئلة تقييم وتحليل الأداء.</p><span class="evidence-badge">مبتكر</span>
+     </div>
+    </div><!-- Detailed Sections -->
+    <h2 style="font-size: 36px; color: #013A63; margin-bottom: 40px; text-align: center; font-weight: 700;">أدوات التقييم المتوفرة</h2><!-- Content Section: Rubrics Models -->
+    <div class="pdf-section" style="margin-bottom: 40px;">
+     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 20px;"><span style="font-size: 48px;">📊</span>
+      <h3 class="pdf-section-title" style="margin: 0;">نماذج Rubrics للتقييم</h3>
+     </div>
+     <p class="pdf-text">يحتوي هذا القسم على جداول تقييم معيارية جاهزة لمهارات البرمجة والمهارات العملية.</p>
+    </div><!-- Rubric Table -->
+    <div style="background: white; padding: 32px; border-radius: 12px; box-shadow: 0 4px 16px rgba(0,0,0,0.08); margin-bottom: 40px; overflow-x: auto;">
+     <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 24px;"><span style="font-size: 40px;">📊</span>
+      <h3 style="font-size: 24px; color: #013A63; font-weight: 700; margin: 0;">Rubric لتقييم المهارات العملية في HTML / CSS / JS</h3>
+     </div>
+     <div style="overflow-x: auto;">
+      <table style="width: 100%; border-collapse: collapse; font-size: 16px; min-width: 800px;">
+       <thead>
+        <tr style="background: linear-gradient(135deg, #80A1BA 0%, #91C4C3 100%); color: white;">
+         <th style="padding: 16px; text-align: right; border: 1px solid #C7D9DD; font-weight: 700; font-size: 17px;">المعيار</th>
+         <th style="padding: 16px; text-align: center; border: 1px solid #C7D9DD; font-weight: 700; font-size: 17px;">متميز (4)</th>
+         <th style="padding: 16px; text-align: center; border: 1px solid #C7D9DD; font-weight: 700; font-size: 17px;">متقن (3)</th>
+         <th style="padding: 16px; text-align: center; border: 1px solid #C7D9DD; font-weight: 700; font-size: 17px;">جيد (2)</th>
+         <th style="padding: 16px; text-align: center; border: 1px solid #C7D9DD; font-weight: 700; font-size: 17px;">يحتاج دعم (1)</th>
+        </tr>
+       </thead>
+       <tbody>
+        <tr style="background: #F1FAFF;">
+         <td style="padding: 16px; border: 1px solid #ddd; font-weight: 600; color: #013A63;">تنسيق الصور والنصوص</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">استخدام دقيق لجميع الوسوم وتنسيق احترافي</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تطبيق جيد مع أخطاء بسيطة</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تطبيق جزئي أو غير ثابت</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">لا يوجد تطبيق واضح أو الاستخدام غير صحيح</td>
+        </tr>
+        <tr style="background: white;">
+         <td style="padding: 16px; border: 1px solid #ddd; font-weight: 600; color: #013A63;">تقسيم الصفحة باستخدام div</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تقسيم منظم احترافي ومتجاوب</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تقسيم جيد ومنسق</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تقسيم غير متناسق</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">لا توجد تقسيمات صحيحة</td>
+        </tr>
+        <tr style="background: #F1FAFF;">
+         <td style="padding: 16px; border: 1px solid #ddd; font-weight: 600; color: #013A63;">التنسيق الداخلي والخارجي CSS</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تطبيق احترافي للتنسيق الداخلي والخارجي</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تطبيق جيد مع تفاوت بسيط</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تنسيق بسيط غير مكتمل</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">لم يتم استخدام CSS</td>
+        </tr>
+        <tr style="background: white;">
+         <td style="padding: 16px; border: 1px solid #ddd; font-weight: 600; color: #013A63;">JavaScript (document.write / alert)</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تطبيق كامل للدوال بشكل صحيح</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تطبيق جيد مع أخطاء بسيطة</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">استخدام جزئي للدوال</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">لا يوجد استخدام للدوال</td>
+        </tr>
+        <tr style="background: #F1FAFF;">
+         <td style="padding: 16px; border: 1px solid #ddd; font-weight: 600; color: #013A63;">الإبداع في التصميم</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تصميم جذاب واحترافي ومتناسق</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تصميم جيد ومنسق</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">تصميم بسيط</td>
+         <td style="padding: 16px; border: 1px solid #ddd; text-align: center;">لا توجد محاولات إبداعية</td>
+        </tr>
+       </tbody>
+      </table>
+     </div>
+     <div style="margin-top: 24px; padding: 20px; background: #F1FAFF; border-right: 4px solid #0A9396; border-radius: 8px;">
+      <p style="font-size: 16px; color: #555; margin: 0; line-height: 1.8;"><strong style="color: #013A63;">💡 ملاحظة:</strong> يمكن تخصيص هذا الجدول حسب متطلبات المشروع أو المهارات المستهدفة. استخدمه كنموذج قابل للتعديل والطباعة.</p>
+     </div>
+    </div>
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">📊</span>
+      <h3>Rubrics جاهزة للاستخدام</h3>
+     </div>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>Rubric تقييم العروض التقديمية</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>Rubric تقييم المشاريع البحثية</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>Rubric تقييم الكتابة الإبداعية</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>Rubric تقييم المشاركة الصفية</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>Rubric تقييم التفكير النقدي</p>
+      </div>
+     </div>
+    </div>
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">✅</span>
+      <h3>أدوات تقييم الأداء العملي</h3>
+     </div>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>قائمة مراجعة المهارات المخبرية</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>نموذج تقييم الأداء الفني والعملي</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>استمارة تقييم المهارات الحركية</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>أداة تقييم التجارب العلمية</p>
+      </div>
+     </div>
+    </div>
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">👥</span>
+      <h3>قوالب التقييم الذاتي وبين الأقران</h3>
+     </div>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>نموذج للتقييم الذاتي للطالبة</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>استمارة تقييم طالبة لطالبة</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>قالب التفكير التأملي الذاتي</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>نموذج تقييم العمل الجماعي</p>
+      </div>
+     </div>
+    </div>
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">🤖</span>
+      <h3>أمثلة للتقييمات الذكية بالذكاء الاصطناعي</h3>
+     </div>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>استخدام ChatGPT لتوليد أسئلة متنوعة</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>تحليل إجابات الطالبات بالذكاء الاصطناعي</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>توليد سيناريوهات تقييم واقعية</p>
+      </div>
+      <div class="step-item"><span class="step-number">✓</span>
+       <p>إنشاء تغذية راجعة شخصية للطالبات</p>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div><!-- Professional Forum Page -->
+  <div class="page" id="forum-page">
+   <div class="strategies-header">
+    <h2>مجتمع الحوار المهني</h2>
+    <p style="font-size: 20px; margin-top: 16px; opacity: 0.95;">مساحة تفاعلية لتبادل الخبرات والممارسات الملهمة</p>
+   </div>
+   <div class="strategies-content"><!-- Overview Cards -->
+    <div class="evidence-grid" style="margin-bottom: 60px;">
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       💬
+      </div>
+      <h3>قنوات نقاش تخصصية</h3>
+      <p>منتديات نقاش منظمة حسب التخصصات والمراحل الدراسية لتسهيل تبادل الأفكار والخبرات المتخصصة.</p><span class="evidence-badge">10+ قناة</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       ✨
+      </div>
+      <h3>ممارسات ملهمة</h3>
+      <p>مساحة لعرض ومشاركة الممارسات التعليمية الإبداعية والناجحة التي أنشأها المعلمون في فصولهم.</p><span class="evidence-badge">مشاركات يومية</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       💡
+      </div>
+      <h3>ركن "اسأل خبيرك"</h3>
+      <p>منصة للحصول على دعم مهني متخصص من خبراء التعليم والمعلمين المتميزين في مختلف المجالات.</p><span class="evidence-badge">دعم فوري</span>
+     </div>
+     <div class="evidence-card">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       🤝
+      </div>
+      <h3>مجموعات التعلم المهني</h3>
+      <p>مجموعات صغيرة للمعلمين تجتمع بانتظام لمناقشة التحديات والحلول ومشاركة أفضل الممارسات.</p><span class="evidence-badge">تعاون مستمر</span>
+     </div>
+    </div><!-- Detailed Sections -->
+    <h2 style="font-size: 36px; color: #013A63; margin-bottom: 40px; text-align: center; font-weight: 700;">أقسام المجتمع المهني</h2>
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">✨</span>
+      <h3>معرض الممارسات الملهمة</h3>
+     </div>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">🎯</span>
+       <p>أنشطة صفية مبتكرة</p>
+      </div>
+      <div class="step-item"><span class="step-number">📚</span>
+       <p>استراتيجيات إدارة الصف الفعالة</p>
+      </div>
+      <div class="step-item"><span class="step-number">🎯</span>
+       <p>تجارب دمج التقنية في التعليم</p>
+      </div>
+      <div class="step-item"><span class="step-number">📚</span>
+       <p>مشاريع طلابية ملهمة</p>
+      </div>
+      <div class="step-item"><span class="step-number">🎯</span>
+       <p>حلول إبداعية للتحديات التعليمية</p>
+      </div>
+     </div>
+    </div>
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">💡</span>
+      <h3>ركن "اسأل خبيرك"</h3>
+     </div>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">💡</span>
+       <p>استشارات في تصميم الدروس</p>
+      </div>
+      <div class="step-item"><span class="step-number">💡</span>
+       <p>حلول لتحديات إدارة الصف</p>
+      </div>
+      <div class="step-item"><span class="step-number">💡</span>
+       <p>نصائح في استراتيجيات التقييم</p>
+      </div>
+      <div class="step-item"><span class="step-number">💡</span>
+       <p>إرشادات في التعامل مع صعوبات التعلم</p>
+      </div>
+      <div class="step-item"><span class="step-number">💡</span>
+       <p>دعم في استخدام التقنيات الحديثة</p>
+      </div>
+     </div>
+    </div>
+    <div class="strategy-box">
+     <div class="strategy-header"><span class="strategy-icon">🤝</span>
+      <h3>مجموعات التعلم المهني</h3>
+     </div>
+     <div class="strategy-steps">
+      <div class="step-item"><span class="step-number">👥</span>
+       <p>مجموعة دراسة الكتب المهنية</p>
+      </div>
+      <div class="step-item"><span class="step-number">👥</span>
+       <p>مجموعة تطوير المناهج</p>
+      </div>
+      <div class="step-item"><span class="step-number">👥</span>
+       <p>مجموعة بحوث إجرائية</p>
+      </div>
+      <div class="step-item"><span class="step-number">👥</span>
+       <p>مجموعة تبادل الزيارات الصفية</p>
+      </div>
+     </div>
+    </div><!-- Call to Action -->
+    <div style="text-align: center; margin-top: 60px; padding: 40px; background: linear-gradient(135deg, #0EA5E9 0%, #0284C7 100%); border-radius: 12px; color: white; box-shadow: 0 4px 16px rgba(0,0,0,0.08);">
+     <div style="font-size: 64px; margin-bottom: 20px;">
+      🌟
+     </div>
+     <h3 style="font-size: 28px; margin-bottom: 16px; font-weight: 700; color: white;">انضم إلى المجتمع المهني</h3>
+     <p style="font-size: 19px; max-width: 700px; margin: 0 auto 32px; opacity: 0.95;">شارك خبراتك، تعلم من زملائك، وكن جزءا من مجتمع تعليمي متميز يسعى للتطوير المستمر</p><button style="background: #ffffff; color: #0284C7; border: none; padding: 16px 40px; border-radius: 8px; font-size: 20px; font-weight: 700; cursor: pointer; font-family: 'Tajawal', sans-serif; box-shadow: 0 4px 16px rgba(255, 255, 255, 0.3);">ابدأ المشاركة الآن</button>
+    </div>
+   </div>
+  </div><!-- Library Page -->
+  <div class="page" id="library-page">
+   <div class="strategies-header">
+    <h2>مكتبة الموارد التعليمية</h2>
+   </div>
+   <div class="strategies-content"><!-- Introduction -->
+    <div class="pdf-section">
+     <h3 class="pdf-section-title">عن المكتبة</h3>
+     <p class="pdf-text">تحتوي مكتبة الموارد التعليمية على مجموعة شاملة من الأدوات والموارد التي تدعم المعلمين في تطوير ممارساتهم المهنية وتحسين جودة التعليم.</p>
+    </div><!-- Resource Cards -->
+    <div class="evidence-grid">
+     <div class="evidence-card" style="background: linear-gradient(145deg, #ffffff 0%, #D5E5D5 100%); border-top-color: #3DB6B1;">
+      <div style="font-size: 56px; text-align: center; margin-bottom: 20px;">
+       📚
+      </div>
+      <h3 style="color: #1581BF;">أدلة تدريس حديثة</h3>
+      <p>مجموعة متنوعة من أدلة التدريس المحدثة التي تغطي أحدث الطرق والاستراتيجيات التعليمية المبنية على الأبحاث.</p><span class="evidence-badge" style="background: linear-gradient(135deg, #91C4C3 0%, #3DB6B1 100%);">25+ دليل</span>
+     </div>
+    </div><!-- Detailed Sections -->
+    <div style="margin-top: 60px;">
+     <div class="strategy-box">
+      <div class="strategy-header"><span class="strategy-icon">📚</span>
+       <h3>أدلة التدريس الحديثة</h3>
+      </div>
+      <div class="strategy-steps">
+       <div class="step-item" style="cursor: pointer;" onclick="window.open('https://shathaedu.com/id', '_blank', 'noopener,noreferrer')"><span class="step-number">✓</span>
+        <p>دليل الفروق الفردية 🔗</p>
+       </div>
+       <div class="step-item" style="cursor: pointer;" onclick="window.open('https://shathaedu.com/di', '_blank', 'noopener,noreferrer')"><span class="step-number">✓</span>
+        <p>دليل التعلم المتمايز 🔗</p>
+       </div>
+       <div class="step-item" style="cursor: pointer;" onclick="window.open('https://shathaedu.com/tie', '_blank', 'noopener,noreferrer')"><span class="step-number">✓</span>
+        <p>دليل التقييم البنائي والختامي 🔗</p>
+       </div>
+       <div class="step-item" style="cursor: pointer;" onclick="window.open('https://shathaedu.com/ie', '_blank', 'noopener,noreferrer')"><span class="step-number">✓</span>
+        <p>دليل دمج التقنية في التعليم 🔗</p>
+       </div>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+  <script>
+    const defaultConfig = {
+      cover_title: "منصة معلم - المشروع المهني المتكامل",
+      cover_subtitle: "منصة رقمية - لوحة معلومات - مكتبة استراتيجيات - شواهد رسمية",
+      platform_hero_title: "مرحبا بكم في منصة معلم",
+      platform_hero_text: "موارد تعليمية - استراتيجيات مبتكرة - دليل تقييم - مجتمعات مهنية",
+      platform_button: "استكشف الآن",
+      primary_color: "#013A63",
+      secondary_color: "#0A9396",
+      background_color: "#F1FAFF",
+      accent_color: "#FFB703",
+      font_family: "Cairo"
+    };
+
+    // Navigation
+    function navigateToPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+      
+      document.getElementById(pageId + '-page').classList.add('active');
+      document.querySelector(`[data-page="${pageId}"]`).classList.add('active');
+      
+      window.scrollTo(0, 0);
+    }
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const pageId = link.getAttribute('data-page');
+        navigateToPage(pageId);
+      });
+    });
+
+    // Innovative Strategies Toggle
+    function showInnovativeStrategies(e) {
+      if (e) e.preventDefault();
+      const content = document.getElementById('innovative-strategies-content');
+      if (content) {
+        content.style.display = 'block';
+        setTimeout(() => {
+          content.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+
+    function hideInnovativeStrategies(e) {
+      if (e) e.preventDefault();
+      const content = document.getElementById('innovative-strategies-content');
+      if (content) {
+        content.style.display = 'none';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }
+
+    // SDK Implementation
+    async function onConfigChange(config) {
+      const coverTitle = document.getElementById('cover-title');
+      const coverSubtitle = document.getElementById('cover-subtitle');
+
+      if (coverTitle) coverTitle.textContent = config.cover_title || defaultConfig.cover_title;
+      if (coverSubtitle) coverSubtitle.textContent = config.cover_subtitle || defaultConfig.cover_subtitle;
+
+      const primaryColor = config.primary_color || defaultConfig.primary_color;
+      const secondaryColor = config.secondary_color || defaultConfig.secondary_color;
+      const backgroundColor = config.background_color || defaultConfig.background_color;
+      const accentColor = config.accent_color || defaultConfig.accent_color;
+      const fontFamily = config.font_family || defaultConfig.font_family;
+
+      document.body.style.backgroundColor = backgroundColor;
+      document.body.style.color = primaryColor;
+      document.body.style.fontFamily = `'${fontFamily}', sans-serif`;
+
+      const gradients = document.querySelectorAll('.cover-page, .platform-hero, .strategies-header, .evidence-header');
+      gradients.forEach(el => {
+        el.style.background = `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`;
+      });
+
+      const accentButtons = document.querySelectorAll('.cover-button, .hero-button');
+      accentButtons.forEach(btn => {
+        btn.style.backgroundColor = accentColor;
+        btn.style.color = primaryColor;
+      });
+
+      const gridItems = document.querySelectorAll('.grid-item, .strategy-card');
+      gridItems.forEach(item => {
+        item.style.borderRightColor = secondaryColor;
+      });
+
+      const contentLis = document.querySelectorAll('.content-section li');
+      contentLis.forEach(li => {
+        li.style.borderRightColor = accentColor;
+      });
+
+      const evidenceCards = document.querySelectorAll('.evidence-card');
+      evidenceCards.forEach(card => {
+        card.style.borderTopColor = accentColor;
+      });
+
+      const evidenceBadges = document.querySelectorAll('.evidence-badge');
+      evidenceBadges.forEach(badge => {
+        badge.style.backgroundColor = secondaryColor;
+      });
+    }
+
+    function mapToCapabilities(config) {
+      return {
+        recolorables: [
+          {
+            get: () => config.primary_color || defaultConfig.primary_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.config.primary_color = value;
+                window.elementSdk.setConfig({ primary_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.secondary_color || defaultConfig.secondary_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.config.secondary_color = value;
+                window.elementSdk.setConfig({ secondary_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.background_color || defaultConfig.background_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.config.background_color = value;
+                window.elementSdk.setConfig({ background_color: value });
+              }
+            }
+          },
+          {
+            get: () => config.accent_color || defaultConfig.accent_color,
+            set: (value) => {
+              if (window.elementSdk) {
+                window.elementSdk.config.accent_color = value;
+                window.elementSdk.setConfig({ accent_color: value });
+              }
+            }
+          }
+        ],
+        borderables: [],
+        fontEditable: {
+          get: () => config.font_family || defaultConfig.font_family,
+          set: (value) => {
+            if (window.elementSdk) {
+              window.elementSdk.config.font_family = value;
+              window.elementSdk.setConfig({ font_family: value });
+            }
+          }
+        },
+        fontSizeable: undefined
+      };
+    }
+
+    function mapToEditPanelValues(config) {
+      return new Map([
+        ["cover_title", config.cover_title || defaultConfig.cover_title],
+        ["cover_subtitle", config.cover_subtitle || defaultConfig.cover_subtitle]
+      ]);
+    }
+
+    if (window.elementSdk) {
+      window.elementSdk.init({
+        defaultConfig,
+        onConfigChange,
+        mapToCapabilities,
+        mapToEditPanelValues
+      });
+    }
+  </script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abafb9b51ce9350',t:'MTc2NTM1MTI1OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
