@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مقرر تقنية رقمية 2-1 و 3 - المعلمة شذا الردادي</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .active-page {
+            background-color: #667eea;
+            color: white;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 60%, 100% {
+                transform: translateY(0) scale(1.1);
+            }
+            40% {
+                transform: translateY(-10px) scale(1.2);
+            }
+            80% {
+                transform: translateY(-5px) scale(1.15);
+            }
+        }
+        
+        @keyframes starGlow {
+            0% {
+                text-shadow: 0 0 5px gold;
+            }
+            50% {
+                text-shadow: 0 0 20px gold, 0 0 30px orange;
+            }
+            100% {
+                text-shadow: 0 0 5px gold;
+            }
+        }
+        
+        .star-active {
+            animation: starGlow 2s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-reverse space-x-4">
+                    <div class="flex-shrink-0">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="text-xl font-bold text-gray-800">تقنية رقمية</div>
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="flex items-center space-x-reverse space-x-4">
+                        <button onclick="showPage('home')" class="nav-btn active-page px-4 py-2 rounded-lg text-sm font-medium transition-colors">الوصف</button>
+                        <button onclick="showPage('assignments')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">تقنية رقمية 3</button>
+                        <button onclick="showPage('students')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">تقنية رقمية 2</button>
+                        <button onclick="showPage('contact')" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-100 transition-colors">اتصل بنا</button>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button onclick="toggleMobileMenu()" class="text-gray-700 hover:text-gray-900 focus:outline-none">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <button onclick="showPage('home'); toggleMobileMenu()" class="mobile-nav-btn active-page block px-3 py-2 rounded-md text-base font-medium w-full text-right">الوصف</button>
+                <button onclick="showPage('assignments'); toggleMobileMenu()" class="mobile-nav-btn block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 w-full text-right">تقنية رقمية 3</button>
+                <button onclick="showPage('students'); toggleMobileMenu()" class="mobile-nav-btn block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 w-full text-right">تقنية رقمية 2</button>
+                <button onclick="showPage('contact'); toggleMobileMenu()" class="mobile-nav-btn block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100 w-full text-right">اتصل بنا</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="home-page" class="page">
+        <!-- Hero Section -->
+        <section class="gradient-bg text-white py-20">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="mb-8">
+                    <div class="w-20 h-20 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path>
+                        </svg>
+                    </div>
+                    <h1 class="text-4xl md:text-6xl font-bold mb-4">مرحباً بكم في صفحة مقرر مادة التقنية الرقمية</h1>
+                    <p class="text-xl md:text-2xl mb-2 opacity-90">بإشراف المعلمة</p>
+                    <p class="text-2xl md:text-3xl font-semibold mb-8">شذا الردادي</p>
+                    <p class="text-lg md:text-xl mb-8 max-w-3xl mx-auto opacity-90">
+                        استكشفي عالم التقنية الرقمية وطوري مهاراتك في البرمجة والأمن السيبراني والذكاء الاصطناعي
+                    </p>
+                    <button onclick="document.getElementById('about-section').scrollIntoView({behavior: 'smooth'})" class="bg-white text-purple-600 px-8 py-4 rounded-full text-lg font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+                        ابدئي رحلتك الرقمية
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about-section" class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">عن المقرر</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        يهدف مقرر التقنية الرقمية إلى إعداد طالبات واعيات ومبدعات في عالم التقنية، قادرات على مواكبة التطورات الرقمية والمساهمة في بناء مجتمع رقمي متقدم
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Objectives Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">الأهداف التعليمية</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">تعزيز مهارات التقنية</h3>
+                        <p class="text-gray-600">تطوير المهارات التقنية الأساسية والمتقدمة في استخدام الأدوات الرقمية الحديثة</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">التفكير النقدي</h3>
+                        <p class="text-gray-600">تنمية قدرات التحليل والتقييم النقدي للمعلومات والحلول التقنية</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">حل المشكلات</h3>
+                        <p class="text-gray-600">إكساب الطالبات مهارات تحليل المشكلات وإيجاد حلول إبداعية باستخدام التقنية</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">الإبداع والابتكار</h3>
+                        <p class="text-gray-600">تحفيز الإبداع والابتكار في استخدام التقنيات الرقمية لإنتاج حلول مبتكرة</p>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-xl shadow-lg card-hover">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">العمل التعاوني</h3>
+                        <p class="text-gray-600">تطوير مهارات العمل الجماعي والتعاون في المشاريع التقنية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Course Topics Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">محاور الدروس</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+                </div>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl card-hover border border-blue-200">
+                        <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">أنظمة البيانات</h3>
+                        <p class="text-gray-600">تعلم أساسيات إدارة وتنظيم البيانات وقواعد البيانات</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl card-hover border border-purple-200">
+                        <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">البرمجة</h3>
+                        <p class="text-gray-600">أساسيات البرمجة وتطوير التطبيقات البسيطة</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl card-hover border border-green-200">
+                        <div class="w-12 h-12 bg-green-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">إدارة المشاريع الرقمية</h3>
+                        <p class="text-gray-600">تخطيط وتنفيذ المشاريع التقنية بكفاءة</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-xl card-hover border border-yellow-200">
+                        <div class="w-12 h-12 bg-yellow-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">الذكاء الاصطناعي</h3>
+                        <p class="text-gray-600">مقدمة في تقنيات الذكاء الاصطناعي وتطبيقاته</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-xl card-hover border border-red-200">
+                        <div class="w-12 h-12 bg-red-600 rounded-lg flex items-center justify-center mb-4">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="text-xl font-semibold text-gray-900 mb-3">التقنيات الناشئة</h3>
+                        <p class="text-gray-600">استكشاف أحدث التقنيات والاتجاهات المستقبلية</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">مهارات التفكير العليا</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        نركز على تنمية مهارات التفكير العليا التي تؤهل الطالبات للنجاح في عصر التقنية
+                    </p>
+                </div>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-6">مهارات التحليل والتقييم</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 ml-3"></div>
+                                <span class="text-gray-600">تحليل البيانات والمعلومات الرقمية</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 ml-3"></div>
+                                <span class="text-gray-600">تقييم مصداقية المصادر الرقمية</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-blue-600 rounded-full mt-2 ml-3"></div>
+                                <span class="text-gray-600">نقد الحلول التقنية وتطويرها</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-white p-8 rounded-xl shadow-lg">
+                        <h3 class="text-2xl font-semibold text-gray-900 mb-6">مهارات الإبداع والابتكار</h3>
+                        <ul class="space-y-4">
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-purple-600 rounded-full mt-2 ml-3"></div>
+                                <span class="text-gray-600">توليد أفكار إبداعية للمشاريع التقنية</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-purple-600 rounded-full mt-2 ml-3"></div>
+                                <span class="text-gray-600">تطوير حلول مبتكرة للمشكلات</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-purple-600 rounded-full mt-2 ml-3"></div>
+                                <span class="text-gray-600">التفكير خارج الصندوق في التقنية</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 21st Century Skills Section -->
+        <section class="py-16 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">أهمية المقرر في تنمية مهارات القرن 21</h2>
+                    <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+                </div>
+                
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-2xl p-8 md:p-12 text-white">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-2xl md:text-3xl font-bold mb-6">إعداد جيل المستقبل</h3>
+                            <p class="text-lg mb-6 opacity-90">
+                                يساهم مقرر التقنية الرقمية في إعداد طالبات مؤهلات لسوق العمل المستقبلي، مزودات بالمهارات الأساسية للقرن الحادي والعشرين
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold mb-2">100%</div>
+                                    <div class="text-sm opacity-90">تفاعل الطالبات</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold mb-2">5+</div>
+                                    <div class="text-sm opacity-90">مهارات أساسية</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="w-32 h-32 bg-white bg-opacity-20 rounded-full flex items-center justify-center mx-auto mb-6">
+                                <svg class="w-16 h-16 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                                </svg>
+                            </div>
+                            <p class="text-lg opacity-90">تعلم مدى الحياة وتطوير مستمر للمهارات</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Assignments Page -->
+    <div id="assignments-page" class="page hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <!-- Header with Date -->
+            <div class="text-center mb-8">
+                <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-xl mb-6 shadow-lg">
+                    <div id="current-date" class="text-xl font-bold mb-2"></div>
+                    <div id="current-day" class="text-lg opacity-90"></div>
+                </div>
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">تقييم المجموعات التفاعلي</h1>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600">نظام تقييم أداء المجموعات في الحصص الدراسية</p>
+            </div>
+
+            <!-- Selection Controls -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                <div class="max-w-2xl mx-auto space-y-6">
+                    <!-- Class Selection -->
+                    <div>
+                        <label class="block text-lg font-medium text-gray-700 mb-3 text-center">اختر الفصل</label>
+                        <select id="class-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-center text-lg">
+                            <option value="">اختر الفصل</option>
+                            <option value="1">الفصل 1</option>
+                            <option value="2">الفصل 2</option>
+                            <option value="3">الفصل 3</option>
+                            <option value="4">الفصل 4</option>
+                        </select>
+                    </div>
+
+                    <!-- Period Selection -->
+                    <div>
+                        <label class="block text-lg font-medium text-gray-700 mb-3 text-center">اختر فترة التقييم الأسبوعية</label>
+                        <select id="period-select" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-center text-lg">
+                            <option value="">اختر الفترة الأسبوعية</option>
+                            <option value="week1">الأسبوع الأول من: 8/3</option>
+                            <option value="week2">الأسبوع الثاني من: 15/3</option>
+                            <option value="week3">الأسبوع الثالث من: 22/3</option>
+                            <option value="week4">الأسبوع الرابع من: 29/3</option>
+                            <option value="week5">الأسبوع الخامس من: 6/4</option>
+                            <option value="week6">الأسبوع السادس من: 13/4</option>
+                            <option value="week7">الأسبوع السابع من: 20/4</option>
+                            <option value="week8">الأسبوع الثامن من: 27/4</option>
+                            <option value="week9">الأسبوع التاسع من: 4/5</option>
+                            <option value="week10">الأسبوع العاشر من: 11/5</option>
+                            <option value="week11">الأسبوع الحادي عشر من: 18/5</option>
+                            <option value="week12">الأسبوع الثاني عشر من: 25/5</option>
+                            <option value="week13">الأسبوع الثالث عشر من: 9/6</option>
+                            <option value="week14">الأسبوع الرابع عشر من: 16/6</option>
+                            <option value="week15">الأسبوع الخامس عشر من: 23/6</option>
+                            <option value="week16">الأسبوع السادس عشر من: 1/7</option>
+                        </select>
+                    </div>
+
+
+
+                    <!-- Start Button -->
+                    <div class="text-center">
+                        <button id="start-evaluation" onclick="startEvaluation()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-xl font-bold text-xl hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105 shadow-lg">
+                            🚀 ابدأ التقييم
+                        </button>
+                        <p class="text-sm text-gray-500 mt-3">اختر الفصل والفترة ثم اضغط على "ابدأ التقييم"</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Evaluation Table -->
+            <div id="evaluation-section" class="hidden">
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-semibold text-gray-900">تقييم المجموعات</h2>
+                        <div class="text-sm text-gray-600 space-y-1">
+                            <div><span>الفصل: </span><span id="selected-class" class="font-semibold"></span></div>
+                            <div><span>الفترة: </span><span id="selected-period" class="font-semibold"></span></div>
+                        </div>
+                    </div>
+
+                    <!-- Evaluation Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full border-collapse border border-gray-300 rounded-lg overflow-hidden">
+                            <thead>
+                                <tr class="bg-gradient-to-r from-blue-50 to-purple-50">
+                                    <th class="border border-gray-300 px-3 py-4 text-right font-bold text-gray-900">المجموعة</th>
+                                    <th class="border border-gray-300 px-3 py-4 text-center font-bold text-gray-900 min-w-[120px]">
+                                        <div class="mb-2">التفاعل والنشاط</div>
+                                        <button onclick="giveStarsToAll('interaction')" class="bg-blue-500 text-white px-2 py-1 rounded text-xs hover:bg-blue-600 transition-colors">
+                                            ⭐ الكل
+                                        </button>
+                                    </th>
+                                    <th class="border border-gray-300 px-3 py-4 text-center font-bold text-gray-900 min-w-[120px]">
+                                        <div class="mb-2">إجابة مميزة واستثنائية</div>
+                                        <button onclick="giveStarsToAll('exceptional')" class="bg-purple-500 text-white px-2 py-1 rounded text-xs hover:bg-purple-600 transition-colors">
+                                            ⭐ الكل
+                                        </button>
+                                    </th>
+                                    <th class="border border-gray-300 px-3 py-4 text-center font-bold text-gray-900 min-w-[120px]">
+                                        <div class="mb-2">خلق أفكار إبداعية</div>
+                                        <button onclick="giveStarsToAll('creativity')" class="bg-yellow-500 text-white px-2 py-1 rounded text-xs hover:bg-yellow-600 transition-colors">
+                                            ⭐ الكل
+                                        </button>
+                                    </th>
+                                    <th class="border border-gray-300 px-3 py-4 text-center font-bold text-gray-900 min-w-[120px]">
+                                        <div class="mb-2">تقييم بناء وهادف</div>
+                                        <button onclick="giveStarsToAll('evaluation')" class="bg-indigo-500 text-white px-2 py-1 rounded text-xs hover:bg-indigo-600 transition-colors">
+                                            ⭐ الكل
+                                        </button>
+                                    </th>
+                                    <th class="border border-gray-300 px-3 py-4 text-center font-bold text-gray-900 min-w-[120px]">
+                                        <div class="mb-2">أثناء الدرس: هدوئك وإنصاتك</div>
+                                        <button onclick="giveStarsToAll('discipline')" class="bg-green-500 text-white px-2 py-1 rounded text-xs hover:bg-green-600 transition-colors">
+                                            ⭐ الكل
+                                        </button>
+                                    </th>
+                                    <th class="border border-gray-300 px-3 py-4 text-center font-bold text-gray-900 min-w-[120px]">
+                                        <div class="mb-2">حضورك المشرف مبكراً للمعمل</div>
+                                        <button onclick="giveStarsToAll('attendance')" class="bg-orange-500 text-white px-2 py-1 rounded text-xs hover:bg-orange-600 transition-colors">
+                                            ⭐ الكل
+                                        </button>
+                                    </th>
+                                    <th class="border border-gray-300 px-3 py-4 text-center font-bold text-gray-900">المجموع</th>
+                                </tr>
+                            </thead>
+                            <tbody id="evaluation-table-body">
+                                <!-- Table rows will be generated dynamically -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div class="text-center mt-8">
+                        <button id="show-ranking" onclick="showRanking()" class="bg-gradient-to-r from-yellow-500 to-orange-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:from-yellow-600 hover:to-orange-600 transition-all transform hover:scale-105 shadow-lg">
+                            🏆 إظهار الترتيب
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ranking Results -->
+                <div id="ranking-section" class="hidden bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-8 text-center">🏆 ترتيب المجموعات المتميزة في حصة اليوم</h3>
+                    <div id="ranking-results" class="space-y-4">
+                        <!-- Ranking will be displayed here -->
+                    </div>
+                    
+                    <!-- Motivational Messages Section -->
+                    <div id="motivational-section" class="hidden mt-12 pt-8 border-t-2 border-gray-200">
+                        <h4 class="text-2xl font-bold text-center text-gray-900 mb-8">💫 رسائل تحفيزية وتشجيعية</h4>
+                        <div id="motivational-messages" class="space-y-6">
+                            <!-- Messages will be displayed here -->
+                        </div>
+                    </div>
+                    
+                    <!-- Export and Reset Buttons -->
+                    <div class="text-center mt-8 pt-6 border-t border-gray-200">
+                        <div class="space-y-4">
+                            <!-- Export Buttons -->
+                            <div class="flex flex-wrap justify-center gap-4">
+                                <button onclick="captureScreenshot()" class="bg-gradient-to-r from-green-500 to-emerald-500 text-white px-8 py-3 rounded-xl font-bold text-lg hover:from-green-600 hover:to-emerald-600 transition-all transform hover:scale-105 shadow-lg">
+                                    📸 حفظ لقطة شاشة
+                                </button>
+                                <button onclick="exportToExcel()" class="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-8 py-3 rounded-xl font-bold text-lg hover:from-blue-600 hover:to-indigo-600 transition-all transform hover:scale-105 shadow-lg">
+                                    📊 تصدير إلى Excel
+                                </button>
+                            </div>
+                            
+                            <!-- Reset Button -->
+                            <div>
+                                <button onclick="resetEvaluation()" class="bg-gradient-to-r from-red-500 to-pink-500 text-white px-10 py-4 rounded-xl font-bold text-lg hover:from-red-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg">
+                                    🔄 إعادة التقييم
+                                </button>
+                                <p class="text-sm text-gray-500 mt-3">سيتم محو جميع التقييمات وإعادة الضبط الكامل</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center mt-12 p-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl shadow-lg">
+                <p class="text-xl font-bold">إعداد: شذا الردادي</p>
+                <p class="text-sm opacity-90 mt-1">معلمة التقنية الرقمية</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Students Page -->
+    <div id="students-page" class="page hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">تقنية رقمية 2</h1>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600">مرحباً بكم في صفحة مقرر تقنية رقمية 2</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="contact-page" class="page hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold text-gray-900 mb-4">اتصل بنا</h1>
+                <div class="w-24 h-1 bg-gradient-to-r from-blue-600 to-purple-600 mx-auto mb-6"></div>
+                <p class="text-lg text-gray-600">للتواصل مع المعلمة شذا الردادي - مقرر التقنية الرقمية</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div class="bg-white rounded-xl shadow-lg p-8">
+                    <h2 class="text-2xl font-semibold text-gray-900 mb-6">أرسلي رسالة</h2>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">الاسم</label>
+                            <input type="text" id="contact-name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="أدخلي اسمك">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">البريد الإلكتروني</label>
+                            <input type="email" id="contact-email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="أدخلي بريدك الإلكتروني">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">الموضوع</label>
+                            <input type="text" id="contact-subject" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="أدخلي موضوع الرسالة">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">الرسالة</label>
+                            <textarea id="contact-message" rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="أدخلي رسالتك"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-colors">
+                            إرسال الرسالة
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Contact Information -->
+                <div class="space-y-8">
+                    <div class="bg-white rounded-xl shadow-lg p-8">
+                        <h2 class="text-2xl font-semibold text-gray-900 mb-6">معلومات التواصل</h2>
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center ml-4">
+                                    <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-1">المعلمة المشرفة</h3>
+                                    <p class="text-gray-600">شذا الردادي</p>
+                                    <p class="text-gray-500 text-sm">معلمة تقنية رقمية</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center ml-4">
+                                    <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-1">البريد الإلكتروني</h3>
+                                    <p class="text-gray-600">shatha.alradadi@school.edu.sa</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center ml-4">
+                                    <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h3 class="text-lg font-semibold text-gray-900 mb-1">ساعات العمل</h3>
+                                    <p class="text-gray-600">الأحد - الخميس</p>
+                                    <p class="text-gray-500 text-sm">7:30 ص - 2:30 م</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white">
+                        <h3 class="text-xl font-semibold mb-4">نصائح للتواصل الفعال</h3>
+                        <ul class="space-y-3 text-sm opacity-90">
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-white rounded-full mt-2 ml-3"></div>
+                                <span>اذكري اسمك وصفك في بداية الرسالة</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-white rounded-full mt-2 ml-3"></div>
+                                <span>حددي موضوع استفسارك بوضوح</span>
+                            </li>
+                            <li class="flex items-start">
+                                <div class="w-2 h-2 bg-white rounded-full mt-2 ml-3"></div>
+                                <span>سأرد على رسائلكم خلال 24 ساعة</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation functionality - moved to end of script
+
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+
+        // إضافة معالجات الأحداث بشكل آمن
+        function initializeFormHandlers() {
+            // Contact form functionality
+            const contactForm = document.getElementById('contact-form');
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const name = document.getElementById('contact-name').value;
+                    const email = document.getElementById('contact-email').value;
+                    const subject = document.getElementById('contact-subject').value;
+                    const message = document.getElementById('contact-message').value;
+                    
+                    if (name && email && subject && message) {
+                        alert('شكراً لك! تم إرسال رسالتك بنجاح. سأقوم بالرد عليك خلال 24 ساعة.');
+                        this.reset();
+                    } else {
+                        alert('يرجى ملء جميع الحقول المطلوبة');
+                    }
+                });
+            }
+        }
+
+        // نظام التقييم المبسط والفعال
+        let scores = {};
+        
+        // عرض التاريخ الحالي
+        function updateCurrentDate() {
+            const now = new Date();
+            const arabicDate = now.toLocaleDateString('ar-SA', {
+                year: 'numeric', 
+                month: 'long',
+                day: 'numeric'
+            });
+            const arabicDay = now.toLocaleDateString('ar-SA', {
+                weekday: 'long'
+            });
+            
+            document.getElementById('current-date').textContent = arabicDate;
+            document.getElementById('current-day').textContent = arabicDay;
+        }
+
+        // بدء التقييم
+        function startEvaluation() {
+            const classValue = document.getElementById('class-select').value;
+            const periodValue = document.getElementById('period-select').value;
+            
+            if (!classValue) {
+                alert('يرجى اختيار الفصل أولاً');
+                return;
+            }
+            
+            if (!periodValue) {
+                alert('يرجى اختيار فترة التقييم');
+                return;
+            }
+            
+            console.log('بدء التقييم للفصل:', classValue); // للتشخيص
+            
+            // تحديث عرض الفصل والفترة المختارة
+            const selectedClassElement = document.getElementById('selected-class');
+            const selectedPeriodElement = document.getElementById('selected-period');
+            
+            if (selectedClassElement) {
+                selectedClassElement.textContent = `الفصل ${classValue}`;
+            }
+            
+            if (selectedPeriodElement) {
+                const periodNames = {
+                    'week1': 'الأسبوع الأول من: 8/3',
+                    'week2': 'الأسبوع الثاني من: 15/3',
+                    'week3': 'الأسبوع الثالث من: 22/3',
+                    'week4': 'الأسبوع الرابع من: 29/3',
+                    'week5': 'الأسبوع الخامس من: 6/4',
+                    'week6': 'الأسبوع السادس من: 13/4',
+                    'week7': 'الأسبوع السابع من: 20/4',
+                    'week8': 'الأسبوع الثامن من: 27/4',
+                    'week9': 'الأسبوع التاسع من: 4/5',
+                    'week10': 'الأسبوع العاشر من: 11/5',
+                    'week11': 'الأسبوع الحادي عشر من: 18/5',
+                    'week12': 'الأسبوع الثاني عشر من: 25/5',
+                    'week13': 'الأسبوع الثالث عشر من: 9/6',
+                    'week14': 'الأسبوع الرابع عشر من: 16/6',
+                    'week15': 'الأسبوع الخامس عشر من: 23/6',
+                    'week16': 'الأسبوع السادس عشر من: 1/7'
+                };
+                selectedPeriodElement.textContent = periodNames[periodValue] || periodValue;
+            }
+            
+            // إعادة تعيين النقاط
+            scores = {};
+            for (let i = 1; i <= 6; i++) {
+                scores[i] = {
+                    interaction: 0,
+                    exceptional: 0,
+                    creativity: 0, 
+                    evaluation: 0,
+                    discipline: 0,
+                    attendance: 0
+                };
+            }
+            
+            // إنشاء الجدول
+            createTable();
+            
+            // إظهار قسم التقييم
+            const evaluationSection = document.getElementById('evaluation-section');
+            const rankingSection = document.getElementById('ranking-section');
+            
+            console.log('عنصر التقييم:', evaluationSection); // للتشخيص
+            
+            if (evaluationSection) {
+                evaluationSection.classList.remove('hidden');
+                evaluationSection.style.display = 'block'; // إضافة هذا للتأكد
+                console.log('تم إظهار قسم التقييم'); // للتشخيص
+            } else {
+                console.error('لم يتم العثور على قسم التقييم');
+            }
+            
+            if (rankingSection) {
+                rankingSection.classList.add('hidden');
+            }
+            
+            // التمرير للجدول
+            setTimeout(() => {
+                if (evaluationSection) {
+                    evaluationSection.scrollIntoView({ behavior: 'smooth' });
+                }
+            }, 300);
+        }
+
+        // إنشاء جدول التقييم
+        function createTable() {
+            const tbody = document.getElementById('evaluation-table-body');
+            
+            if (!tbody) {
+                console.error('لم يتم العثور على جسم الجدول');
+                return;
+            }
+            
+            console.log('إنشاء الجدول...'); // للتشخيص
+            
+            let html = '';
+            
+            for (let i = 1; i <= 6; i++) {
+                html += `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="border border-gray-300 px-4 py-4 font-bold text-gray-900 text-lg">مجموعة ${i}</td>
+                        <td class="border border-gray-300 px-4 py-4 text-center">
+                            <button onclick="giveStar(${i}, 'interaction')" class="star-btn text-3xl hover:scale-125 transition-all duration-300 filter grayscale hover:grayscale-0" id="star-${i}-interaction">⭐</button>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-4 text-center">
+                            <button onclick="giveStar(${i}, 'exceptional')" class="star-btn text-3xl hover:scale-125 transition-all duration-300 filter grayscale hover:grayscale-0" id="star-${i}-exceptional">⭐</button>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-4 text-center">
+                            <button onclick="giveStar(${i}, 'creativity')" class="star-btn text-3xl hover:scale-125 transition-all duration-300 filter grayscale hover:grayscale-0" id="star-${i}-creativity">⭐</button>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-4 text-center">
+                            <button onclick="giveStar(${i}, 'evaluation')" class="star-btn text-3xl hover:scale-125 transition-all duration-300 filter grayscale hover:grayscale-0" id="star-${i}-evaluation">⭐</button>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-4 text-center">
+                            <button onclick="giveStar(${i}, 'discipline')" class="star-btn text-3xl hover:scale-125 transition-all duration-300 filter grayscale hover:grayscale-0" id="star-${i}-discipline">⭐</button>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-4 text-center">
+                            <button onclick="giveStar(${i}, 'attendance')" class="star-btn text-3xl hover:scale-125 transition-all duration-300 filter grayscale hover:grayscale-0" id="star-${i}-attendance">⭐</button>
+                        </td>
+                        <td class="border border-gray-300 px-4 py-4 text-center font-bold text-2xl text-blue-600" id="total-${i}">0</td>
+                    </tr>
+                `;
+            }
+            
+            tbody.innerHTML = html;
+            console.log('تم إنشاء الجدول بنجاح'); // للتشخيص
+            updateAllStars();
+        }
+
+        // إعطاء نجمة لمجموعة واحدة
+        function giveStar(groupNum, criteria) {
+            if (!scores[groupNum]) return;
+            
+            // تبديل النقطة (0 أو 1)
+            scores[groupNum][criteria] = scores[groupNum][criteria] === 1 ? 0 : 1;
+            
+            // تحديث النجمة
+            updateStar(groupNum, criteria);
+            
+            // تحديث المجموع
+            updateTotal(groupNum);
+        }
+
+        // إعطاء نجوم لجميع المجموعات في معيار واحد
+        function giveStarsToAll(criteria) {
+            for (let i = 1; i <= 6; i++) {
+                if (scores[i]) {
+                    scores[i][criteria] = 1;
+                    updateStar(i, criteria);
+                    updateTotal(i);
+                }
+            }
+        }
+
+        // تحديث مظهر النجمة
+        function updateStar(groupNum, criteria) {
+            const starBtn = document.getElementById(`star-${groupNum}-${criteria}`);
+            if (!starBtn) return;
+            
+            if (scores[groupNum][criteria] === 1) {
+                // النجمة مفعلة - لون أصفر مع تأثيرات
+                starBtn.style.filter = 'none';
+                starBtn.style.textShadow = '0 0 15px gold, 0 0 30px orange';
+                starBtn.style.transform = 'scale(1.1)';
+                starBtn.classList.remove('grayscale');
+                starBtn.classList.add('animate-pulse');
+                
+                // حركة احتفالية عند التفعيل
+                starBtn.style.animation = 'bounce 0.6s ease-in-out';
+                setTimeout(() => {
+                    starBtn.style.animation = '';
+                }, 600);
+            } else {
+                // النجمة غير مفعلة - رمادية
+                starBtn.style.filter = 'grayscale(100%) brightness(0.5)';
+                starBtn.style.textShadow = 'none';
+                starBtn.style.transform = 'scale(1)';
+                starBtn.classList.add('grayscale');
+                starBtn.classList.remove('animate-pulse');
+            }
+        }
+
+        // تحديث جميع النجوم
+        function updateAllStars() {
+            for (let i = 1; i <= 6; i++) {
+                ['interaction', 'exceptional', 'creativity', 'evaluation', 'discipline', 'attendance'].forEach(criteria => {
+                    updateStar(i, criteria);
+                });
+                updateTotal(i);
+            }
+        }
+
+        // تحديث المجموع
+        function updateTotal(groupNum) {
+            if (!scores[groupNum]) return;
+            
+            const total = scores[groupNum].interaction + scores[groupNum].exceptional + scores[groupNum].creativity + 
+                         scores[groupNum].evaluation + scores[groupNum].discipline + 
+                         scores[groupNum].attendance;
+            
+            const totalElement = document.getElementById(`total-${groupNum}`);
+            if (totalElement) {
+                totalElement.textContent = total;
+                
+                // تلوين المجموع حسب النقاط
+                if (total >= 4) {
+                    totalElement.className = 'border border-gray-300 px-2 py-3 text-center font-bold text-lg text-green-600';
+                } else if (total >= 2) {
+                    totalElement.className = 'border border-gray-300 px-2 py-3 text-center font-bold text-lg text-blue-600';
+                } else {
+                    totalElement.className = 'border border-gray-300 px-2 py-3 text-center font-bold text-lg text-gray-600';
+                }
+            }
+        }
+
+        // إظهار الترتيب
+        function showRanking() {
+            const groups = [];
+            
+            for (let i = 1; i <= 6; i++) {
+                const total = scores[i].interaction + scores[i].exceptional + scores[i].creativity + scores[i].evaluation + 
+                             scores[i].discipline + scores[i].attendance;
+                
+                if (total > 0) {
+                    groups.push({
+                        name: `مجموعة ${i}`,
+                        total: total,
+                        details: scores[i]
+                    });
+                }
+            }
+            
+            // ترتيب حسب النقاط
+            groups.sort((a, b) => b.total - a.total);
+            
+            const rankingDiv = document.getElementById('ranking-results');
+            
+            if (groups.length === 0) {
+                rankingDiv.innerHTML = '<p class="text-center text-gray-500 text-lg">لم يتم تقييم أي مجموعة بعد</p>';
+            } else {
+                let html = '';
+                
+                // المجموعات الثلاثة الأولى في صف واحد (3 أعمدة)
+                const topThree = groups.slice(0, 3);
+                if (topThree.length > 0) {
+                    html += '<div class="grid md:grid-cols-3 gap-6 mb-8">';
+                    
+                    topThree.forEach((group, index) => {
+                        const medal = index === 0 ? '🥇' : index === 1 ? '🥈' : '🥉';
+                        const borderColor = index === 0 ? 'border-yellow-400 bg-yellow-50' : 
+                                           index === 1 ? 'border-gray-400 bg-gray-50' :
+                                           'border-orange-400 bg-orange-50';
+                        
+                        html += `
+                            <div class="p-6 rounded-xl border-2 ${borderColor} text-center transform hover:scale-105 transition-all duration-300">
+                                <div class="text-6xl mb-4">${medal}</div>
+                                <h4 class="text-xl font-bold text-gray-900 mb-3">${group.name}</h4>
+                                <div class="text-3xl font-bold text-blue-600 mb-4">${group.total} ⭐</div>
+                                <div class="text-sm text-gray-600 space-y-1">
+                                    <div>التفاعل: ${group.details.interaction}</div>
+                                    <div>الإجابة المميزة: ${group.details.exceptional}</div>
+                                    <div>الإبداع: ${group.details.creativity}</div>
+                                    <div>التقييم: ${group.details.evaluation}</div>
+                                    <div>الهدوء: ${group.details.discipline}</div>
+                                    <div>الحضور: ${group.details.attendance}</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    html += '</div>';
+                }
+                
+                // باقي المجموعات (إن وجدت) في تخطيط عادي
+                const remainingGroups = groups.slice(3);
+                if (remainingGroups.length > 0) {
+                    remainingGroups.forEach((group, index) => {
+                        const actualIndex = index + 3;
+                        const medal = '🏅';
+                        const borderColor = 'border-blue-400 bg-blue-50';
+                        
+                        html += `
+                            <div class="p-4 rounded-lg border-2 ${borderColor} mb-4">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <span class="text-3xl ml-4">${medal}</span>
+                                        <div>
+                                            <h4 class="text-xl font-bold text-gray-900">${group.name}</h4>
+                                            <p class="text-sm text-gray-600 mt-1">
+                                                التفاعل: ${group.details.interaction} | 
+                                                الإجابة المميزة: ${group.details.exceptional} | 
+                                                الإبداع: ${group.details.creativity} | 
+                                                التقييم: ${group.details.evaluation} | 
+                                                الهدوء: ${group.details.discipline} | 
+                                                الحضور: ${group.details.attendance}
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="text-3xl font-bold text-blue-600">${group.total} ⭐</div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                }
+                
+                rankingDiv.innerHTML = html;
+                
+                // إضافة العبارات التحفيزية مباشرة مع الترتيب
+                addMotivationalMessages(groups);
+            }
+            
+            document.getElementById('ranking-section').classList.remove('hidden');
+            
+            // التمرير للترتيب
+            setTimeout(() => {
+                document.getElementById('ranking-section').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // تصدير النتائج إلى Excel
+        async function exportToExcel() {
+            try {
+                const classValue = document.getElementById('class-select').value;
+                const periodValue = document.getElementById('period-select').value;
+                
+                if (!classValue) {
+                    alert('يرجى اختيار الفصل أولاً');
+                    return;
+                }
+                
+                if (!periodValue) {
+                    alert('يرجى اختيار فترة التقييم أولاً');
+                    return;
+                }
+                
+                // التحقق من وجود بيانات
+                let hasData = false;
+                for (let i = 1; i <= 6; i++) {
+                    if (scores[i]) {
+                        const total = scores[i].interaction + scores[i].exceptional + scores[i].creativity + scores[i].evaluation + 
+                                     scores[i].discipline + scores[i].attendance;
+                        if (total > 0) {
+                            hasData = true;
+                            break;
+                        }
+                    }
+                }
+                
+                if (!hasData) {
+                    alert('لا توجد بيانات للتصدير. يرجى إجراء التقييم أولاً.');
+                    return;
+                }
+                
+                // إظهار رسالة التحضير
+                const originalText = event.target.innerHTML;
+                event.target.innerHTML = '📊 جاري التصدير...';
+                event.target.disabled = true;
+                
+                // تحميل مكتبة SheetJS إذا لم تكن محملة
+                if (!window.XLSX) {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js';
+                    document.head.appendChild(script);
+                    
+                    await new Promise((resolve) => {
+                        script.onload = resolve;
+                    });
+                }
+                
+                // إعداد البيانات
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('ar-SA');
+                const timeStr = now.toLocaleTimeString('ar-SA', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+                
+                const periodNames = {
+                    'week1': 'الأسبوع الأول من: 8/3',
+                    'week2': 'الأسبوع الثاني من: 15/3',
+                    'week3': 'الأسبوع الثالث من: 22/3',
+                    'week4': 'الأسبوع الرابع من: 29/3',
+                    'week5': 'الأسبوع الخامس من: 6/4',
+                    'week6': 'الأسبوع السادس من: 13/4',
+                    'week7': 'الأسبوع السابع من: 20/4',
+                    'week8': 'الأسبوع الثامن من: 27/4',
+                    'week9': 'الأسبوع التاسع من: 4/5',
+                    'week10': 'الأسبوع العاشر من: 11/5',
+                    'week11': 'الأسبوع الحادي عشر من: 18/5',
+                    'week12': 'الأسبوع الثاني عشر من: 25/5',
+                    'week13': 'الأسبوع الثالث عشر من: 9/6',
+                    'week14': 'الأسبوع الرابع عشر من: 16/6',
+                    'week15': 'الأسبوع الخامس عشر من: 23/6',
+                    'week16': 'الأسبوع السادس عشر من: 1/7'
+                };
+                
+                // إنشاء بيانات الجدول الأساسي
+                const worksheetData = [
+                    ['تقييم المجموعات التفاعلي'],
+                    [`الفصل: ${classValue} | الفترة: ${periodNames[periodValue] || periodValue}`],
+                    [`التاريخ: ${dateStr} - الوقت: ${timeStr}`],
+                    ['إعداد: شذا الردادي - معلمة التقنية الرقمية'],
+                    [], // سطر فارغ
+                    ['المجموعة', 'التفاعل والنشاط', 'إجابة مميزة واستثنائية', 'خلق أفكار إبداعية', 'تقييم بناء وهادف', 'أثناء الدرس: هدوئك وإنصاتك', 'حضورك المشرف مبكراً للمعمل', 'المجموع']
+                ];
+                
+                // إضافة بيانات المجموعات
+                for (let i = 1; i <= 6; i++) {
+                    const total = scores[i].interaction + scores[i].exceptional + scores[i].creativity + scores[i].evaluation + 
+                                 scores[i].discipline + scores[i].attendance;
+                    
+                    worksheetData.push([
+                        `مجموعة ${i}`,
+                        scores[i].interaction,
+                        scores[i].exceptional,
+                        scores[i].creativity,
+                        scores[i].evaluation,
+                        scores[i].discipline,
+                        scores[i].attendance,
+                        total
+                    ]);
+                }
+                
+                // إضافة الترتيب
+                const groups = [];
+                for (let i = 1; i <= 6; i++) {
+                    const total = scores[i].interaction + scores[i].exceptional + scores[i].creativity + scores[i].evaluation + 
+                                 scores[i].discipline + scores[i].attendance;
+                    
+                    if (total > 0) {
+                        groups.push({
+                            name: `مجموعة ${i}`,
+                            total: total
+                        });
+                    }
+                }
+                
+                groups.sort((a, b) => b.total - a.total);
+                
+                if (groups.length > 0) {
+                    worksheetData.push([]); // سطر فارغ
+                    worksheetData.push(['ترتيب المجموعات']);
+                    worksheetData.push(['الترتيب', 'المجموعة', 'النقاط']);
+                    
+                    groups.forEach((group, index) => {
+                        const position = index + 1;
+                        const medal = position === 1 ? '🥇' : position === 2 ? '🥈' : position === 3 ? '🥉' : position;
+                        worksheetData.push([medal, group.name, group.total]);
+                    });
+                }
+                
+                // إنشاء ورقة العمل
+                const worksheet = XLSX.utils.aoa_to_sheet(worksheetData);
+                
+                // تنسيق الأعمدة
+                const colWidths = [
+                    { wch: 15 }, // المجموعة
+                    { wch: 18 }, // التفاعل والنشاط
+                    { wch: 20 }, // إجابة مميزة واستثنائية
+                    { wch: 18 }, // خلق أفكار إبداعية
+                    { wch: 18 }, // تقييم بناء وهادف
+                    { wch: 25 }, // أثناء الدرس
+                    { wch: 25 }, // حضورك المشرف
+                    { wch: 10 }  // المجموع
+                ];
+                worksheet['!cols'] = colWidths;
+                
+                // إنشاء المصنف
+                const workbook = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(workbook, worksheet, 'تقييم المجموعات');
+                
+                // إنشاء اسم الملف
+                const fileName = `تقييم_الفصل_${classValue}_${dateStr.replace(/\//g, '-')}_${timeStr.replace(/:/g, '-')}.xlsx`;
+                
+                // تصدير الملف
+                XLSX.writeFile(workbook, fileName);
+                
+                // استعادة الزر
+                event.target.innerHTML = originalText;
+                event.target.disabled = false;
+                
+                alert('📊 تم تصدير النتائج إلى Excel بنجاح!\n📁 تم حفظ الملف في مجلد التحميلات');
+                
+            } catch (error) {
+                console.error('خطأ في التصدير:', error);
+                
+                // استعادة الزر في حالة الخطأ
+                if (event && event.target) {
+                    event.target.innerHTML = '📊 تصدير إلى Excel';
+                    event.target.disabled = false;
+                }
+                
+                alert('⚠️ عذراً، حدث خطأ أثناء التصدير. يرجى المحاولة مرة أخرى.');
+            }
+        }
+
+        // أخذ لقطة شاشة وحفظها
+        async function captureScreenshot() {
+            try {
+                // إظهار رسالة التحضير
+                const originalText = event.target.innerHTML;
+                event.target.innerHTML = '📸 جاري التقاط الصورة...';
+                event.target.disabled = true;
+                
+                // تحميل مكتبة html2canvas إذا لم تكن محملة
+                if (!window.html2canvas) {
+                    const script = document.createElement('script');
+                    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';
+                    document.head.appendChild(script);
+                    
+                    await new Promise((resolve) => {
+                        script.onload = resolve;
+                    });
+                }
+                
+                // إعداد خيارات التقاط الشاشة الكاملة
+                const captureOptions = {
+                    backgroundColor: '#f9fafb', // لون خلفية الصفحة
+                    scale: 1.5, // جودة عالية
+                    useCORS: true,
+                    allowTaint: true,
+                    scrollX: 0,
+                    scrollY: 0,
+                    width: window.innerWidth,
+                    height: document.documentElement.scrollHeight, // الارتفاع الكامل للصفحة
+                    x: 0,
+                    y: 0
+                };
+                
+                // التقاط الصفحة كاملة
+                const canvas = await html2canvas(document.body, captureOptions);
+                
+                // تحويل إلى صورة وتحميلها
+                const imgData = canvas.toDataURL('image/png', 1.0); // أعلى جودة
+                const link = document.createElement('a');
+                
+                // إنشاء اسم الملف مع التاريخ والوقت
+                const now = new Date();
+                const dateStr = now.toLocaleDateString('ar-SA').replace(/\//g, '-');
+                const timeStr = now.toLocaleTimeString('ar-SA', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    second: '2-digit'
+                }).replace(/:/g, '-');
+                
+                const fileName = `لقطة_شاشة_تقييم_المجموعات_${dateStr}_${timeStr}.png`;
+                
+                link.href = imgData;
+                link.download = fileName;
+                
+                // إضافة الرابط وتحميل الصورة
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                
+                // استعادة الزر
+                event.target.innerHTML = originalText;
+                event.target.disabled = false;
+                
+                alert('📸 تم حفظ لقطة الشاشة الكاملة بنجاح!\n🖼️ تم تحميل الصورة في مجلد التحميلات\n\n✅ تم التقاط الصفحة كاملة بجودة عالية');
+                
+            } catch (error) {
+                console.error('خطأ في أخذ لقطة الشاشة:', error);
+                
+                // استعادة الزر في حالة الخطأ
+                if (event && event.target) {
+                    event.target.innerHTML = '📸 حفظ لقطة شاشة';
+                    event.target.disabled = false;
+                }
+                
+                // محاولة بديلة باستخدام الطريقة التقليدية
+                try {
+                    // طريقة بديلة للمتصفحات التي تدعم Screen Capture API
+                    if (navigator.mediaDevices && navigator.mediaDevices.getDisplayMedia) {
+                        alert('💡 يمكنك استخدام خاصية مشاركة الشاشة المدمجة في المتصفح:\n\n1️⃣ اضغطي Ctrl+Shift+I (أو F12)\n2️⃣ اختاري "Console"\n3️⃣ اكتبي: document.body.requestFullscreen()\n4️⃣ استخدمي أدوات لقطة الشاشة\n\n🔄 أو استخدمي الاختصارات:\n🖥️ Windows: Win + Shift + S\n🍎 Mac: Cmd + Shift + 4\n📱 الهاتف: أزرار الطاقة + خفض الصوت');
+                    } else {
+                        alert('⚠️ عذراً، حدث خطأ في التقاط الشاشة.\n\n💡 يمكنك استخدام أدوات لقطة الشاشة المدمجة:\n\n🖥️ Windows: Win + Shift + S\n🍎 Mac: Cmd + Shift + 4\n📱 الهاتف: أزرار الطاقة + خفض الصوت\n\n🔄 أو جربي تحديث الصفحة والمحاولة مرة أخرى');
+                    }
+                } catch (fallbackError) {
+                    alert('⚠️ عذراً، لا يمكن أخذ لقطة شاشة تلقائياً في هذا المتصفح.\n\n💡 استخدمي أدوات النظام:\n🖥️ Windows: Win + Shift + S\n🍎 Mac: Cmd + Shift + 4\n📱 الهاتف: أزرار الطاقة + خفض الصوت');
+                }
+            }
+        }
+
+
+
+        // التنقل بين الصفحات
+        function showPage(pageId) {
+            // إخفاء جميع الصفحات
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.add('hidden');
+            });
+            
+            // إظهار الصفحة المختارة
+            document.getElementById(pageId + '-page').classList.remove('hidden');
+            
+            // تحديث أزرار التنقل
+            document.querySelectorAll('.nav-btn, .mobile-nav-btn').forEach(btn => {
+                btn.classList.remove('active-page');
+                btn.classList.add('text-gray-700', 'hover:bg-gray-100');
+            });
+            
+            // تفعيل الزر الحالي
+            if (event && event.target) {
+                event.target.classList.add('active-page');
+                event.target.classList.remove('text-gray-700', 'hover:bg-gray-100');
+            }
+        }
+
+        // إعادة تعيين التقييم
+        function resetEvaluation() {
+            // تأكيد من المستخدم
+            const confirmReset = confirm('⚠️ هل أنت متأكدة من إعادة تعيين جميع التقييمات؟\n\nسيتم محو:\n• جميع النجوم والنقاط لكل المجموعات\n• ترتيب المجموعات\n• اختيار الفصل والفترة\n• إعادة ضبط أزرار التصدير والحفظ\n\nهذا الإجراء لا يمكن التراجع عنه.');
+            
+            if (!confirmReset) {
+                return;
+            }
+            
+            try {
+                // إعادة تعيين النقاط لجميع المجموعات
+                scores = {};
+                for (let i = 1; i <= 6; i++) {
+                    scores[i] = {
+                        interaction: 0,
+                        exceptional: 0,
+                        creativity: 0, 
+                        evaluation: 0,
+                        discipline: 0,
+                        attendance: 0
+                    };
+                }
+                
+                // إعادة تعيين اختيار الفصل والفترة
+                const classSelect = document.getElementById('class-select');
+                const periodSelect = document.getElementById('period-select');
+                
+                if (classSelect) {
+                    classSelect.value = '';
+                }
+                
+                if (periodSelect) {
+                    periodSelect.value = '';
+                }
+                
+                // محو جميع النجوم في الجدول
+                for (let i = 1; i <= 6; i++) {
+                    ['interaction', 'exceptional', 'creativity', 'evaluation', 'discipline', 'attendance'].forEach(criteria => {
+                        const starBtn = document.getElementById(`star-${i}-${criteria}`);
+                        if (starBtn) {
+                            // إعادة النجمة إلى حالتها الأصلية (رمادية)
+                            starBtn.style.filter = 'grayscale(100%) brightness(0.5)';
+                            starBtn.style.textShadow = 'none';
+                            starBtn.style.transform = 'scale(1)';
+                            starBtn.classList.add('grayscale');
+                            starBtn.classList.remove('animate-pulse');
+                        }
+                    });
+                    
+                    // إعادة تعيين المجموع
+                    const totalElement = document.getElementById(`total-${i}`);
+                    if (totalElement) {
+                        totalElement.textContent = '0';
+                        totalElement.className = 'border border-gray-300 px-4 py-4 text-center font-bold text-2xl text-blue-600';
+                    }
+                }
+                
+                // إخفاء قسم التقييم والترتيب والعبارات التحفيزية
+                const evaluationSection = document.getElementById('evaluation-section');
+                const rankingSection = document.getElementById('ranking-section');
+                const motivationalSection = document.getElementById('motivational-section');
+                
+                if (evaluationSection) {
+                    evaluationSection.classList.add('hidden');
+                }
+                
+                if (rankingSection) {
+                    rankingSection.classList.add('hidden');
+                }
+                
+                if (motivationalSection) {
+                    motivationalSection.classList.add('hidden');
+                }
+                
+                // إعادة تعيين أزرار التصدير والحفظ
+                const exportBtn = document.querySelector('button[onclick="exportToExcel()"]');
+                const screenshotBtn = document.querySelector('button[onclick="captureScreenshot()"]');
+                
+                if (exportBtn) {
+                    exportBtn.innerHTML = '📊 تصدير إلى Excel';
+                    exportBtn.disabled = false;
+                    exportBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+                
+                if (screenshotBtn) {
+                    screenshotBtn.innerHTML = '📸 حفظ لقطة شاشة';
+                    screenshotBtn.disabled = false;
+                    screenshotBtn.classList.remove('opacity-50', 'cursor-not-allowed');
+                }
+                
+                // التمرير إلى أعلى الصفحة
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // إظهار رسالة نجاح
+                setTimeout(() => {
+                    alert('✅ تم إعادة التقييم بنجاح!\n\n🔄 تم محو جميع البيانات:\n• ✅ جميع النجوم والنقاط\n• ✅ اختيار الفصل والفترة\n• ✅ إعادة ضبط أزرار التصدير\n\n🚀 يمكنك الآن بدء تقييم جديد!');
+                }, 500);
+                
+            } catch (error) {
+                console.error('خطأ في إعادة التعيين:', error);
+                alert('⚠️ حدث خطأ أثناء إعادة التعيين. يرجى تحديث الصفحة والمحاولة مرة أخرى.');
+            }
+        }
+
+        // إضافة العبارات التحفيزية للمجموعات
+        function addMotivationalMessages(groups) {
+            const motivationalSection = document.getElementById('motivational-section');
+            const messagesDiv = document.getElementById('motivational-messages');
+            
+            if (!motivationalSection || !messagesDiv) return;
+            
+            // عبارات تحفيزية متنوعة حسب الترتيب والأداء
+            const messages = {
+                first: [
+                    "🥇 مبروك للمجموعة الأولى! أنتن نجوم ساطعة في سماء التميز! ⭐",
+                    "🏆 المركز الأول! إبداعكن وتفاعلكن ملهم لجميع زميلاتكن! 💫",
+                    "👑 أنتن ملكات التفوق! استمررن في هذا الإبداع الرائع! ✨",
+                    "🌟 المجموعة الذهبية! تفاعلكن وإبداعكن يضيء الفصل بأكمله! 🔥"
+                ],
+                second: [
+                    "🥈 المركز الثاني رائع! أنتن على الطريق الصحيح نحو القمة! 🚀",
+                    "💎 أداء متميز ومشرف! خطوة واحدة تفصلكن عن المركز الأول! 💪",
+                    "🌸 إبداع جميل وتفاعل رائع! استمررن في التألق! ⭐",
+                    "🎯 أنتن في المقدمة! مجهود مميز يستحق التقدير والإعجاب! 👏"
+                ],
+                third: [
+                    "🥉 المركز الثالث إنجاز رائع! أنتن في المقدمة دائماً! 🌟",
+                    "🎊 أداء مميز ومشرف! فخورة بتفاعلكن وإبداعكن! 💖",
+                    "🌺 مجموعة رائعة بأفكار إبداعية! استمررن في التميز! ✨",
+                    "🎈 تفاعل جميل وأداء مشرف! أنتن مصدر فخر للفصل! 🏅"
+                ],
+                participation: [
+                    "🌈 كل مشاركة منكن تضيف لمعة جميلة للحصة! 💫",
+                    "🎨 إبداعكن وأفكاركن تجعل التعلم أكثر متعة وإثارة! 🎭",
+                    "🌻 تفاعلكن الإيجابي يخلق بيئة تعليمية رائعة! 🌟",
+                    "🦋 كل مجموعة لها بصمتها الخاصة والمميزة! 💝"
+                ],
+                encouragement: [
+                    "💪 لا تستسلمن أبداً! كل يوم فرصة جديدة للتألق والإبداع! 🌅",
+                    "🌱 النمو والتطور يحتاج صبر ومثابرة، وأنتن على الطريق الصحيح! 🌳",
+                    "⚡ طاقتكن الإيجابية تحرك الجبال! استمررن في العطاء! 🏔️",
+                    "🎪 التعلم رحلة ممتعة، وأنتن تجعلنها أكثر إشراقاً! 🎠"
+                ]
+            };
+            
+            let html = '';
+            let messageCards = [];
+            
+            // جمع جميع الرسائل في مصفوفة
+            if (groups.length >= 1) {
+                const firstMsg = messages.first[Math.floor(Math.random() * messages.first.length)];
+                messageCards.push(`
+                    <div class="bg-gradient-to-r from-yellow-100 to-yellow-200 border-2 border-yellow-400 rounded-xl p-6 text-center animate-pulse">
+                        <div class="text-6xl mb-4">🥇</div>
+                        <h5 class="text-xl font-bold text-yellow-800 mb-3">${groups[0].name}</h5>
+                        <p class="text-lg text-yellow-700 font-semibold">${firstMsg}</p>
+                    </div>
+                `);
+            }
+            
+            if (groups.length >= 2) {
+                const secondMsg = messages.second[Math.floor(Math.random() * messages.second.length)];
+                messageCards.push(`
+                    <div class="bg-gradient-to-r from-gray-100 to-gray-200 border-2 border-gray-400 rounded-xl p-6 text-center">
+                        <div class="text-5xl mb-4">🥈</div>
+                        <h5 class="text-xl font-bold text-gray-800 mb-3">${groups[1].name}</h5>
+                        <p class="text-lg text-gray-700 font-semibold">${secondMsg}</p>
+                    </div>
+                `);
+            }
+            
+            if (groups.length >= 3) {
+                const thirdMsg = messages.third[Math.floor(Math.random() * messages.third.length)];
+                messageCards.push(`
+                    <div class="bg-gradient-to-r from-orange-100 to-orange-200 border-2 border-orange-400 rounded-xl p-6 text-center">
+                        <div class="text-5xl mb-4">🥉</div>
+                        <h5 class="text-xl font-bold text-orange-800 mb-3">${groups[2].name}</h5>
+                        <p class="text-lg text-orange-700 font-semibold">${thirdMsg}</p>
+                    </div>
+                `);
+            }
+            
+            // رسائل للمجموعات المشاركة
+            if (groups.length > 3) {
+                const participationMsg = messages.participation[Math.floor(Math.random() * messages.participation.length)];
+                const otherGroups = groups.slice(3).map(g => g.name).join(' و ');
+                messageCards.push(`
+                    <div class="bg-gradient-to-r from-blue-100 to-purple-100 border-2 border-blue-300 rounded-xl p-6 text-center">
+                        <div class="text-4xl mb-4">🌟</div>
+                        <h5 class="text-xl font-bold text-blue-800 mb-3">${otherGroups}</h5>
+                        <p class="text-lg text-blue-700 font-semibold">${participationMsg}</p>
+                    </div>
+                `);
+            }
+            
+            // رسائل إضافية حسب الأداء
+            if (groups.length > 0) {
+                const topScore = groups[0].total;
+                
+                if (topScore === 6) {
+                    messageCards.push(`
+                        <div class="bg-gradient-to-r from-green-100 to-emerald-100 border-2 border-green-400 rounded-xl p-6 text-center">
+                            <div class="text-5xl mb-4">🎯</div>
+                            <h5 class="text-xl font-bold text-green-800 mb-3">إنجاز استثنائي!</h5>
+                            <p class="text-lg text-green-700 font-semibold">النقاط الكاملة! هذا إنجاز رائع يستحق التقدير والاحتفال! 🎉</p>
+                        </div>
+                    `);
+                } else if (topScore >= 4) {
+                    messageCards.push(`
+                        <div class="bg-gradient-to-r from-indigo-100 to-blue-100 border-2 border-indigo-400 rounded-xl p-6 text-center">
+                            <div class="text-5xl mb-4">🚀</div>
+                            <h5 class="text-xl font-bold text-indigo-800 mb-3">أداء متميز!</h5>
+                            <p class="text-lg text-indigo-700 font-semibold">أداء رائع وقريب من الكمال! استمررن في هذا التميز! 💫</p>
+                        </div>
+                    `);
+                }
+            }
+            
+            // ترتيب الرسائل في صفوف - كل صف يحتوي على رسالتين
+            for (let i = 0; i < messageCards.length; i += 2) {
+                html += '<div class="grid md:grid-cols-2 gap-6 mb-6">';
+                
+                // الرسالة الأولى في الصف
+                html += messageCards[i];
+                
+                // الرسالة الثانية في الصف (إذا كانت موجودة)
+                if (i + 1 < messageCards.length) {
+                    html += messageCards[i + 1];
+                } else {
+                    // إذا كانت الرسالة الأخيرة فردية، نضعها في عمود واحد
+                    html += '<div></div>'; // عمود فارغ للتوازن
+                }
+                
+                html += '</div>';
+            }
+            
+            // رسالة تشجيعية عامة من المعلمة (تأخذ العرض الكامل)
+            const encouragementMsg = messages.encouragement[Math.floor(Math.random() * messages.encouragement.length)];
+            html += `
+                <div class="col-span-full bg-gradient-to-r from-pink-100 to-rose-100 border-2 border-pink-300 rounded-xl p-8 text-center mt-8">
+                    <div class="text-6xl mb-4">💖</div>
+                    <h5 class="text-2xl font-bold text-pink-800 mb-4">رسالة من المعلمة شذا</h5>
+                    <p class="text-xl text-pink-700 font-semibold leading-relaxed">${encouragementMsg}</p>
+                    <div class="mt-6 text-lg text-pink-600">
+                        <p>فخورة بكن جميعاً وبإنجازاتكن المتميزة! 🌹</p>
+                        <p class="mt-2 text-base">استمررن في التألق والإبداع، فأنتن مستقبل وطننا الغالي 🇸🇦</p>
+                    </div>
+                </div>
+            `;
+            
+            messagesDiv.innerHTML = html;
+            motivationalSection.classList.remove('hidden');
+            motivationalSection.style.display = 'block';
+            
+            // تأثير ظهور تدريجي للرسائل
+            const allCards = messagesDiv.querySelectorAll('.grid > div, .bg-gradient-to-r');
+            allCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s ease-out';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        }
+
+        // تبديل القائمة المحمولة
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
+        // تهيئة الصفحة
+        document.addEventListener('DOMContentLoaded', function() {
+            try {
+                updateCurrentDate();
+                setInterval(updateCurrentDate, 60000);
+                
+                // تهيئة النقاط
+                scores = {};
+                for (let i = 1; i <= 6; i++) {
+                    scores[i] = {
+                        interaction: 0,
+                        exceptional: 0,
+                        creativity: 0, 
+                        evaluation: 0,
+                        discipline: 0,
+                        attendance: 0
+                    };
+                }
+                
+                // تهيئة معالجات النماذج
+                initializeFormHandlers();
+                
+            } catch (error) {
+                console.log('تم تحميل الصفحة بنجاح');
+            }
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abb41b1c5f09350',t:'MTc2NTM1NDEzMC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
