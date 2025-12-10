@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>عجلة اختيار الطالبات</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+body {
+  box-sizing: border-box;
+}
+:root{
+  --bg:linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #ec4899 100%); --card:rgba(255,255,255,0.15); --card-alt:rgba(16,185,129,0.12); --muted:#e0e7ff; --accent:#4ade80; --danger:#f87171; --warn:#fbbf24; --fg:#ffffff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Tajawal",system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Noto Sans Arabic",Tahoma,Arial,sans-serif;background:var(--bg);color:var(--fg);min-height:100vh;}
+.wrap{max-width:1100px;margin:24px auto;padding:16px}
+.panel{background:var(--card);backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,0.2);border-radius:20px;padding:24px;box-shadow:0 8px 32px rgba(0,0,0,0.1);}
+h1{font-size:clamp(24px,3vw,36px);margin:0 0 20px;font-weight:800;text-align:center;background:linear-gradient(135deg,#ffffff,#e0e7ff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;text-shadow:0 2px 10px rgba(0,0,0,0.1);}
+.subtitle{color:var(--muted);margin-bottom:16px}
+.grid{display:grid;grid-template-columns:1fr;gap:16px}
+@media(min-width:1000px){.grid{grid-template-columns: 1.2fr 0.8fr}}
+.wheelArea{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.canvasBox{position:relative;aspect-ratio:1;border-radius:20px;background:rgba(255,255,255,0.12);backdrop-filter:blur(15px);border:2px solid rgba(255,255,255,0.25);display:flex;align-items:center;justify-content:center;min-height:500px;box-shadow:inset 0 4px 16px rgba(0,0,0,0.1);}
+svg{width:100%;height:100%}
+.pointer{position:absolute;top:-10px;left:50%;transform:translateX(-50%)}
+.pointer svg{width:46px;height:46px;filter:drop-shadow(0 6px 10px rgba(0,0,0,.35))}
+.controls{display:flex;flex-wrap:wrap;gap:8px}
+button{appearance:none;border:none;border-radius:15px;padding:14px 20px;font-weight:700;cursor:pointer;transition:.2s all ease;background:rgba(255,255,255,0.1);color:#ffffff;border:1px solid rgba(255,255,255,0.2);backdrop-filter:blur(10px);font-family:"Tajawal",sans-serif;}
+button:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(0,0,0,0.15);}
+.primary{background:linear-gradient(135deg,#4ade80,#22d3ee);border:none;color:#0f172a;box-shadow:0 4px 15px rgba(74,222,128,0.3);}
+.danger{background:linear-gradient(135deg,#f87171,#fb7185);border:none;color:#ffffff;box-shadow:0 4px 15px rgba(248,113,113,0.3);}
+.warn{background:linear-gradient(135deg,#fbbf24,#f59e0b);border:none;color:#0f172a;box-shadow:0 4px 15px rgba(251,191,36,0.3);}
+.good{background:linear-gradient(135deg,#34d399,#10b981);border:none;color:#0f172a;box-shadow:0 4px 15px rgba(52,211,153,0.3);}
+.muted{opacity:.8}
+.nameBox{background:rgba(255,255,255,0.1);backdrop-filter:blur(15px);border:2px dashed rgba(255,255,255,0.3);border-radius:18px;padding:20px;box-shadow:0 4px 20px rgba(0,0,0,0.1);}
+.nameBox b{display:block;font-size:20px}
+.list{max-height:360px;overflow:auto;border:1px solid rgba(255,255,255,0.2);border-radius:16px;background:rgba(255,255,255,0.05);backdrop-filter:blur(10px);}
+.list-item{padding:12px 16px;border-bottom:1px solid rgba(255,255,255,0.1);transition:background 0.2s ease;}
+.list-item:hover{background:rgba(255,255,255,0.1);}
+.list-item:last-child{border-bottom:none}
+.count{font-variant-numeric:tabular-nums}
+.chip{display:inline-block;padding:.4rem .8rem;border-radius:999px;background:rgba(255,255,255,0.15);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.2);color:#ffffff;font-size:.85rem;font-weight:600;}
+.foot{color:var(--muted);font-size:.9rem;margin-top:8px}
+/* confetti */
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.confetti span{position:absolute;width:8px;height:14px;opacity:.9;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(120vh) rotate(720deg)}}
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>🎡 عجلة اختيار الطالبات</h1>
+
+    <div class="panel" style="margin-bottom:16px;background:rgba(255,255,255,0.95);color:#1f2937">
+      <h3 style="margin:0 0 12px;text-align:center">اختاري الفصل:</h3>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center">
+        <button id="class1Btn" class="primary">ثالث 1</button>
+        <button id="class2Btn" class="primary muted">ثالث 2</button>
+        <button id="class3Btn" class="primary muted">ثالث 3</button>
+        <button id="class4Btn" class="primary muted">ثالث 4</button>
+        <button id="adminBtn" class="primary muted">ثاني إدارة</button>
+      </div>
+      <div id="currentClass" style="text-align:center;margin-top:8px;color:#6b7280;font-size:.9rem">
+        الفصل الحالي: <strong>ثالث 1</strong>
+      </div>
+    </div>
+    
+    <div class="grid">
+      <div class="panel" style="background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4)">
+        <div class="wheelArea">
+          <div class="canvasBox">
+            <div class="pointer">
+              <svg viewBox="0 0 24 24" fill="#22c55e">
+                <path d="M12 2L15.09 8.26L22 9L17 14L18.18 21L12 17.77L5.82 21L7 14L2 9L8.91 8.26L12 2Z"/>
+              </svg>
+            </div>
+            <svg id="wheel" viewBox="0 0 400 400">
+              <!-- Wheel segments will be generated here -->
+            </svg>
+          </div>
+          
+          <div class="controls">
+            <button id="spinBtn" class="primary">🎯 ابدئي الدوران</button>
+            <button id="undoBtn" class="warn muted">↩️ تراجع</button>
+            <button id="resetBtn" class="danger muted">🔄 إعادة التعيين</button>
+            <button id="exportBtn" class="good muted">📥 تصدير CSV</button>
+          </div>
+        </div>
+        
+        <div id="result" class="nameBox" style="margin-top:16px;display:none">
+          <div style="color:var(--muted);margin-bottom:4px">الطالبة المختارة:</div>
+          <b id="selectedName"></b>
+          <div style="color:var(--muted);font-size:.85rem;margin-top:4px">تم نسخ الاسم تلقائياً 📋</div>
+        </div>
+      </div>
+      
+      <div class="panel" style="background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.35)">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px">
+          <h3 style="margin:0">قائمة الطالبات</h3>
+          <span class="chip count" id="counter">36 طالبة</span>
+        </div>
+        
+        <div class="list" id="namesList">
+          <!-- Names will be populated here -->
+        </div>
+        
+        <div class="foot">
+          💡 <strong>نصيحة:</strong> يمكنك النقر مباشرة على العجلة لتدويرها
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="confetti" id="confetti"></div>
+
+  <script>
+    // Student lists for different classes
+    const classLists = {
+      'class1': [
+        'أثير الرشيدي',
+        'أماني الجابري',
+        'ابتسام عمر',
+        'اجوان غالب',
+        'اجوان موسى',
+        'المى الشمراني',
+        'بشرى المطيري',
+        'جمانة عبدالله',
+        'جنى عثمان',
+        'جنى الحربي',
+        'جوري السيد',
+        'دارين العمري',
+        'دانا الخثعمي',
+        'رتاج العنيزي',
+        'رحاب اللهيبي',
+        'ريفال العامري',
+        'ريما الحربي',
+        'ساره الخلف',
+        'سدن المطيري',
+        'سدين الترجمي',
+        'شهد الحربي',
+        'شهد المطيري',
+        'عبير الشيخ',
+        'غادة الشهري',
+        'غدي سليمان',
+        'فاطمه سفرجي',
+        'فاطمه باحشوان',
+        'لانا الحربي',
+        'لمار العوفي',
+        'لميس مظهر',
+        'ليان فلاته',
+        'ليان المطيري',
+        'مارية هوساوي',
+        'ميان حميد',
+        'هلا الحربي',
+        'يسر الرشيدي'
+      ],
+      'class2': [
+        'آمنه محمد',
+        'اروى المطيري',
+        'اروى فهد',
+        'اروي منيف',
+        'الاء الحربي',
+        'الهنوف الشاماني',
+        'ايلان المحمادى',
+        'بسمه الحربي',
+        'بشرى الحربي',
+        'جنا الرشيدي',
+        'جنى المطيري',
+        'حور العنزي',
+        'دانه المطيري',
+        'دانية مقنص',
+        'ديما الزهراني',
+        'رزان العمري',
+        'رزان عيسوي',
+        'رغد الخريجي',
+        'رفيف السحيمي',
+        'ريماس السهلي',
+        'ريوف السبيعي',
+        'زهرة ابراهيم',
+        'سلاف الحربي',
+        'شيرين العلياني',
+        'صبا العمري',
+        'عائشة عمودي',
+        'لانا الأحمدي',
+        'لمار الحربي',
+        'لمار الاحمدي',
+        'لمار المطيرى',
+        'لنا الأحمدي',
+        'ليان البلادي',
+        'ليان الرويثي',
+        'لينا البلوي',
+        'ملاك عسكر',
+        'ميرال الحربي',
+        'ندى الحربي',
+        'نوره الرويثي',
+        'هناء الحربي'
+      ],
+      'class3': [
+        'ابتسام المطيري',
+        'اسماء الحربي',
+        'افنان العمري',
+        'الهنوف الحربي',
+        'امل العمري',
+        'بيان المطيري',
+        'جنى الحربي',
+        'جواهر العوفي',
+        'جود الحربي',
+        'جوري السحيمي',
+        'دارين الحربي',
+        'ديم السلامه',
+        'رهاف الجابري',
+        'رهام الشهري',
+        'روزا يوسف',
+        'ريتال فرغلي',
+        'ريلام الجهني',
+        'ريمه الصيعري',
+        'ريناد الحربي',
+        'سعاد علي',
+        'شادن المطيري',
+        'شادن موقد',
+        'طيف العوفي',
+        'طيف العمري',
+        'فرح اليوبى',
+        'فرح الرحيلي',
+        'لانا الكريدا',
+        'لمى مقبل',
+        'لمى الحربي',
+        'ليان المخلفي',
+        'ميار الحربي',
+        'ميان المطيري',
+        'هدى الأحمد',
+        'هيا العمري',
+        'وجدان المطيري',
+        'ود العنزي',
+        'يارا الشاماني'
+      ],
+      'class4': [
+        'ابرار الحربي',
+        'امياز الحسيني',
+        'بتول الانصاري',
+        'تسنيم العباسى',
+        'جنا الحربي',
+        'جنى الحربي',
+        'جنى العوفي',
+        'حلا السحيمي',
+        'حنان الحربي',
+        'ربى الحربي',
+        'رزان الرشيدي',
+        'رغد الحربي',
+        'روز الردادي',
+        'رولا المطيري',
+        'ريم البلادي',
+        'ريناد عزي',
+        'ريهام الشاماني',
+        'سميه محمد',
+        'شفاء الحربي',
+        'غلا المطيري',
+        'كنوز المطيري',
+        'لانا السحيمي',
+        'لمار بدير',
+        'لمار العلاوي',
+        'ليان المنصري',
+        'ليان الحربي',
+        'ليليا الشمري',
+        'مها الحربي',
+        'مها المطيري',
+        'مهاد عبدالله',
+        'مياسة عفيفي',
+        'نرمين المطيري',
+        'نوره المطيري',
+        'هدى السعد',
+        'وئام عبدالله',
+        'وئام صالح'
+      ],
+      'admin': [
+        'الهنوف دليم',
+        'امل وحيد',
+        'بهى العمري',
+        'جوان الحربي',
+        'دعاء الحربي',
+        'سجى الحايطي',
+        'سما بري',
+        'عذاري الحربي',
+        'عروب العمري',
+        'ميعاد الحربي',
+        'سلمى المطيري',
+        'منال المطيري'
+      ]
+    };
+    
+    let currentClassKey = 'class1';
+    let students = [...classLists[currentClassKey]];
+    let originalStudents = [...classLists[currentClassKey]];
+    let removedStudents = [];
+    let isSpinning = false;
+    let currentRotation = 0;
+    
+    const wheel = document.getElementById('wheel');
+    const spinBtn = document.getElementById('spinBtn');
+    const undoBtn = document.getElementById('undoBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const exportBtn = document.getElementById('exportBtn');
+    const result = document.getElementById('result');
+    const selectedName = document.getElementById('selectedName');
+    const namesList = document.getElementById('namesList');
+    const counter = document.getElementById('counter');
+    const confetti = document.getElementById('confetti');
+    const currentClass = document.getElementById('currentClass');
+    
+    // Class buttons
+    const class1Btn = document.getElementById('class1Btn');
+    const class2Btn = document.getElementById('class2Btn');
+    const class3Btn = document.getElementById('class3Btn');
+    const class4Btn = document.getElementById('class4Btn');
+    const adminBtn = document.getElementById('adminBtn');
+    
+    // Colors for wheel segments
+    const colors = [
+      '#ef4444', '#f97316', '#f59e0b', '#eab308', '#84cc16',
+      '#22c55e', '#10b981', '#14b8a6', '#06b6d4', '#0ea5e9',
+      '#3b82f6', '#6366f1', '#8b5cf6', '#a855f7', '#d946ef',
+      '#ec4899', '#f43f5e', '#fb7185', '#fda4af', '#fecaca'
+    ];
+    
+    function switchClass(classKey, className) {
+      if (isSpinning) return;
+      
+      currentClassKey = classKey;
+      students = [...classLists[classKey]];
+      originalStudents = [...classLists[classKey]];
+      removedStudents = [];
+      
+      result.style.display = 'none';
+      currentRotation = 0;
+      wheel.style.transform = 'rotate(0deg)';
+      
+      // Update class indicator
+      currentClass.innerHTML = `الفصل الحالي: <strong>${className}</strong>`;
+      
+      // Update button states
+      document.querySelectorAll('#class1Btn, #class2Btn, #class3Btn, #class4Btn, #adminBtn').forEach(btn => {
+        btn.className = 'primary muted';
+      });
+      document.getElementById(classKey + 'Btn').className = 'primary';
+      
+      updateCounter();
+      updateButtons();
+      renderNamesList();
+      createWheelSegments();
+    }
+    
+    function updateCounter() {
+      const count = students.length;
+      counter.textContent = count === 1 ? 'طالبة واحدة' : count === 2 ? 'طالبتان' : `${count} طالبة`;
+      counter.className = count === 0 ? 'chip count muted' : 'chip count';
+    }
+    
+    function updateButtons() {
+      const hasStudents = students.length > 0;
+      const hasRemoved = removedStudents.length > 0;
+      
+      spinBtn.disabled = !hasStudents || isSpinning;
+      spinBtn.className = hasStudents && !isSpinning ? 'primary' : 'primary muted';
+      
+      undoBtn.disabled = !hasRemoved;
+      undoBtn.className = hasRemoved ? 'warn' : 'warn muted';
+      
+      resetBtn.disabled = removedStudents.length === 0;
+      resetBtn.className = removedStudents.length > 0 ? 'danger' : 'danger muted';
+      
+      exportBtn.disabled = students.length === 0;
+      exportBtn.className = students.length > 0 ? 'good' : 'good muted';
+    }
+    
+    function renderNamesList() {
+      namesList.innerHTML = students.length === 0 
+        ? '<div class="list-item" style="text-align:center;color:var(--muted)">لا توجد طالبات متبقية</div>'
+        : students.map(name => `<div class="list-item">${name}</div>`).join('');
+    }
+    
+    function createWheelSegments() {
+      if (students.length === 0) {
+        wheel.innerHTML = '<circle cx="200" cy="200" r="180" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.3)" stroke-width="2"/><text x="200" y="200" text-anchor="middle" fill="rgba(255,255,255,0.7)" font-size="16">لا توجد طالبات</text>';
+        return;
+      }
+      
+      const segmentAngle = 360 / students.length;
+      let segments = '';
+      
+      students.forEach((name, index) => {
+        const startAngle = index * segmentAngle;
+        const endAngle = (index + 1) * segmentAngle;
+        const color = colors[index % colors.length];
+        
+        const startRad = (startAngle * Math.PI) / 180;
+        const endRad = (endAngle * Math.PI) / 180;
+        
+        const x1 = 200 + 180 * Math.cos(startRad);
+        const y1 = 200 + 180 * Math.sin(startRad);
+        const x2 = 200 + 180 * Math.cos(endRad);
+        const y2 = 200 + 180 * Math.sin(endRad);
+        
+        const largeArc = segmentAngle > 180 ? 1 : 0;
+        
+        const pathData = `M 200 200 L ${x1} ${y1} A 180 180 0 ${largeArc} 1 ${x2} ${y2} Z`;
+        
+        segments += `<path d="${pathData}" fill="${color}" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>`;
+        
+        // Add text
+        const textAngle = startAngle + segmentAngle / 2;
+        const textRad = (textAngle * Math.PI) / 180;
+        const textX = 200 + 140 * Math.cos(textRad);
+        const textY = 200 + 140 * Math.sin(textRad);
+        
+        segments += `<text x="${textX}" y="${textY}" text-anchor="middle" fill="white" font-size="10" font-weight="bold" transform="rotate(${textAngle} ${textX} ${textY})">${name}</text>`;
+      });
+      
+      wheel.innerHTML = segments;
+    }
+    
+    function spinWheel() {
+      if (isSpinning || students.length === 0) return;
+      
+      isSpinning = true;
+      result.style.display = 'none';
+      
+      const spins = 3 + Math.random() * 3; // 3-6 full rotations
+      const finalAngle = Math.random() * 360;
+      const totalRotation = spins * 360 + finalAngle;
+      
+      currentRotation += totalRotation;
+      
+      wheel.style.transition = 'transform 3s cubic-bezier(0.23, 1, 0.32, 1)';
+      wheel.style.transform = `rotate(${currentRotation}deg)`;
+      
+      setTimeout(() => {
+        // Calculate which segment the pointer landed on
+        const normalizedAngle = (360 - (currentRotation % 360)) % 360;
+        const segmentAngle = 360 / students.length;
+        const selectedIndex = Math.floor(normalizedAngle / segmentAngle);
+        
+        const selected = students[selectedIndex];
+        
+        // Show result
+        selectedName.textContent = selected;
+        result.style.display = 'block';
+        
+        // Copy to clipboard
+        navigator.clipboard.writeText(selected).catch(() => {});
+        
+        // Remove from students and add to removed
+        removedStudents.push(selected);
+        students.splice(selectedIndex, 1);
+        
+        // Show confetti
+        showConfetti();
+        
+        // Update UI
+        updateCounter();
+        updateButtons();
+        renderNamesList();
+        createWheelSegments();
+        
+        isSpinning = false;
+        wheel.style.transition = '';
+      }, 3000);
+      
+      updateButtons();
+    }
+    
+    function showConfetti() {
+      const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+      
+      for (let i = 0; i < 50; i++) {
+        const confettiPiece = document.createElement('span');
+        confettiPiece.style.left = Math.random() * 100 + '%';
+        confettiPiece.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confettiPiece.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        confettiPiece.style.animationDelay = Math.random() * 2 + 's';
+        confetti.appendChild(confettiPiece);
+        
+        setTimeout(() => confettiPiece.remove(), 4000);
+      }
+    }
+    
+    function undoLastSelection() {
+      if (removedStudents.length === 0) return;
+      
+      const lastRemoved = removedStudents.pop();
+      students.push(lastRemoved);
+      
+      result.style.display = 'none';
+      
+      updateCounter();
+      updateButtons();
+      renderNamesList();
+      createWheelSegments();
+    }
+    
+    function resetAll() {
+      // Restore all removed students
+      students = [...originalStudents];
+      removedStudents = [];
+      
+      result.style.display = 'none';
+      currentRotation = 0;
+      wheel.style.transform = 'rotate(0deg)';
+      
+      updateCounter();
+      updateButtons();
+      renderNamesList();
+      createWheelSegments();
+    }
+    
+    function exportCSV() {
+      if (students.length === 0) return;
+      
+      const csvContent = 'الطالبات المتبقيات\n' + students.join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const link = document.createElement('a');
+      
+      if (link.download !== undefined) {
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'الطالبات_المتبقيات.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    }
+    
+    // Event listeners
+    spinBtn.addEventListener('click', spinWheel);
+    undoBtn.addEventListener('click', undoLastSelection);
+    resetBtn.addEventListener('click', resetAll);
+    exportBtn.addEventListener('click', exportCSV);
+    wheel.addEventListener('click', spinWheel);
+    
+    // Class selection event listeners
+    class1Btn.addEventListener('click', () => switchClass('class1', 'ثالث 1'));
+    class2Btn.addEventListener('click', () => switchClass('class2', 'ثالث 2'));
+    class3Btn.addEventListener('click', () => switchClass('class3', 'ثالث 3'));
+    class4Btn.addEventListener('click', () => switchClass('class4', 'ثالث 4'));
+    adminBtn.addEventListener('click', () => switchClass('admin', 'ثاني إدارة'));
+    
+    // Initialize
+    updateCounter();
+    updateButtons();
+    renderNamesList();
+    createWheelSegments();
+  </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abae674e7d49350',t:'MTc2NTM1MDM5My4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
