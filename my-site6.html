@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سجل الطالبة - التقنية الرقمية</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+        
+        body {
+            font-family: 'Cairo', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .card-shadow {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .progress-bar {
+            transition: width 0.8s ease-in-out;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen py-8 px-4">
+    <div class="max-w-2xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-8 fade-in">
+            <div class="bg-white rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center card-shadow">
+                <svg class="w-10 h-10 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold text-white mb-2">سجل الطالبة</h1>
+            <p class="text-purple-100">التقنية الرقمية 2-1</p>
+        </div>
+
+        <!-- Input Form -->
+        <div class="bg-white rounded-2xl p-8 card-shadow mb-6 fade-in">
+            <form id="studentForm" class="space-y-6">
+                <div>
+                    <label for="civilId" class="block text-lg font-semibold text-gray-700 mb-3">
+                        🆔 السجل المدني
+                    </label>
+                    <input 
+                        type="text" 
+                        id="civilId" 
+                        placeholder="أدخلي رقم السجل المدني"
+                        class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:outline-none transition-colors text-lg"
+                        required
+                    >
+                </div>
+                
+                <button 
+                    type="submit" 
+                    class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg"
+                >
+                    عرض السجل 📊
+                </button>
+            </form>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results" class="hidden bg-white rounded-2xl p-8 card-shadow fade-in">
+            <div class="text-center mb-6">
+                <div class="bg-gradient-to-r from-green-400 to-blue-500 rounded-full w-16 h-16 mx-auto mb-4 flex items-center justify-center pulse-animation">
+                    <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 mb-2">مرحباً بك</h2>
+                <p id="studentName" class="text-xl text-purple-600 font-semibold"></p>
+            </div>
+
+            <!-- Progress Section -->
+            <div class="bg-gray-50 rounded-xl p-6 mb-6">
+                <h3 class="text-lg font-semibold text-gray-700 mb-4 flex items-center">
+                    📚 إنجاز الواجبات
+                </h3>
+                
+                <div class="mb-4">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-sm font-medium text-gray-600">التقدم</span>
+                        <span id="progressText" class="text-sm font-medium text-purple-600"></span>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3">
+                        <div id="progressBar" class="progress-bar bg-gradient-to-r from-green-400 to-blue-500 h-3 rounded-full" style="width: 0%"></div>
+                    </div>
+                </div>
+                
+                <div class="grid grid-cols-2 gap-4 text-center">
+                    <div class="bg-white rounded-lg p-4">
+                        <div id="completedCount" class="text-2xl font-bold text-green-600">0</div>
+                        <div class="text-sm text-gray-600">مكتملة</div>
+                    </div>
+                    <div class="bg-white rounded-lg p-4">
+                        <div class="text-2xl font-bold text-gray-400">15</div>
+                        <div class="text-sm text-gray-600">المجموع</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Message Section -->
+            <div id="messageSection" class="bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl p-6 mb-6">
+                <div class="flex items-start space-x-3 space-x-reverse">
+                    <div class="bg-purple-100 rounded-full p-2">
+                        <svg class="w-5 h-5 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800 mb-2">رسالة تشجيعية</h4>
+                        <p id="motivationalMessage" class="text-gray-700 leading-relaxed"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Teacher Info -->
+            <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-xl p-6">
+                <div class="flex items-center space-x-3 space-x-reverse">
+                    <div class="bg-indigo-100 rounded-full p-3">
+                        <svg class="w-6 h-6 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h4 class="font-semibold text-gray-800">المعلمة</h4>
+                        <p class="text-indigo-600 font-medium">شذا الردادي</p>
+                        <p class="text-sm text-gray-600">التقنية الرقمية 2-1</p>
+                    </div>
+                </div>
+            </div>
+
+            <button 
+                onclick="resetForm()" 
+                class="w-full mt-6 bg-gray-100 text-gray-700 py-3 px-6 rounded-xl font-medium hover:bg-gray-200 transition-colors"
+            >
+                البحث عن طالبة أخرى 🔄
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // بيانات الطالبات
+        const studentsData = {
+            '1': { name: 'مها', completed: 13 },
+            '2': { name: 'أمل', completed: 15 },
+            '3': { name: 'سارة', completed: 7 },
+            '4': { name: 'نورة', completed: 15 },
+            '5': { name: 'نوال', completed: 15 },
+            '6': { name: 'فاطمة', completed: 10 }
+        };
+
+        const totalAssignments = 15;
+
+        function getMotivationalMessage(completed, total) {
+            const percentage = (completed / total) * 100;
+            
+            if (percentage === 100) {
+                return "🌟 ممتاز! لقد أكملت جميع الواجبات. أنت طالبة مثالية ومجتهدة. استمري في هذا التميز!";
+            } else if (percentage >= 80) {
+                return "👏 أحسنت! أداؤك رائع جداً. أنت قريبة من إكمال جميع الواجبات. استمري بهذا الجهد المميز!";
+            } else if (percentage >= 60) {
+                return "💪 جيد جداً! أنت في الطريق الصحيح. ما زال أمامك بعض الواجبات لتحققي التميز الكامل!";
+            } else if (percentage >= 40) {
+                return "📈 يمكنك تحسين أدائك أكثر! لا تستسلمي، كل واجب تكملينه يقربك من النجاح.";
+            } else {
+                return "🎯 ابدئي من جديد! لديك الكثير من الفرص لتحسني أداءك. أؤمن بقدرتك على التميز!";
+            }
+        }
+
+        document.getElementById('studentForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const civilId = document.getElementById('civilId').value.trim();
+            
+            if (!civilId) {
+                alert('يرجى إدخال رقم السجل المدني');
+                return;
+            }
+
+            // البحث عن الطالبة أو إنشاء بيانات عشوائية
+            let studentData;
+            if (studentsData[civilId]) {
+                studentData = studentsData[civilId];
+            } else {
+                // إنشاء بيانات عشوائية للأرقام غير المسجلة
+                const randomNames = [
+                    'أمل سعد الأحمدي', 'زينب محمد الخالدي', 'رقية عبدالرحمن السعدي',
+                    'خديجة فيصل المالكي', 'حفصة طارق البقمي', 'صفية ناصر الشهري'
+                ];
+                studentData = {
+                    name: randomNames[Math.floor(Math.random() * randomNames.length)],
+                    completed: Math.floor(Math.random() * 16) // من 0 إلى 15
+                };
+            }
+
+            displayResults(studentData);
+        });
+
+        function displayResults(studentData) {
+            const { name, completed } = studentData;
+            const percentage = (completed / totalAssignments) * 100;
+
+            // إخفاء النموذج وإظهار النتائج
+            document.getElementById('studentForm').parentElement.style.display = 'none';
+            document.getElementById('results').classList.remove('hidden');
+
+            // تحديث المعلومات
+            document.getElementById('studentName').textContent = name;
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('progressText').textContent = `${completed} من ${totalAssignments} (${Math.round(percentage)}%)`;
+            document.getElementById('motivationalMessage').textContent = getMotivationalMessage(completed, totalAssignments);
+
+            // تحديث شريط التقدم مع تأثير متحرك
+            setTimeout(() => {
+                document.getElementById('progressBar').style.width = percentage + '%';
+            }, 300);
+        }
+
+        function resetForm() {
+            document.getElementById('results').classList.add('hidden');
+            document.getElementById('studentForm').parentElement.style.display = 'block';
+            document.getElementById('civilId').value = '';
+            document.getElementById('progressBar').style.width = '0%';
+        }
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9abb4625770d9350',t:'MTc2NTM1NDMxMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
